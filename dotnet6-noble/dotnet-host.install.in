@@ -1,7 +1,0 @@
-@etcdir@
-debian/dotnet.sh /etc/profile.d/
-@basedir@/dotnet
-@basedir@/LICENSE.txt
-@basedir@/ThirdPartyNotices.txt
-debian/install_location /@etcdir@/
-debian/install_location_@arch@ /@etcdir@/
