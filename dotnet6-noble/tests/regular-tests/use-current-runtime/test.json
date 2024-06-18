@@ -1,0 +1,16 @@
+{
+  "name": "use-current-runtime",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "6.0",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "vmr-ci" // portable runtime packs not published
+  ],
+  "ignoredRIDs":[
+    "linux-s390x",
+    "linux-ppc64le"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "distribution-packages",
+  "enabled": true,
+  "version": "3.0",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "vmr-ci" // not packaged (tar.gz build)
+  ],
+  "ignoredRIDs":[
+    "rhel7",
+    "linux-musl",
+    "ubuntu" // See: https://github.com/canonical/dotnet-regular-tests/issues/2
+  ]
+}

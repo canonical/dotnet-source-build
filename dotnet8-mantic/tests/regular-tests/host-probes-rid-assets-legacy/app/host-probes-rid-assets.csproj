@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(TestTargetFramework)</TargetFramework>
+    <RestoreSources>$(MSBuildThisFileDirectory)/../packages</RestoreSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="host-probes-rid-assets-mylib-unix" Version="1.0.0" />
+    <PackageReference Include="host-probes-rid-assets-mylib-sdkrid" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.Runtime.Loader.UseRidGraph" Value="true" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,205 @@
+Source: dotnet8
+Section: devel
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: clang,
+               cmake,
+               bash-completion,
+               debhelper-compat (= 13),
+               dotnet-sdk-8.0,
+               dotnet-sdk-8.0-source-built-artifacts,
+               git,
+               libicu-dev,
+               libkrb5-dev,
+               liblttng-ust-dev,
+               libssl-dev,
+               libunwind-dev,
+               lld,
+               llvm,
+               locales-all,
+               python3,
+               zlib1g-dev
+Standards-Version: 4.6.2
+Rules-Requires-Root: binary-targets
+Homepage: https://dot.net
+
+Package: dotnet8
+Architecture: amd64 arm64
+Depends: dotnet-sdk-8.0, ${misc:Depends}, ${shlibs:Depends}
+Breaks: dotnet6 (<< 6.0.111~)
+Description: .NET CLI tools and runtime
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+ .
+ .NET contains a runtime conforming to .NET Standards, a set of
+ framework libraries, an SDK containing compilers, and a 'dotnet'
+ CLI application to drive everything.
+
+Package: dotnet-host-8.0
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: dotnet-host, dotnet-host-7.0
+Replaces: dotnet-host, dotnet-host-7.0
+Provides: dotnet-host, dotnet-host-7.0
+Description: .NET host command line
+ The .NET host is a command line program that runs a standalone
+ .NET application or launches the SDK.
+ .
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: dotnet-hostfxr-8.0
+Architecture: amd64 arm64
+Depends: dotnet-host-8.0, ${misc:Depends}, ${shlibs:Depends}
+Breaks: dotnet-hostfxr-6.0 (<< 6.0.111~)
+Description: .NET host resolver
+ The .NET host resolver contains the logic to resolve and select
+ the right version of the .NET SDK or runtime to use.
+ .
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: dotnet-runtime-8.0
+Architecture: amd64 arm64
+Depends: dotnet-hostfxr-8.0,
+         libicu72,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
+Description: .NET runtime
+ The .NET runtime contains everything needed to run .NET applications.
+ It includes a high performance Virtual Machine as well as the framework
+ libraries used by .NET applications.
+ .
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: aspnetcore-runtime-8.0
+Architecture: amd64 arm64
+Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
+Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
+Description: ASP.NET Core runtime
+ The ASP.NET Core runtime contains everything needed to run .NET
+ web applications. It includes a high performance Virtual Machine as
+ well as the framework libraries used by .NET applications.
+ .
+ ASP.NET Core is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: dotnet-templates-8.0
+Architecture: amd64 arm64
+Depends: dotnet-host-8.0, ${misc:Depends}, ${shlibs:Depends}
+Breaks: dotnet-templates-6.0 (<< 6.0.111~)
+Description: .NET 8.0 templates
+ This package contains templates used by the .NET SDK.
+ .
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: dotnet-sdk-8.0
+Architecture: amd64 arm64
+Depends: aspnetcore-runtime-8.0,
+         aspnetcore-targeting-pack-8.0,
+         dotnet-apphost-pack-8.0,
+         dotnet-runtime-8.0,
+         dotnet-targeting-pack-8.0,
+         dotnet-templates-8.0,
+         netstandard-targeting-pack-2.1-8.0,
+         ca-certificates,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Breaks: dotnet-sdk-6.0 (<< 6.0.111~)
+Description: .NET 8.0 Software Development Kit
+ The .NET SDK is a collection of command line applications to
+ create, build, publish, and run .NET applications.
+ .
+ .NET is a fast, lightweight and modular platform for creating
+ cross platform applications that work on GNU/Linux, macOS and Windows.
+ .
+ It particularly focuses on creating console applications, web
+ applications, and micro-services.
+
+Package: dotnet-sdk-8.0-source-built-artifacts
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Internal package for building the .NET 8.0 Software Development Kit
+ The .NET source-built archive is a collection of packages needed
+ to build the .NET SDK itself.
+ .
+ These are not meant for general use.
+
+Package: dotnet-targeting-pack-8.0
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: dotnet-targeting-pack-6.0 (<< 6.0.111~)
+Description: Internal - targeting pack for Microsoft.NETCore.App 8.0
+ This package provides a targeting pack for Microsoft.NETCore.App 8.0
+ that allows developers to compile against and target Microsoft.NETCore.App 8.0
+ applications using the .NET SDK. This are not meant for general use.
+
+Package: netstandard-targeting-pack-2.1-8.0
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
+Replaces: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
+Provides: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
+Description: Internal - targeting pack for NETStandard.Library 2.1
+ This package provides a targeting pack for NETStandard.Library 2.1
+ that allows developers to compile against and target NETStandard.Library 2.1
+ applications using the .NET SDK.
+ This are not meant for general use.
+
+Package: aspnetcore-targeting-pack-8.0
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: aspnetcore-targeting-pack-6.0 (<< 6.0.111~)
+Description: Internal - targeting pack for Microsoft.AspNetCore.App 8.0
+ This package provides a targeting pack for Microsoft.AspNetCore.App 8.0
+ that allows developers to compile against and target
+ Microsoft.AspNetCore.App 8.0 applications using the .NET SDK.
+ This are not meant for general use.
+
+Package: dotnet-apphost-pack-8.0
+Architecture: amd64 arm64
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: dotnet-apphost-pack-6.0 (<< 6.0.111~)
+Description: Internal - targeting pack for Microsoft.NETCore.App 8.0
+ This package provides a targeting pack for Microsoft.NETCore.App 8.0
+ that allows developers to compile against and target Microsoft.NETCore.App 8.0
+ applications using the .NET SDK. This not meant for general use.
+
+Package: aspnetcore-runtime-dbg-8.0
+Architecture: amd64 arm64
+Depends: aspnetcore-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
+Description: ASP.NET Runtime debug symbols.
+ This package provides the PDB debug symbols for Microsoft.AspNetCore.App 8.0.
+
+Package: dotnet-runtime-dbg-8.0
+Architecture: amd64 arm64
+Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
+Description: .NET Runtime debug symbols.
+ This package provides the PDB debug symbols for Microsoft.NETCore.App 8.0.
+
+Package: dotnet-sdk-dbg-8.0
+Architecture: amd64 arm64
+Depends: dotnet-sdk-8.0, ${misc:Depends}, ${shlibs:Depends}
+Description: .NET SDK debug symbols.
+ This package provides the PDB debug symbols for the .NET 8.0 SDK.

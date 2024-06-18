@@ -1,0 +1,14 @@
+{
+  "name": "createdump-aspnet",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "2.2",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "runtime=mono" // 'createdump' is not included with mono
+  ],
+  "ignoredRIDs":[
+  ]
+}

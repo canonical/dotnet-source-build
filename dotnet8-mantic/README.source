@@ -1,0 +1,161 @@
+# .NET 8 on Ubuntu
+
+Table of Content:
+- [Support](#support)
+- [Package Design Considerations](#package-design-considerations)
+- [Building the Binary Packages](#building-the-binary-packages)
+- [Get the orig tarball (for Canonical Package Maintainers)](#get-the-orig-tarball-for-canonical-package-maintainers)
+
+## Support
+
+.NET 8 is a Long-Term Support (LTS) release. Microsoft will provide free
+support and patches for 3 years (until November 10, 2026).
+
+Within this support lifecycle, Microsoft will release patch updates on the
+second Tuesday of each month, also known as "Patch Tuesday". These patches fix
+bugs or common vulnerabilities and exposures (CVEs). Patches are compatible,
+which eliminates the risk of adversely affecting applications. Therefore,
+Canonical recommends continuously updating to the latest available version.
+
+Microsoft provides Canonical early access to patches (usually two weeks prior)
+to ensure a smooth and consistent release process on all platforms, secure the
+software supply chain between .NET and Ubuntu, and provide enterprise-grade
+support.
+
+Canonical's Security Team packages, tests, and releases patches that fix CVEs.
+These patches are available in the security and updates pocket of the Ubuntu
+Archive on the same day Microsoft publishes them.
+
+Canonical's Toolchains Squad of the Foundations Team packages, tests, and
+releases the remaining patches. Because these patches do **not** contain fixes
+for CVEs, they are less urgent to release. The release will follow Ubuntu's
+Stable Release Update (SRU) process: The patch will be available in the proposed
+pocket of the Ubuntu Archive on the same day Microsoft publishes it and will
+migrate to the updates pocket within a week if no regression has been detected.
+You are very welcome to participate in the regression testing. Install the 
+package containing the patch from the proposed pocket and test it against your
+use cases.
+
+Canonical will provide support for .NET packages within the lifespan of the
+package's target Ubuntu series. Within the Ubuntu standard term support period,
+Canonical will triage and fix selected bugs. After the end of upstream support
+provided by Microsoft, Canonical will backport patches for critical, high, and
+selected medium CVEs until the end of the Expanded Security Maintenance (ESM)
+period. 
+Even though Canonical provides support beyond the upstream support period,
+upgrading to a higher .NET version supported upstream by Microsoft is strongly
+recommended. Backporting a patch may take some time and can leave you exposed to
+CVEs in the meantime. Additionally, you may have a hard time using first-party
+or third-party services/libraries of the .NET ecosystem after the end of
+upstream support (e.g., NuGet).
+
+Please report bugs related to the .NET 6 Ubuntu Package to
+[Launchpad](https://bugs.launchpad.net/ubuntu/+source/dotnet8) instead of the
+upstream bug trackers. We are working closely with Microsoft to fix bugs and
+improve the user experience and will forward issues if necessary.
+
+**See also:**
+- [Microsoft .NET Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy)
+- [Expanded Security Maintenance (ESM)](https://ubuntu.com/security/esm)
+- [Launchpad – `dotnet8` Bug Tracker](https://bugs.launchpad.net/ubuntu/+source/dotnet8)
+- [Ubuntu CVE Tracker for .NET 8](https://ubuntu.com/security/cves?package=dotnet8)
+- [Canonical Blog Article about the collaboration with Microsoft](https://canonical.com/blog/install-dotnet-on-ubuntu)
+
+## Package Design Considerations
+
+### `debian/watch` file
+
+The .NET 8 source code is distributed over the Virtual Monolithic Repository
+(VMR) introduced in this version and available at https://github.com/dotnet/dotnet.
+If you want to build the upstream .NET 8 source yourself, you have to follow
+these instructions: https://github.com/dotnet/dotnet#dev-instructions.
+
+Canonical also gets embargoed early hand-offs of .NET monthly updates in order
+to maintain a conherent release schedule with Microsoft on Patch Tuesday.
+However, the watch file points to the public tarball releases available on
+the VMR repository.
+
+### Lintian Overrides
+
+ * `license-problem-non-free-RFC`: Every folder under `src` includes a
+ `THIRD_PARTY_NOTICES.TXT` file (that triggers the error). Also, the file
+ `src/runtime.*/src/coreclr/utilcode/guidfromname.cpp` is multilicensed.
+ 
+ * `source-is-missing`: We have three cases here for
+   overriding this:
+   1. JS files: It looks like these are all false positives. The `*.js` files
+      all contain the full source code and license headers. Also, there are
+      `*.min.js` files available; these would be a problem if the corresponding
+      `*.js` did not accompany them.
+   2. HTML files: Also a false positive due to using the substring ".Link" in
+      their names.
+   3. prebuilds from [Microsoft Arcade](https://github.com/dotnet/arcade): These
+      files are needed for bootstrapping the first release of the package (they
+      will disappear in upcoming releases).
+
+## Building the Binary Packages
+
+Because .NET gets built with .NET itself, building the binary packages of this
+source package is not trivial. Notice that in the `debian/control` file, the
+`dotnet8` source package `Build-Depends` on the binary packages it produces
+(`dotnet-sdk-8.0` and `dotnet-sdk-8.0-source-built-artifacts`).
+
+You have to use a previous build from the Ubuntu Archive. Canonical will
+bootstrap the initial version.
+
+### Requirements
+
+- ~100GB Disk Space
+- `sbuild` is set up ([How to set up your environment for Ubuntu Development?](https://github.com/canonical/ubuntu-maintainers-handbook/blob/main/Setup.md))
+- a [`schroot`](https://manpages.ubuntu.com/manpages/mantic/en/man1/schroot.1.html)
+  for `mantic` and the architecture you want to build for
+  (e.g., with `mk-sbuild mantic`)
+
+### Build from Ubuntu Previous Build
+
+1. Get the latest source from [Launchpad](https://launchpad.net/ubuntu/+source/dotnet8) with 
+    ```
+    pull-lp-source dotnet8
+    ```
+
+    After the command finishes, you should have a
+    - `dotnet8_*.orig.tar.xz` tarball file
+    - `dotnet8_*.debian.tar.xz` tarball file
+    - `dotnet8-*` folder where both are unpacked
+
+2. Build the source with
+    ```
+    sbuild \
+      --dist=mantic \
+      --arch-any --arch=amd64 --no-arch-all --no-source \
+      --apt-update --apt-upgrade \
+      --no-run-lintian \
+      --purge-build=successful \
+      dotnet8_*.dsc
+    ```
+
+    NOTE: replace `--arch=amd64` with `--arch=arm64` if you want to build the
+    binary packages for `arm64`, but be aware that you need to build on an
+    `arm64` system.
+
+    NOTE: The argument `--no-run-lintian` is optional, but depending on your
+    system, running `lintian` can take up to 1 hour.
+
+## Get the orig tarball (for Canonical Package Maintainers)
+
+As explained in the section [*`debian/watch` file*](#debianwatch-file)
+Canonical gets the original source from a private repository. We do not
+really need a `debian/watch` file for this repository as we speak weekly with
+Microsoft about releases and we get notified by email when a new release is
+available.
+
+We use the `build-dotnet-tarball.sh` script to download the source and build
+the `orig.tar` from it. You can run `build-dotnet-tarball.sh --help` to get
+help how to use that script. The script also aims to give usefull error messages
+if something is wrong.
+
+NOTE: You can use this script and point it to the public VMR repository along
+with the version tag name in order to build the orig tarball, just like we do
+with the private .NET repository used for monthly security hand-offs.
+    
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 05 Apr 2024 04:04:25 +0300

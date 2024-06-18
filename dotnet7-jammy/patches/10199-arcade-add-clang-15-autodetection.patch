@@ -1,0 +1,24 @@
+Description: Add clang-15 autodetection
+ This is from #73065 on dotnet/runtime repo, adding some versions up
+ to clang-15 and cpp-12.
+Author: Adeel Mujahid <github.com/am11>, Miriam España Acebal <miriam.espana@canonical.com>
+Origin: upstream, https://github.com/dotnet/arcade/pull/10199
+Forwarded: not-needed
+Applied-Upstream: https://github.com/dotnet/arcade/pull/10199/commits/9727aa8823da5bb5947a38158f4bd95633f27fb1
+Reviewed-by: Jan Kotas <jkotas@microsoft.com>
+Last-Update: 2022-10-11 <YYYY-MM-DD, last update of the meta-information, optional>
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/msbuild/eng/common/native/find-native-compiler.sh
++++ b/src/msbuild/eng/common/native/find-native-compiler.sh
+@@ -55,8 +55,8 @@
+     # Set default versions
+     if [ -z "$majorVersion" ]; then
+         # note: gcc (all versions) and clang versions higher than 6 do not have minor version in file name, if it is zero.
+-        if [ "$compiler" = "clang" ]; then versions=( 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
+-        elif [ "$compiler" = "gcc" ]; then versions=( 9 8 7 6 5 4.9 ); fi
++        if [ "$compiler" = "clang" ]; then versions=( 15 14 13 12 11 10 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
++        elif [ "$compiler" = "gcc" ]; then versions=( 12 11 10 9 8 7 6 5 4.9 ); fi
+
+         for version in "${versions[@]}"; do
+             parts=(${version//./ })

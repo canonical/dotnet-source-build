@@ -1,0 +1,5 @@
+dotnet8 (8.0.100-8.0.0~rc1-0ubuntu1~test1) UNRELEASED; urgency=medium
+
+  * Mock changelog entry
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 03 Oct 2023 17:27:04 +0300

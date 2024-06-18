@@ -1,0 +1,112 @@
+Description: Fix clang 18 build errors
+Author: Raphtaliyah <me@raphtaliyah.moe>
+Origin: upstream
+Bug: https://github.com/dotnet/runtime/pull/94782
+Bug-Launchpad: https://bugs.launchpad.net/ubuntu/+source/dotnet8/+bug/2058766
+Last-Update: 2024-04-10
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/runtime/eng/native/configurecompiler.cmake
++++ b/src/runtime/eng/native/configurecompiler.cmake
+@@ -337,6 +337,11 @@
+     add_compile_options(-Wimplicit-fallthrough)
+   endif()
+ 
++  # VLAs are non standard in C++, aren't available on Windows and
++  # are a warning by default since clang 18.
++  # For consistency, enable warnings for all compiler versions.
++  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wvla>)
++
+   #These seem to indicate real issues
+   add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-invalid-offsetof>)
+ 
+@@ -376,6 +381,9 @@
+     add_compile_options(-Wno-single-bit-bitfield-constant-conversion)
+     add_compile_options(-Wno-cast-function-type-strict)
+     add_compile_options(-Wno-incompatible-function-pointer-types-strict)
++
++    # clang 18.1 supressions
++    add_compile_options(-Wno-switch-default)
+   else()
+     add_compile_options(-Wno-unknown-pragmas)
+     add_compile_options(-Wno-uninitialized)
+--- a/src/runtime/src/coreclr/gc/unix/gcenv.unix.cpp
++++ b/src/runtime/src/coreclr/gc/unix/gcenv.unix.cpp
+@@ -721,9 +721,9 @@
+         if ((int)node <= g_highestNumaNode)
+         {
+             int usedNodeMaskBits = g_highestNumaNode + 1;
+-            int nodeMaskLength = (usedNodeMaskBits + sizeof(unsigned long) - 1) / sizeof(unsigned long);
+-            unsigned long nodeMask[nodeMaskLength];
+-            memset(nodeMask, 0, sizeof(nodeMask));
++            int nodeMaskLength = usedNodeMaskBits + sizeof(unsigned long) - 1;
++            unsigned long* nodeMask = (unsigned long*)alloca(nodeMaskLength);
++            memset(nodeMask, 0, nodeMaskLength);
+ 
+             int index = node / sizeof(unsigned long);
+             nodeMask[index] = ((unsigned long)1) << (node & (sizeof(unsigned long) - 1));
+--- a/src/runtime/src/coreclr/pal/src/file/path.cpp
++++ b/src/runtime/src/coreclr/pal/src/file/path.cpp
+@@ -401,8 +401,8 @@
+         return 0;
+     }
+ 
+-    char TempBuffer[nBufferLength > 0 ? nBufferLength : 1];
+-    DWORD dwRetVal = GetTempPathA( nBufferLength, TempBuffer );
++    char* tempBuffer = (char*)alloca(nBufferLength > 0 ? nBufferLength : 1);
++    DWORD dwRetVal = GetTempPathA( nBufferLength, tempBuffer );
+ 
+     if ( dwRetVal >= nBufferLength )
+     {
+@@ -413,7 +413,7 @@
+     else if ( dwRetVal != 0 )
+     {
+         /* Convert to wide. */
+-        if ( 0 == MultiByteToWideChar( CP_ACP, 0, TempBuffer, -1,
++        if ( 0 == MultiByteToWideChar( CP_ACP, 0, tempBuffer, -1,
+                                        lpBuffer, dwRetVal + 1 ) )
+         {
+             ASSERT( "An error occurred while converting the string to wide.\n" );
+--- a/src/runtime/src/coreclr/pal/src/include/pal/palinternal.h
++++ b/src/runtime/src/coreclr/pal/src/include/pal/palinternal.h
+@@ -431,6 +431,7 @@
+ #undef va_start
+ #undef va_end
+ #undef va_copy
++#undef va_arg
+ #undef stdin
+ #undef stdout
+ #undef stderr
+--- a/src/runtime/src/native/common/getexepath.h
++++ b/src/runtime/src/native/common/getexepath.h
+@@ -33,7 +33,7 @@
+         return NULL;
+     }
+ 
+-    char path_buf[path_length];
++    char* path_buf = (char*)alloca(path_length);
+     if (_NSGetExecutablePath(path_buf, &path_length) != 0)
+     {
+         errno = EINVAL;
+--- a/src/runtime/eng/common/native/find-native-compiler.sh
++++ b/src/runtime/eng/common/native/find-native-compiler.sh
+@@ -55,7 +55,7 @@
+     # Set default versions
+     if [ -z "$majorVersion" ]; then
+         # note: gcc (all versions) and clang versions higher than 6 do not have minor version in file name, if it is zero.
+-        if [ "$compiler" = "clang" ]; then versions=( 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
++        if [ "$compiler" = "clang" ]; then versions=( 18 17 16 15 14 13 12 11 10 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
+         elif [ "$compiler" = "gcc" ]; then versions=( 9 8 7 6 5 4.9 ); fi
+ 
+         for version in "${versions[@]}"; do
+--- a/src/arcade/eng/common/native/find-native-compiler.sh
++++ b/src/arcade/eng/common/native/find-native-compiler.sh
+@@ -55,7 +55,7 @@
+     # Set default versions
+     if [ -z "$majorVersion" ]; then
+         # note: gcc (all versions) and clang versions higher than 6 do not have minor version in file name, if it is zero.
+-        if [ "$compiler" = "clang" ]; then versions=( 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
++        if [ "$compiler" = "clang" ]; then versions=( 18 17 16 15 14 13 12 11 10 9 8 7 6.0 5.0 4.0 3.9 3.8 3.7 3.6 3.5 )
+         elif [ "$compiler" = "gcc" ]; then versions=( 9 8 7 6 5 4.9 ); fi
+ 
+         for version in "${versions[@]}"; do

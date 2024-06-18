@@ -1,0 +1,16 @@
+{
+  "name": "nativeaot",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "7.0",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "runtime=mono", // nativeaot is not available with mono
+    "vmr-ci"        // nativeaot packages not published
+  ],
+  "ignoredRIDs": [
+    "linux-arm" // nativeaot not supported on arm
+  ]
+}

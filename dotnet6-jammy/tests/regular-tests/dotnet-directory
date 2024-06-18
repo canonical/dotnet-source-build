@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# This is a script called by multiple tests to find the runtime
+# directory of the current platform.
+
+set -euo pipefail
+
+print_err()
+{
+    echo "err: $@" 1>&2;
+}
+
+print_usage() {
+    echo "usage: $0 [--root (default) | --sdk | --framework <runtime version> | --help ]" 1>&2
+    echo "" 1>&2
+    echo "Shows a .NET directory." 1>&2
+}
+
+if [ "${1:-}" == "--help" ]; then
+    print_usage
+    exit 0
+fi
+
+dotnet_command_path=$(command -v dotnet || true)
+if [ -z "$dotnet_command_path" ]; then
+    print_err "'dotnet' command not found."
+    exit 1
+fi
+dotnet_dir=$(dirname "$(realpath "$dotnet_command_path")")
+
+print_root() {
+    if [ ! -d "$dotnet_dir" ]; then
+        print_err "dotnet root directory not found."
+        exit 1
+    fi
+    echo "${dotnet_dir}"
+    exit 0
+}
+
+print_sdk() {
+    local sdk_version="$(dotnet --version)"
+    local sdk_dir="${dotnet_dir}/sdk/${sdk_version}"
+    if [ ! -d "$sdk_dir" ]; then
+        print_err "sdk directory for $sdk_version not found."
+        exit 1
+    fi
+    echo "${sdk_dir}"
+    exit 0
+}
+
+print_framework() {
+    if [[ $# -lt 2 ]]; then
+        print_err "Missing <version> argument."
+        exit 1
+    fi
+    local dir_name="$1"
+    local version="$2"
+    declare -a versions
+    IFS='.-' read -ra versions <<< "${version}"
+    framework_dirs=( "${dotnet_dir}/shared/$dir_name/${versions[0]}.${versions[1]:-}"* )
+    framework_dir="${framework_dirs[0]}"
+    if [ ! -d "$framework_dir" ]; then
+        print_err "framework directory for $version not found."
+        exit 1
+    fi
+    echo "${framework_dir}"
+    exit 0
+}
+
+if [[ $# -eq 0 ]]; then
+    command="--root"
+else
+    command="$1"
+    shift
+fi
+case "$command" in
+    --root)
+        print_root "$@"
+        ;;
+    --framework)
+        print_framework "Microsoft.NETCore.App" "$@"
+        ;;
+    --aspnet)
+        print_framework "Microsoft.AspNetCore.App" "$@"
+        ;; 
+    --sdk)
+        print_sdk "$@"
+        ;;
+    *)
+        print_err "unknown argument: $1."
+        print_usage
+        exit 1
+esac
+

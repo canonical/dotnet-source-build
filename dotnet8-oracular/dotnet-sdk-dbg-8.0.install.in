@@ -1,0 +1,2 @@
+artifacts/debug-symbols/sdk/@major@.0.* @basedir@/sdk
+artifacts/debug-symbols/packs @basedir@

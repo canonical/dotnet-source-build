@@ -1,0 +1,4 @@
+1500sdk-telemetry-optout.patch
+68212runtime-shlibdeps-warning-log2.patch
+10199-arcade-add-clang-15-autodetection.patch
+remove-libunwind-build.patch

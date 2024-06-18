@@ -1,0 +1,153 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  unit-test:
+    name: Verify unit tests pass
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        container_image:
+          - quay.io/centos/centos:stream8
+          - quay.io/centos/centos:stream9
+          - registry.fedoraproject.org/fedora:37
+          - registry.fedoraproject.org/fedora:38
+          - registry.fedoraproject.org/fedora:39
+          - registry.fedoraproject.org/fedora:rawhide
+          - registry.access.redhat.com/ubi8
+          - registry.access.redhat.com/ubi9
+        dotnet_version:
+          - "6.0"
+          - "7.0"
+        include:
+          - container_image: quay.io/centos/centos:stream9
+            dotnet_version: "8.0"
+
+    container:
+      image: ${{ matrix.container_image }}
+      options: --security-opt seccomp=unconfined
+
+    steps:
+      - name: Install build dependencies
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          if command -v dnf; then
+            dnf install -y dotnet-sdk-${{ matrix.dotnet_version }} git make
+          elif command -v apk; then
+            apk add bash curl git icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ make zlib
+            curl -sSLO https://dot.net/v1/dotnet-install.sh
+            chmod +x ./dotnet-install.sh
+            ./dotnet-install.sh --channel ${{ matrix.dotnet_version }}
+          fi
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Sanity check
+        run: |
+          set -euo pipefail
+          PATH=$PATH:$HOME/.dotnet/
+
+          git config --global safe.directory "$GITHUB_WORKSPACE"
+
+          make
+          mkdir -p no-reproducers
+          dotnet turkey/Turkey.dll no-reproducers
+
+      - name: Run tests
+        run: |
+          set -euo pipefail
+          PATH=$PATH:$HOME/.dotnet/
+
+          make check
+
+  reproducers:
+    name: Verify reproducers work
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        container_image:
+          - quay.io/centos/centos:stream8
+          - quay.io/centos/centos:stream9
+          - registry.fedoraproject.org/fedora:37
+          - registry.fedoraproject.org/fedora:38
+          - registry.fedoraproject.org/fedora:39
+          - registry.fedoraproject.org/fedora:rawhide
+          - registry.access.redhat.com/ubi8
+          - registry.access.redhat.com/ubi9
+        dotnet_version:
+          - "6.0"
+          - "7.0"
+        include:
+          - container_image: quay.io/centos/centos:stream9
+            dotnet_version: "8.0"
+
+
+    container:
+      image: ${{ matrix.container_image }}
+      options: --security-opt seccomp=unconfined
+
+    steps:
+      - name: Install build dependencies
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          dnf install -y dotnet-sdk-${{ matrix.dotnet_version }} git make
+
+      # We need to fetch the tags, so 'git tag' in 'make publish' below works
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Build test runner
+        timeout-minutes: 2
+        run: |
+          set -euo pipefail
+          git config --global --add safe.directory $(pwd)
+          make publish
+
+      - name: Get reproducers
+        run: |
+          set -euo pipefail
+          git clone https://github.com/redhat-developer/dotnet-regular-tests/
+
+      - name: Install Test dependencies
+        timeout-minutes: 2
+        run: |
+          dnf install -y python3 wget \
+            $(grep '^Dependencies(dnf): ' dotnet-regular-tests/README.md | cut -d: -f2-) \
+            --skip-broken
+
+      - name: Run reproducers
+        run: |
+          set -euo pipefail
+          ### HACK: Filter tests that can't pass in Containers
+          rm -r dotnet-regular-tests/debugging-sos-lldb* dotnet-regular-tests/createdump-aspnet dotnet-regular-tests/cgroup-limit
+
+          ### HACK: UBI 8 is missing strace and bash-completion packages for these tests
+          if [[ ${{ matrix.container_image }} == *ubi* ]] ; then
+              rm -r dotnet-regular-tests/telemetry-is-off-by-default dotnet-regular-tests/bash-completion dotnet-regular-tests/system-data-odbc
+          fi
+
+          dotnet --info
+
+          dotnet turkey/Turkey.dll dotnet-regular-tests -v --timeout 600
+
+      - name: Show Logs
+        if: ${{ always() }}
+        run: |
+          set -euo pipefail
+          find -iname '*.log' -exec echo {} \; -exec cat {} \;

@@ -1,0 +1,116 @@
+dotnet8 (8.0.105-8.0.5-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: stack buffer overflow
+    - CVE-2024-30045: a stack based buffer overflow in the .NET Double Parse
+      routine allows for remote code execution.
+  * SECURITY UPDATE: resource dead-lock
+    - CVE-2024-30046: a dead-lock in Http2OutputProducer.Stop() results in a
+      denial of service.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Thu, 09 May 2024 17:16:36 +0300
+
+dotnet8 (8.0.104-8.0.4-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * New upstream release (LP: #2060261).
+  * debian/README.source: Update support information (LP: #2058746).
+  * debian/eng/versionlib: Add support for '+really' and '~bootstrap+ARCH' 
+                           in version string.
+  * debian/tests/versionlib-tests: Add versionlib unit tests
+    - debian/tests/run-versionlib-tests.sh: script to run the tests
+  * Added new binary packages for debug symbols.
+  * Moved RID-specific targeting packs to dotnet-sdk
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 05 Apr 2024 06:24:17 +0300
+
+dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.2) jammy; urgency=medium
+
+  * Add ca-certificates to dotnet-sdk-8.0 depends (LP: #2057982).
+  * Replace debian/tests:
+    - Add debian/tests/01_regular-tests & debian/tests/regular-tests
+      (testcases files; included version of: 
+      https://github.com/canonical/dotnet-regular-tests/).
+    - Add debian/tests/build-time-tests
+  * debian/rules: Added override_dh_auto_test; runs d/t/build-time-tests
+  * debian/copyright: Update debian/ copyright information
+  * debian/eng: Added directory for scripts & libraries used within the package:
+    - Add debian/eng/test-runner (executes debian/tests/regular-tests testcases;
+      included version of: https://github.com/canonical/dotnet-test-runner).
+    - Added debian/eng/versionlib (.NET version parsing library; used by 
+      debian/tests).
+    - Added debian/eng/strenum; needed by debian/eng/versionlib
+    - Added debian/eng/dotnet-version.py; needed by debian/tests/01_regular-tests
+    - Moved debian/watch-script.sh and debian/build-dotnet-tarball.sh 
+      to debian/eng
+  * Removed debian/repack-dotnet-tarball.sh (deprecated)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 18 Mar 2024 14:34:59 +0200
+
+dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-21392: DoS in .NET Core / YARP HTTP / 2 WebSocket support.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Fri, 08 Mar 2024 10:26:16 +0200
+
+dotnet8 (8.0.102-8.0.2-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-21386: denial of service vector in SignalR server.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-21404: .NET with OpenSSL support is vulnerable to a denial of
+      service when parsing X509 certificates.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Mon, 12 Feb 2024 22:08:53 +0200
+
+dotnet8 (8.0.101-8.0.1-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: validation bypass
+    - CVE-2024-0057: X509 Certificates - Validation Bypass across Azure
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-21319: Azure Identity - Pre-Authentication DoS in JWT
+  * debian/build-dotnet-tarball.sh: rename function print_err to print_error
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Mon, 12 Feb 2024 11:04:58 +0200
+
+dotnet8 (8.0.100-8.0.0-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * Backport to Ubuntu 22.04 LTS Jammy Jellyfish (LP: #2046133).
+    - d/control: change dotnet-runtime-8.0 Depends from libicu72 to libicu70
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 11 Dec 2023 08:02:06 +0200
+
+dotnet8 (8.0.100-8.0.0-0ubuntu1~23.10.1) mantic-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2023-36558: Security Feature Bypass in Blazor forms
+  * SECURITY UPDATE: Arbitrary File Write and Deletion
+    - CVE-2023-36049: Microsoft .NET FormatFtpCommand CRLF Injection
+      Arbitrary File Write and Deletion
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Mon, 13 Nov 2023 11:10:48 +0200
+
+dotnet8 (8.0.100-8.0.0~rc2-0ubuntu1) mantic-security; urgency=medium
+
+  * New upstream release.
+  * SECURITY UPDATE: denial of service
+    - CVE-2023-44487: Denial of service - Kestrel server.
+  * debian/tests/cli-metadata-should-be-correct: updated regex for the Host
+    Runtime Version check.
+
+  [ Mateus Rodrigues de Morais ]
+  * debian/rules: removed uneeded sym link for
+    $(DOTNET_TOP)/source-built-artifacts/Private.SourceBuilt.Prebuilts.*.tar.gz
+  * debian/lintian: additional lintian overrides added.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Wed, 18 Oct 2023 21:05:17 +0300
+
+dotnet8 (8.0.100-8.0.0~rc1-0ubuntu1) mantic; urgency=medium
+
+  * Initial release (LP: #2025261)
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 05 Oct 2023 15:58:22 -0300

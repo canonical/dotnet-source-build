@@ -1,0 +1,14 @@
+{
+  "name": "aspnet-same-runtime-version",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "3.0",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "vmr-ci" // CI builds may have different versions for runtime and ASP.NET Core.
+  ],
+  "ignoredRIDs":[
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "japanese-eras",
+  "enabled": false,
+  "requiresSdk": true,
+  "version": "2.1",
+  "versionSpecific": false,
+  "type": "xunit",
+  "cleanup": true,
+  "ignoredRIDs":[
+  ]
+}
+

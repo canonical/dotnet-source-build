@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import re
+import argparse
+from xml.etree import ElementTree
+
+
+def ContainsNU1102Error(name, stdout):
+    if name == "workload":
+        match = re.search(r"Workload installation failed: "
+                          r"[a-zA-Z0-9.\-_]+::[0-9.]+ "
+                          r"is not found in NuGet feeds", stdout)
+    else:
+        match = re.search(r"error NU1102: Unable to find package "
+                          r"Microsoft\.NETCore\.App\.Runtime\."
+                          r"(linux-\w+|Mono.browser-wasm) "
+                          r"with version", stdout)
+    
+    return match is not None
+
+
+argumentParser = argparse.ArgumentParser(
+    description="Checks the results of a test-runner run file and "
+                "evaluates if the test suite passes or fails.")
+
+argumentParser.add_argument("--ignore-nu1102-errors",
+                            action="store_true",
+                            dest="IgnoreNU1102Errors",
+                            help="Ignores .NET NU1102 errors (unable to find "
+                                 "package). These failures are often caused "
+                                 "when the build version is not released yet "
+                                 "and therefore the corresponding packages "
+                                 "are not available yet. NOTE: Instead of "
+                                 "specifing this flag, the environment "
+                                 "variable REGULAR_TESTS_IGNORE_NU1102_ERRORS "
+                                 "can be defined.")
+argumentParser.add_argument("ResultsFilePath",
+                            nargs="?",
+                            metavar="<results.xml file path>",
+                            default="results.xml",
+                            help="File path of the results.xml file. "
+                                 "(Default: 'results.xml')")
+
+arguments = argumentParser.parse_args()
+
+ResultsFilePath = arguments.ResultsFilePath
+
+if "REGULAR_TESTS_IGNORE_NU1102_ERRORS" in os.environ:
+    IgnoreNU1102Errors = True
+    print("INFO: Environment variable 'REGULAR_TESTS_IGNORE_NU1102_ERRORS' is "
+          "defined. Ignoring testcase failures caused by NU1102 (unable to "
+          "find package) error.")
+elif arguments.IgnoreNU1102Errors:
+    IgnoreNU1102Errors = True
+    print("INFO: Command line flag '--ignore-nu1102-errors' is "
+          "defined. Ignoring testcase failures caused by NU1102 "
+          "(unable to find package) error.")
+else:
+    IgnoreNU1102Errors = False
+
+if not os.path.exists(ResultsFilePath):
+    print(f"ERROR: The specified results.xml file path '{ResultsFilePath}' "
+          "does not exist.")
+
+tree = ElementTree.parse(ResultsFilePath)
+testsuite = tree.getroot()
+
+if testsuite.tag != "testsuite":
+    raise ValueError(f"Root element has unexpected tag '{testsuite.tag}'. "
+                     "Expected 'testsuite'.")
+
+PassedTestCases = 0
+SkipedTestCases = 0
+IgnoredTestCases = 0
+FailedTestCases = 0
+
+for testcase in testsuite:
+    if testcase.tag != "testcase":
+        raise ValueError(f"Unexpected element tag '{testcase.tag}'. "
+                         "Expected 'testcase'.")
+    
+    match len(testcase):
+        case 0:
+            raise ValueError("Testcase does not have child element. "
+                            "This is unexpected.")
+        case 1:
+            if testcase[0].tag == "system-out":
+                PassedTestCases += 1
+                continue
+            else:
+                raise ValueError(f"Unexpected element '{testcase[0].tag}'. "
+                                 "Expected 'system-out'.")
+        case 2:
+            match [testcase[0].tag, testcase[1].tag]:
+                case ["skipped", "system-out"]:
+                    SkipedTestCases += 1
+                case ["failure", "system-out"]:
+                    name = testcase.attrib["name"]
+                    stdout = testcase[1].text
+
+                    isNU1102Error = ContainsNU1102Error(name, stdout)
+
+                    if isNU1102Error and IgnoreNU1102Errors:
+                        IgnoredTestCases += 1
+                        print(f"INFO: Ignoring failed of testcase '{name}', "
+                              "caused by NU1102 (unable to find package) "
+                              "error.")
+                    else:
+                        FailedTestCases += 1
+                        msg = f"ERROR: Testcase '{name}' failed."
+                        
+                        if isNU1102Error:
+                            msg += (" [Note: Failure is caused by NU1102 "
+                                   "(unable to find package) error.]")
+                        
+                        print(msg)
+                case [tag1, tag2]:
+                    print("DEBUG: ", testcase)
+                    raise ValueError(
+                        f"Unexpected elements '{tag1}', '{tag2}'.")
+        case elementCount:
+            print("DEBUG: ", testcase)
+            raise ValueError("Testcase has more elements than expected "
+                             f"(element count: {elementCount}).")
+
+
+TotalTestCases = (PassedTestCases + SkipedTestCases + 
+                  IgnoredTestCases + FailedTestCases)
+
+print("\n"
+      f"Total: {TotalTestCases} "
+      f"Passed: {PassedTestCases} "
+      f"Skiped: {SkipedTestCases} "
+      f"Ignored: {IgnoredTestCases} "
+      f"Failed: {FailedTestCases}")
+
+if FailedTestCases == 0:
+    print("\nPASSED!")
+else:
+    print("\nFAILED!")
+    sys.exit(1)

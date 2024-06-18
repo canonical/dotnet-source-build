@@ -1,0 +1,75 @@
+name: Create a release when a tag is pushed
+
+on:
+  push:
+    tags:
+      - 'v*'  # Push events matching v*, i.e. v1, v20
+
+  # Allow running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get install --assume-yes dotnet6 git make
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Run tests and publish binaries
+        run: |
+          set -euo pipefail
+          git config --global --add safe.directory "$(pwd)"
+          make check
+          make publish
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-binaries
+          path: turkey.tar.gz
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    needs: Build
+
+    steps:
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-binaries
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          name: Version ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: true
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: turkey.tar.gz
+          asset_name: turkey.tar.gz
+          asset_content_type: application/gzip

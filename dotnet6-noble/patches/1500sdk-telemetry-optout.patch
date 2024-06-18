@@ -1,0 +1,18 @@
+diff --git a/src/sdk/src/Cli/dotnet/Program.cs b/src/sdk/src/Cli/dotnet/Program.cs
+index de1ebb9e6..6bbf479de 100644
+--- a/src/sdk/src/Cli/dotnet/Program.cs
++++ b/src/sdk/src/Cli/dotnet/Program.cs
+@@ -28,6 +28,13 @@ public class Program
+
+         public static int Main(string[] args)
+         {
++            // opt out of telemetry by default if the env var is unset
++            string telemetryValue = Environment.GetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT");
++            if (String.IsNullOrEmpty(telemetryValue))
++            {
++                Environment.SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1");
++            }
++
+             DebugHelper.HandleDebugSwitch(ref args);
+
+             // Capture the current timestamp to calculate the host overhead.

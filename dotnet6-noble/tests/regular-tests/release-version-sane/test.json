@@ -1,0 +1,12 @@
+{
+  "name": "release-version-sane",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "3.1",
+  "versionSpecific": false,
+  "type": "xunit",
+  "cleanup": true,
+  "skipWhen": [
+    "vmr-ci" // see https://github.com/redhat-developer/dotnet-regular-tests/issues/282
+  ]
+}

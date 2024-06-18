@@ -1,0 +1,14 @@
+{
+  "name": "assemblies-valid",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "2.0",
+  "versionSpecific": false,
+  "type": "xunit",
+  "cleanup": true,
+  "skipWhen": [
+    "runtime=mono,arch=x64" // test assumes x64 means coreclr
+  ],
+  "ignoredRIDs":[
+  ]
+}

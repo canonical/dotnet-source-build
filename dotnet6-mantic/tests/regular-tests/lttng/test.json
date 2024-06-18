@@ -1,0 +1,18 @@
+{
+  "name": "lttng",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "2.1",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "runtime=mono", // mono does not use lttng
+    "ubuntu-autopkgtest-cloud", // see https://github.com/canonical/dotnet-regular-tests/issues/8
+  ],
+  "ignoredRIDs":[
+    "centos",
+    "fedora", // see https://github.com/redhat-developer/dotnet-regular-tests/issues/202
+    "rhel"
+  ]
+}

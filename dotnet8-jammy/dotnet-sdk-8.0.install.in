@@ -1,0 +1,5 @@
+@basedir@/metadata
+@basedir@/sdk-manifests/@major@.0.*
+@basedir@/sdk/@major@.0.*
+@basedir@/packs/Microsoft.AspNetCore.App.Runtime.@rid@-@arch@
+@basedir@/packs/Microsoft.NETCore.App.Runtime.@rid@-@arch@

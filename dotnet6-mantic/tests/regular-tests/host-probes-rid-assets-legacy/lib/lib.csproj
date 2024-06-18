@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>host-probes-rid-assets-$(LibName)</PackageId>
+    <!-- We need a native library for this test. Pick one from the runtime. -->
+    <NativeLibrary>$(NetCoreRoot)/shared/Microsoft.NETCore.App/$(BundledNETCoreAppPackageVersion)/libSystem.Native.so</NativeLibrary>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Place it under the rid specific folder and rename it based on the Rid and LibName properties. -->
+    <Content Include="$(NativeLibrary)">
+      <PackagePath>runtimes/$(Rid)/native/$(LibName).so</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+</Project>

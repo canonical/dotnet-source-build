@@ -1,0 +1,11 @@
+{
+  "name": "dotnet-info-commit-ids",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "2.1",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "ignoredRIDs":[
+  ]
+}

@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# ENVIRONMENT VARIABLES:
+# - REGULAR_TESTS_RUNNER_VERSION
+#   Set the release version of https://github.com/canonical/dotnet-test-runner/
+#   to download. When unset it will use the included version.
+#   
+# - REGULAR_TESTS_REF
+#   Set the git ref of https://github.com/canonical/dotnet-regular-tests/
+#   to check out. When unset it will use the included version.
+#
+# - REGULAR_TESTS_TESTCASE_TIMEOUT_IN_SECONDS: 
+#   Sets the default timeout of a testcase (default: 720 seconds).   
+#
+# - REGULAR_TESTS_IGNORE_NU1102_ERRORS: 
+#   Set to any value to ignore NU1102 errors (package not found).
+#   This is useful to test .NET builds during embargo time when certain
+#   packages are not published yet.
+
+set -euo pipefail
+
+PACKAGE_ROOT="$(pwd)"
+
+# HOME is used by the .NET SDK
+export HOME="${AUTOPKGTEST_TMP}"
+
+set -x
+
+echo "INFO: extract source build artifacts"
+mkdir -p "${AUTOPKGTEST_TMP}/packages"
+tar --extract --gzip \
+  --directory "${AUTOPKGTEST_TMP}/packages" \
+  --file "$(debian/eng/source_build_artifact_path.py)"
+
+echo "INFO: add source build artifacts to global NuGet config"
+mkdir -p ~/.nuget/NuGet/
+cat <<EOF > ~/.nuget/NuGet/NuGet.Config
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+ <packageSources>
+   <add key="source-build" value="${AUTOPKGTEST_TMP}/packages" />
+   <add key="system-commandline-nightly" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries/nuget/v3/index.json" />
+   <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+ </packageSources>
+</configuration>
+EOF
+
+if [[ -z "${REGULAR_TESTS_RUNNER_VERSION:-}" ]]; then
+  echo "INFO: copy test-runner to test directory"
+  cp --recursive "debian/eng/test-runner" "${AUTOPKGTEST_TMP}"
+
+  echo "INFO: copy regular-tests to test directory"
+  cp --recursive "debian/tests/regular-tests" "${AUTOPKGTEST_TMP}"
+
+  export TargetBundledFramework='true'
+  export BundledNETCoreAppTargetFrameworkVersion="$(debian/eng/dotnet-version.py)"
+
+  pushd "${AUTOPKGTEST_TMP}/test-runner"
+
+  echo "INFO: run test-runner self-tests"
+  make check
+
+  echo "INFO: build test-runner"
+  make
+
+  popd 
+else
+  mkdir -p "${AUTOPKGTEST_TMP}/test-runner"
+  pushd "${AUTOPKGTEST_TMP}/test-runner"
+
+  echo "INFO: download test-runner to test directory"
+  wget "https://github.com/canonical/dotnet-test-runner/releases/${TEST_RUNNER_VERSION}/download/turkey.tar.gz"
+    
+  echo "INFO: extracting test-runner"
+  tar --extract --gzip --file "turkey.tar.gz"
+
+  popd
+fi
+
+if [[ -z "${REGULAR_TESTS_REF:-}" ]]; then
+  echo "INFO: copy regular-tests"
+  cp --recursive "debian/tests/regular-tests" "${AUTOPKGTEST_TMP}"
+else
+  pushd "${AUTOPKGTEST_TMP}"
+
+  echo "INFO: clone regular-tests"
+  git clone "https://github.com/canonical/dotnet-regular-tests" "regular-tests"
+
+  echo "INFO: checking out regular-tests ref '$REGULAR_TESTS_REF'"
+  git checkout "$REGULAR_TESTS_REF"
+  
+  popd
+fi
+
+cd "${AUTOPKGTEST_TMP}"
+
+echo "INFO: create test user"
+chmod --recursive 777 "${AUTOPKGTEST_TMP}"
+useradd testrunner --create-home
+mkdir -p /home/testuser/.nuget/NuGet/
+cp ~/.nuget/NuGet/NuGet.Config /home/testuser/.nuget/NuGet/
+chown --recursive testrunner:testrunner /home/testuser/
+
+echo "INFO: run regular-tests"
+mkdir -p "${AUTOPKGTEST_ARTIFACTS}/regular-tests"
+dotnet test-runner/turkey/Turkey.dll --version
+set +e 
+dotnet test-runner/turkey/Turkey.dll regular-tests \
+  --trait ubuntu-autopkgtest-cloud \
+  --timeout "${REGULAR_TESTS_TESTCASE_TIMEOUT_IN_SECONDS:-720}" \
+  --log-directory "${AUTOPKGTEST_ARTIFACTS}/regular-tests"
+set -e
+
+echo "INFO: check results of regular-tests run"
+regular-tests/check-test-results "${AUTOPKGTEST_ARTIFACTS}/regular-tests/results.xml"

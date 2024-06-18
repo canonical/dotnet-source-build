@@ -1,0 +1,15 @@
+{
+  "name": "file-permissions",
+  "enabled": true,
+  "requiresSdk": true,
+  "version": "3.0",
+  "versionSpecific": false,
+  "type": "bash",
+  "cleanup": true,
+  "skipWhen": [
+    "vmr-ci" // not packaged (tar.gz build)
+  ],
+  "ignoredRIDs":[
+
+  ]
+}
