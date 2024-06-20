@@ -3,6 +3,9 @@
 # Building .NET from source for Ubuntu
 [![License badge for GNU General Public License v3.0](https://img.shields.io/badge/License-GPL--3.0-informational)](https://github.com/canonical/dotnet-source-build/blob/main/LICENSE)
 
+> [!CAUTION]
+> The current state of the project is still highly experimental and untested.
+
 Home of the .NET source build effort for Ubuntu platforms. This Repository includes all the code needed to build .NET Debian source packages that target Ubuntu 22.04+
 
 ## Releases
