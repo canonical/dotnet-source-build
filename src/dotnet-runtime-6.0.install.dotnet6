@@ -1,0 +1,1 @@
+${dotnet:root-dir}/shared/Microsoft.NETCore.App/${dotnet:major}.${dotnet:minor}.*

@@ -1,3 +1,0 @@
-@basedir@/metadata
-@basedir@/sdk-manifests/@major@.0.*
-@basedir@/sdk/@major@.0.*

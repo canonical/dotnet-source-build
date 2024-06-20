@@ -1,0 +1,1 @@
+${dotnet:root-dir}/packs/Microsoft.NETCore.App.Host.${dotnet:rid}

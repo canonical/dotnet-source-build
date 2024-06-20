@@ -1,0 +1,2 @@
+artifacts/debug-symbols/sdk/${dotnet:major}.${dotnet:minor}.* ${dotnet:root-dir}/sdk
+artifacts/debug-symbols/packs ${dotnet:root-dir}

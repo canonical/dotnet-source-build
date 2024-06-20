@@ -1,0 +1,3 @@
+${dotnet:root-dir}/metadata
+${dotnet:root-dir}/sdk-manifests/${dotnet:major}.${dotnet:minor}.*
+${dotnet:root-dir}/sdk/${dotnet:major}.${dotnet:minor}.*

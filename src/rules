@@ -1,0 +1,171 @@
+#!/usr/bin/make --makefile
+
+SHELL ?= /usr/bin/bash
+
+# .NET will create by default the directories ~/.dotnet and ~/.nuget, but
+# sbuild will fail the build if anything is written to the default home directory.
+# See https://github.com/dotnet/source-build/issues/2767
+export HOME=$(shell mktemp --directory)
+
+include /usr/share/dpkg/pkg-info.mk
+include /usr/share/dpkg/architecture.mk
+include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
+
+ifeq ($(DOTNET_80_OR_GREATER), false)
+    export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+endif
+
+ifeq ($(DEB_HOST_ARCH), arm64)
+# 	-fstack-clash-protection is not implemented in arm64 clang,
+# 	therefore stripping this flag away to avoid the error:
+# 	clang: error: argument unused during compilation.
+# 	See https://github.com/llvm/llvm-project/issues/40148
+    export DEB_CFLAGS_MAINT_STRIP = -fstack-clash-protection
+    export DEB_CXXFLAGS_MAINT_STRIP = -fstack-clash-protection
+    export DEB_CFLAGS_MAINT_SET = -mbranch-protection=bti
+    export DEB_CXXFLAGS_MAINT_SET = -mbranch-protection=bti
+endif
+
+ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
+    DOTNET_BUILD_ARGS += --clean-while-building
+else
+    DOTNET_BUILD_ARGS += --with-sdk $(CURDIR)/previously-built-dotnet
+endif
+
+ifeq ($(DOTNET_80_OR_GREATER), true)
+    DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
+    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)	
+endif
+
+ifeq ($(DEB_DISTRIBUTION), trusty)
+    LIBICU = libicu52
+ifeq ($(DEB_DISTRIBUTION), xenial)
+    LIBICU = libicu55
+ifeq ($(DEB_DISTRIBUTION), bionic)
+    LIBICU = libicu60
+ifeq ($(DEB_DISTRIBUTION), focal)
+    LIBICU = libicu66
+ifeq ($(DEB_DISTRIBUTION), jammy)
+    LIBICU = libicu70
+else ifeq ($(DEB_DISTRIBUTION), mantic)
+    LIBICU = libicu72
+else ifeq ($(DEB_DISTRIBUTION), noble)
+    LIBICU = libicu74
+else ifeq ($(DEB_DISTRIBUTION), oracular)
+    LIBICU = libicu74
+else
+    $(error libicu version unspecified for distribution '$(DEB_DISTRIBUTION)')
+endif
+
+MAN_DIR = /usr/share/man
+DOTNET_BIN = /usr/bin/dotnet
+DOTNET_ROOT_DIR = /usr/lib/dotnet
+DOTNET_SYSCONF_DIR = /etc/dotnet
+DEST_DIR = $(CURDIR)/debian/tmp
+
+# Creating the debian/substvars file. See deb-substvars(5) for more details.
+ifeq ("$(wildcard $(CURDIR)/debian/substvars)",)
+    $(shell echo "dotnet-sdk:Depends:minor=dotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR),dotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "libicu:Depends=$(LIBICU)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:bin=$(DOTNET_BIN)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:root-dir=$(DOTNET_ROOT_DIR)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:sysconf-dir=$(DOTNET_SYSCONF_DIR)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:arch=$(DOTNET_ARCH)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:rid=$(DOTNET_RUNTIME_ID)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:major=$(DOTNET_MAJOR)" >> "$(CURDIR)/debian/substvars")
+    $(shell echo "dotnet:minor=$(DOTNET_MINOR)" >> "$(CURDIR)/debian/substvars")
+else
+    $(error A debian/substvars file already exists)
+endif
+
+%:
+    dh $@ --with bash-completion
+
+override_dh_auto_build:
+ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
+    mkdir --parents "$(CURDIR)/packages/archive"
+    ln --symbolic \
+        "$(DOTNET_ROOT_DIR)/source-built-artifacts/Private.SourceBuilt.Artifacts.*.tar.gz" \
+        "$(CURDIR)/packages/archive/"
+    cp --recursive --dereference --preserve=mode,ownership,timestamps \
+        "$(DOTNET_ROOT_DIR)" \
+        "$(CURDIR)/previously-built-dotnet"
+endif
+    VERBOSE=1 ./build.sh $(DOTNET_BUILD_ARGS) \
+    -- \
+    /v:n \
+    /p:SkipPortableRuntimeBuild=true \
+    /p:LogVerbosity=n \
+    /p:MinimalConsoleLogOutput=false \
+    /p:ContinueOnPrebuiltBaselineError=true
+
+override_dh_auto_test:
+    python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
+
+override_dh_gencontrol:
+ifeq ($(DOTNET_80_OR_GREATER), true)
+    dh_gencontrol
+    dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-host-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-hostfxr-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-sdk-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+    dh_gencontrol -pdotnet-sdk-8.0-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+    dh_gencontrol -pdotnet-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-templates-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+    dh_gencontrol -pnetstandard-targeting-pack-2.1-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+    dh_gencontrol -paspnetcore-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+    dh_gencontrol -pdotnet-sdk-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
+
+override_dh_install:
+    install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_ROOT_DIR)
+    install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_SYSCONF_DIR)
+    ls artifacts/$(DOTNET_ARCH)/Release
+    
+    tar --extract \
+        --file artifacts/$(DOTNET_ARCH)/Release/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+        --directory $(DEST_DIR)/$(DOTNET_ROOT_DIR)
+
+ifeq ($(DOTNET_80_OR_GREATER), true)
+# 	Clean up unwanted PDB files in sdk tar.gz
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pdb' -exec rm {} \;
+
+# 	Extract debug symbols to their own directory for easy handling
+    mkdir --parents artifacts/debug-symbols
+    tar --extract \
+        --file artifacts/$(DOTNET_ARCH)/Release/dotnet-symbols-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+        --directory artifacts/debug-symbols
+endif
+
+#   See https://github.com/dotnet/source-build/issues/2579
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'testhost.x86' -delete
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'vstest.console' -delete
+
+#   Fix executable permissions on files
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'apphost' -exec chmod +x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'lib*so' -exec chmod +x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'singlefilehost' -exec chmod +x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.a' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.dll' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.h' -exec chmod 0644 {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.json' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pdb' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.props' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pubxml' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.targets' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.txt' -exec chmod -x {} \;
+    find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.xml' -exec chmod -x {} \;
+
+    echo "$(DOTNET_ROOT_DIR)" > $(CURDIR)/debian/install_location
+    echo "$(DOTNET_ROOT_DIR)" > $(CURDIR)/debian/install_location_$(DOTNET_ARCH)
+
+    dh_install
+
+override_dh_dwz:
+#	Leaving it empty due to "dwz: Unknown debugging section .debug_addr"

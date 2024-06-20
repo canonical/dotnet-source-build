@@ -1,0 +1,1 @@
+artifacts/debug-symbols/shared/Microsoft.NETCore.App/${dotnet:major}.${dotnet:minor}.0.* ${dotnet:root-dir}/shared/Microsoft.NETCore.App
