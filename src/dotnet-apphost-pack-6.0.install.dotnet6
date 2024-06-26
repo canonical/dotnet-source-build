@@ -1,1 +1,1 @@
-${dotnet:root-dir}/packs/Microsoft.NETCore.App.Host.${dotnet:rid}
+${env:DOTNET_ROOT_DIR}/packs/Microsoft.NETCore.App.Host.${env:DOTNET_RUNTIME_ID}

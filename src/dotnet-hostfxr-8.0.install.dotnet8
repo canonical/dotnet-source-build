@@ -1,1 +1,1 @@
-${dotnet:root-dir}/host/fxr/${dotnet:major}.${dotnet:minor}.*
+${env:DOTNET_ROOT_DIR}/host/fxr/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*

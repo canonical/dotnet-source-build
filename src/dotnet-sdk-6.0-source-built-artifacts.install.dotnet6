@@ -1,1 +1,1 @@
-artifacts/${dotnet:arch}/Release/Private.SourceBuilt.Artifacts.*.tar.gz ${dotnet:root-dir}/source-built-artifacts/
+artifacts/${env:DOTNET_ARCH}/Release/Private.SourceBuilt.Artifacts.*.tar.gz ${env:DOTNET_ROOT_DIR}/source-built-artifacts/

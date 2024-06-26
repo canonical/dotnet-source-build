@@ -1,1 +1,1 @@
-${dotnet:root-dir}
+${env:DOTNET_ROOT_DIR}

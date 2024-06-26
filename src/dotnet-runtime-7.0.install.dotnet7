@@ -1,1 +1,1 @@
-${dotnet:root-dir}/shared/Microsoft.NETCore.App/${dotnet:major}.${dotnet:minor}.*
+${env:DOTNET_ROOT_DIR}/shared/Microsoft.NETCore.App/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*

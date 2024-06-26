@@ -63,9 +63,9 @@ else
     $(error libicu version unspecified for distribution '$(DEB_DISTRIBUTION)')
 endif
 
-DOTNET_BIN = /usr/bin/dotnet
-DOTNET_ROOT_DIR = /usr/lib/dotnet
-DOTNET_SYSCONF_DIR = /etc/dotnet
+export DOTNET_BIN = /usr/bin/dotnet
+export DOTNET_ROOT_DIR = /usr/lib/dotnet
+export DOTNET_SYSCONF_DIR = /etc/dotnet
 DEST_DIR = $(CURDIR)/debian/tmp
 
 %:
