@@ -34,12 +34,20 @@ endif
 
 ifeq ($(DEB_HOST_ARCH), amd64)
     DOTNET_ARCH = x64
+else ifeq ($(DEB_HOST_ARCH), i386)
+    DOTNET_ARCH = x86
 else ifeq ($(DEB_HOST_ARCH), arm64)
     DOTNET_ARCH = arm64
+else ifeq ($(DEB_HOST_ARCH), armhf)
+    DOTNET_ARCH = arm
 else ifeq ($(DEB_HOST_ARCH), s390x)
     DOTNET_ARCH = s390x
 else ifeq ($(DEB_HOST_ARCH), ppc64el)
     DOTNET_ARCH = ppc64le
+else ifeq ($(DEB_HOST_ARCH), powerpc)
+    DOTNET_ARCH = ppc
+else ifeq ($(DEB_HOST_ARCH), riscv64)
+    DOTNET_ARCH = riscv64
 else
 	$(error "architecture '$(DEB_HOST_ARCH)' not handled")
 endif
