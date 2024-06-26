@@ -44,7 +44,7 @@ else
 	$(error "architecture '$(DEB_HOST_ARCH)' not handled")
 endif
 
-DOTNET_RUNTIME_ID = $(shell source /etc/os-release; echo $${ID}.$${VERSION_ID}-$(DOTNET_ARCH))
+DOTNET_RUNTIME_ID = $(shell . /etc/os-release; echo "$${ID}.$${VERSION_ID}-$(DOTNET_ARCH)")
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_DEB_VERSION_SDK_ONLY = $(shell $(CURDIR)/debian/eng/dotnet-version.py --sdk-only-deb-version)
