@@ -39,21 +39,25 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)	
 endif
 
-ifeq ($(DEB_DISTRIBUTION), trusty)
+ifneq ($(findstring trusty,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu52
-ifeq ($(DEB_DISTRIBUTION), xenial)
+else ifneq ($(findstring xenial,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu55
-ifeq ($(DEB_DISTRIBUTION), bionic)
+else ifneq ($(findstring bionic,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu60
-ifeq ($(DEB_DISTRIBUTION), focal)
+else ifneq ($(findstring focal,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu66
-ifeq ($(DEB_DISTRIBUTION), jammy)
+else ifneq ($(findstring jammy,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu70
-else ifeq ($(DEB_DISTRIBUTION), mantic)
+else ifneq ($(findstring kinetic,$(DEB_DISTRIBUTION)),)
+    LIBICU = libicu71
+else ifneq ($(findstring lunar,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu72
-else ifeq ($(DEB_DISTRIBUTION), noble)
+else ifneq ($(findstring mantic,$(DEB_DISTRIBUTION)),)
+    LIBICU = libicu72
+else ifneq ($(findstring noble,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu74
-else ifeq ($(DEB_DISTRIBUTION), oracular)
+else ifneq ($(findstring oracular,$(DEB_DISTRIBUTION)),)
     LIBICU = libicu74
 else
     $(error libicu version unspecified for distribution '$(DEB_DISTRIBUTION)')
