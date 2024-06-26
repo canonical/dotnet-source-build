@@ -50,7 +50,7 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_DEB_VERSION_SDK_ONLY = $(shell $(CURDIR)/debian/eng/dotnet-version.py --sdk-only-deb-version)
     DOTNET_DEB_VERSION_RUNTIME_ONLY = $(shell $(CURDIR)/debian/eng/dotnet-version.py --runtime-only-deb-version)
     
-    ifeq ("$(wildcard $(CURDIR)/release.info)",)
+    ifeq ($(wildcard $(CURDIR)/release.info),)
         $(error "No release.info file in the source tarball found")
     endif
 
@@ -64,7 +64,7 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	endif
 endif
 
-ifneq ("$(wildcard $(CURDIR)/.dotnet)",)
+ifneq ($(wildcard $(CURDIR)/.dotnet),)
     DOTNET_CONTAINS_BOOTSTRAPPING_SDK = true
 else
     DOTNET_CONTAINS_BOOTSTRAPPING_SDK = false
