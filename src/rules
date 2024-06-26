@@ -99,25 +99,6 @@ endif
 override_dh_auto_test:
     python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
 
-override_dh_gencontrol:
-ifeq ($(DOTNET_80_OR_GREATER), true)
-    dh_gencontrol
-    dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-host-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-hostfxr-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-sdk-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-    dh_gencontrol -pdotnet-sdk-8.0-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-    dh_gencontrol -pdotnet-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-templates-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-    dh_gencontrol -pnetstandard-targeting-pack-2.1-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-    dh_gencontrol -paspnetcore-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-    dh_gencontrol -pdotnet-sdk-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-endif
-
 override_dh_install:
     install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_ROOT_DIR)
     install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_SYSCONF_DIR)
@@ -161,6 +142,25 @@ endif
     echo "$(DOTNET_ROOT_DIR)" > $(CURDIR)/debian/install_location_$(DOTNET_ARCH)
 
     dh_install
+
+override_dh_gencontrol: debian/substvars
+ifeq ($(DOTNET_80_OR_GREATER), true)
+	dh_gencontrol
+	dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-host-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-hostfxr-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-sdk-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-sdk-8.0-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-templates-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pnetstandard-targeting-pack-2.1-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -paspnetcore-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-sdk-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
 
 override_dh_dwz:
 #	Leaving it empty due to "dwz: Unknown debugging section .debug_addr"
