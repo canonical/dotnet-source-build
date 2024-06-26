@@ -17,17 +17,17 @@ DOTNET_MAJOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --major)
 DOTNET_MINOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --minor)
 
 ifeq ($(DOTNET_MAJOR),6)
-	DOTNET_60_OR_GREATER = true
-	DOTNET_70_OR_GREATER = true
-	DOTNET_80_OR_GREATER = true
+    DOTNET_60_OR_GREATER = true
+    DOTNET_70_OR_GREATER = true
+    DOTNET_80_OR_GREATER = true
 else ifeq ($(DOTNET_MAJOR),7)
-	DOTNET_60_OR_GREATER = false
-	DOTNET_70_OR_GREATER = true
-	DOTNET_80_OR_GREATER = true
+    DOTNET_60_OR_GREATER = false
+    DOTNET_70_OR_GREATER = true
+    DOTNET_80_OR_GREATER = true
 else ifeq ($(DOTNET_MAJOR),8)
-	DOTNET_60_OR_GREATER = false
-	DOTNET_70_OR_GREATER = false
-	DOTNET_80_OR_GREATER = true
+    DOTNET_60_OR_GREATER = false
+    DOTNET_70_OR_GREATER = false
+    DOTNET_80_OR_GREATER = true
 else
     $(error ".NET version $(DOTNET_MAJOR).$(DOTNET_MINOR) not handled")
 endif
