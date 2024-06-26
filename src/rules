@@ -63,7 +63,6 @@ else
     $(error libicu version unspecified for distribution '$(DEB_DISTRIBUTION)')
 endif
 
-MAN_DIR = /usr/share/man
 DOTNET_BIN = /usr/bin/dotnet
 DOTNET_ROOT_DIR = /usr/lib/dotnet
 DOTNET_SYSCONF_DIR = /etc/dotnet
