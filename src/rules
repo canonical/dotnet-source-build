@@ -68,25 +68,17 @@ DOTNET_ROOT_DIR = /usr/lib/dotnet
 DOTNET_SYSCONF_DIR = /etc/dotnet
 DEST_DIR = $(CURDIR)/debian/tmp
 
-# Creating the debian/substvars file. See deb-substvars(5) for more details.
-ifeq ("$(wildcard $(CURDIR)/debian/substvars)",)
-    $(shell echo "dotnet-sdk:Depends:minor=dotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR),dotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "libicu:Depends=$(LIBICU)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:bin=$(DOTNET_BIN)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:root-dir=$(DOTNET_ROOT_DIR)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:sysconf-dir=$(DOTNET_SYSCONF_DIR)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:arch=$(DOTNET_ARCH)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:rid=$(DOTNET_RUNTIME_ID)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:major=$(DOTNET_MAJOR)" >> "$(CURDIR)/debian/substvars")
-    $(shell echo "dotnet:minor=$(DOTNET_MINOR)" >> "$(CURDIR)/debian/substvars")
-else
-    $(error A debian/substvars file already exists)
-endif
-
 %:
-    dh $@ --with bash-completion
+	dh $@ --with bash-completion
 
-override_dh_auto_build:
+override_dh_clean:
+	rm --force "$(CURDIR)"/debian/substvars
+	dh_clean
+
+debian/substvars:
+	echo "libicu:Depends=$(LIBICU)" > "$(CURDIR)/debian/substvars"
+
+override_dh_auto_build: debian/substvars
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
     mkdir --parents "$(CURDIR)/packages/archive"
     ln --symbolic \
