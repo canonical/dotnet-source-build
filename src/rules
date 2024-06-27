@@ -11,6 +11,40 @@ include /usr/share/dpkg/pkg-info.mk
 include /usr/share/dpkg/architecture.mk
 include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
 
+ifneq ($(findstring trusty,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu52
+else ifneq ($(findstring xenial,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu55
+else ifneq ($(findstring bionic,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu60
+else ifneq ($(findstring focal,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu66
+else ifneq ($(findstring jammy,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu70
+else ifneq ($(findstring kinetic,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu71
+else ifneq ($(findstring lunar,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = false
+    LIBICU = libicu72
+else ifneq ($(findstring mantic,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = true
+    LIBICU = libicu72
+else ifneq ($(findstring noble,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = true
+    LIBICU = libicu74
+else ifneq ($(findstring oracular,$(DEB_DISTRIBUTION)),)
+    UBUNTU_2310_OR_OR_GREATER = true
+    LIBICU = libicu74
+else
+    $(error "distribution '$(DEB_DISTRIBUTION)' not handled")
+endif
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
 
 ifeq ($(DOTNET_80_OR_GREATER), false)
@@ -24,8 +58,10 @@ ifeq ($(DEB_HOST_ARCH), arm64)
 # 	See https://github.com/llvm/llvm-project/issues/40148
     export DEB_CFLAGS_MAINT_STRIP = -fstack-clash-protection
     export DEB_CXXFLAGS_MAINT_STRIP = -fstack-clash-protection
+ifeq ($(UBUNTU_2310_OR_OR_GREATER), true)
     export DEB_CFLAGS_MAINT_SET = -mbranch-protection=bti
     export DEB_CXXFLAGS_MAINT_SET = -mbranch-protection=bti
+endif
 endif
 
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
@@ -37,30 +73,6 @@ endif
 ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
     DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)	
-endif
-
-ifneq ($(findstring trusty,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu52
-else ifneq ($(findstring xenial,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu55
-else ifneq ($(findstring bionic,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu60
-else ifneq ($(findstring focal,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu66
-else ifneq ($(findstring jammy,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu70
-else ifneq ($(findstring kinetic,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu71
-else ifneq ($(findstring lunar,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu72
-else ifneq ($(findstring mantic,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu72
-else ifneq ($(findstring noble,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu74
-else ifneq ($(findstring oracular,$(DEB_DISTRIBUTION)),)
-    LIBICU = libicu74
-else
-    $(error libicu version unspecified for distribution '$(DEB_DISTRIBUTION)')
 endif
 
 export DOTNET_BIN = /usr/bin/dotnet
