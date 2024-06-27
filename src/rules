@@ -67,7 +67,10 @@ endif
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
     DOTNET_BUILD_ARGS += --clean-while-building
 else
-    DOTNET_BUILD_ARGS += --with-sdk $(CURDIR)/previously-built-dotnet
+    DOTNET_PREVIOUS_BUILT_DIR = $(CURDIR)/previously-built-dotnet
+    DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR = $(CURDIR)/prereqs/packages/archive
+    DOTNET_BUILD_ARGS += --with-sdk "$(DOTNET_PREVIOUS_BUILT_DIR)"
+    DOTNET_BUILD_ARGS += --with-packages "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
@@ -92,13 +95,13 @@ debian/substvars:
 
 override_dh_auto_build: debian/substvars
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
-	mkdir --parents "$(CURDIR)/prereqs/packages/archive"
+	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	ln --symbolic \
 	    "$(DOTNET_ROOT_DIR)"/source-built-artifacts/Private.SourceBuilt.Artifacts.*.tar.gz \
-	    "$(CURDIR)"/prereqs/packages/archive/
+	    "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
 	cp --recursive --dereference --preserve=mode,ownership,timestamps \
 	    "$(DOTNET_ROOT_DIR)" \
-	    "$(CURDIR)/previously-built-dotnet"
+	    "$(DOTNET_PREVIOUS_BUILT_DIR)"
 endif
 	VERBOSE=1 ./build.sh $(DOTNET_BUILD_ARGS) \
 	-- \
