@@ -94,6 +94,7 @@ debian/substvars:
 	echo "libicu:Depends=$(LIBICU)" > "$(CURDIR)/debian/substvars"
 
 override_dh_auto_build: debian/substvars
+	printenv | sort
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	ln --symbolic \
