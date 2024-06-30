@@ -40,9 +40,13 @@ ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
     DOTNET_BUILD_ARGS += --clean-while-building
 else
     DOTNET_PREVIOUS_BUILT_DIR = $(CURDIR)/previously-built-dotnet
-    DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR = $(CURDIR)/prereqs/packages/archive
     DOTNET_BUILD_ARGS += --with-sdk "$(DOTNET_PREVIOUS_BUILT_DIR)"
-    DOTNET_BUILD_ARGS += --with-packages "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
+
+    ifeq ($(DOTNET_80_OR_GREATER), true)
+        DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR = $(CURDIR)/prereqs/packages/archive
+    else
+        DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR = $(CURDIR)/packages/archive
+    endif
 endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
@@ -65,9 +69,17 @@ override_dh_auto_build: debian/substvars
 	printenv | sort
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
+	
+	DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
+	if [ "$${#DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
+		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}"; \
+		exit 1; \
+	fi; \
+	echo "source built artifacts tarball: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}"; \
 	ln --symbolic \
-	    "$(DOTNET_ROOT_DIR)"/source-built-artifacts/Private.SourceBuilt.Artifacts.*.tar.gz \
-	    "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
+		"$${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}" \
+		"$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
+	
 	cp --recursive --dereference --preserve=mode,ownership,timestamps \
 	    "$(DOTNET_ROOT_DIR)" \
 	    "$(DOTNET_PREVIOUS_BUILT_DIR)"
