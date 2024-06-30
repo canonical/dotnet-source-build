@@ -1,6 +1,6 @@
 #!/usr/bin/make --makefile
 
-SHELL ?= /usr/bin/bash
+SHELL = /usr/bin/bash
 
 # .NET will create by default the directories ~/.dotnet and ~/.nuget, but
 # sbuild will fail the build if anything is written to the default home directory.
