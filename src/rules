@@ -16,30 +16,6 @@ include /usr/share/dpkg/pkg-info.mk
 include /usr/share/dpkg/architecture.mk
 include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
 
-ifneq ($(findstring trusty,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring xenial,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring bionic,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring focal,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring jammy,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring kinetic,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring lunar,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = false
-else ifneq ($(findstring mantic,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = true
-else ifneq ($(findstring noble,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = true
-else ifneq ($(findstring oracular,$(DEB_DISTRIBUTION)),)
-    UBUNTU_2310_OR_OR_GREATER = true
-else
-    $(error "distribution '$(DEB_DISTRIBUTION)' not handled")
-endif
-
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
 
 ifeq ($(DOTNET_80_OR_GREATER), false)
@@ -53,7 +29,8 @@ ifeq ($(DEB_HOST_ARCH), arm64)
 # 	See https://github.com/llvm/llvm-project/issues/40148
     export DEB_CFLAGS_MAINT_STRIP = -fstack-clash-protection
     export DEB_CXXFLAGS_MAINT_STRIP = -fstack-clash-protection
-ifeq ($(UBUNTU_2310_OR_OR_GREATER), true)
+    UBUNTU_2310_OR_GREATER = $(shell . /etc/os-release && dpkg --compare-versions $${VERSION_ID} ge 23.10 && echo true || echo false)
+ifeq ($(UBUNTU_2310_OR_GREATER), true)
     export DEB_CFLAGS_MAINT_SET = -mbranch-protection=bti
     export DEB_CXXFLAGS_MAINT_SET = -mbranch-protection=bti
 endif
