@@ -18,34 +18,24 @@ include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
 
 ifneq ($(findstring trusty,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu52
 else ifneq ($(findstring xenial,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu55
 else ifneq ($(findstring bionic,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu60
 else ifneq ($(findstring focal,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu66
 else ifneq ($(findstring jammy,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu70
 else ifneq ($(findstring kinetic,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu71
 else ifneq ($(findstring lunar,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = false
-    LIBICU = libicu72
 else ifneq ($(findstring mantic,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = true
-    LIBICU = libicu72
 else ifneq ($(findstring noble,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = true
-    LIBICU = libicu74
 else ifneq ($(findstring oracular,$(DEB_DISTRIBUTION)),)
     UBUNTU_2310_OR_OR_GREATER = true
-    LIBICU = libicu74
 else
     $(error "distribution '$(DEB_DISTRIBUTION)' not handled")
 endif
@@ -91,7 +81,8 @@ override_dh_clean:
 	dh_clean
 
 debian/substvars:
-	echo "libicu:Depends=$(LIBICU)" > "$(CURDIR)/debian/substvars"
+	echo "libicu:Depends=$$(apt-cache depends libicu-dev | grep --only-matching --extended-regexp 'libicu[0-9]+')" > "$(CURDIR)/debian/substvars"
+	cat "$(CURDIR)/debian/substvars"
 
 override_dh_auto_build: debian/substvars
 	printenv | sort
