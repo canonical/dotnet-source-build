@@ -160,8 +160,8 @@ endif
 	dh_install
 
 override_dh_gencontrol: debian/substvars
-ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol
+ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
