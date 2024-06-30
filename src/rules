@@ -96,17 +96,17 @@ override_dh_auto_test:
 	python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
 
 override_dh_install:
-	install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_ROOT_DIR)
-	install --mode=0755 --directory $(DEST_DIR)/$(DOTNET_SYSCONF_DIR)
+	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
+	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_SYSCONF_DIR)"
 	ls "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release
 	
 	tar --extract \
 	    --file "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
-	    --directory $(DEST_DIR)/$(DOTNET_ROOT_DIR)
+	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	
 ifeq ($(DOTNET_80_OR_GREATER), true)
 # 	Clean up unwanted PDB files in sdk tar.gz
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pdb' -exec rm {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pdb' -exec rm {} \;
 	
 # 	Extract debug symbols to their own directory for easy handling
 	mkdir --parents "$(CURDIR)/artifacts/debug-symbols"
@@ -116,23 +116,23 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 endif
 	
 #   See https://github.com/dotnet/source-build/issues/2579
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'testhost.x86' -delete
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'vstest.console' -delete
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'testhost.x86' -delete
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'vstest.console' -delete
 
 #   Fix executable permissions on files
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'apphost' -exec chmod +x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'lib*so' -exec chmod +x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name 'singlefilehost' -exec chmod +x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.a' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.dll' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.h' -exec chmod 0644 {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.json' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pdb' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.props' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.pubxml' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.targets' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.txt' -exec chmod -x {} \;
-	find $(DEST_DIR)/$(DOTNET_ROOT_DIR) -type f -name '*.xml' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'apphost' -exec chmod +x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'lib*so' -exec chmod +x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'singlefilehost' -exec chmod +x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.a' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.dll' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.json' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pdb' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.props' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pubxml' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.targets' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.txt' -exec chmod -x {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.xml' -exec chmod -x {} \;
 	
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location_$(DOTNET_ARCH)
