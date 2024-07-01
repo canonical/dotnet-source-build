@@ -1,3 +1,18 @@
+dotnet8 (8.0.105-8.0.5-0ubuntu2) oracular; urgency=medium
+
+  * d/control, d/rules: Added ppc64el as a supported architecture
+  * d/eng/versionlib/dotnet.py: Added ppc64le to ArchitectureIdentifier
+  * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: Fixed ppc64el FTBFS by
+    disabling usage of AppHost in roslyn-analyzers PerformanceTests project
+  * d/p/0003-vstest-intent-net8.0.patch: Fixed ppc64el FTBFS by changing the
+    Intent test project TFM to net8.0 in vstest
+  * d/t/regular-tests/release-version-sane/VersionTest.cs: Fix test failure
+    by defining a sane release version number as less than or equal to current
+  * d/eng/test-runner: Updated test runner to latest release (v1.1.0) to fix
+    autopkgtest failure in ppc64el
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 12 Jun 2024 17:14:41 -0300
+
 dotnet8 (8.0.105-8.0.5-0ubuntu1) oracular; urgency=medium
 
   * New upstream release
