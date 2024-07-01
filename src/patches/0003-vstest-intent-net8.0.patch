@@ -1,0 +1,13 @@
+Index: dotnet8-8.0.104-8.0.4/src/vstest/test/Intent/Intent.csproj
+===================================================================
+--- dotnet8-8.0.104-8.0.4.orig/src/vstest/test/Intent/Intent.csproj	2024-04-03 10:23:11.000000000 -0300
++++ dotnet8-8.0.104-8.0.4/src/vstest/test/Intent/Intent.csproj	2024-04-29 12:18:24.733646380 -0300
+@@ -2,7 +2,7 @@
+ 
+   <PropertyGroup>
+     <OutputType>Exe</OutputType>
+-    <TargetFramework>net6.0</TargetFramework>
++    <TargetFramework>net8.0</TargetFramework>
+     <ImplicitUsings>enable</ImplicitUsings>
+     <Nullable>enable</Nullable>
+   </PropertyGroup>
