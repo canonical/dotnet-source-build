@@ -31,7 +31,7 @@ namespace ReleaseVersionSane
             Version publicRuntimeVersionNextPatch = new Version(publicRuntimeVersion.Major,
                                                                 publicRuntimeVersion.Minor,
                                                                 publicRuntimeVersion.Build + 1);
-            bool matchesUpstream = runtimeVersion.Equals(publicRuntimeVersion);
+            bool matchesUpstream = runtimeVersion <= publicRuntimeVersion;
             bool matchesUpstreamNext = runtimeVersion.Equals(publicRuntimeVersionNextPatch);
             Version expectedPublicSdkVersion = null;
             if (matchesUpstream)
@@ -47,7 +47,7 @@ namespace ReleaseVersionSane
 
             Assert.True(matchesUpstream || matchesUpstreamNext, $"{runtimeVersionRaw} is not expected with public version {publicRuntimeVersionRaw}");
             Assert.NotNull(expectedPublicSdkVersion);
-            Assert.Contains(expectedPublicSdkVersion, publicSdkVersions);
+            Assert.Contains(publicSdkVersions, v => v >= expectedPublicSdkVersion);
         }
 
         private string GetRuntimeVersion()

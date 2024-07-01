@@ -1,0 +1,12 @@
+Index: dotnet8-8.0.104-8.0.4/src/roslyn-analyzers/src/PerformanceTests/Tests/PerformanceTests.csproj
+===================================================================
+--- dotnet8-8.0.104-8.0.4.orig/src/roslyn-analyzers/src/PerformanceTests/Tests/PerformanceTests.csproj	2024-04-03 10:23:00.000000000 -0300
++++ dotnet8-8.0.104-8.0.4/src/roslyn-analyzers/src/PerformanceTests/Tests/PerformanceTests.csproj	2024-04-29 12:14:43.930178876 -0300
+@@ -4,6 +4,7 @@
+     <LangVersion>preview</LangVersion>
+     <Nullable>disable</Nullable>
+     <OutputType>Exe</OutputType>
++    <UseAppHost>false</UseAppHost>
+   </PropertyGroup>
+   <PropertyGroup>
+     <NonShipping>true</NonShipping>
