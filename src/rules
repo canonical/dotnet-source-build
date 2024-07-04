@@ -27,12 +27,23 @@ ifeq ($(DEB_HOST_ARCH), arm64)
 # 	therefore stripping this flag away to avoid the error:
 # 	clang: error: argument unused during compilation.
 # 	See https://github.com/llvm/llvm-project/issues/40148
-    export DEB_CFLAGS_MAINT_STRIP = -fstack-clash-protection
-    export DEB_CXXFLAGS_MAINT_STRIP = -fstack-clash-protection
+    export DEB_CFLAGS_MAINT_STRIP += -fstack-clash-protection
+    export DEB_CXXFLAGS_MAINT_STRIP += -fstack-clash-protection
+
     UBUNTU_2310_OR_GREATER = $(shell . /etc/os-release && dpkg --compare-versions $${VERSION_ID} ge 23.10 && echo true || echo false)
 ifeq ($(UBUNTU_2310_OR_GREATER), true)
-    export DEB_CFLAGS_MAINT_SET = -mbranch-protection=bti
-    export DEB_CXXFLAGS_MAINT_SET = -mbranch-protection=bti
+#   On ARM64 Ubuntu 23.10 and higher the build will fail with the message 
+#   "Cannot find mkstemps nor mkstemp on this platform.", related to libunwind
+#   and the branch-protection `pac-ret`. By default branch-protection `standard`
+#   is set which is equivalent to `bti+pac-ret`.
+#   By stripping branch-protection `standard` and appending branch-protection
+#   `bti`, effectively only branch protection `pac-ret` gets stripped.
+#   See also: https://github.com/canonical/dotnet-source-build/issues/7
+    export DEB_CFLAGS_MAINT_STRIP += -mbranch-protection=standard
+    export DEB_CXXFLAGS_MAINT_STRIP += -mbranch-protection=standard
+
+    export DEB_CFLAGS_MAINT_APPEND += -mbranch-protection=bti
+    export DEB_CXXFLAGS_MAINT_APPEND += -mbranch-protection=bti
 endif
 endif
 
