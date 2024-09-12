@@ -1,4 +1,4 @@
-#!/usr/bin/make --makefile
+#!/usr/bin/make -f
 
 SHELL = /usr/bin/bash
 
