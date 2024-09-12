@@ -81,7 +81,8 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	endif
 endif
 
-ifneq ($(wildcard $(CURDIR)/.dotnet),)
+# If there is a '.dotnet' or 'dotnet' directory, the source package contains a bootstraping SDK.
+ifneq ($(wildcard $(CURDIR)/.dotnet)$(wildcard $(CURDIR)/dotnet),)
     DOTNET_CONTAINS_BOOTSTRAPPING_SDK = true
 else
     DOTNET_CONTAINS_BOOTSTRAPPING_SDK = false
