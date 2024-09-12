@@ -1,5 +1,5 @@
 Tests:
-    01_regular-tests,
+    run-regular-tests,
 Depends: 
     babeltrace,
     bash,
