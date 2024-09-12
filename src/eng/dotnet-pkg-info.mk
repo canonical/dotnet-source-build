@@ -12,6 +12,7 @@
 #  DOTNET_60_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 6.0
 #  DOTNET_70_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 7.0
 #  DOTNET_80_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 8.0
+#  DOTNET_90_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 9.0
 
 export DOTNET_MAJOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --major)
 export DOTNET_MINOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --minor)
@@ -20,14 +21,22 @@ ifeq ($(DOTNET_MAJOR),6)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = false
     DOTNET_80_OR_GREATER = false
+    DOTNET_90_OR_GREATER = false
 else ifeq ($(DOTNET_MAJOR),7)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = true
     DOTNET_80_OR_GREATER = false
+    DOTNET_90_OR_GREATER = false
 else ifeq ($(DOTNET_MAJOR),8)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = true
     DOTNET_80_OR_GREATER = true
+    DOTNET_90_OR_GREATER = false
+else ifeq ($(DOTNET_MAJOR),9)
+    DOTNET_60_OR_GREATER = true
+    DOTNET_70_OR_GREATER = true
+    DOTNET_80_OR_GREATER = true
+    DOTNET_90_OR_GREATER = true
 else
     $(error ".NET version $(DOTNET_MAJOR).$(DOTNET_MINOR) not handled")
 endif
