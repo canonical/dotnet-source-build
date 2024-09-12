@@ -153,20 +153,23 @@ endif
 override_dh_gencontrol: debian/substvars
 	dh_gencontrol
 ifeq ($(DOTNET_80_OR_GREATER), true)
-	dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-host-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-hostfxr-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-sdk-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pdotnet-sdk-8.0-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pdotnet-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-templates-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pnetstandard-targeting-pack-2.1-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -paspnetcore-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-sdk-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -paspnetcore-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -paspnetcore-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)         -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-apphost-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)               -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-host-$(DOTNET_MAJOR).$(DOTNET_MINOR)                       -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-hostfxr-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)             -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -paspnetcore-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)            -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)                        -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-templates-$(DOTNET_MAJOR).$(DOTNET_MINOR)                  -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-sdk-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+ifeq ($(DOTNET_90_OR_GREATER), true)
+	dh_gencontrol -pdotnet-sdk-aot-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
 endif
 
 override_dh_dwz:
