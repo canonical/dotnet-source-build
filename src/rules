@@ -102,6 +102,10 @@ endif
 	/p:LogVerbosity=n \
 	/p:MinimalConsoleLogOutput=false \
 	/p:ContinueOnPrebuiltBaselineError=true
+	
+ifeq ($(DOTNET_90_OR_GREATER), true)
+	tree
+endif
 
 override_dh_auto_test:
 	python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
