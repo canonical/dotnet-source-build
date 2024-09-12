@@ -1,14 +1,12 @@
 {
-  "name": "restore-with-rid",
+  "name": "non-portable-rid",
   "enabled": true,
   "requiresSdk": true,
-  "version": "2.1",
+  "version": "6.0",
   "versionSpecific": false,
   "type": "bash",
   "cleanup": true,
   "skipWhen":[
-    "version=6,arch=s390x", // no runtime pack available
-  ],
-  "ignoredRIDs":[
+    "portable", // this test only tests non-portable SDKs
   ]
 }

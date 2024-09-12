@@ -7,9 +7,57 @@ set -euo pipefail
 IFS=$'\n\t'
 set -x
 
+IFS='.-' read -ra VERSION_SPLIT <<< "$1"
+declare -a allTemplates
+major_version="${VERSION_SPLIT[0]}"
+
 # The list of templates in each version of .NET that we want to test.
 # If additional templates are found via `dotnet new --list`, this test
 # will fail unless they are added here.
+
+dotnet9Templates=(
+    apicontroller
+    blazor
+    blazorwasm
+    buildprops
+    buildtargets
+    classlib
+    console
+    editorconfig
+    .editorconfig
+    gitignore
+    .gitignore
+    global.json
+    globaljson
+    grpc
+    mstest-class
+    mstest
+    mvc
+    mvccontroller
+    nuget.config
+    nugetconfig
+    nunit
+    nunit-test
+    packagesprops
+    page
+    proto
+    razor
+    razorclasslib
+    razorcomponent
+    sln
+    solution
+    tool-manifest
+    view
+    viewimports
+    viewstart
+    web
+    webapi
+    webapiaot
+    webapp
+    webconfig
+    worker
+    xunit
+)
 
 dotnet8Templates=(
     apicontroller
@@ -27,7 +75,6 @@ dotnet8Templates=(
     global.json
     grpc
     mstest
-    mstest-playwright
     mvc
     mvccontroller
     nugetconfig
@@ -164,6 +211,7 @@ dotnet3Templates=(
 # format: <template> <action>
 # actions:
 #    new - just create template ( using dotnet new <template> )
+#    project,new - create a project, and then create this template ( using dotnet new <template> )
 #    build - create template and run build on it ( dotnet build )
 #    run - create template and run it ( dotnet run )
 #    test - create template and run its tests ( dotnet test )
@@ -188,8 +236,10 @@ gitignore new
 globaljson new
 global.json new
 mstest test
+mstest-class project,new
 mvc build
 nunit test
+nunit-test new
 page new
 razor build
 razorclasslib build
@@ -202,6 +252,9 @@ webapi build
 webapp build
 worker build
 xunit test"
+
+template9Actions=\
+"nunit-test project,new"
 
 # Templates that can be ignored. They may be present in the dotnet new
 # --list output but are safe to ignore. We we don't want to test these
@@ -227,6 +280,17 @@ for line in "${templateLines[@]}"; do
     knownTemplateActions["$templateName"]="$action"
 done
 
+templateActions="template${major_version}Actions"
+templateActions="${!templateActions:-}"
+if [[ $templateActions != "" ]]; then
+    readarray -t templateLines <<< "${templateActions}"
+    for line in "${templateLines[@]}"; do
+        templateName="${line%% *}"
+        action="${line##* }"
+        knownTemplateActions["$templateName"]="$action"
+    done
+fi
+
 dotnet help > /dev/null 2>/dev/null
 
 dotnet new --list
@@ -243,6 +307,7 @@ if [[ "${#allAutoTemplates[@]}" -lt 10 ]]; then
     exit 1
 fi
 
+set +x
 filteredAutoTemplates=()
 for template in "${allAutoTemplates[@]}"; do
     ignore=0
@@ -255,24 +320,18 @@ for template in "${allAutoTemplates[@]}"; do
         filteredAutoTemplates+=("$template")
     fi
 done
+set -x
 
-IFS='.-' read -ra VERSION_SPLIT <<< "$1"
-declare -a allTemplates
-if [[ ${VERSION_SPLIT[0]} == "8" ]]; then
-    allTemplates=( "${dotnet8Templates[@]}" )
-elif [[ ${VERSION_SPLIT[0]} == "7" ]]; then
-    allTemplates=( "${dotnet7Templates[@]}" )
-elif [[ ${VERSION_SPLIT[0]} == "6" ]]; then
-    allTemplates=( "${dotnet6Templates[@]}" )
-elif [[ ${VERSION_SPLIT[0]} == "3" ]]; then
-    allTemplates=( "${dotnet3Templates[@]}" )
-else
+template_names="dotnet${major_version}Templates[@]"
+allTemplates=( "${!template_names}" )
+if [[ -z "$allTemplates" ]] ; then
     echo "error: unknown dotnet version " "${VERSION_SPLIT[@]}"
     echo "Need a new template list for this. Here's a starting point:"
     echo "${filteredAutoTemplates[@]}"
     exit 1
 fi
 
+set +x
 for autoTemplate in "${filteredAutoTemplates[@]}"; do
     found=0
     for explicitTemplate in "${allTemplates[@]}"; do
@@ -289,6 +348,7 @@ for autoTemplate in "${filteredAutoTemplates[@]}"; do
 
     fi
 done
+set -x
 
 echo "Auto-detected templates:" "${allAutoTemplates[@]}"
 echo "Ignoring:" "${templateIgnoreList[@]}"
@@ -316,6 +376,11 @@ function testTemplate {
         # webapiaot implies AOT which will not even restore on mono (ppc64le/s390x) and arm, skip it
         echo "SKIP skipping webapiaot on ppc64/s390x/armv7"
         return
+    fi
+
+    if [[ ${action} = project,* ]] ; then
+        dotnet new console 2>&1 | tee "${templateName}.log"
+        action=$(echo "${action}" | sed -E "s|project,||")
     fi
 
     dotnet new "${templateName}" 2>&1 | tee "${templateName}.log"

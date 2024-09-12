@@ -1,14 +1,12 @@
 {
-  "name": "man-pages",
+  "name": "nativeaot-sb",
   "enabled": true,
   "requiresSdk": true,
-  "version": "2.1",
+  "version": "9.0",
   "versionSpecific": false,
   "type": "bash",
   "cleanup": true,
   "skipWhen": [
-    "vmr-ci", // man page not installed
-  ],
-  "ignoredRIDs":[
+    "runtime=mono" // nativeaot is not available with mono
   ]
 }
