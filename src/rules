@@ -32,7 +32,7 @@ ifeq ($(DEB_HOST_ARCH), arm64)
 
     UBUNTU_2310_OR_GREATER = $(shell . /etc/os-release && dpkg --compare-versions $${VERSION_ID} ge 23.10 && echo true || echo false)
 ifeq ($(UBUNTU_2310_OR_GREATER), true)
-#   On ARM64 Ubuntu 23.10 and higher the build will fail with the message 
+#   On ARM64 Ubuntu 23.10 and higher the build will fail with the message
 #   "Cannot find mkstemps nor mkstemp on this platform.", related to libunwind
 #   and the branch-protection `pac-ret`. By default branch-protection `standard`
 #   is set which is equivalent to `bti+pac-ret`.
