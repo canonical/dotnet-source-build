@@ -136,7 +136,6 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'singlefilehost' -exec chmod +x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.a' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.dll' -exec chmod -x {} \;
-	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.json' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pdb' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.props' -exec chmod -x {} \;
@@ -144,6 +143,15 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.targets' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.txt' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.xml' -exec chmod -x {} \;
+	
+#   fixes lintian warning: dotnet-sdk-aot-9.0: executable-not-elf-or-script
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h.in' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.c' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.cpp' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.cmake' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.m' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.def' -exec chmod 0644 {} \;
 	
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location_$(DOTNET_ARCH)
