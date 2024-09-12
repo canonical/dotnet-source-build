@@ -62,7 +62,14 @@ endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
-    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)	
+    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)
+endif
+
+ifeq ($(DOTNET_90_OR_GREATER), true)
+    DOTNET_BUILD_ARGS += --source-only
+    DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/assets/Release
+else
+    DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/$(DOTNET_ARCH)/Release
 endif
 
 %:
@@ -81,14 +88,14 @@ override_dh_auto_build: debian/substvars
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	
-	DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
-	if [ "$${#DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
-		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}"; \
+	DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
+	if [ "$${#DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
+		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}"; \
 		exit 1; \
 	fi; \
-	echo "source built artifacts tarball: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}"; \
+	echo "source built artifacts tarball: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL}"; \
 	ln --symbolic \
-		"$${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}" \
+		"$${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL}" \
 		"$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
 	
 	cp --recursive --dereference --preserve=mode,ownership,timestamps \
@@ -113,10 +120,10 @@ override_dh_auto_test:
 override_dh_install:
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_SYSCONF_DIR)"
-	ls "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release
+	ls "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
 	
 	tar --extract \
-	    --file "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
 	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	
 ifeq ($(DOTNET_80_OR_GREATER), true)
@@ -126,8 +133,9 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 # 	Extract debug symbols to their own directory for easy handling
 	mkdir --parents "$(CURDIR)/artifacts/debug-symbols"
 	tar --extract \
-	    --file "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release/dotnet-symbols-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-symbols-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
 	    --directory "$(CURDIR)/artifacts/debug-symbols"
+	ls "$(CURDIR)/artifacts/debug-symbols"
 endif
 	
 #   See https://github.com/dotnet/source-build/issues/2579
