@@ -1,0 +1,8 @@
+version=4
+# watch for 9.0.X[X[-TEXT.X.XXXXX.X]] pattern:
+# watch for 9.0.100-preview.1; 9.0.100-preview.2; 9.0.100-preview.3:
+opts="mode=git,repack,compression=xz,dversionmangle=s/^9\.0\.(1\d\d)-//,uversionmangle=s/^9\.0\.100/9.0.0/;s/-([a-z]+)\./~$1/" \
+git@github.com:dotnet/dotnet.git \
+^refs/tags/v(9\.0\.\d{1,3}(?:-[a-z]+\.\d+)?).*$ \
+debian \
+debian/eng/watch-script.sh
