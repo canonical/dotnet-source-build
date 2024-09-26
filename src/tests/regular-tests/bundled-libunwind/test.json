@@ -9,6 +9,7 @@
   "skipWhen": [
     "runtime=mono", // mono does not use libunwind
     "os=ubuntu,version=6", // see https://github.com/canonical/dotnet-regular-tests/issues/7
+    "os=ubuntu,version=9,arch=x64" // see https://github.com/canonical/dotnet-regular-tests/issues/7
   ],
   "ignoredRIDs":[
     "alpine",
