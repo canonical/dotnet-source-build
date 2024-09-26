@@ -1,8 +1,9 @@
+#!/usr/bin/dh-exec
 ${env:DOTNET_ROOT_DIR}/metadata
 ${env:DOTNET_ROOT_DIR}/sdk-manifests/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*
 ${env:DOTNET_ROOT_DIR}/sdk-manifests/*/microsoft.net.sdk.aspire/*
 ${env:DOTNET_ROOT_DIR}/sdk/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*
-${env:DOTNET_ROOT_DIR}/library-packs/Microsoft.DotNet.ILCompiler.${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*.nupkg
-${env:DOTNET_ROOT_DIR}/library-packs/Microsoft.NET.ILLink.Tasks.${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*.nupkg
+[amd64 arm64] ${env:DOTNET_ROOT_DIR}/library-packs/Microsoft.DotNet.ILCompiler.${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*.nupkg
+[amd64 arm64] ${env:DOTNET_ROOT_DIR}/library-packs/Microsoft.NET.ILLink.Tasks.${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*.nupkg
 ${env:DOTNET_ROOT_DIR}/packs/Microsoft.NETCore.App.Runtime.${env:DOTNET_RUNTIME_ID}
 ${env:DOTNET_ROOT_DIR}/packs/Microsoft.AspNetCore.App.Runtime.${env:DOTNET_RUNTIME_ID}

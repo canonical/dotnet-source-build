@@ -49,6 +49,9 @@ endif
 
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
     DOTNET_BUILD_ARGS += --clean-while-building
+    ifneq ($(filter $(DEB_HOST_ARCH),s390x ppc64el),)
+        DOTNET_BUILD_ARGS += --with-sdk $(CURDIR)/dotnet
+    endif
 else
     DOTNET_PREVIOUS_BUILT_DIR = $(CURDIR)/previously-built-dotnet
     DOTNET_BUILD_ARGS += --with-sdk "$(DOTNET_PREVIOUS_BUILT_DIR)"
@@ -68,6 +71,28 @@ endif
 ifeq ($(DOTNET_90_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-only
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/assets/Release
+
+    ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
+        SYSTEM_LIBRARIES += +brotli
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_LIBUNWIND), true)
+        SYSTEM_LIBRARIES += +libunwind
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_RAPIDJSON), true)
+        SYSTEM_LIBRARIES += +rapidjson
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_ZLIB), true)
+        SYSTEM_LIBRARIES += +zlib
+    endif
+
+#	The += operator adds text preceded by a space. Since the system libs list should
+#	contain no space, we replace every space in the string with an empty character.
+    space := $(shell printf " ")
+    DOTNET_BUILD_ARGS += --with-system-libs $(subst $(space),,$(SYSTEM_LIBRARIES))
+
+    ifeq ($(DOTNET_USE_MONO_RUNTIME), true)
+        DOTNET_BUILD_ARGS += --use-mono-runtime
+    endif
 else
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/$(DOTNET_ARCH)/Release
 endif
@@ -85,6 +110,23 @@ debian/substvars:
 
 override_dh_auto_build: debian/substvars
 	printenv | sort
+
+#	If a library is being pulled in from the system, remove the bundled source for it
+ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/brotli
+endif
+ifeq ($(DOTNET_USE_SYSTEM_LIBUNWIND), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/libunwind
+endif
+ifeq ($(DOTNET_USE_SYSTEM_RAPIDJSON), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/rapidjson
+endif
+ifeq ($(DOTNET_USE_SYSTEM_ZLIB), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib-intel
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib-ng
+endif
+
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	
@@ -187,7 +229,7 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -pdotnet-templates-$(DOTNET_MAJOR).$(DOTNET_MINOR)                  -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-sdk-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-ifeq ($(DOTNET_90_OR_GREATER), true)
+ifeq ($(DOTNET_BUILD_AOT_BINARY_PACKAGE), true)
 	dh_gencontrol -pdotnet-sdk-aot-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 endif
 endif

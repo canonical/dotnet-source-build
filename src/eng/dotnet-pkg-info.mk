@@ -13,6 +13,12 @@
 #  DOTNET_70_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 7.0
 #  DOTNET_80_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 8.0
 #  DOTNET_90_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 9.0
+#  DOTNET_BUILD_AOT_BINARY_PACKAGE: A boolean (true/false) that indicates whether the dotnet-sdk-aot-* package should be built.
+#  DOTNET_USE_MONO_RUNTIME: A boolean (true/false) that indicates whether the build script should use the --use-mono-runtime flag.
+#  DOTNET_USE_SYSTEM_BROTLI: A boolean (true/false) that indicates whether to use the system-provided brotli library.
+#  DOTNET_USE_SYSTEM_LIBUNWIND: A boolean (true/false) that indicates whether to use the system-provided libunwind library.
+#  DOTNET_USE_SYSTEM_RAPIDJSON: A boolean (true/false) that indicates whether to use the system-provided rapidjson library.
+#  DOTNET_USE_SYSTEM_ZLIB: A boolean (true/false) that indicates whether to use the system-provided zlib library.
 
 export DOTNET_MAJOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --major)
 export DOTNET_MINOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --minor)
@@ -79,6 +85,30 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
     else ifeq ($(DOTNET_GIT_COMMIT),)
         $(error ".NET git commit hash is NOT specified in release.info file.")
 	endif
+endif
+
+ifeq ($(DOTNET_90_OR_GREATER), true)
+    export DOTNET_USE_SYSTEM_BROTLI = true
+    export DOTNET_USE_SYSTEM_LIBUNWIND = true
+    export DOTNET_USE_SYSTEM_RAPIDJSON = true
+    export DOTNET_USE_SYSTEM_ZLIB = true
+
+    ifeq ($(DEB_HOST_ARCH), amd64)
+        export DOTNET_BUILD_AOT_BINARY_PACKAGE = true
+        export DOTNET_USE_MONO_RUNTIME = false
+    else ifeq ($(DEB_HOST_ARCH), arm64)
+        export DOTNET_BUILD_AOT_BINARY_PACKAGE = true
+        export DOTNET_USE_MONO_RUNTIME = false
+        export DOTNET_USE_SYSTEM_LIBUNWIND = false
+    else ifeq ($(DEB_HOST_ARCH), s390x)
+        export DOTNET_BUILD_AOT_BINARY_PACKAGE = false
+        export DOTNET_USE_MONO_RUNTIME = true
+        export DOTNET_USE_SYSTEM_LIBUNWIND = false
+    else ifeq ($(DEB_HOST_ARCH), ppc64el)
+        export DOTNET_BUILD_AOT_BINARY_PACKAGE = false
+        export DOTNET_USE_MONO_RUNTIME = true
+        export DOTNET_USE_SYSTEM_LIBUNWIND = false
+    endif
 endif
 
 # If there is a '.dotnet' or 'dotnet' directory, the source package contains a bootstraping SDK.
