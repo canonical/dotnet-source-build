@@ -1,2 +1,3 @@
 0001-roslyn-analyzers-dont-use-apphost.patch
 0002-vstest-intent-net9.0.patch
+0003-use-system-brotli-on-unix-non-portable-builds.patch
