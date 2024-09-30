@@ -1,0 +1,18 @@
+Description: vstest/Intetnt should not use the .NET App Host
+ Fixed ppc64el FTBFS
+Author: Mateus Rodrigues de Morais <mateus.morais@canonical.com>
+Origin: vendor, https://git.launchpad.net/ubuntu/+source/dotnet8/commit/debian/patches/0003-vstest-intent-net8.0.patch?h=ubuntu/oracular-devel&id=fb41115fd9b9992b824198c3e3909aee976e22f5
+Forwarded: not-needed
+Last-Update: 2024-08-06
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/roslyn-analyzers/src/PerformanceTests/Tests/PerformanceTests.csproj
++++ b/src/roslyn-analyzers/src/PerformanceTests/Tests/PerformanceTests.csproj
+@@ -4,6 +4,7 @@
+     <LangVersion>preview</LangVersion>
+     <Nullable>disable</Nullable>
+     <OutputType>Exe</OutputType>
++    <UseAppHost>false</UseAppHost>
+   </PropertyGroup>
+   <PropertyGroup>
+     <NonShipping>true</NonShipping>

@@ -1,0 +1,7 @@
+${env:DOTNET_SYSCONF_DIR}
+debian/dotnet.sh /etc/profile.d/
+${env:DOTNET_ROOT_DIR}/dotnet
+${env:DOTNET_ROOT_DIR}/LICENSE.txt
+${env:DOTNET_ROOT_DIR}/ThirdPartyNotices.txt
+debian/install_location ${env:DOTNET_SYSCONF_DIR}/
+debian/install_location_${env:DOTNET_ARCH} ${env:DOTNET_SYSCONF_DIR}/
