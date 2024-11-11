@@ -1,1 +1,0 @@
-${env:DOTNET_ROOT_DIR}/shared/Microsoft.AspNetCore.App/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*

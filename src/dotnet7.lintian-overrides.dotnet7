@@ -1,2 +1,0 @@
-#dotnet7 is virtual, as dotnet community is used to install from it (in MS and RH)
-dotnet7: empty-binary-package

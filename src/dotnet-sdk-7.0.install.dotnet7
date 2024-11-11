@@ -1,3 +1,0 @@
-${env:DOTNET_ROOT_DIR}/metadata
-${env:DOTNET_ROOT_DIR}/sdk-manifests/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*
-${env:DOTNET_ROOT_DIR}/sdk/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*
