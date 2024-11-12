@@ -1,4 +1,4 @@
-dotnet9 (9.0.100-9.0.0-0ubuntu1~24.10.1) oracular; urgency=medium
+dotnet9 (9.0.100-9.0.0-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2087880)
   * SECURITY UPDATE: privilege escalation
