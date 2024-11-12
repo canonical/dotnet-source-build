@@ -28,7 +28,7 @@ if __name__ == "__main__":
         if (version.BootstrapArchitecture != None):
             versionString += f"~bootstrap+{version.BootstrapArchitecture}"
 
-        versionString += f"-{version.DebRevision}"
+        versionString += f"-rtm-{version.DebRevision}"
 
         print(versionString)
     elif (sys.argv[1] == "--sdk-only-deb-version"):
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         if (version.BootstrapArchitecture != None):
             versionString += f"~bootstrap+{version.BootstrapArchitecture}"
 
-        versionString += f"-{version.DebRevision}"
+        versionString += f"-rtm-{version.DebRevision}"
 
         print(versionString)
     else:
