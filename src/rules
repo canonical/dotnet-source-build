@@ -125,7 +125,7 @@ endif
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	
-	DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
+	DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.tar.gz')); \
 	if [ "$${#DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
 		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}"; \
 		exit 1; \

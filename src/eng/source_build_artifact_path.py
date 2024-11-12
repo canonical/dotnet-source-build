@@ -19,7 +19,7 @@ def GetSourceBuiltArtifactsTarball(
     if type == "Packages":
         # e.g. Private.SourceBuilt.Artifacts.9.0.100-preview.7.24407.1.ubuntu.24.10-x64.tar.gz
         globPattern =  (f"{basePath}/Private.SourceBuilt.Artifacts."
-                        f"{sdkVersion}*.{runtimeIdentifier}.tar.gz")
+                        f"{sdkVersion}*.tar.gz")
     elif type == "SDK":
         # e.g. dotnet-sdk-9.0.100-preview.7.24407.1-ubuntu.24.10-x64.tar.gz
         globPattern =  (f"{basePath}/dotnet-sdk-"
