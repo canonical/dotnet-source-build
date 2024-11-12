@@ -1,3 +1,62 @@
+dotnet8 (8.0.110-8.0.10-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2024-38229: Kestrel http/3 - When closing an HTTP/3 stream while
+      application code is writing to the response body, a race condition may
+      lead to remote code execution.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43483: Multiple .NET components designed to process hostile
+      input are susceptible to hash flooding attacks.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43484: System.IO.Packaging - Multiple DoS vectors in use of
+      SortedList.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43485: Denial of Service attack against System.Text.Json
+      ExtensionData feature.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Wed, 02 Oct 2024 09:54:14 +0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu1~22.04.2) jammy; urgency=medium
+
+  * Add s390x and ppc64el as supported architectures (LP: #2080023).
+    - d/control, d/rules: Add s390x and ppc64el as supported architectures.
+    - d/eng/versionlib/dotnet.py: Add ppc64le to ArchitectureIdentifier.
+  * d/p/0001-roslyn-analyzers-dont-use-apphost.patch: Fix ppc64el FTBFS by
+    disabling usage of AppHost in roslyn-analyzers PerformanceTests project.
+  * d/p/0002-vstest-intent-net8.0.patch: Fix ppc64el FTBFS by changing the
+    vstest Intent test project TFM to net8.0.
+  * d/t/regular-tests: Update regular-tests to latest available version to fix
+    autpkgtest failure.
+  * d/eng/test-runner: Update test runner to latest version (v1.1.0) to fix
+    autopkgtest failure in ppc64el.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 29 Aug 2024 17:00:02 -0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2024-38167: information disclosure vulnerability in TlsStream.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Thu, 08 Aug 2024 16:43:10 +0300
+
+dotnet8 (8.0.107-8.0.7-0ubuntu1~22.04.1) jammy-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-30105: Denial of service vulnerability in System.Text.Json
+      deserialization.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-35264: Denial of service in ASP.NET Core 8.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-38095: Denial of service in parsing X.509 Content and
+      ObjectIdentifiers.
+  * debian/eng/build-dotnet-tarball.sh: SECURITY_PARTNERS_REPOSITORY
+    connection method updated.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Tue, 02 Jul 2024 11:56:00 +0300
+
 dotnet8 (8.0.105-8.0.5-0ubuntu1~22.04.1) jammy-security; urgency=medium
 
   * New upstream release

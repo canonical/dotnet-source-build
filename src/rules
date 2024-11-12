@@ -16,6 +16,8 @@ include /usr/share/dpkg/pkg-info.mk
 include /usr/share/dpkg/architecture.mk
 include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
 
+export LIBICU_PACKAGENAME=$(shell apt-cache depends libicu-dev | grep --only-matching --extended-regexp 'libicu[0-9]+')
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
 
 ifeq ($(DOTNET_80_OR_GREATER), false)
@@ -100,16 +102,9 @@ endif
 %:
 	dh $@ --with bash-completion
 
-override_dh_clean:
-	rm --force "$(CURDIR)"/debian/substvars
-	dh_clean
-
-debian/substvars:
-	echo "libicu:Depends=$$(apt-cache depends libicu-dev | grep --only-matching --extended-regexp 'libicu[0-9]+')" > "$(CURDIR)/debian/substvars"
-	cat "$(CURDIR)/debian/substvars"
-
-override_dh_auto_build: debian/substvars
+override_dh_auto_build:
 	printenv | sort
+	vmstat --stats --unit MiB
 
 #	If a library is being pulled in from the system, remove the bundled source for it
 ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
@@ -212,15 +207,17 @@ endif
 	
 	dh_install
 
-override_dh_gencontrol: debian/substvars
-	dh_gencontrol
+override_dh_gencontrol:
+	echo "LIBICU_PACKAGENAME=$(LIBICU_PACKAGENAME)"
+	
+	dh_gencontrol -- -Vlibicu:Depends=$(LIBICU_PACKAGENAME)
 ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -paspnetcore-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -paspnetcore-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)         -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -pdotnet-apphost-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)               -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -pdotnet-host-$(DOTNET_MAJOR).$(DOTNET_MINOR)                       -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -pdotnet-hostfxr-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY) -Vlibicu:Depends=$(LIBICU_PACKAGENAME)
 	dh_gencontrol -pdotnet-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)             -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -paspnetcore-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)            -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
 	dh_gencontrol -pdotnet-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)

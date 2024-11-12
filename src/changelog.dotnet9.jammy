@@ -1,3 +1,67 @@
+dotnet9 (9.0.100-9.0.0~rc2-0ubuntu1~22.04.1~ppa2) jammy; urgency=medium
+
+  * New upstream release (LP: #2083883)
+  * d/rules: Fixed missing definition of substitution variable ${libicu:Depends}
+    (used to be defined in d/substvars file, but buildlog indicated that this is
+    not used by dh_gencontrol).
+  * d/t/build-time-tests/test.py: Fixed falsely reported test failure due to new
+                                  'dotnet run' CLI design.
+  * d/control:
+    - Moved dotnet-sdk-aot-9.0 to Recommends from Suggests
+      for dotnet9 virtual package.
+    - Added dotnet-sdk-dbg-9.0, dotnet-runtime-dbg-9.0,
+      aspnetcore-runtime-dbg-9.0 to Suggests for dotnet9 virtual package.
+    - Fixed descriptions with invalid control statements
+      (lines containing a space, a full stop and some more characters)
+      to comply with Section 5.6.13 in the Debian Policy Manual.
+  * d/copyright:
+    - Contained full Apache-2.0 and LGPL-2.1 license text; referred to
+      /usr/share/common-licenses instead.
+    - Removed references to files no longer present in new upstream release
+      sources.
+  * d/aspnetcore-runtime-9.0.docs, d/dotnet-sdk-9.0.docs: Included
+    src/razor/NOTICE.txt in package to comply with Apache-2.0
+    paragraph 4 section (d).
+  * d/source/lintian-overrides:
+    - Adjust source-is-missing and source-contains-prebuilt-javascript-object
+      overrides due to file changes caused by the new upstream release.
+    - Add hyphen-in-upstream-part-of-debian-changelog-version override:
+      Canonical Specification FO127 mandates a hyphen in the upstream part of
+      the Debian changelog version.
+  * d/aspnetcore-targeting-pack-9.0.lintian-overrides,
+    d/dotnet-sdk-9.0.lintian-overrides,
+    d/dotnet-sdk-dbg-9.0.lintian-overrides,
+    d/dotnet-targeting-pack-9.0.lintian-overrides:
+    Ignore repeated-path-segment warnings, as these repetitions are intended.
+  * d/aspnetcore-targeting-pack-9.0.lintian-overrides:
+    ignore package-has-long-file-name warnings
+
+  [Mateus Rodrigues de Morais <mateus.morais@canonical.com>]
+
+  * d/rules: tweaks for s390x and ppc64el builds.
+    - Explicit usage of the --with-sdk build argument when bootstrapping.
+    - Added the --use-mono-runtime flag based on the DOTNET_USE_MONO_RUNTIME
+      variable.
+    - Conditional dh_gencontrol override for dotnet-sdk-aot-9.0 binary package
+      based on the DOTNET_BUILD_AOT_BINARY_PACKAGE variable.
+    - Added the --with-system-libs build argument based on the several
+      DOTNET_USE_SYSTEM_* library specifier variables.
+  * d/eng/dotnet-pkg-info.mk: defined the DOTNET_BUILD_AOT_BINARY_PACKAGE,
+    DOTNET_USE_MONO_RUNTIME, and DOTNET_USE_SYSTEM_* variables.
+  * d/control: tweaks for s390x and ppc64el builds.
+    - Added dh-exec, libbrotli-dev, and rapidjson-dev as build dependencies.
+    - The dotnet9 package now only suggests dotnet-sdk-aot-9.0.
+    - Changed the dotnet-sdk-aot-9.0 binary package architectures to amd64
+      and arm64 only.
+  * d/dotnet-sdk-9.0.install: added dh-exec to filter out files not present in
+    certain architectures and marked the file as executable.
+  * d/t/control: added missing development libraries for the nativeaot-sb test
+    and replaced packages provided by this source package with @.
+  * d/t/regular-tests/bundled-libunwind/test.json: skipping test when on
+    amd64, which no longer bundles libunwind.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 07 Oct 2024 13:42:57 +0000
+
 dotnet9 (9.0.100-9.0.0~rc1-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * Initial release (LP: #2079031)

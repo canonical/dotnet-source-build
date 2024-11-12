@@ -3,11 +3,16 @@
 # dotnet9 source: source-is-missing [.dotnet/*]
 # dotnet9 source: source-contains-prebuilt-windows-binary [.dotnet/*]
 
+# Canonical Specification FO127 mandates a hyphen in the upstream part of
+# the Debian changelog version:
+dotnet9 source: hyphen-in-upstream-part-of-debian-changelog-version
+
 # multi-license:
 dotnet9 source: license-problem-non-free-RFC [*/THIRD-PARTY-NOTICES.TXT]
 
 # These js and html files all contain the full source code and license headers:
-# The js files are generated from ts files 
+# The js files are generated from ts files
+dotnet9 source: source-is-missing [src/aspire/playground/BrowserTelemetry/BrowserTelemetry.Web/wwwroot/scripts/bundle.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.server.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.web.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.webassembly.js]
@@ -31,6 +36,12 @@ dotnet9 source: source-is-missing [src/aspnetcore/src/Mvc/test/Mvc.FunctionalTes
 dotnet9 source: source-is-missing [src/aspnetcore/src/Mvc/test/Mvc.FunctionalTests/compiler/resources/TagHelpersWebSite.Home.ViewComponentTagHelpers.html]
 dotnet9 source: source-is-missing [src/aspnetcore/src/Mvc/test/WebSites/BasicWebSite/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/Mvc/test/WebSites/GenericHostWebSite/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
 dotnet9 source: source-is-missing [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
@@ -66,6 +77,7 @@ dotnet9 source: source-is-missing [src/runtime/src/installer/pkg/sfx/bundle/osx_
 dotnet9 source: source-is-missing [src/sdk/src/Installer/redist-installer/packaging/osx/resources/ru.lproj/welcome.html]
 dotnet9 source: source-is-missing [src/sdk/test/Microsoft.AspNetCore.Watch.BrowserRefresh.Tests/wwwroot/largefile.html]
 dotnet9 source: source-is-missing [src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/NOTICE.html]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspire/playground/BrowserTelemetry/BrowserTelemetry.Web/wwwroot/scripts/bundle.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.server.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.web.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Components/Web.JS/dist/Release/blazor.webassembly.js]
@@ -86,12 +98,13 @@ dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/I
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.esm.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap/dist/js/bootstrap.min.js]
-dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/additional-methods.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/additional-methods.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/jquery.validate.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/jquery.validate.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery/dist/jquery.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery/dist/jquery.slim.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
@@ -103,13 +116,26 @@ dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/I
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Mvc/perf/benchmarkapps/BasicViews/wwwroot/js/site.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Mvc/test/WebSites/BasicWebSite/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Mvc/test/WebSites/GenericHostWebSite/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery/dist/jquery.slim.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
-dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js]
@@ -121,24 +147,26 @@ dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/P
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
-dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery/dist/jquery.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery/dist/jquery.slim.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
-dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/additional-methods.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery/dist/jquery.min.js]
+dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery/dist/jquery.slim.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/js/site.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js]
@@ -187,7 +215,26 @@ dotnet9 source: source-contains-prebuilt-javascript-object [src/nuget-client/tes
 dotnet9 source: source-contains-prebuilt-javascript-object [src/sdk/src/BuiltInTools/BrowserRefresh/WebSocketScriptInjection.js]
 dotnet9 source: source-contains-prebuilt-javascript-object [src/source-build-externals/src/application-insights/NETCORE/test/FunctionalTests.MVC.Tests/wwwroot/js/site.min.js]
 
+
 # Don't know how to fix this. The entries look fine.
 dotnet9 source: superfluous-file-pattern debian/eng/strenum [debian/copyright:*]
 dotnet9 source: superfluous-file-pattern debian/eng/test-runner [debian/copyright:*]
 dotnet9 source: superfluous-file-pattern debian/tests/regular-tests [debian/copyright:*]
+
+# There is no alternative upstream tarall without these.
+# We may decide to delete them, as they are not important for Linux source-build.
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/AspNetCore/aspnetcoremodule.rc]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/AspNetCore/resource.h]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/InProcessRequestHandler/HtmlResponses.rc]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/InProcessRequestHandler/inprocessrequesthandler.rc]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/InProcessRequestHandler/resource.h]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/OutOfProcessRequestHandler/HtmlResponses.rc]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/OutOfProcessRequestHandler/outofprocessrequesthandler.rc]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/aspnetcore/src/Servers/IIS/AspNetCoreModuleV2/OutOfProcessRequestHandler/resource.h]
+dotnet9 source: source-contains-autogenerated-visual-c++-file [src/wpf/src/Microsoft.DotNet.Wpf/src/PenImc/dll/resource.h]
+
+# It would be a little bit weird to just ship these exaples as they are not
+# prime examples of the .NET platform. We may want to come back to these and
+# ship them together with more comprehensive examples.
+dotnet9 source: package-does-not-install-examples [src/source-build-externals/src/application-insights/examples/]
+dotnet9 source: package-does-not-install-examples [src/source-build-externals/src/spectre-console/examples/]

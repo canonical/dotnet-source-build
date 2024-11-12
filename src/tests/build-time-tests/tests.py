@@ -265,8 +265,10 @@ class TestContext:
 
         self.__ExtractPackages()
         self.__CreateTestProject()
-        output = self.__RunDotnet(["run", "--no-restore",
-                                   "--project", self.TestProjectFile])
+        self.__RestoreTestProject()
+
+        dllPath = self.__BuildTestProject()
+        output = self.__RunDotnet([dllPath])
         self.__ValidateDotnetTestProjectOutput(output)
 
         self.LogInfo("Test succeeded!")
@@ -406,10 +408,20 @@ class TestContext:
                           "--name", self.TestProjectName,
                           "--output", self.TestProjectDirectory])
 
+    def __RestoreTestProject(self) -> None:
         self.LogDebug("Restore test project dependencies.")
         self.__RunDotnet(["restore",
                           "--source", self.NuGetPackagesDirectory,
                           self.TestProjectDirectory])
+
+    def __BuildTestProject(self) -> str:
+        self.LogDebug("Build test project binaries.")
+        self.__RunDotnet(["build", "--no-restore", self.TestProjectFile])
+
+        dllPath = (f"{self.TestProjectDirectory}/bin/Debug/net9.0/"
+                  f"{self.TestProjectName}.dll")
+
+        return dllPath
 
     def __ValidateDotnetHelpOutput(self, output: str) -> None:
         if len(output) == 0:
@@ -501,7 +513,12 @@ class TestContext:
 
         match = re.match(r"^Hello, World!\s*$", output,
                          re.DOTALL | re.MULTILINE)
+
         if match is None:
+            print("Hexdump:")
+            for index, char in enumerate(output):
+                print(f"{index}: {hex(ord(char))} {ord(char)} '{char}'")
+
             self.LogErrorAndDie(".NET test project does not output "
                                 "\"Hello, World!\".")
 

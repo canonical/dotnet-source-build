@@ -1,0 +1,4 @@
+# The Apache 2.0 license requires distributing of NOTICE files. 
+# See paragraph 4 section (d). On Debian systems, the full Apache-2.0 license
+# text can be found at: /usr/share/common-licenses/Apache-2.0
+src/razor/NOTICE.txt
