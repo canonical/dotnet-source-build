@@ -37,7 +37,7 @@ if __name__ == "__main__":
         if (version.BootstrapArchitecture != None):
             versionString += f"~bootstrap+{version.BootstrapArchitecture}"
 
-        versionString += f"{version.DebRevision}"
+        versionString += f"-{version.DebRevision}"
 
         print(versionString)
     else:
