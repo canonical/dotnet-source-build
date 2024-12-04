@@ -20,7 +20,6 @@ Home of the .NET source build effort for Ubuntu platforms. This Repository inclu
 
 - [.NET Maintainer Team on Launchpad](https://launchpad.net/~dotnet)
 - [.NET Backports PPA](https://launchpad.net/~dotnet/+archive/ubuntu/backports)
-- [.NET Backports (proposed) PPA](https://launchpad.net/~dotnet/+archive/ubuntu/backports-proposed)
 
 ## License
   
