@@ -13,6 +13,7 @@ sys.path.append("debian/eng")
 from versionlib.dotnet import SourcePackageVersion, RuntimeIdentifier  # noqa: E402, E501
 from source_build_artifact_path import GetSourceBuiltArtifactsTarball  # noqa: E402, E501
 
+
 def ParseArguments():
     class MultiStoreTrue(argparse.Action):
         def __init__(self,
@@ -167,10 +168,20 @@ class TestContext:
         self.TestProjectFile = os.path.join(
             self.TestProjectDirectory, f"{self.TestProjectName}.csproj")
 
+        if version.SdkVersion.Major < 9:
+            self.DotnetBuiltArtifactsBasePath = (f"{self.SourcePackageRoot}"
+                                                 "/artifacts/"
+                                                 f"{self.DotnetArchitecture}"
+                                                 "/Release")
+        else:
+            self.DotnetBuiltArtifactsBasePath = (f"{self.SourcePackageRoot}"
+                                                 "/artifacts/assets/Release")
+
         self.LogDebug(
             "Full Context:\n"
             f"- TestDirectory: {self.TestDirectory}\n"
             f"- SourcePackageRoot: {self.SourcePackageRoot}\n"
+            f"- DotnetBuiltArtifactsBasePath: {self.DotnetBuiltArtifactsBasePath}\n"  # noqa: E501
             f"- DotnetRoot: {self.DotnetRoot}\n"
             f"- NuGetPackagesDirectory: {self.NuGetPackagesDirectory}\n"
             f"- FakeHome: {self.FakeHome}\n"
@@ -254,8 +265,10 @@ class TestContext:
 
         self.__ExtractPackages()
         self.__CreateTestProject()
-        output = self.__RunDotnet(["run", "--no-restore",
-                                   "--project", self.TestProjectFile])
+        self.__RestoreTestProject()
+
+        dllPath = self.__BuildTestProject()
+        output = self.__RunDotnet([dllPath])
         self.__ValidateDotnetTestProjectOutput(output)
 
         self.LogInfo("Test succeeded!")
@@ -307,10 +320,11 @@ class TestContext:
             return
 
         self.__ExtractGZipTarball(
-            tarPath=f"{self.SourcePackageRoot}/artifacts/"
-                    f"{self.DotnetArchitecture}/Release/dotnet-sdk-"
-                    f"{self.DotnetSdkVersion}-"
-                    f"{self.DotnetRuntimeIdentifier}.tar.gz",
+            tarPath=GetSourceBuiltArtifactsTarball(
+                basePath=self.DotnetBuiltArtifactsBasePath,
+                sdkVersion=self.DotnetSdkVersion,
+                runtimeIdentifier=self.DotnetRuntimeIdentifier,
+                type="SDK"),
             humanReadableName=".NET SDK build artifacts",
             targetDirectory=self.DotnetRoot)
 
@@ -321,14 +335,11 @@ class TestContext:
             self.LogInfo("Consider using the --clean-packages flag.")
             return
 
-        tarPath = GetSourceBuiltArtifactsTarball(
-            basePath=(f"{self.SourcePackageRoot}/artifacts/"
-                      f"{self.DotnetArchitecture}/Release"),
-            sdkVersion=self.DotnetSdkVersion, 
-            runtimeIdentifier=self.DotnetRuntimeIdentifier)
-
         self.__ExtractGZipTarball(
-            tarPath=tarPath,
+            tarPath=GetSourceBuiltArtifactsTarball(
+                basePath=self.DotnetBuiltArtifactsBasePath,
+                sdkVersion=self.DotnetSdkVersion,
+                runtimeIdentifier=self.DotnetRuntimeIdentifier),
             humanReadableName="NuGet packages artifacts",
             targetDirectory=self.NuGetPackagesDirectory)
 
@@ -397,10 +408,20 @@ class TestContext:
                           "--name", self.TestProjectName,
                           "--output", self.TestProjectDirectory])
 
+    def __RestoreTestProject(self) -> None:
         self.LogDebug("Restore test project dependencies.")
         self.__RunDotnet(["restore",
                           "--source", self.NuGetPackagesDirectory,
                           self.TestProjectDirectory])
+
+    def __BuildTestProject(self) -> str:
+        self.LogDebug("Build test project binaries.")
+        self.__RunDotnet(["build", "--no-restore", self.TestProjectFile])
+
+        dllPath = (f"{self.TestProjectDirectory}/bin/Debug/net9.0/"
+                  f"{self.TestProjectName}.dll")
+
+        return dllPath
 
     def __ValidateDotnetHelpOutput(self, output: str) -> None:
         if len(output) == 0:
@@ -410,8 +431,8 @@ class TestContext:
         if len(output) == 0:
             self.LogErrorAndDie(".NET version output is empty")
 
-        match = re.match(rf"^{re.escape(self.DotnetSdkVersion)}\s*$", output,
-                         re.DOTALL | re.MULTILINE)
+        match = re.match(rf"^{re.escape(self.DotnetSdkVersion)}(\..+)?\s*$",
+                         output, re.DOTALL | re.MULTILINE)
         if match is None:
             self.LogErrorAndDie(".NET version output does not match the SDK "
                                 "version number "
@@ -457,32 +478,32 @@ class TestContext:
             rf"OS Version:\s+{UbuntuVersion}.+"
             r"OS Platform:\s+Linux.+"
             rf"RID:\s+{DotnetRuntimeIdentifier}.+"
-            rf"Base Path:\s+{DotnetRoot}/sdk/{DotnetSdkVersion}/",
+            rf"Base Path:\s+{DotnetRoot}/sdk/{DotnetSdkVersion}(\..+)?/",
             description=".NET runtime info")
 
         self.__ValidateOutputMatchesPattern(
             output,
             pattern=r".*"
             r"Host:.+"
-            rf"Version:\s+{DotnetRuntimeVersion}.+"
+            rf"Version:\s+{DotnetRuntimeVersion}(\..+)?.+"
             rf"Architecture:\s+{DotnetArchitecture}.+"
-            r"Commit:\s+[a-f0-9]{10}",
+            r"Commit:\s+([a-f0-9]{10}|static)",
             description=".NET host info")
 
         self.__ValidateOutputMatchesPattern(
             output,
             pattern=r".*"
             r".NET SDKs installed:.+"
-            rf"{DotnetSdkVersion} \[{DotnetRoot}/sdk\]",
+            rf"{DotnetSdkVersion}(\..+)? \[{DotnetRoot}/sdk\]",
             description=".NET SDK install info")
 
         self.__ValidateOutputMatchesPattern(
             output,
             pattern=r".*"
             r".NET runtimes installed:.+"
-            rf"Microsoft\.AspNetCore\.App\s+{DotnetRuntimeVersion}\s+"
+            rf"Microsoft\.AspNetCore\.App\s+{DotnetRuntimeVersion}(\..+)?\s+"
             rf"\[{DotnetRoot}/shared/Microsoft\.AspNetCore\.App\].+"
-            rf"Microsoft\.NETCore\.App\s+{DotnetRuntimeVersion}\s+"
+            rf"Microsoft\.NETCore\.App\s+{DotnetRuntimeVersion}(\..+)?\s+"
             rf"\[{DotnetRoot}/shared/Microsoft\.NETCore\.App\]",
             description=".NET runtime install info")
 
@@ -492,7 +513,12 @@ class TestContext:
 
         match = re.match(r"^Hello, World!\s*$", output,
                          re.DOTALL | re.MULTILINE)
+
         if match is None:
+            print("Hexdump:")
+            for index, char in enumerate(output):
+                print(f"{index}: {hex(ord(char))} {ord(char)} '{char}'")
+
             self.LogErrorAndDie(".NET test project does not output "
                                 "\"Hello, World!\".")
 

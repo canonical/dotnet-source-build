@@ -1,7 +1,0 @@
-version=4
-opts="filenamemangle=s%(?:.*?)?v(7.0.1\d\d)\.tar\.gz%dotnet-$1.tar.gz%" \
-https://github.com/dotnet/installer/tags \
-(?:.*?/)?v(7\.0\.1\d\d)\.tar\.gz \
-# See the section "Package Design Considerations" > "`debian/watch` file"
-# in the README.source file for more context.
-debian debian/eng/failing-watchfile-script.sh

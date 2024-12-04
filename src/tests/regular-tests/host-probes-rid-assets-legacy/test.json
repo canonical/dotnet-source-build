@@ -8,7 +8,8 @@
   "cleanup": true,
   "skipWhen": [
     "os=alpine", // see https://github.com/redhat-developer/dotnet-regular-tests/issues/330#issuecomment-1911461723
-    "vmr-ci" // test fails against stage 1 build (https://github.com/redhat-developer/dotnet-regular-tests/issues/289#issuecomment-1705268294)
+    "vmr-ci", // test fails against stage 1 build (https://github.com/redhat-developer/dotnet-regular-tests/issues/289#issuecomment-1705268294)
+    "ubuntu-autopkgtest-cloud",
   ],
   "ignoredRIDs":[
   ]

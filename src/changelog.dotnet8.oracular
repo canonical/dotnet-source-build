@@ -1,3 +1,59 @@
+dotnet8 (8.0.110-8.0.10-0ubuntu1) oracular; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2024-38229: Kestrel http/3 - When closing an HTTP/3 stream while
+      application code is writing to the response body, a race condition may
+      lead to remote code execution.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43483: Multiple .NET components designed to process hostile
+      input are susceptible to hash flooding attacks.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43484: System.IO.Packaging - Multiple DoS vectors in use of
+      SortedList.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-43485: Denial of Service attack against System.Text.Json
+      ExtensionData feature.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Wed, 02 Oct 2024 09:54:23 +0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu3) oracular; urgency=medium
+
+  * d/p/0004-fix-clang19-build.patch: fix clang19 build issues (LP: #2081032)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 18 Sep 2024 12:07:02 +0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu2) oracular; urgency=medium
+
+  * d/t/regular-tests/cgroup-limit/test.sh: bumped test scope memory
+    limit to 200M to fix autopkgtest failure in Oracular.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Aug 2024 11:06:51 -0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu1) oracular; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2024-38167: information disclosure vulnerability in TlsStream.
+  * debian/eng/build-dotnet-tarball.sh: SECURITY_PARTNERS_REPOSITORY
+    connection method updated.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Fri, 09 Aug 2024 09:43:31 +0300
+
+dotnet8 (8.0.107-8.0.7-0ubuntu1) oracular; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-30105: Denial of service vulnerability in System.Text.Json
+      deserialization.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-35264: Denial of service in ASP.NET Core 8.
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-38095: Denial of service in parsing X.509 Content and
+      ObjectIdentifiers.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Tue, 02 Jul 2024 11:55:56 +0300
+
 dotnet8 (8.0.105-8.0.5-0ubuntu2) oracular; urgency=medium
 
   * d/control, d/rules: Added ppc64el as a supported architecture

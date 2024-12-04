@@ -1,4 +1,4 @@
-#!/usr/bin/make --makefile
+#!/usr/bin/make -f
 
 SHELL = /usr/bin/bash
 
@@ -16,6 +16,8 @@ include /usr/share/dpkg/pkg-info.mk
 include /usr/share/dpkg/architecture.mk
 include $(CURDIR)/debian/eng/dotnet-pkg-info.mk
 
+export LIBICU_PACKAGENAME=$(shell apt-cache depends libicu-dev | grep --only-matching --extended-regexp 'libicu[0-9]+')
+
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=-lto
 
 ifeq ($(DOTNET_80_OR_GREATER), false)
@@ -32,7 +34,7 @@ ifeq ($(DEB_HOST_ARCH), arm64)
 
     UBUNTU_2310_OR_GREATER = $(shell . /etc/os-release && dpkg --compare-versions $${VERSION_ID} ge 23.10 && echo true || echo false)
 ifeq ($(UBUNTU_2310_OR_GREATER), true)
-#   On ARM64 Ubuntu 23.10 and higher the build will fail with the message 
+#   On ARM64 Ubuntu 23.10 and higher the build will fail with the message
 #   "Cannot find mkstemps nor mkstemp on this platform.", related to libunwind
 #   and the branch-protection `pac-ret`. By default branch-protection `standard`
 #   is set which is equivalent to `bti+pac-ret`.
@@ -49,6 +51,9 @@ endif
 
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
     DOTNET_BUILD_ARGS += --clean-while-building
+    ifneq ($(filter $(DEB_HOST_ARCH),s390x ppc64el),)
+        DOTNET_BUILD_ARGS += --with-sdk $(CURDIR)/dotnet
+    endif
 else
     DOTNET_PREVIOUS_BUILT_DIR = $(CURDIR)/previously-built-dotnet
     DOTNET_BUILD_ARGS += --with-sdk "$(DOTNET_PREVIOUS_BUILT_DIR)"
@@ -62,33 +67,72 @@ endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
-    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)	
+    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)
+endif
+
+ifeq ($(DOTNET_90_OR_GREATER), true)
+    DOTNET_BUILD_ARGS += --source-only
+    DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/assets/Release
+
+    ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
+        SYSTEM_LIBRARIES += +brotli
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_LIBUNWIND), true)
+        SYSTEM_LIBRARIES += +libunwind
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_RAPIDJSON), true)
+        SYSTEM_LIBRARIES += +rapidjson
+    endif
+    ifeq ($(DOTNET_USE_SYSTEM_ZLIB), true)
+        SYSTEM_LIBRARIES += +zlib
+    endif
+
+#	The += operator adds text preceded by a space. Since the system libs list should
+#	contain no space, we replace every space in the string with an empty character.
+    space := $(shell printf " ")
+    DOTNET_BUILD_ARGS += --with-system-libs $(subst $(space),,$(SYSTEM_LIBRARIES))
+
+    ifeq ($(DOTNET_USE_MONO_RUNTIME), true)
+        DOTNET_BUILD_ARGS += --use-mono-runtime
+    endif
+else
+    DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/$(DOTNET_ARCH)/Release
 endif
 
 %:
 	dh $@ --with bash-completion
 
-override_dh_clean:
-	rm --force "$(CURDIR)"/debian/substvars
-	dh_clean
-
-debian/substvars:
-	echo "libicu:Depends=$$(apt-cache depends libicu-dev | grep --only-matching --extended-regexp 'libicu[0-9]+')" > "$(CURDIR)/debian/substvars"
-	cat "$(CURDIR)/debian/substvars"
-
-override_dh_auto_build: debian/substvars
+override_dh_auto_build:
 	printenv | sort
+	vmstat --stats --unit MiB
+
+#	If a library is being pulled in from the system, remove the bundled source for it
+ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/brotli
+endif
+ifeq ($(DOTNET_USE_SYSTEM_LIBUNWIND), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/libunwind
+endif
+ifeq ($(DOTNET_USE_SYSTEM_RAPIDJSON), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/rapidjson
+endif
+ifeq ($(DOTNET_USE_SYSTEM_ZLIB), true)
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib-intel
+	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/zlib-ng
+endif
+
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
 	
-	DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
-	if [ "$${#DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
-		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL[@]}"; \
+	DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.$(DOTNET_RUNTIME_ID).tar.gz')); \
+	if [ "$${#DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
+		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}"; \
 		exit 1; \
 	fi; \
-	echo "source built artifacts tarball: $${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}"; \
+	echo "source built artifacts tarball: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL}"; \
 	ln --symbolic \
-		"$${DOTNET_SOURCE_BUITD_ARTIFACTS_TARBALL}" \
+		"$${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL}" \
 		"$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
 	
 	cp --recursive --dereference --preserve=mode,ownership,timestamps \
@@ -102,6 +146,10 @@ endif
 	/p:LogVerbosity=n \
 	/p:MinimalConsoleLogOutput=false \
 	/p:ContinueOnPrebuiltBaselineError=true
+	
+ifeq ($(DOTNET_90_OR_GREATER), true)
+	tree
+endif
 
 override_dh_auto_test:
 	python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
@@ -109,10 +157,10 @@ override_dh_auto_test:
 override_dh_install:
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_SYSCONF_DIR)"
-	ls "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release
+	ls "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
 	
 	tar --extract \
-	    --file "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
 	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	
 ifeq ($(DOTNET_80_OR_GREATER), true)
@@ -122,8 +170,9 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 # 	Extract debug symbols to their own directory for easy handling
 	mkdir --parents "$(CURDIR)/artifacts/debug-symbols"
 	tar --extract \
-	    --file "$(CURDIR)"/artifacts/$(DOTNET_ARCH)/Release/dotnet-symbols-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-symbols-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
 	    --directory "$(CURDIR)/artifacts/debug-symbols"
+	ls "$(CURDIR)/artifacts/debug-symbols"
 endif
 	
 #   See https://github.com/dotnet/source-build/issues/2579
@@ -136,7 +185,6 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'singlefilehost' -exec chmod +x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.a' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.dll' -exec chmod -x {} \;
-	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.json' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pdb' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.props' -exec chmod -x {} \;
@@ -145,28 +193,42 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.txt' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.xml' -exec chmod -x {} \;
 	
+#   fixes lintian warning: dotnet-sdk-aot-9.0: executable-not-elf-or-script
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h.in' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.c' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.cpp' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.cmake' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.m' -exec chmod 0644 {} \;
+	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.def' -exec chmod 0644 {} \;
+	
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location_$(DOTNET_ARCH)
 	
 	dh_install
 
-override_dh_gencontrol: debian/substvars
-	dh_gencontrol
+override_dh_gencontrol:
+	echo "LIBICU_PACKAGENAME=$(LIBICU_PACKAGENAME)"
+	
+	dh_gencontrol -- -Vlibicu:Depends=$(LIBICU_PACKAGENAME)
 ifeq ($(DOTNET_80_OR_GREATER), true)
-	dh_gencontrol -paspnetcore-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -paspnetcore-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-apphost-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-host-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-hostfxr-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-runtime-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-sdk-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pdotnet-sdk-8.0-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pdotnet-targeting-pack-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-templates-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pnetstandard-targeting-pack-2.1-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -paspnetcore-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-runtime-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
-	dh_gencontrol -pdotnet-sdk-dbg-8.0 -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -paspnetcore-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -paspnetcore-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)         -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-apphost-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)               -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-host-$(DOTNET_MAJOR).$(DOTNET_MINOR)                       -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-hostfxr-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY) -Vlibicu:Depends=$(LIBICU_PACKAGENAME)
+	dh_gencontrol -pdotnet-targeting-pack-$(DOTNET_MAJOR).$(DOTNET_MINOR)             -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -paspnetcore-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)            -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-runtime-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)
+	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)                        -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-templates-$(DOTNET_MAJOR).$(DOTNET_MINOR)                  -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+	dh_gencontrol -pdotnet-sdk-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+ifeq ($(DOTNET_BUILD_AOT_BINARY_PACKAGE), true)
+	dh_gencontrol -pdotnet-sdk-aot-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
 endif
 
 override_dh_dwz:
