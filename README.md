@@ -4,17 +4,22 @@
 [![License badge for GNU General Public License v3.0](https://img.shields.io/badge/License-GPL--3.0-informational)](https://github.com/canonical/dotnet-source-build/blob/main/LICENSE)
 
 > [!CAUTION]
-> The current state of the project is still highly experimental and untested.
+> The current state of the project is still experimental.
 
 Home of the .NET source build effort for Ubuntu platforms. This Repository includes all the code needed to build .NET Debian source packages that target Ubuntu 22.04+
 
 ## Releases
 
+
 | Package Name | Launchpad Link | Autopkgtest Link |
-|------|----------------|------------------|
-| `dotnet6` | [![dotnet6 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet6-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet6) | [![dotnet6 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet6-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet6) |
-| `dotnet7` | [![dotnet7 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet7-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet7) | [![dotnet7 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet7-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet7) |
+|--------------|----------------|------------------|
+| `dotnet9` | [![dotnet9 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet9-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet9) | [![dotnet9 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet9-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet9) |
 | `dotnet8` | [![dotnet8 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet8-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet8) | [![dotnet8 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet8-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet8) |
+| `dotnet7` | [![dotnet7 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet7-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet7) | [![dotnet7 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet7-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet7) |
+| `dotnet6` | [![dotnet6 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet6-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet6) | [![dotnet6 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet6-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet6) |
+
+> [!NOTE]
+> This repository only builds .NET 8+ source packages since support for packages was dropped with commit [94faf62](https://github.com/canonical/dotnet-source-build/commit/94faf62fe11b9a7ef021384198e02bf6974af02c).
 
 ### See also
 
