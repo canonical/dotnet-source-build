@@ -3,8 +3,12 @@ dotnet9 (9.0.101-9.0.0-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
   * New upstream release (LP: #2091009)
   * debian/rules, debian/eng/source_build_artifact_path.py: re-enable strict
     RID matching of last release.
-  * debian/eng/dotnet-version.py: remove temporarily added '-rtm' to
-    DOTNET_DEB_VERSION_SDK_ONLY due to higher SDK version number.
+  * debian/eng/dotnet-version.py: 
+    - remove temporarily added '-rtm' to DOTNET_DEB_VERSION_SDK_ONLY due
+      to higher SDK version number.
+    - temporarily added '+build1' to DOTNET_DEB_VERSION_RUNTIME_ONLY to comply
+      with FO127 due to same runtime version number compared to last upstream
+      release.
   * disable 'host-probes-rid-assets-legacy' test: this test fails and fixing
     would require patching the legacy RID graph which we dicided to no longer
     maintain.
