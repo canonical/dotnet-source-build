@@ -19,7 +19,7 @@ Home of the .NET source build effort for Ubuntu platforms. This Repository inclu
 | `dotnet6` | [![dotnet6 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet6-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet6) | [![dotnet6 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet6-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet6) |
 
 > [!NOTE]
-> This repository only builds .NET 8+ source packages since support for packages was dropped with commit [94faf62](https://github.com/canonical/dotnet-source-build/commit/94faf62fe11b9a7ef021384198e02bf6974af02c).
+> This repository only builds .NET 8+ source packages. Support for `dotnet6` and `dotnet7` was dropped with commit [94faf62](https://github.com/canonical/dotnet-source-build/commit/94faf62fe11b9a7ef021384198e02bf6974af02c).
 
 ### See also
 
