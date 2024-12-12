@@ -2,9 +2,9 @@ Source: dotnet8
 Section: devel
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Build-Depends: clang,
+Build-Depends: bash-completion,
+               clang,
                cmake,
-               bash-completion,
                debhelper-compat (= 13),
                dotnet-sdk-8.0,
                dotnet-sdk-8.0-source-built-artifacts,
