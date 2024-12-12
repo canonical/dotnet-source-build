@@ -18,6 +18,7 @@ Build-Depends: bash-completion,
                llvm,
                locales-all,
                python3,
+               tree,
                zlib1g-dev
 Standards-Version: 4.6.2
 Rules-Requires-Root: binary-targets
