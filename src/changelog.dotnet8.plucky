@@ -1,6 +1,9 @@
-dotnet8 (8.0.111-8.0.11-0ubuntu1~24.10.1) oracular; urgency=medium
+dotnet8 (8.0.111-8.0.11-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2087882)
+  * debian/eng/source_build_artifact_path.py: temporarily disable
+    strict RID matching to solve build issue on plucky due to binary copying
+    during archive opening.
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 08 Nov 2024 18:16:21 +0200
 
