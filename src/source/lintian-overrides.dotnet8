@@ -1,3 +1,7 @@
+# Canonical Specification FO127 mandates a hyphen in the upstream part of
+# the Debian changelog version:
+dotnet8 source: hyphen-in-upstream-part-of-debian-changelog-version
+
 #the tarball always contains this
 #dotnet8: source-contains-prebuilt-windows-binary
 #multilicense
