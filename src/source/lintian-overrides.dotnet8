@@ -1,3 +1,8 @@
+# .NET bootstrap SDK/Runtime
+# dotnet8 source: license-problem-non-free-RFC [.dotnet/*]
+# dotnet8 source: source-is-missing [.dotnet/*]
+# dotnet8 source: source-contains-prebuilt-windows-binary [.dotnet/*]
+
 # Canonical Specification FO127 mandates a hyphen in the upstream part of
 # the Debian changelog version:
 dotnet8 source: hyphen-in-upstream-part-of-debian-changelog-version
