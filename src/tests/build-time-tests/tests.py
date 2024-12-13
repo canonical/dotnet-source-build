@@ -391,7 +391,7 @@ class TestContext:
             self.LogErrorAndDie("Execution failure!\n"
                                 f"- Exit Code: {error.returncode}\n"
                                 f"- Args: {str(args)}\n"
-                                f"- Output:\n{output}")
+                                f"- Output:\n{error.output}")
 
         self.LogInfo(f"Output:\n=======\n{output}")
         return output
