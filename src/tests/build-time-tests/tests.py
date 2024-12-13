@@ -150,6 +150,7 @@ class TestContext:
         self.DotnetSdkVersion = str(version.SdkVersion)
         self.DotnetRuntimeVersion = str(version.RuntimeVersion)
         self.DotnetRuntimeIdentifier = str(runtimeIdentifier)
+        self.DotnetTargetFramework = f"net{version.SdkVersion.Major}.{version.SdkVersion.Minor}"
         self.DotnetArchitecture = str(runtimeIdentifier.ArchitectureIdentifier)
         self.UbuntuVersion = str(
             runtimeIdentifier.OperatingSystemIdentifier.Version)
@@ -192,6 +193,7 @@ class TestContext:
             f"- DotnetSdkVersion: {self.DotnetSdkVersion}\n"
             f"- DotnetRuntimeVersion: {self.DotnetRuntimeVersion}\n"
             f"- DotnetRuntimeIdentifier: {self.DotnetRuntimeIdentifier}\n"
+            f"- DotnetTargetFramework: {self.DotnetTargetFramework}\n"
             f"- DotnetArchitecture: {self.DotnetArchitecture}")
 
     def LogDebug(self, msg) -> None:
@@ -391,7 +393,7 @@ class TestContext:
             self.LogErrorAndDie("Execution failure!\n"
                                 f"- Exit Code: {error.returncode}\n"
                                 f"- Args: {str(args)}\n"
-                                f"- Output:\n{output}")
+                                f"- Output:\n{error.output}")
 
         self.LogInfo(f"Output:\n=======\n{output}")
         return output
@@ -418,7 +420,7 @@ class TestContext:
         self.LogDebug("Build test project binaries.")
         self.__RunDotnet(["build", "--no-restore", self.TestProjectFile])
 
-        dllPath = (f"{self.TestProjectDirectory}/bin/Debug/net9.0/"
+        dllPath = (f"{self.TestProjectDirectory}/bin/Debug/{self.DotnetTargetFramework}/"
                   f"{self.TestProjectName}.dll")
 
         return dllPath

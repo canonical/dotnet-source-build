@@ -21,15 +21,15 @@ Copyright: 2022 Canonical Ltd.
  Jesús Soto Mendoza <jesus.soto@canonical.com>
 License: Expat or Apache-2.0
 
-Files: debian/eng/strenum
+Files: debian/eng/strenum/*
 Copyright: 2019 James C Sinclair
 License: Expat
 
-Files: debian/eng/test-runner
+Files: debian/eng/test-runner/*
 Copyright: 2019 Red Hat, Inc
 License: LGPL-2.1
 
-Files: debian/tests/regular-tests
+Files: debian/tests/regular-tests/*
 Copyright: 2018 Radka Janeková
   2022 Canonical Ltd.
 License: Expat
@@ -3638,20 +3638,12 @@ Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extens
 Copyright: .NET Foundation
 License: Expat
 
-Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/src/Microsoft.IdentityModel.Tokens/opensource/json/*
-Copyright: 2007, 2022, James Newton-King
-License: Expat
-
-Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/src/Microsoft.IdentityModel.Tokens/opensource/json/Utilities/LinqBridge.cs
-Copyright: 2007-2009, Atif Aziz, Joseph Albahari.
-License: BSD-3-clause
-
 Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/CustomSecurityKey.cs
  src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/SecurityKeyCustomConverter.cs
 Copyright: 2007, 2022, James Newton-King
 License: Expat
 
-Files: src/source-build-externals/src/docker-creds-provider/*
+Files: src/source-build-externals/src/docker-creds-provider-*/*
 Copyright: 2020, Matt Thalman
 License: Expat
 
@@ -3704,19 +3696,15 @@ Copyright: .NET Foundation
 License: Apache-2.0
 
 Files: src/source-build-reference-packages/src/referencePackages/*
-Copyright: Microsoft Corporation.
+Copyright: Microsoft Corporation
 License: Expat
 
 Files: src/source-build-reference-packages/src/referencePackages/src/humanizer.core/*
-Copyright: 2012-2017, Mehdi Khalili")]
+Copyright: 2012-2017, Mehdi Khalili
 License: Expat
 
 Files: src/source-build-reference-packages/src/referencePackages/src/microsoft.extensions.filesystemglobbing/2.0.0/*
-Copyright: Microsoft Corporation")]
-License: Expat
-
-Files: src/source-build-reference-packages/src/referencePackages/src/xunit.abstractions/*
-Copyright: Outercurve Foundation")]
+Copyright: Microsoft Corporation
 License: Expat
 
 Files: src/source-build-reference-packages/src/textOnlyPackages/src/microsoft.extensions.commandlineutils.sources/*
@@ -4501,6 +4489,25 @@ License: GPL-2
  See /usr/share/common-licenses/GPL-2, or
  <http://www.gnu.org/copyleft/gpl.txt> for the terms of the latest version
  of the GNU General Public License.
+
+License: LGPL-2.1
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ .
+ See /usr/share/common-licenses/LGPL-2.1 on Debian systems, or
+ <https://www.gnu.org/licenses/lgpl-2.1.txt> for the terms of the latest version
+ of the GNU Lesser General Public License 2.1.
 
 License: ISC
  Permission to use, copy, modify, and/or distribute this software for any

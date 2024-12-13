@@ -1,0 +1,43 @@
+Description: Fix clang19 build issues
+Author: Adeel Mujahid 
+Origin: upstream, https://github.com/dotnet/runtime/pull/105141
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/dotnet8/+bug/2081032
+Applied-Upstream: https://github.com/dotnet/runtime/commit/043ae8c50dbe1c7377cf5ad436c5ac1c226aef79
+Reviewed-by: Jan Kotas <jkotas@microsoft.com>
+Last-Update: 2024-09-18
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/runtime/src/coreclr/vm/comreflectioncache.hpp
++++ b/src/runtime/src/coreclr/vm/comreflectioncache.hpp
+@@ -26,6 +26,7 @@
+ 
+     void Init();
+ 
++#ifndef DACCESS_COMPILE
+     BOOL GetFromCache(Element *pElement, CacheType& rv)
+     {
+         CONTRACTL
+@@ -102,6 +103,7 @@
+         AdjustStamp(TRUE);
+         this->LeaveWrite();
+     }
++#endif // !DACCESS_COMPILE
+ 
+ private:
+     // Lock must have been taken before calling this.
+@@ -141,6 +143,7 @@
+         return CacheSize;
+     }
+ 
++#ifndef DACCESS_COMPILE
+     void AdjustStamp(BOOL hasWriterLock)
+     {
+         CONTRACTL
+@@ -170,6 +173,7 @@
+         if (!hasWriterLock)
+             this->LeaveWrite();
+     }
++#endif // !DACCESS_COMPILE
+ 
+     void UpdateHashTable(SIZE_T hash, int slot)
+     {
