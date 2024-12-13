@@ -3638,20 +3638,12 @@ Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extens
 Copyright: .NET Foundation
 License: Expat
 
-Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/src/Microsoft.IdentityModel.Tokens/opensource/json/*
-Copyright: 2007, 2022, James Newton-King
-License: Expat
-
-Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/src/Microsoft.IdentityModel.Tokens/opensource/json/Utilities/LinqBridge.cs
-Copyright: 2007-2009, Atif Aziz, Joseph Albahari.
-License: BSD-3-clause
-
 Files: src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/CustomSecurityKey.cs
  src/source-build-externals/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/SecurityKeyCustomConverter.cs
 Copyright: 2007, 2022, James Newton-King
 License: Expat
 
-Files: src/source-build-externals/src/docker-creds-provider/*
+Files: src/source-build-externals/src/docker-creds-provider-*/*
 Copyright: 2020, Matt Thalman
 License: Expat
 
@@ -3704,19 +3696,15 @@ Copyright: .NET Foundation
 License: Apache-2.0
 
 Files: src/source-build-reference-packages/src/referencePackages/*
-Copyright: Microsoft Corporation.
+Copyright: Microsoft Corporation
 License: Expat
 
 Files: src/source-build-reference-packages/src/referencePackages/src/humanizer.core/*
-Copyright: 2012-2017, Mehdi Khalili")]
+Copyright: 2012-2017, Mehdi Khalili
 License: Expat
 
 Files: src/source-build-reference-packages/src/referencePackages/src/microsoft.extensions.filesystemglobbing/2.0.0/*
-Copyright: Microsoft Corporation")]
-License: Expat
-
-Files: src/source-build-reference-packages/src/referencePackages/src/xunit.abstractions/*
-Copyright: Outercurve Foundation")]
+Copyright: Microsoft Corporation
 License: Expat
 
 Files: src/source-build-reference-packages/src/textOnlyPackages/src/microsoft.extensions.commandlineutils.sources/*
