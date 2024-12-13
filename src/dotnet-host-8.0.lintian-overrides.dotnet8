@@ -1,0 +1,10 @@
+# troff complains that it is silly to select a monospace font on a terminal output
+# that only supports monospace fonts, see:
+# - https://savannah.gnu.org/bugs/index.php?64594
+# - https://github.com/jgm/pandoc/issues/9020
+dotnet-host-8.0: groff-message troff:<standard input>:*: warning: cannot select font 'C' [usr/share/man/man1/*.gz:*]
+dotnet-host-8.0: groff-message troff:<standard input>:*: warning: cannot select font 'CB' [usr/share/man/man1/*.1.gz:*]
+
+# these issues are fine:
+dotnet-host-8.0: groff-message troff:<standard input>:319: warning [p 2, 1.0i, div '3tbd19,3', 0.0i]: cannot adjust line [usr/share/man/man1/dotnet-new.1.gz:3]
+dotnet-host-8.0: groff-message troff:<standard input>:396: warning [p 2, 1.0i, div '3tbd26,3', 0.0i]: cannot adjust line [usr/share/man/man1/dotnet-new.1.gz:4]
