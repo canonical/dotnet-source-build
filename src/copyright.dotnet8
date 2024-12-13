@@ -21,15 +21,15 @@ Copyright: 2022 Canonical Ltd.
  Jesús Soto Mendoza <jesus.soto@canonical.com>
 License: Expat or Apache-2.0
 
-Files: debian/eng/strenum
+Files: debian/eng/strenum/*
 Copyright: 2019 James C Sinclair
 License: Expat
 
-Files: debian/eng/test-runner
+Files: debian/eng/test-runner/*
 Copyright: 2019 Red Hat, Inc
 License: LGPL-2.1
 
-Files: debian/tests/regular-tests
+Files: debian/tests/regular-tests/*
 Copyright: 2018 Radka Janeková
   2022 Canonical Ltd.
 License: Expat
