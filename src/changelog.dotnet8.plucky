@@ -1,3 +1,15 @@
+dotnet8 (8.0.111-8.0.11-0ubuntu3) plucky; urgency=medium
+
+  * Hard-code libicu76 instead of libicu74.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 09 Jan 2025 15:41:25 +0100
+
+dotnet8 (8.0.111-8.0.11-0ubuntu2) plucky; urgency=medium
+
+  * No-change rebuild for icu soname change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 05 Jan 2025 20:30:29 +0100
+
 dotnet8 (8.0.111-8.0.11-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2087882)
