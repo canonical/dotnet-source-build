@@ -24,7 +24,7 @@ Home of the .NET source build effort for Ubuntu platforms. This Repository inclu
 
 ## License
   
-Copyright (C) 2024 Canonical Ltd.
+Copyright (C) 2025 Canonical Ltd.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
