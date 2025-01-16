@@ -33,6 +33,21 @@ class PrereleaseVersion:
 
         return prereleaseVersion
 
+    def DebRepresentation(self) -> str:
+        prereleaseVersion = str(self.Type)
+
+        if self.Revision is not None:
+            prereleaseVersion += str(self.Revision)
+
+        if self.BuildMetadata is not None:
+            for buildMetadataPart in self.BuildMetadata:
+                prereleaseVersion += "." + buildMetadataPart
+
+        return prereleaseVersion
+
+    def __repr__(self) -> str:
+        return str(self)
+
     def __eq__(self, __value: object) -> bool:
         if __value is None:
             return False
@@ -50,7 +65,7 @@ class PrereleaseVersion:
         elif len(self.BuildMetadata) != len(__value.BuildMetadata):
             return False
 
-        for i in range(self.BuildMetadata):
+        for i in range(len(self.BuildMetadata)):
             if self.BuildMetadata[i] != __value.BuildMetadata[i]:
                 return False
 
@@ -94,6 +109,28 @@ class SdkVersion:
 
         return sdkVersion
 
+    def DebRepresentation(self) -> str:
+        sdkVersion = f"{self.Major}.{self.Minor}.{self.Revision}"
+
+        if self.PreReleaseVersion is not None:
+            sdkVersion += "~" + self.PreReleaseVersion.DebRepresentation()
+
+        return sdkVersion
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    def __eq__(self, other: 'SdkVersion') -> bool:
+        if not isinstance(other, SdkVersion):
+            return False
+
+        return (self.Major == other.Major
+                and self.Minor == other.Minor
+                and self.Minor == other.Minor
+                and self.FeatureBand == other.FeatureBand
+                and self.Patch == other.Patch
+                and self.PreReleaseVersion == other.PreReleaseVersion)
+
 
 class RuntimeVersion:
     def __init__(self,
@@ -123,6 +160,26 @@ class RuntimeVersion:
             runtimeVersion += "-" + str(self.PreReleaseVersion)
 
         return runtimeVersion
+
+    def DebRepresentation(self) -> str:
+        runtimeVersion = f"{self.Major}.{self.Minor}.{self.Patch}"
+
+        if self.PreReleaseVersion is not None:
+            runtimeVersion += "~" + self.PreReleaseVersion.DebRepresentation()
+
+        return runtimeVersion
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    def __eq__(self, other: 'RuntimeVersion') -> bool:
+        if not isinstance(other, RuntimeVersion):
+            return False
+
+        return (self.Major == other.Major
+                and self.Minor == other.Minor
+                and self.Patch == other.Patch
+                and self.PreReleaseVersion == other.PreReleaseVersion)
 
 
 class SourcePackageVersion:
@@ -164,6 +221,24 @@ class SourcePackageVersion:
         self.IsFO127Compliant = isFO127Compliant
         self.BootstrapArchitecture = bootstrapArch
         self.OverwrittenVersion = overwrittenVersion
+
+    def RuntimeOnlyDebVersion(self, buildSuffix: str = "") -> str:
+        versionString = self.RuntimeVersion.DebRepresentation() + buildSuffix
+
+        if (self.BootstrapArchitecture is not None):
+            versionString += f"~bootstrap+{self.BootstrapArchitecture}"
+
+        versionString += f"-{self.DebRevision}"
+        return versionString
+
+    def SdkOnlyDebVersion(self, buildSuffix: str = "") -> str:
+        versionString = self.SdkVersion.DebRepresentation() + buildSuffix
+
+        if (self.BootstrapArchitecture is not None):
+            versionString += f"~bootstrap+{self.BootstrapArchitecture}"
+
+        versionString += f"-{self.DebRevision}"
+        return versionString
 
     @staticmethod
     def Parse(value: str) -> 'SourcePackageVersion':
@@ -222,6 +297,7 @@ class SourcePackageVersion:
             bootstrapArch,
             overwrittenVersion)
 
+    @staticmethod
     def ParseFromChangelog(path: str) -> 'SourcePackageVersion':
         version = dpkg.Changelog(path).ParseFieldOfLatestEntry(
             dpkg.ChangelogEntryField.VERSION)

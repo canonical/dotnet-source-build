@@ -102,6 +102,23 @@ endif
 %:
 	dh $@ --with bash-completion
 
+override_dh_auto_clean:
+	dh_auto_clean
+
+#   clean test runner artifacts
+	rm -rf $(CURDIR)/debian/eng/test-runner/Turkey/bin
+	rm -rf $(CURDIR)/debian/eng/test-runner/Turkey/obj
+	rm -rf $(CURDIR)/debian/eng/test-runner/Turkey.Tests/bin
+	rm -rf $(CURDIR)/debian/eng/test-runner/Turkey.Tests/obj
+	rm -rf $(CURDIR)/debian/eng/test-runner/bin
+	rm -rf $(CURDIR)/debian/eng/test-runner/turkey
+	rm -f $(CURDIR)/debian/eng/test-runner/turkey.tar.gz
+	find $(CURDIR)/debian/eng/test-runner -iname '*.log' -delete
+
+#   clean python lib artifacts
+	rm -rf $(CURDIR)/debian/eng/strenum/__pycache__
+	rm -rf $(CURDIR)/debian/eng/versionlib/__pycache__
+
 override_dh_auto_build:
 	printenv | sort
 	vmstat --stats --unit MiB
@@ -147,9 +164,7 @@ endif
 	/p:MinimalConsoleLogOutput=false \
 	/p:ContinueOnPrebuiltBaselineError=true
 	
-ifeq ($(DOTNET_90_OR_GREATER), true)
 	tree
-endif
 
 override_dh_auto_test:
 	python3 ./debian/tests/build-time-tests/tests.py --verbose --purge-after
