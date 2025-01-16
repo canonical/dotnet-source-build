@@ -1,3 +1,19 @@
+dotnet9 (9.0.102-9.0.1-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+
+  * New upstream release (LP: #2094271).
+  * d/patches: Renamed patch files to uniquely identify patches among all
+    dotnet* source packages.
+  * d/rules: Added override_dh_auto_clean to remove .NET and Python
+    binary artifacts.
+  * d/copyright, d/source/lintian-overrides.dotnet9: Fixed 
+    superfluous-file-pattern warning for debian/eng/strenum,
+    debian/eng/test-runner and debian/tests/regular-tests.
+  * d/tests/build-time-tests/tests.py: Fixed crash when running for net8.0.
+  * d/eng/dotnet-version.py, d/eng/versionlib/dotnet.py:
+    Refactored deb version handling of irregular past releases.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 14 Jan 2025 00:10:52 +0200
+
 dotnet9 (9.0.101-9.0.0-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release (LP: #2091009)

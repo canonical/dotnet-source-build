@@ -1,3 +1,48 @@
+dotnet8 (8.0.112-8.0.12-0ubuntu1~24.04.1) noble; urgency=medium
+
+  * New upstream release (LP: #2094272).
+  * Unified source build transition. The debian source tree for dotnet*
+    source packages is now build from a common source (see also: 
+    https://github.com/canonical/dotnet-source-build/pull/13). Changes include:
+    - d/rules: Refactored; the same file is now used by
+      all dotnet* source packages. A major change is the use of substvars.
+    - d/control: Change hard-coded libicu* to dynamic ${libicu:Depends} substvar.
+    - d/eng/dotnet-pkg-info.mk: Added to provide common information and
+      functionality for all dotnet* source packages. Is used by d/rules.
+    - Removed .in file extension from the files
+      d/*.{install,manpages,dirs,docs,preinst,sh}.in and used substvars.
+    - d/eng/build-dotnet-tarball.sh: Removed.
+    - d/eng/source_build_artifact_path.py, d/eng/versionlib,
+      d/tests/regular-tests: Updated; includes bug-fixes from
+      other dotnet* source packages.
+    - d/patches: Renamed patch files to uniquely identify patches among all
+      dotnet* source packages.
+  * d/aspnetcore-runtime-8.0.docs: Included src/razor/NOTICE.txt in package to
+    comply with Apache-2.0 paragraph 4 section (d).
+  * d/control:
+    - Alphabetically sorted Build-Depends.
+    - Added tree to Build-Depends for debugging purposes.
+    - Fixed descriptions with invalid control statements
+      (lines containing a space, a full stop and some more characters)
+      to comply with Section 5.6.13 in the Debian Policy Manual.
+    - Added dotnet-runtime-dbg-8.0, aspnetcore-runtime-dbg-8.0,
+      dotnet-sdk-dbg-8.0 to dotnet8 Suggests.
+  * d/copyright:
+    - Refresh copyright info.
+    - Add LGPL-2.1 license text.
+  * d/rules: Added override_dh_auto_clean to remove .NET and Python
+    binary artifacts.
+  * lintian overrides:
+    - Silenced dotnet-sdk-8.0-source-built-artifacts: package-has-long-file-name
+      The long file name is unavoidable.
+    - Silenced FO127 related lintian warning 
+      hyphen-in-upstream-part-of-debian-changelog-version.
+    - Silenced manpage troff warnings. Troff complains that it is silly that the
+      dotnet8 manpages select a monospace font on a terminal output that only
+      supports monospace fonts.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 14 Jan 2025 00:10:52 +0200
+
 dotnet8 (8.0.111-8.0.11-0ubuntu1~24.04.1) noble; urgency=medium
 
   * New upstream release (LP: #2087882)
