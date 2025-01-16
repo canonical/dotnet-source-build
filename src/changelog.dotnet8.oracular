@@ -1,6 +1,20 @@
 dotnet8 (8.0.112-8.0.12-0ubuntu1~24.10.1) oracular; urgency=medium
 
   * New upstream release (LP: #2094272).
+  * SECURITY UPDATE: remote code execution
+    - CVE-2025-21172: An integer overflow in msdia140.dll leads to heap-based
+      buffer overflow, leading to possible RCE. An attacker could exploit this
+      vulnerability by loading a specially crafted file in Visual Studio.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2025-21176: Insufficient input data validation leads to heap-based
+      buffer overflow in msdia140.dll. An attacker could exploit this
+      vulnerability by loading a specially crafted file in Visual Studio.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2025-21173: Insecure Temp File Usage Allows Malicious Package
+      Dependency Injection on Linux. An attacker could exploit this
+      vulnerability to writing a specially crafted file in the security
+      context of the local system. This only affects .NET on Linux operating
+      systems.
   * Unified source build transition. The debian source tree for dotnet*
     source packages is now build from a common source (see also: 
     https://github.com/canonical/dotnet-source-build/pull/13). Changes include:
@@ -42,7 +56,7 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~24.10.1) oracular; urgency=medium
       dotnet8 manpages select a monospace font on a terminal output that only
       supports monospace fonts.
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 14 Jan 2025 00:10:52 +0200
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 15 Jan 2025 20:11:26 +0200
 
 dotnet8 (8.0.111-8.0.11-0ubuntu1~24.10.1) oracular; urgency=medium
 
