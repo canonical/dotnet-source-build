@@ -1,3 +1,10 @@
+dotnet8 (8.0.113-8.0.13-0ubuntu2) plucky; urgency=medium
+
+  * d/p/0004-fix-clang20-build.patch: Fix FTBFS with clang 20 (LP: #2099720).
+  * d/eng/test-runner/Turkey: Removed unnecessary obj directory.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Sat, 22 Feb 2025 15:39:45 -0300
+
 dotnet8 (8.0.113-8.0.13-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2097013)
