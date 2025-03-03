@@ -1,14 +1,14 @@
+dotnet8 (8.0.113-8.0.13-0ubuntu1~24.04.1) noble; urgency=medium
+
+  * New upstream release (LP: #2097013)
+  * Updated security information of last changelog with latest information from
+    upstream maintainers.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 10 Feb 2025 20:56:02 +0200
+
 dotnet8 (8.0.112-8.0.12-0ubuntu1~24.04.1) noble; urgency=medium
 
   * New upstream release (LP: #2094272).
-  * SECURITY UPDATE: remote code execution
-    - CVE-2025-21172: An integer overflow in msdia140.dll leads to heap-based
-      buffer overflow, leading to possible RCE. An attacker could exploit this
-      vulnerability by loading a specially crafted file in Visual Studio.
-  * SECURITY UPDATE: remote code execution
-    - CVE-2025-21176: Insufficient input data validation leads to heap-based
-      buffer overflow in msdia140.dll. An attacker could exploit this
-      vulnerability by loading a specially crafted file in Visual Studio.
   * SECURITY UPDATE: elevation of privilege
     - CVE-2025-21173: Insecure Temp File Usage Allows Malicious Package
       Dependency Injection on Linux. An attacker could exploit this

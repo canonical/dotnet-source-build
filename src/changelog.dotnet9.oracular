@@ -1,3 +1,11 @@
+dotnet9 (9.0.103-9.0.2-0ubuntu1~24.10.1) oracular; urgency=medium
+
+  * New upstream release (LP: #2097012)
+  * Updated security information of last changelog with latest information from
+    upstream maintainers.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 10 Feb 2025 20:56:02 +0200
+
 dotnet9 (9.0.102-9.0.1-0ubuntu1~24.10.1) oracular; urgency=medium
 
   * New upstream release (LP: #2094271).
@@ -5,14 +13,6 @@ dotnet9 (9.0.102-9.0.1-0ubuntu1~24.10.1) oracular; urgency=medium
     - CVE-2025-21171: Buffer overrun in Convert.TryToHexString. An attacker
       could exploit this vulnerability by sending a specially crafted request
       to the vulnerable web server.
-  * SECURITY UPDATE: remote code execution
-    - CVE-2025-21172: An integer overflow in msdia140.dll leads to heap-based
-      buffer overflow, leading to possible RCE. An attacker could exploit this
-      vulnerability by loading a specially crafted file in Visual Studio.
-  * SECURITY UPDATE: remote code execution
-    - CVE-2025-21176: Insufficient input data validation leads to heap-based
-      buffer overflow in msdia140.dll. An attacker could exploit this
-      vulnerability by loading a specially crafted file in Visual Studio.
   * SECURITY UPDATE: elevation of privilege
     - CVE-2025-21173: Insecure Temp File Usage Allows Malicious Package
       Dependency Injection on Linux. An attacker could exploit this
