@@ -30,8 +30,6 @@ Homepage: https://dot.net
 Package: dotnet9
 Architecture: amd64 arm64 s390x ppc64el
 Depends: dotnet-sdk-9.0, ${misc:Depends}, ${shlibs:Depends}
-Recommends: dotnet-sdk-aot-9.0 [amd64 arm64]
-Suggests: dotnet-sdk-dbg-9.0, dotnet-runtime-dbg-9.0, aspnetcore-runtime-dbg-9.0
 Breaks: dotnet6 (<< 6.0.111~)
 Description: .NET CLI tools and runtime
  The .NET platform is a fast, lightweight and modular, enabling the creation of
@@ -80,6 +78,7 @@ Depends: dotnet-hostfxr-9.0,
          ${libicu:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
+Suggests: dotnet-runtime-dbg-9.0
 Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
 Description: .NET runtime
  The .NET runtime contains everything needed to run .NET applications.
@@ -95,6 +94,7 @@ Description: .NET runtime
 Package: aspnetcore-runtime-9.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: dotnet-runtime-9.0, ${misc:Depends}, ${shlibs:Depends}
+Suggests: aspnetcore-runtime-dbg-9.0
 Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
 Description: ASP.NET Core runtime
  The ASP.NET Core runtime contains everything needed to run .NET
@@ -132,6 +132,8 @@ Depends: aspnetcore-runtime-9.0,
          ca-certificates,
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: dotnet-sdk-aot-9.0 [amd64 arm64]
+Suggests: dotnet-sdk-dbg-9.0
 Breaks: dotnet-sdk-6.0 (<< 6.0.111~)
 Description: .NET 9.0 Software Development Kit
  The .NET SDK is a collection of command line applications to

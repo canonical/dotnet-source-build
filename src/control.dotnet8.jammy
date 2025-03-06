@@ -27,7 +27,6 @@ Homepage: https://dot.net
 Package: dotnet8
 Architecture: amd64 arm64 s390x ppc64el
 Depends: dotnet-sdk-8.0, ${misc:Depends}, ${shlibs:Depends}
-Suggests: dotnet-runtime-dbg-8.0, aspnetcore-runtime-dbg-8.0, dotnet-sdk-dbg-8.0
 Breaks: dotnet6 (<< 6.0.111~)
 Description: .NET CLI tools and runtime
  The .NET platform is a fast, lightweight and modular, enabling the creation of
@@ -76,6 +75,7 @@ Depends: dotnet-hostfxr-8.0,
          ${libicu:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
+Suggests: dotnet-runtime-dbg-8.0
 Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
 Description: .NET runtime
  The .NET runtime contains everything needed to run .NET applications.
@@ -92,6 +92,7 @@ Package: aspnetcore-runtime-8.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
 Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
+Suggests: aspnetcore-runtime-dbg-8.0
 Description: ASP.NET Core runtime
  The ASP.NET Core runtime contains everything needed to run .NET
  web applications. It includes a high performance Virtual Machine as
@@ -128,6 +129,7 @@ Depends: aspnetcore-runtime-8.0,
          ca-certificates,
          ${misc:Depends},
          ${shlibs:Depends}
+Suggests: dotnet-sdk-dbg-8.0
 Breaks: dotnet-sdk-6.0 (<< 6.0.111~)
 Description: .NET 8.0 Software Development Kit
  The .NET SDK is a collection of command line applications to
