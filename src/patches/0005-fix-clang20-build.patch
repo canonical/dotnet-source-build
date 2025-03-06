@@ -4,10 +4,8 @@ Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/dotnet9/+bug/2099720
 Last-Update: 2025-02-20
 ---
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
-Index: dotnet9-9.0.103-9.0.2/src/runtime/src/coreclr/pal/src/arch/ppc64le/context2.S
-===================================================================
---- dotnet9-9.0.103-9.0.2.orig/src/runtime/src/coreclr/pal/src/arch/ppc64le/context2.S	2025-02-10 16:17:24.000000000 -0300
-+++ dotnet9-9.0.103-9.0.2/src/runtime/src/coreclr/pal/src/arch/ppc64le/context2.S	2025-02-20 10:43:39.013905031 -0300
+--- a/src/runtime/src/coreclr/pal/src/arch/ppc64le/context2.S
++++ b/src/runtime/src/coreclr/pal/src/arch/ppc64le/context2.S
 @@ -137,7 +137,7 @@
  	lfd %f31, CONTEXT_F31(%r3)
  
