@@ -1,3 +1,16 @@
+dotnet8 (8.0.114-8.0.14-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * New upstream release (LP: #2101028)
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2025-24070: EoP - Potential Security Risk in
+      SignInManager.RefreshSignInAsync Method
+  * debian/control:
+    - moved Suggests dotnet-runtime-dbg-8.0 from dotnet8 to dotnet-runtime-8.0
+    - moved Suggests aspnetcore-runtime-dbg-8.0 from dotnet8 to aspnetcore-runtime-8.0
+    - moved Suggests dotnet-sdk-dbg-8.0 from dotnet8 to dotnet-sdk-8.0
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 06 Mar 2025 11:24:30 +0200
+
 dotnet8 (8.0.113-8.0.13-0ubuntu1~22.04.1) jammy; urgency=medium
 
   * New upstream release (LP: #2097013)

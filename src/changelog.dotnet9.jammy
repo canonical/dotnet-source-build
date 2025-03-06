@@ -1,3 +1,17 @@
+dotnet9 (9.0.104-9.0.3-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release (LP: #2101029)
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2025-24070: EoP - Potential Security Risk in
+      SignInManager.RefreshSignInAsync Method
+  * debian/control:
+    - moved Recommends dotnet-sdk-aot-9.0 from dotnet9 to dotnet-sdk-9.0
+    - moved Suggests dotnet-runtime-dbg-9.0 from dotnet9 to dotnet-runtime-9.0
+    - moved Suggests aspnetcore-runtime-dbg-9.0 from dotnet9 to aspnetcore-runtime-9.0
+    - moved Suggests dotnet-sdk-dbg-9.0 from dotnet9 to dotnet-sdk-9.0
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 06 Mar 2025 11:24:30 +0200
+
 dotnet9 (9.0.103-9.0.2-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release (LP: #2097012)
