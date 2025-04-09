@@ -377,6 +377,7 @@ class TestContext:
 
         env = {
             'HOME': self.FakeHome,
+            'DOTNET_CLI_HOME': self.FakeHome,
             'DOTNET_ROOT': self.DotnetRoot,
             'DOTNET_NOLOGO': 'true',
             'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'

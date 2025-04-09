@@ -1,4 +1,4 @@
-Source: dotnet8
+Source: dotnet10
 Section: devel
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
@@ -6,27 +6,30 @@ Build-Depends: bash-completion,
                clang,
                cmake,
                debhelper-compat (= 13),
-               dotnet-sdk-8.0,
-               dotnet-sdk-8.0-source-built-artifacts,
+               dh-exec,
+               dotnet-sdk-10.0,
+               dotnet-sdk-10.0-source-built-artifacts,
                git,
                libicu-dev,
                libkrb5-dev,
                liblttng-ust-dev,
+               libbrotli-dev,
                libssl-dev,
                libunwind-dev [!s390x],
                lld [!s390x],
                llvm,
                locales-all,
                python3,
+               rapidjson-dev,
                tree,
                zlib1g-dev
 Standards-Version: 4.6.2
 Rules-Requires-Root: binary-targets
 Homepage: https://dot.net
 
-Package: dotnet8
+Package: dotnet10
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-sdk-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: dotnet-sdk-10.0, ${misc:Depends}, ${shlibs:Depends}
 Breaks: dotnet6 (<< 6.0.111~)
 Description: .NET CLI tools and runtime
  The .NET platform is a fast, lightweight and modular, enabling the creation of
@@ -39,12 +42,12 @@ Description: .NET CLI tools and runtime
  framework libraries, an SDK containing compilers, and a 'dotnet'
  CLI application to drive everything.
 
-Package: dotnet-host-8.0
+Package: dotnet-host-10.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts: dotnet-host, dotnet-host-7.0
-Replaces: dotnet-host, dotnet-host-7.0
-Provides: dotnet-host, dotnet-host-7.0
+Conflicts: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
+Replaces: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
+Provides: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
 Description: .NET host command line
  The .NET host is a command line program that runs a standalone .NET
  application or launches the SDK.
@@ -55,9 +58,9 @@ Description: .NET host command line
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: dotnet-hostfxr-8.0
+Package: dotnet-hostfxr-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-host-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: dotnet-host-10.0, ${misc:Depends}, ${shlibs:Depends}
 Breaks: dotnet-hostfxr-6.0 (<< 6.0.111~)
 Description: .NET host resolver
  The .NET host resolver contains the logic to resolve and select
@@ -69,13 +72,13 @@ Description: .NET host resolver
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: dotnet-runtime-8.0
+Package: dotnet-runtime-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-hostfxr-8.0,
+Depends: dotnet-hostfxr-10.0,
          ${libicu:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Suggests: dotnet-runtime-dbg-8.0
+Suggests: dotnet-runtime-dbg-10.0
 Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
 Description: .NET runtime
  The .NET runtime contains everything needed to run .NET applications.
@@ -88,10 +91,10 @@ Description: .NET runtime
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: aspnetcore-runtime-8.0
+Package: aspnetcore-runtime-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
-Suggests: aspnetcore-runtime-dbg-8.0
+Depends: dotnet-runtime-10.0, ${misc:Depends}, ${shlibs:Depends}
+Suggests: aspnetcore-runtime-dbg-10.0
 Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
 Description: ASP.NET Core runtime
  The ASP.NET Core runtime contains everything needed to run .NET
@@ -104,11 +107,11 @@ Description: ASP.NET Core runtime
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: dotnet-templates-8.0
+Package: dotnet-templates-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-host-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: dotnet-host-10.0, ${misc:Depends}, ${shlibs:Depends}
 Breaks: dotnet-templates-6.0 (<< 6.0.111~)
-Description: .NET 8.0 templates
+Description: .NET 10.0 templates
  This package contains templates used by the .NET SDK.
  .
  The .NET platform is a fast, lightweight and modular, enabling the creation of
@@ -117,21 +120,22 @@ Description: .NET 8.0 templates
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: dotnet-sdk-8.0
+Package: dotnet-sdk-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: aspnetcore-runtime-8.0,
-         aspnetcore-targeting-pack-8.0,
-         dotnet-apphost-pack-8.0,
-         dotnet-runtime-8.0,
-         dotnet-targeting-pack-8.0,
-         dotnet-templates-8.0,
-         netstandard-targeting-pack-2.1-8.0,
+Depends: aspnetcore-runtime-10.0,
+         aspnetcore-targeting-pack-10.0,
+         dotnet-apphost-pack-10.0,
+         dotnet-runtime-10.0,
+         dotnet-targeting-pack-10.0,
+         dotnet-templates-10.0,
+         netstandard-targeting-pack-2.1-10.0,
          ca-certificates,
          ${misc:Depends},
          ${shlibs:Depends}
-Suggests: dotnet-sdk-dbg-8.0
+Recommends: dotnet-sdk-aot-10.0 [amd64 arm64]
+Suggests: dotnet-sdk-dbg-10.0
 Breaks: dotnet-sdk-6.0 (<< 6.0.111~)
-Description: .NET 8.0 Software Development Kit
+Description: .NET 10.0 Software Development Kit
  The .NET SDK is a collection of command line applications to
  create, build, publish, and run .NET applications.
  .
@@ -141,69 +145,75 @@ Description: .NET 8.0 Software Development Kit
  It particularly focuses on creating console applications, web
  applications, and micro-services.
 
-Package: dotnet-sdk-8.0-source-built-artifacts
+Package: dotnet-sdk-10.0-source-built-artifacts
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: Internal package for building the .NET 8.0 Software Development Kit
+Description: Internal package for building the .NET 10.0 Software Development Kit
  The .NET source-built archive is a collection of packages needed
  to build the .NET SDK itself.
  .
  These are not meant for general use.
 
-Package: dotnet-targeting-pack-8.0
+Package: dotnet-sdk-aot-10.0
+Architecture: amd64 arm64
+Depends: dotnet-sdk-10.0, ${misc:Depends}, ${shlibs:Depends}
+Description: .NET platform NativeAOT components.
+ This package provides the SDK components for platform NativeAOT.
+
+Package: dotnet-targeting-pack-10.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Breaks: dotnet-targeting-pack-6.0 (<< 6.0.111~)
-Description: Internal - targeting pack for Microsoft.NETCore.App 8.0
- This package provides a targeting pack for Microsoft.NETCore.App 8.0
- that allows developers to compile against and target Microsoft.NETCore.App 8.0
+Description: Internal - targeting pack for Microsoft.NETCore.App 10.0
+ This package provides a targeting pack for Microsoft.NETCore.App 10.0
+ that allows developers to compile against and target Microsoft.NETCore.App 10.0
  applications using the .NET SDK. This are not meant for general use.
 
-Package: netstandard-targeting-pack-2.1-8.0
+Package: netstandard-targeting-pack-2.1-10.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
-Replaces: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
-Provides: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0
+Conflicts: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
+Replaces: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
+Provides: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
 Description: Internal - targeting pack for NETStandard.Library 2.1
  This package provides a targeting pack for NETStandard.Library 2.1
  that allows developers to compile against and target NETStandard.Library 2.1
  applications using the .NET SDK.
  This are not meant for general use.
 
-Package: aspnetcore-targeting-pack-8.0
+Package: aspnetcore-targeting-pack-10.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Breaks: aspnetcore-targeting-pack-6.0 (<< 6.0.111~)
-Description: Internal - targeting pack for Microsoft.AspNetCore.App 8.0
- This package provides a targeting pack for Microsoft.AspNetCore.App 8.0
+Description: Internal - targeting pack for Microsoft.AspNetCore.App 10.0
+ This package provides a targeting pack for Microsoft.AspNetCore.App 10.0
  that allows developers to compile against and target
- Microsoft.AspNetCore.App 8.0 applications using the .NET SDK.
+ Microsoft.AspNetCore.App 10.0 applications using the .NET SDK.
  This are not meant for general use.
 
-Package: dotnet-apphost-pack-8.0
+Package: dotnet-apphost-pack-10.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Breaks: dotnet-apphost-pack-6.0 (<< 6.0.111~)
-Description: Internal - targeting pack for Microsoft.NETCore.App 8.0
- This package provides a targeting pack for Microsoft.NETCore.App 8.0
- that allows developers to compile against and target Microsoft.NETCore.App 8.0
+Description: Internal - targeting pack for Microsoft.NETCore.App 10.0
+ This package provides a targeting pack for Microsoft.NETCore.App 10.0
+ that allows developers to compile against and target Microsoft.NETCore.App 10.0
  applications using the .NET SDK. This not meant for general use.
 
-Package: aspnetcore-runtime-dbg-8.0
+Package: aspnetcore-runtime-dbg-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: aspnetcore-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: aspnetcore-runtime-10.0, ${misc:Depends}, ${shlibs:Depends}
 Description: ASP.NET Runtime debug symbols.
- This package provides the PDB debug symbols for Microsoft.AspNetCore.App 8.0.
+ This package provides the PDB debug symbols for Microsoft.AspNetCore.App 10.0.
 
-Package: dotnet-runtime-dbg-8.0
+Package: dotnet-runtime-dbg-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: dotnet-runtime-10.0, ${misc:Depends}, ${shlibs:Depends}
 Description: .NET Runtime debug symbols.
- This package provides the PDB debug symbols for Microsoft.NETCore.App 8.0.
+ This package provides the PDB debug symbols for Microsoft.NETCore.App 10.0.
 
-Package: dotnet-sdk-dbg-8.0
+Package: dotnet-sdk-dbg-10.0
 Architecture: amd64 arm64 s390x ppc64el
-Depends: dotnet-sdk-8.0, ${misc:Depends}, ${shlibs:Depends}
+Depends: dotnet-sdk-10.0, ${misc:Depends}, ${shlibs:Depends}
 Description: .NET SDK debug symbols.
- This package provides the PDB debug symbols for the .NET 8.0 SDK.
+ This package provides the PDB debug symbols for the .NET 10.0 SDK.

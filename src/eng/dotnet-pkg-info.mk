@@ -13,6 +13,7 @@
 #  DOTNET_70_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 7.0
 #  DOTNET_80_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 8.0
 #  DOTNET_90_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 9.0
+#  DOTNET_100_OR_GREATER: A boolean (true/false) that indicates if the source version is equal or greater than 10.0
 #  DOTNET_BUILD_AOT_BINARY_PACKAGE: A boolean (true/false) that indicates whether the dotnet-sdk-aot-* package should be built.
 #  DOTNET_USE_MONO_RUNTIME: A boolean (true/false) that indicates whether the build script should use the --use-mono-runtime flag.
 #  DOTNET_USE_SYSTEM_BROTLI: A boolean (true/false) that indicates whether to use the system-provided brotli library.
@@ -28,21 +29,31 @@ ifeq ($(DOTNET_MAJOR),6)
     DOTNET_70_OR_GREATER = false
     DOTNET_80_OR_GREATER = false
     DOTNET_90_OR_GREATER = false
+    DOTNET_100_OR_GREATER = false
 else ifeq ($(DOTNET_MAJOR),7)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = true
     DOTNET_80_OR_GREATER = false
     DOTNET_90_OR_GREATER = false
+    DOTNET_100_OR_GREATER = false
 else ifeq ($(DOTNET_MAJOR),8)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = true
     DOTNET_80_OR_GREATER = true
     DOTNET_90_OR_GREATER = false
+    DOTNET_100_OR_GREATER = false
 else ifeq ($(DOTNET_MAJOR),9)
     DOTNET_60_OR_GREATER = true
     DOTNET_70_OR_GREATER = true
     DOTNET_80_OR_GREATER = true
     DOTNET_90_OR_GREATER = true
+    DOTNET_100_OR_GREATER = false
+else ifeq ($(DOTNET_MAJOR),10)
+    DOTNET_60_OR_GREATER = true
+    DOTNET_70_OR_GREATER = true
+    DOTNET_80_OR_GREATER = true
+    DOTNET_90_OR_GREATER = true
+    DOTNET_100_OR_GREATER = true
 else
     $(error ".NET version $(DOTNET_MAJOR).$(DOTNET_MINOR) not handled")
 endif
