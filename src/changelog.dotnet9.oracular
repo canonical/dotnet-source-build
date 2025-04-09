@@ -1,3 +1,11 @@
+dotnet9 (9.0.105-9.0.4-0ubuntu1~24.10.1) oracular; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2025-26682: DoS - ASP.NET Core denial of service with HTTP/3
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 04 Apr 2025 12:32:57 +0300
+
 dotnet9 (9.0.104-9.0.3-0ubuntu1~24.10.1) oracular; urgency=medium
 
   * New upstream release (LP: #2101029)
