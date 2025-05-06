@@ -325,7 +325,6 @@ class TestContext:
             tarPath=GetSourceBuiltArtifactsTarball(
                 basePath=self.DotnetBuiltArtifactsBasePath,
                 sdkVersion=self.DotnetSdkVersion,
-                runtimeIdentifier=self.DotnetRuntimeIdentifier,
                 type="SDK"),
             humanReadableName=".NET SDK build artifacts",
             targetDirectory=self.DotnetRoot)
@@ -340,8 +339,7 @@ class TestContext:
         self.__ExtractGZipTarball(
             tarPath=GetSourceBuiltArtifactsTarball(
                 basePath=self.DotnetBuiltArtifactsBasePath,
-                sdkVersion=self.DotnetSdkVersion,
-                runtimeIdentifier=self.DotnetRuntimeIdentifier),
+                sdkVersion=self.DotnetSdkVersion),
             humanReadableName="NuGet packages artifacts",
             targetDirectory=self.NuGetPackagesDirectory)
 

@@ -11,7 +11,6 @@ from versionlib.dotnet import SourcePackageVersion, RuntimeIdentifier
 def GetSourceBuiltArtifactsTarball(
         basePath: str, 
         sdkVersion: str, 
-        runtimeIdentifier: str,
         type: str = "Packages") -> str:
     
     globPattern = ""
@@ -19,11 +18,10 @@ def GetSourceBuiltArtifactsTarball(
     if type == "Packages":
         # e.g. Private.SourceBuilt.Artifacts.9.0.100-preview.7.24407.1.ubuntu.24.10-x64.tar.gz
         globPattern =  (f"{basePath}/Private.SourceBuilt.Artifacts."
-                        f"{sdkVersion}*.{runtimeIdentifier}.tar.gz")
+                        f"{sdkVersion}*.*.tar.gz")
     elif type == "SDK":
         # e.g. dotnet-sdk-9.0.100-preview.7.24407.1-ubuntu.24.10-x64.tar.gz
-        globPattern =  (f"{basePath}/dotnet-sdk-"
-                        f"{sdkVersion}*-{runtimeIdentifier}.tar.gz")
+        globPattern =  (f"{basePath}/dotnet-sdk-{sdkVersion}*-*.tar.gz")
     else:
         raise ValueError(f"Unknown source built artifacts tarball type '{type}'.")
     
@@ -43,9 +41,6 @@ if __name__ == "__main__":
     version = SourcePackageVersion.ParseFromChangelog(
         os.path.join("debian", "changelog"))
 
-    runtimeIdentifier = RuntimeIdentifier.FromPlatformData()
-
     print(GetSourceBuiltArtifactsTarball(
         basePath="/usr/lib/dotnet/source-built-artifacts",
-        sdkVersion=str(version.SdkVersion), 
-        runtimeIdentifier=str(runtimeIdentifier)))
+        sdkVersion=str(version.SdkVersion)))
