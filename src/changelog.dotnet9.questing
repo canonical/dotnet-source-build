@@ -1,4 +1,4 @@
-dotnet9 (9.0.106-9.0.5-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.106-9.0.5-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: spoofing vulnerability

@@ -1,3 +1,18 @@
+dotnet9 (9.0.106-9.0.5-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: spoofing vulnerability
+    - CVE-2025-26646: .NET and Visual Studio Spoofing Vulnerability
+  * Remove strict bootstrapping artifact RID matching. Strict matching caused
+    issues during bootstrapping of .NET for a new Ubuntu series, because it
+    was build with the binary artifact of the previous series, which caused
+    the RIDs not to match. (LP: #2110033) Affected files:
+    - debian/rules
+    - debian/eng/source_build_artifact_path.py
+    - debian/tests/build-time-tests/tests.py
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 06 May 2025 13:59:06 +0300
+
 dotnet9 (9.0.105-9.0.4-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release

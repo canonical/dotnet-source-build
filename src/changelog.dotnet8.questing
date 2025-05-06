@@ -1,4 +1,4 @@
-dotnet8 (8.0.116-8.0.16-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet8 (8.0.116-8.0.16-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: spoofing vulnerability
