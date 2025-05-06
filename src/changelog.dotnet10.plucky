@@ -1,3 +1,9 @@
+dotnet10 (10.0.100-10.0.0~preview3-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 11 Apr 2025 15:29:13 +0300
+
 dotnet10 (10.0.100-10.0.0~preview2-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
 
   * Initial packaging.
