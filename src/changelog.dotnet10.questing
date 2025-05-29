@@ -1,4 +1,4 @@
-dotnet10 (10.0.100-10.0.0~preview4-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+dotnet10 (10.0.100-10.0.0~preview4-0ubuntu1~ppa1) questing; urgency=medium
 
   * New upstream release.
 
