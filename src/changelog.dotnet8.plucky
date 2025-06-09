@@ -1,3 +1,14 @@
+dotnet8 (8.0.117-8.0.17-0ubuntu1~25.04.1) plucky; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2025-30399: DLL Hijacking Remote Code Execution Vulnerability.
+      When using the Download File task in Microsoft.NETCore.App.Runtime,
+      omitting the DestinationFileName in the task invocation may expose
+      users to remote file hijacking if the server is malicious. 
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
+
 dotnet8 (8.0.116-8.0.16-0ubuntu1~25.04.1) plucky; urgency=medium
 
   * New upstream release
