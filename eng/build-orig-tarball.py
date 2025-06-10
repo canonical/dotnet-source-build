@@ -526,6 +526,13 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     print("Running binary toolkit...", flush=True)
 
+    tmpHome = False
+    home = os.environ.get("HOME")
+
+    if home is None or home.strip() == "":
+        home = tempfile.mkdtemp()
+        tmpHome = True
+
     command = [
             "./prep-source-build.sh",
             "--no-artifacts",
@@ -540,6 +547,7 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
         command,
         cwd=context.GitRepositoryClonePath,
         env={
+            'HOME': home,
             'DOTNET_NOLOGO': 'true',
             'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
         })
@@ -556,6 +564,9 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     shutil.rmtree(packagesDirectoryPath, ignore_errors=True)
 
+    if tmpHome:
+        shutil.rmtree(home, ignore_errors=True)
+
 
 def RunPrepScript(context: InvocationContext) -> None:
     if context.DotnetMajorVersion < 9:
@@ -563,14 +574,25 @@ def RunPrepScript(context: InvocationContext) -> None:
     else:
         scriptFile = "./prep-source-build.sh"
 
+    tmpHome = False
+    home = os.environ.get("HOME")
+
+    if home is None or home.strip() == "":
+        home = tempfile.mkdtemp()
+        tmpHome = True
+
     print("Running prep script...", flush=True)
     subprocess.check_call(
         [scriptFile],
         cwd=context.GitRepositoryClonePath,
         env={
+            'HOME': home,
             'DOTNET_NOLOGO': 'true',
             'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
         })
+
+    if tmpHome:
+        shutil.rmtree(home, ignore_errors=True)
 
 
 def RemoveResource(context: InvocationContext,
