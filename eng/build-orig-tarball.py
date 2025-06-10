@@ -532,6 +532,8 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
     if home is None or home.strip() == "":
         home = tempfile.mkdtemp()
         tmpHome = True
+        if context.VerboseOutput:
+            print(f"Created tmp home '{home}'.", flush=True)
 
     command = [
             "./prep-source-build.sh",
@@ -566,6 +568,8 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     if tmpHome:
         shutil.rmtree(home, ignore_errors=True)
+        if context.VerboseOutput:
+            print(f"Deleted tmp home '{home}'.", flush=True)
 
 
 def RunPrepScript(context: InvocationContext) -> None:
@@ -580,6 +584,8 @@ def RunPrepScript(context: InvocationContext) -> None:
     if home is None or home.strip() == "":
         home = tempfile.mkdtemp()
         tmpHome = True
+        if context.VerboseOutput:
+            print(f"Created tmp home '{home}'.", flush=True)
 
     print("Running prep script...", flush=True)
     subprocess.check_call(
@@ -593,6 +599,8 @@ def RunPrepScript(context: InvocationContext) -> None:
 
     if tmpHome:
         shutil.rmtree(home, ignore_errors=True)
+        if context.VerboseOutput:
+            print(f"Deleted tmp home '{home}'.", flush=True)
 
 
 def RemoveResource(context: InvocationContext,
