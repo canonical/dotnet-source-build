@@ -364,7 +364,7 @@ class InvocationContext:
                     'DOTNET_NOLOGO': 'true',
                     'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
                 })
-        except subprocess.CalledProcessError:
+        except:  # noqa: E722
             return None
 
         rePattern = (
