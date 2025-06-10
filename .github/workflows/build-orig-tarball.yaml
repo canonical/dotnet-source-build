@@ -19,7 +19,7 @@ on:
 
 jobs:
   build-orig-tarball:
-    if: ! inputs.bootstrap
+    if: ${{ ! inputs.bootstrap }}
     runs-on: ubuntu-latest
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
@@ -38,7 +38,7 @@ jobs:
           echo "dotnetMajorMinorVersion=$MAJOR_VERSION.$MINOR_VERSION" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
-        if: steps.parse-version.outputs.dotnetMajorVersion >= 9
+        if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 }}
         run: |
           sudo add-apt-repository ppa:dotnet/backports
           sudo add-apt-repository ppa:dotnet/previews
@@ -47,7 +47,7 @@ jobs:
             dotnet-sdk-${{steps.parse-version.outputs.dotnetMajorMinorVersion}}-source-built-artifacts
       
       - name: Configure credentials for .NET security partners repository
-        if: github.repository == 'canonical/dotnet-source-build-security'
+        if: ${{ github.repository == 'canonical/dotnet-source-build-security' }}
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
@@ -70,7 +70,7 @@ jobs:
           path: ./dist/dotnet*_${{inputs.sourceVersion}}*.orig.tar.*
 
   build-bootstraped-orig-tarball:
-    if: inputs.bootstrap
+    if: ${{ inputs.bootstrap }}
     strategy:
       matrix:
         os:
