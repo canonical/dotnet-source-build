@@ -357,13 +357,14 @@ class InvocationContext:
 
     def __FindMatchingDotnetSdk(self) -> str | None:
         try:
+            env = os.environ.copy()
+            env["DOTNET_NOLOGO"] = "true"
+            env["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "true"
+
             sdkList = subprocess.check_output(
                 ["dotnet", "--list-sdks"],
                 text=True,
-                env={
-                    'DOTNET_NOLOGO': 'true',
-                    'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
-                })
+                env=env)
         except:  # noqa: E722
             return None
 
@@ -526,15 +527,6 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     print("Running binary toolkit...", flush=True)
 
-    tmpHome = False
-    home = os.environ.get("HOME")
-
-    if home is None or home.strip() == "":
-        home = tempfile.mkdtemp()
-        tmpHome = True
-        if context.VerboseOutput:
-            print(f"Created tmp home '{home}'.", flush=True)
-
     command = [
             "./prep-source-build.sh",
             "--no-artifacts",
@@ -545,14 +537,11 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
             "--with-packages", packagesDirectoryPath
         ]
 
-    subprocess.check_call(
-        command,
-        cwd=context.GitRepositoryClonePath,
-        env={
-            'HOME': home,
-            'DOTNET_NOLOGO': 'true',
-            'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
-        })
+    env = os.environ.copy()
+    env["DOTNET_NOLOGO"] = "true"
+    env["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "true"
+
+    subprocess.check_call(command, cwd=context.GitRepositoryClonePath, env=env)
 
     print("Deleting temporary files...", flush=True)
 
@@ -566,11 +555,6 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     shutil.rmtree(packagesDirectoryPath, ignore_errors=True)
 
-    if tmpHome:
-        shutil.rmtree(home, ignore_errors=True)
-        if context.VerboseOutput:
-            print(f"Deleted tmp home '{home}'.", flush=True)
-
 
 def RunPrepScript(context: InvocationContext) -> None:
     if context.DotnetMajorVersion < 9:
@@ -578,29 +562,15 @@ def RunPrepScript(context: InvocationContext) -> None:
     else:
         scriptFile = "./prep-source-build.sh"
 
-    tmpHome = False
-    home = os.environ.get("HOME")
-
-    if home is None or home.strip() == "":
-        home = tempfile.mkdtemp()
-        tmpHome = True
-        if context.VerboseOutput:
-            print(f"Created tmp home '{home}'.", flush=True)
+    env = os.environ.copy()
+    env["DOTNET_NOLOGO"] = "true"
+    env["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "true"
 
     print("Running prep script...", flush=True)
     subprocess.check_call(
         [scriptFile],
         cwd=context.GitRepositoryClonePath,
-        env={
-            'HOME': home,
-            'DOTNET_NOLOGO': 'true',
-            'DOTNET_SKIP_FIRST_TIME_EXPERIENCE': 'true'
-        })
-
-    if tmpHome:
-        shutil.rmtree(home, ignore_errors=True)
-        if context.VerboseOutput:
-            print(f"Deleted tmp home '{home}'.", flush=True)
+        env=env)
 
 
 def RemoveResource(context: InvocationContext,
