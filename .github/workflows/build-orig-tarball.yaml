@@ -24,7 +24,7 @@ jobs:
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
-      - name: checkout source
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Parse source version
@@ -80,7 +80,7 @@ jobs:
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
-      - name: checkout source
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Configure credentials for .NET security partners repository
@@ -90,7 +90,7 @@ jobs:
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
           echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
 
-      - name: Build orig tarball
+      - name: Build bootstraped orig tarball
         run: | 
           eng/build-orig-tarball.py \
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
