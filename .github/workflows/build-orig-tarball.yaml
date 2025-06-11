@@ -54,6 +54,7 @@ jobs:
           echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Build orig tarball
+        id: build-orig-tarball
         run: | 
           eng/build-orig-tarball.py \
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
@@ -63,11 +64,14 @@ jobs:
             --vendor-name "Canonical Ltd." \
             --verbose
 
+          echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
+
       - name: Upload orig tarball to workflow artifacts
         id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/dotnet*_${{inputs.sourceVersion}}*.orig.tar.*
+          name: ${{steps.build-orig-tarball.outputs.tarballName}}
+          path: ./dist/${{steps.build-orig-tarball.outputs.tarballName}}
 
   build-bootstraped-orig-tarball:
     if: ${{ inputs.bootstrap }}
@@ -91,6 +95,7 @@ jobs:
           echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Build bootstraped orig tarball
+        id: build-bootstraped-orig-tarball
         run: | 
           eng/build-orig-tarball.py \
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
@@ -101,8 +106,11 @@ jobs:
             --include-bootstrap-sdk \
             --verbose
 
+          echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
+
       - name: Upload orig tarball to workflow artifacts
         id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/dotnet*_${{inputs.sourceVersion}}*.orig.tar.*
+          name: ${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
+          path: ./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
