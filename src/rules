@@ -66,8 +66,11 @@ else
 endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
-    DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
-    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)
+    ifeq ($(wildcard $(CURDIR)/release.json),)
+        $(error "No release.json file in the source tarball found")
+    endif
+
+    DOTNET_BUILD_ARGS += --release-manifest "$(CURDIR)/release.json"
 endif
 
 ifeq ($(DOTNET_90_OR_GREATER), true)

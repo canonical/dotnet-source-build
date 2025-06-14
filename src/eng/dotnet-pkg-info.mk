@@ -4,8 +4,6 @@
 #  DOTNET_MINOR: Minor .NET version number from the latest changelog entry.
 #  DOTNET_RUNTIME_ID: .NET runtime identifier of the current host.
 #  DOTNET_ARCH: .NET architecture identifier of the current host.
-#  DOTNET_GIT_REPO: URI of the repository where the origiinal source is from.
-#  DOTNET_GIT_COMMIT: Commit hash of the original source in the repository.
 #  DOTNET_DEB_VERSION_SDK_ONLY: The version for binary deb packages that only contain SDK components in compliance with FO127.
 #  DOTNET_DEB_VERSION_RUNTIME_ONLY: The version for binary deb packages that only contain Runtime components in compliance with FO127.
 #  DOTNET_CONTAINS_BOOTSTRAPPING_SDK: A boolean (true/false) that indicates if the source packages contains an embedded SDK for initial bootstrapping.
@@ -83,19 +81,6 @@ export DOTNET_RUNTIME_ID = $(shell . /etc/os-release; echo "$${ID}.$${VERSION_ID
 ifeq ($(DOTNET_80_OR_GREATER), true)
     DOTNET_DEB_VERSION_SDK_ONLY = $(shell $(CURDIR)/debian/eng/dotnet-version.py --sdk-only-deb-version)
     DOTNET_DEB_VERSION_RUNTIME_ONLY = $(shell $(CURDIR)/debian/eng/dotnet-version.py --runtime-only-deb-version)
-    
-    ifeq ($(wildcard $(CURDIR)/release.info),)
-        $(error "No release.info file in the source tarball found")
-    endif
-
-    DOTNET_GIT_REPO = $(shell grep --only-matching --perl-regexp '(?<=^RM_GIT_REPO=).+$$' $(CURDIR)/release.info)
-    DOTNET_GIT_COMMIT = $(shell grep --only-matching --perl-regexp '(?<=^RM_GIT_COMMIT=).+$$' $(CURDIR)/release.info)
-
-	ifeq ($(DOTNET_GIT_REPO),)
-		$(error ".NET git source repository is NOT specified in release.info file.")
-    else ifeq ($(DOTNET_GIT_COMMIT),)
-        $(error ".NET git commit hash is NOT specified in release.info file.")
-	endif
 endif
 
 ifeq ($(DOTNET_90_OR_GREATER), true)
