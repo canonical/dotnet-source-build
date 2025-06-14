@@ -170,13 +170,27 @@ class ArgumentParser(argparse.ArgumentParser):
             help="Name of the organization/person that created the "
                  "orig tarball.")
 
-        manifestGroup.add_argument(
-            "--use-legacy-manifest-format",
-            dest="UseLegacyManifestFormat",
+        manifestFormatGroup = manifestGroup.add_mutually_exclusive_group()
+
+        manifestFormatGroup.add_argument(
+            "--force-no-manifest",
+            dest="ForceNoManifest",
             action="store_true",
-            help="Use the legacy (release.info) release manifest format used "
-                 "by earlier Canonical packages. Without this option a "
-                 "manifest.json file will be created.")
+            help="Force that no release manifest file will be created.")
+
+        manifestFormatGroup.add_argument(
+            "--force-use-legacy-manifest-format",
+            dest="ForceUseLegacyManifestFormat",
+            action="store_true",
+            help="Force the use of the legacy release manifest file format "
+                 "(release.info).")
+
+        manifestFormatGroup.add_argument(
+            "--force-use-json-manifest-format",
+            dest="ForceUseJsonManifestFormat",
+            action="store_true",
+            help="Force the use of the newer json based release manifest file "
+                 "format (release.json).")
 
     def __AddBootstrappingOption(self) -> None:
         bootstrappinGroup = self.add_argument_group("bootstrapping options")
@@ -277,7 +291,19 @@ class InvocationContext:
             LogWarning("Specified .NET security partners repository "
                        "access token was not used")
 
-        self.UseLegacyManifestFormat: bool = args.UseLegacyManifestFormat
+        self.ReleaseManifestFormat: str | None = None
+
+        if args.ForceNoManifest:
+            self.ReleaseManifestFormat = None
+        elif args.ForceUseJsonManifestFormat:
+            self.ReleaseManifestFormat = "json"
+        elif args.ForceUseLegacyManifestFormat:
+            self.ReleaseManifestFormat = "legacy"
+        elif self.DotnetMajorVersion >= 10:
+            self.ReleaseManifestFormat = "json"
+        elif self.DotnetMajorVersion >= 8:
+            self.ReleaseManifestFormat = "legacy"
+
         self.VendorName: str | None = args.VendorName
         self.SourceLinkRepository: str | None = args.SourceLinkRepository
 
@@ -415,7 +441,7 @@ Source/Output options:
 - TarballName={self.TarballName}
 
 Manifest options:
-- UseLegacyManifestFormat={self.UseLegacyManifestFormat}
+- ReleaseManifestFormat={self.ReleaseManifestFormat}
 - SourceLinkRepository={self.SourceLinkRepository}
 - VendorName={self.VendorName}
 - BuildId={self.BuildId}
@@ -731,18 +757,22 @@ def GetHeadCommitSha1Hash(context: InvocationContext) -> str:
 
 
 def CreateReleaseManifest(context: InvocationContext) -> None:
+    if context.ReleaseManifestFormat is None:
+        return
+
     sourceRepository = context.SourceLinkRepository
     sourceVersion = GetHeadCommitSha1Hash(context)
     buildIdUnused = False
 
-    if context.UseLegacyManifestFormat:
+    if context.ReleaseManifestFormat == "legacy":
+        releaseManifestFileName = "release.info"
         releaseManifestFileContent = (
             f"RM_GIT_REPO={sourceRepository}\n"
             f"RM_GIT_COMMIT={sourceVersion}")
 
-        releaseManifestFileName = "release.info"
         buildIdUnused = context.BuildId is not None
-    else:
+    elif context.ReleaseManifestFormat == "json":
+        releaseManifestFileName = "release.json"
         releaseManifestData = {
             "sourceRepository": sourceRepository,
             "sourceVersion": sourceVersion,
@@ -759,7 +789,9 @@ def CreateReleaseManifest(context: InvocationContext) -> None:
             buildIdUnused = context.BuildId is not None
 
         releaseManifestFileContent = json.dumps(releaseManifestData, indent=4)
-        releaseManifestFileName = "release.json"
+    else:
+        LogErrorAndExit("Unsupported release manifest format "
+                        f"'{context.ReleaseManifestFormat}'.")
 
     if buildIdUnused:
         LogWarning(f"Build id '{context.BuildId}' is unused")

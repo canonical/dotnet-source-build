@@ -11,6 +11,10 @@ on:
         description: 'Git commit-ish (e.g. the tag) of the .NET release'
         required: true
         type: string
+      buildId:
+        description: 'Official Build Id (only needed for .NET 10+)'
+        required: false
+        type: string
       bootstrap:
         description: 'Build bootstraped orig tarballs'
         required: false
@@ -60,7 +64,6 @@ jobs:
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
             --source-version "${{inputs.sourceVersion}}" \
             --git-reference "${{inputs.gitCommitish}}" \
-            --use-legacy-manifest-format \
             --vendor-name "Canonical Ltd." \
             --verbose
 
@@ -101,7 +104,7 @@ jobs:
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
             --source-version "${{inputs.sourceVersion}}" \
             --git-reference "${{inputs.gitCommitish}}" \
-            --use-legacy-manifest-format \
+            --build-id "${{inputs.buildId}}" \
             --vendor-name "Canonical Ltd." \
             --include-bootstrap-sdk \
             --verbose
