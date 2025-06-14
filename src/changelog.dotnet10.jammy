@@ -1,3 +1,9 @@
+dotnet10 (10.0.100-10.0.0~preview5-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Sat, 14 Jun 2025 12:51:42 +0300
+
 dotnet10 (10.0.100-10.0.0~preview4-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release.
