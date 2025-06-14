@@ -175,10 +175,12 @@ override_dh_auto_test:
 override_dh_install:
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_SYSCONF_DIR)"
-	ls "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
+	ls -l "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
 	
 	tar --extract \
-	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$$("$(CURDIR)"/debian/eng/source_build_artifact_path.py \
+		           --type sdk \
+				   --base-path "$(DOTNET_RELEASE_ARTIFACTS_DIR)")" \
 	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	
 ifeq ($(DOTNET_80_OR_GREATER), true)
