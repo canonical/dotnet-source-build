@@ -46,6 +46,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:dotnet/backports
           sudo add-apt-repository ppa:dotnet/previews
+          sudo add-apt-repository ppa:dotnet-bootstrap/amd64
           sudo apt-get install --assume-yes \
             dotnet${{steps.parse-version.outputs.dotnetMajorVersion}} \
             dotnet-sdk-${{steps.parse-version.outputs.dotnetMajorMinorVersion}}-source-built-artifacts
