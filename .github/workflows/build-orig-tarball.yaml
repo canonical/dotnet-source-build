@@ -65,6 +65,7 @@ jobs:
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
             --source-version "${{inputs.sourceVersion}}" \
             --git-reference "${{inputs.gitCommitish}}" \
+            --build-id "${{inputs.buildId}}" \
             --vendor-name "Canonical Ltd." \
             --verbose
 
