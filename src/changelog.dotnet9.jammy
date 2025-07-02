@@ -1,3 +1,9 @@
+dotnet9 (9.0.108-9.0.7-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release (LP: #2115830)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 02 Jul 2025 16:38:30 +0300
+
 dotnet9 (9.0.107-9.0.6-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release
