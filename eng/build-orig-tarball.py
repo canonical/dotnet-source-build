@@ -221,6 +221,28 @@ class ArgumentParser(argparse.ArgumentParser):
             help="The architecture of the bootstrap SDK that should be "
                  "included in the orig tarball (defaults to host "
                  "architecture). See: --include-bootstrap-sdk")
+        
+        bootstrappinGroup.add_argument(
+            "--with-bootstrap-sdk",
+            type=str,
+            metavar="PATH",
+            dest="BootstrapSdkTarballLocation",
+            help="Path to a local .NET SDK tarball that should be "
+                 "included in the orig tarball. "
+                 "This option is mandatory when bootstrapping for "
+                 "architectures not supported by upstream, i.e. amd64 and arm64."
+        )
+
+        bootstrappinGroup.add_argument(
+            "--with-bootstrap-prebuilts-tarball",
+            type=str,
+            metavar="PATH",
+            dest="BootstrapPrebuiltsTarballLocation",
+            help="Path to a local prebuilts tarball that should be "
+                 "included in the orig tarball. "
+                 "This option is mandatory when bootstrapping for "
+                 "architectures not supported by upstream, i.e. amd64 and arm64."
+        )
 
 
 class ExecutionEnvironment:
@@ -313,6 +335,8 @@ class InvocationContext:
 
         self.HostDpkgArchitecture: str = hostDpkgArchitecture
         self.BootstrapSdkArchitecture: str | None = None
+        self.BootstrapSdkTarballLocation: str | None = args.BootstrapSdkTarballLocation
+        self.BootstrapPrebuiltsTarballLocation: str | None = args.BootstrapPrebuiltsTarballLocation
 
         if args.IncludeBootstrapSdk:
             if args.BootstrapSdkArchitecture is None:
@@ -326,16 +350,35 @@ class InvocationContext:
             LogErrorAndExit("Option --bootstrap-sdk-architecture is "
                             "specified without option "
                             "--include-bootstrap-sdk")
+        elif args.BootstrapSdkTarballLocation is not None:
+            LogErrorAndExit("Option --bootstrap-sdk-location is "
+                            "specified without option "
+                            "--include-bootstrap-sdk")
+        elif args.BootstrapPrebuiltsTarballLocation is not None:
+            LogErrorAndExit("Option --bootstrap-prebuilts-tarball is "
+                            "specified without option "
+                            "--include-bootstrap-sdk")
+
+        if (args.BootstrapSdkTarballLocation is not None
+            and self.BootstrapSdkArchitecture in ["amd64", "arm64"]):
+            LogErrorAndExit("Providing a .NET SDK tarball is only supported for architectures not supported by upstream, i.e. amd64 and arm64.") # noqa: E501
+        if (args.BootstrapPrebuiltsTarballLocation is not None
+            and self.BootstrapSdkArchitecture in ["amd64", "arm64"]):
+            LogErrorAndExit("Providing a prebuilts tarball is only supported for architectures not supported by upstream, i.e. amd64 and arm64.") # noqa: E501
 
         self.SourcePackageName: str = self.__GetSourcePackageName()
         self.OutputDirectory: str = path.abspath(args.OutputDirectory)
         self.TarballName: str = self.__GetTarballName(args.TarballName)
         self.OutputTarballFilePath: str = self.__GetOutputTarballFilePath()
-
-        self.DotnetRoot: str | None = self.__FindMatchingDotnetSdk()
-        self.SourceBuiltArtifactsTarball: str | None = self.__FindMatchingSourceBuiltArtifactsTarball()  # noqa: E501
-
         self.GitRepositoryClonePath: str = self.__GenerateTmpGitRepositoryClonePath()  # noqa: E501
+
+        # NOTE: Providing a bootstrap .NET SDK tarball will make the script extract it to $repoRoot/dotnet
+        self.DotnetRoot: str | None = (path.join(self.GitRepositoryClonePath, "dotnet")
+                                       if args.BootstrapSdkTarballLocation is not None
+                                       else self.__FindMatchingDotnetSdk())
+        self.SourceBuiltArtifactsTarball: str | None = (args.BootstrapPrebuiltsTarballLocation
+                                                        if args.BootstrapPrebuiltsTarballLocation is not None 
+                                                        else self.__FindMatchingSourceBuiltArtifactsTarball())  # noqa: E501
 
     def __ParseDotnetVersion(self):
         match = re.search(
@@ -448,6 +491,8 @@ Manifest options:
 
 Bootstrapping options:
 - BootstrapSdkArchitecture={self.BootstrapSdkArchitecture}
+- BootstrapSdkTarballLocation={self.BootstrapSdkTarballLocation}
+- BootstrapPrebuiltsTarballLocation={self.BootstrapPrebuiltsTarballLocation}
 
 Host information:
 - HostArchitecture={self.HostDpkgArchitecture}
@@ -463,7 +508,7 @@ def CheckBootstrappingPrerequisites(context: InvocationContext) -> None:
     match context.BootstrapSdkArchitecture:
         case None:
             return
-        case "amd64" | "arm64":
+        case "amd64" | "arm64" | "s390x" | "ppc64el":
             if context.HostDpkgArchitecture != context.BootstrapSdkArchitecture:  # noqa: E501
                 LogErrorAndExit(
                     "You need to run this script on an "
@@ -542,16 +587,64 @@ def ExtractSourceBuiltArtifactsTarball(context: InvocationContext) -> str:
 
     path = tempfile.mkdtemp(prefix=f"{context.SourcePackageName}-artifacts_")
     subprocess.check_call(
-        ["tar", "--extract", "--file", context.SourceBuiltArtifactsTarball],
-        cwd=path)
+        ["tar", "--extract", "--file", context.SourceBuiltArtifactsTarball, f"--directory={path}"])
 
     return path
+
+
+def PlaceBootstrappedDotNetSdk(context: InvocationContext) -> None:
+    if context.BootstrapSdkTarballLocation is None:
+        LogErrorAndExit("No .NET SDK tarball location specified. "
+                        "Use the --bootstrap-sdk-location option.")
+
+    if not path.exists(context.BootstrapSdkTarballLocation):
+        LogErrorAndExit(f"Specified .NET SDK tarball does not exist: "
+                        f"'{context.BootstrapSdkTarballLocation}'")
+
+    repoDotnetPath = path.join(context.GitRepositoryClonePath, "dotnet")
+    os.mkdir(repoDotnetPath)
+
+    print(f"Extracting .NET SDK tarball to {repoDotnetPath}...", flush=True)
+
+    subprocess.check_call(
+        ["tar",
+         "--extract",
+         "--file", context.BootstrapSdkTarballLocation,
+         "--directory", repoDotnetPath])
+
+
+def PlaceBootstrappedPrebuiltsTarball(context: InvocationContext) -> None:
+    print("Placing prebuilts tarball...", flush=True)
+
+    if context.BootstrapPrebuiltsTarballLocation is None:
+        LogErrorAndExit("No prebuilts tarball location specified. "
+                        "Use the --bootstrap-prebuilts-tarball option.")
+        
+    if not path.exists(context.BootstrapPrebuiltsTarballLocation):
+        LogErrorAndExit(f"Specified prebuilts tarball does not exist: "
+                        f"'{context.BootstrapPrebuiltsTarballLocation}'")
+
+    destPath = path.join(context.GitRepositoryClonePath, "prereqs", "packages", "archive")
+    shutil.copy(context.BootstrapPrebuiltsTarballLocation, destPath)
 
 
 def RunBinaryToolkit(context: InvocationContext) -> None:
     packagesDirectoryPath = ExtractSourceBuiltArtifactsTarball(context)
 
     print("Running binary toolkit...", flush=True)
+
+    if context.BootstrapSdkArchitecture in ["s390x", "ppc64el"]:
+        # NOTE: For s390x and ppc64el we unpack the bootstrapped .NET SDK into $repoRoot/dotnet.
+        #       The Binary Remover will then inadvertently remove the binaries inside this
+        #       directory and break the bootstrap SDK in the process. For that reason, we modify
+        #       the eng/allowed-sb-binaries.txt file to include the dotnet directory.
+        allowedBinariesFile = path.join(
+            context.GitRepositoryClonePath, "eng", "allowed-sb-binaries.txt")
+
+        with open(allowedBinariesFile, "a", encoding="UTF-8") as file:
+            file.write("\n")
+            file.write("# The dotnet directory is added to the list of allowed binaries for s390x and ppc64el.\n")  # noqa: E501
+            file.write("dotnet/\n")
 
     command = [
             "./prep-source-build.sh",
@@ -562,6 +655,8 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
             "--with-sdk", context.DotnetRoot,
             "--with-packages", packagesDirectoryPath
         ]
+
+    print(f"Running command: {command}", flush=True)
 
     env = os.environ.copy()
     env["DOTNET_NOLOGO"] = "true"
@@ -823,6 +918,15 @@ def PrepareForSourceBuild(context: InvocationContext) -> None:
         case "amd64" | "arm64":
             # NOTE: The prep scrip will run the BinaryToolkit for .NET 9+
             RunPrepScript(context)
+        case "s390x" | "ppc64el":
+            # NOTE: We don't use the prep script to get the bootstrap SDK and prebuilt binaries for these architectures.
+            #       Instead we use a cross-built SDK and prebuilts tarball to create the bootstrap tarball.
+            PlaceBootstrappedDotNetSdk(context)
+            PlaceBootstrappedPrebuiltsTarball(context)
+
+            if context.DotnetMajorVersion >= 9:
+                # NOTE: The BinaryToolkit was introduced with .NET 9
+                RunBinaryToolkit(context)
         case _:
             # NOTE: When implementing this make sure that you run the
             #       BinaryToolkit! See eng/detect-binaries.sh in a
@@ -845,7 +949,8 @@ def CreateOrigTarball(context: InvocationContext) -> None:
     command = [
             "tar",
             "--create",
-            "--xz",
+            # Use --use-compress-program to specify xz with multithreading
+            "--use-compress-program=xz --threads=0",
             "--file", context.OutputTarballFilePath,
             "."
         ]
