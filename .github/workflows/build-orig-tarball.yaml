@@ -65,6 +65,7 @@ jobs:
             --source-version "${{inputs.sourceVersion}}" \
             --git-reference "${{inputs.gitCommitish}}" \
             --vendor-name "Canonical Ltd." \
+            --build-id "${{inputs.buildId}}" \
             --verbose
 
           echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
