@@ -1,3 +1,12 @@
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~25.04.1~ppa3) plucky; urgency=medium
+
+  * d/dotnet-sdk-aot-10.0.install: update installation layout
+    (see also: https://github.com/dotnet/docs/pull/46910)
+  * d/dotnet-host-10.0.install, d/dotnet-host-10.0.links: add dnx tool
+    (see also: https://github.com/dotnet/docs/pull/47094)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 14 Aug 2025 00:41:10 +0300
+
 dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~25.04.1~ppa2) plucky; urgency=medium
 
   * d/dotnet-sdk-10.0.install: remove sdk-manifest for microsoft.net.sdk.aspire

@@ -1,1 +1,2 @@
 ${env:DOTNET_ROOT_DIR}/packs/runtime.${env:DOTNET_RUNTIME_ID}.Microsoft.DotNet.ILCompiler
+${env:DOTNET_ROOT_DIR}/packs/Microsoft.NETCore.App.Runtime.NativeAOT.${env:DOTNET_RUNTIME_ID}/${env:DOTNET_MAJOR}.${env:DOTNET_MINOR}.*
