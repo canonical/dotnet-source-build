@@ -104,7 +104,12 @@ jobs:
 
       - name: Bootstrap .NET SDK
         run: |
-          docker run --platform linux/amd64 --rm -v${{ github.workspace }}/dotnet-vmr:/dotnet -w /dotnet -e ROOTFS_DIR=/crossrootfs/${{ matrix.arch }} \
+          docker run \
+            --rm \
+            --platform linux/amd64 \
+            -v${{ github.workspace }}/dotnet-vmr:/dotnet \
+            -w /dotnet \
+            -e ROOTFS_DIR=/crossrootfs/${{ matrix.arch }} \
             mcr.microsoft.com/dotnet-buildtools/prereqs:azurelinux-3.0-net10.0-cross-${{ matrix.arch }} \
             sh -c '
               ./prep-source-build.sh &&
@@ -168,12 +173,21 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ steps.get-arch.outputs.arch }}" == "s390x" || "${{ steps.get-arch.outputs.arch }}" == "ppc64le" ]]; then
-            sdkTarballPath=$(find "${{ steps.download-artifacts.outputs.download-path }}" -type f \
-                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz" | head -n 1)
-            sdkChecksumPath=$(find "${{ steps.download-artifacts.outputs.download-path }}" -type f \
-                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz.sha512" | head -n 1)
-            prebuiltsTarballPath=$(find "${{ steps.download-artifacts.outputs.download-path }}" -type f \
-                -name "Private.SourceBuilt.Artifacts.*.tar.gz" | head -n 1)
+            sdkTarballPath=$(find \
+                "${{ steps.download-artifacts.outputs.download-path }}" \
+                -type f \
+                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz" \
+                | head -n 1)
+            sdkChecksumPath=$(find \
+                "${{ steps.download-artifacts.outputs.download-path }}" \
+                -type f \
+                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz.sha512" \
+                | head -n 1)
+            prebuiltsTarballPath=$(find \
+                "${{ steps.download-artifacts.outputs.download-path }}" \
+                -type f \
+                -name "Private.SourceBuilt.Artifacts.*.tar.gz" \
+                | head -n 1)
 
             # Verify the checksum of the SDK tarball
             CHECKSUM=$(cat $sdkChecksumPath)
