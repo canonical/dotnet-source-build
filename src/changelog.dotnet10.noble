@@ -1,3 +1,10 @@
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~24.04.1~ppa2) noble; urgency=medium
+
+  * d/dotnet-sdk-10.0.install: remove sdk-manifest for microsoft.net.sdk.aspire
+    (see: https://github.com/dotnet/source-build/issues/4735)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 21:42:00 +0300
+
 dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release.
