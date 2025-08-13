@@ -1,3 +1,9 @@
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 18:04:04 +0300
+
 dotnet10 (10.0.100-10.0.0~preview6-0ubuntu1~ppa1) questing; urgency=medium
 
   * New upstream release.
