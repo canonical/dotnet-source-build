@@ -1,3 +1,9 @@
+dotnet9 (9.0.110-9.0.9-0ubuntu1~25.04.1) plucky; urgency=medium
+
+  * New upstream release (LP: #2122355)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 08 Sep 2025 20:43:18 +0300
+
 dotnet9 (9.0.109-9.0.8-0ubuntu1~25.04.1) plucky; urgency=medium
 
   * New upstream release (LP: #2119538)
