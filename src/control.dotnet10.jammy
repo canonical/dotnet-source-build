@@ -128,7 +128,6 @@ Depends: aspnetcore-runtime-10.0,
          dotnet-runtime-10.0,
          dotnet-targeting-pack-10.0,
          dotnet-templates-10.0,
-         netstandard-targeting-pack-2.1-10.0,
          ca-certificates,
          ${misc:Depends},
          ${shlibs:Depends}
@@ -168,18 +167,6 @@ Description: Internal - targeting pack for Microsoft.NETCore.App 10.0
  This package provides a targeting pack for Microsoft.NETCore.App 10.0
  that allows developers to compile against and target Microsoft.NETCore.App 10.0
  applications using the .NET SDK. This are not meant for general use.
-
-Package: netstandard-targeting-pack-2.1-10.0
-Architecture: amd64 arm64 s390x ppc64el
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
-Replaces: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
-Provides: netstandard-targeting-pack-2.1, netstandard-targeting-pack-2.1-7.0, netstandard-targeting-pack-2.1-8.0, netstandard-targeting-pack-2.1-9.0
-Description: Internal - targeting pack for NETStandard.Library 2.1
- This package provides a targeting pack for NETStandard.Library 2.1
- that allows developers to compile against and target NETStandard.Library 2.1
- applications using the .NET SDK.
- This are not meant for general use.
 
 Package: aspnetcore-targeting-pack-10.0
 Architecture: amd64 arm64 s390x ppc64el

@@ -244,10 +244,12 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)                        -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-templates-$(DOTNET_MAJOR).$(DOTNET_MINOR)                  -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-sdk-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 ifeq ($(DOTNET_BUILD_AOT_BINARY_PACKAGE), true)
 	dh_gencontrol -pdotnet-sdk-aot-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
+ifeq ($(DOTNET_100_OR_GREATER), false)
+	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 endif
 endif
 
