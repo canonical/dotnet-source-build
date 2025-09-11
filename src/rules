@@ -102,6 +102,12 @@ else
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/$(DOTNET_ARCH)/Release
 endif
 
+# Fixup for a bug in the build script. Should be fixed with .NET 10 RC 2.
+# See also: https://github.com/dotnet/source-build/issues/5337
+ifeq ($(DOTNET_100_OR_GREATER), true)
+    DOTNET_BUILD_ARGS += --branding default
+endif
+
 %:
 	dh $@ --with bash-completion
 
