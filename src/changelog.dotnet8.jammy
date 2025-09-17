@@ -1,3 +1,9 @@
+dotnet8 (8.0.120-8.0.20-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * New upstream release (LP: #2122356)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 08 Sep 2025 20:48:08 +0300
+
 dotnet8 (8.0.119-8.0.19-0ubuntu1~22.04.1) jammy; urgency=medium
 
   * New upstream release (LP: #2119537)
