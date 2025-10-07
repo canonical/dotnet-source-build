@@ -1,14 +1,13 @@
 Tests:
     run-regular-tests,
 Depends: 
+    @,
     babeltrace,
     bash,
     bash-completion,
     bc,
     build-essential, 
-    coreutils, 
-    dotnet8,
-    dotnet-sdk-8.0-source-built-artifacts,
+    coreutils,
     file, 
     findutils,
     git,
