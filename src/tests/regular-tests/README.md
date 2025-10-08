@@ -27,5 +27,5 @@ babeltrace bash bash-completion build-essential coreutils file findutils jq lldb
 #### dnf
 
 ````
-babeltrace bash-completion bc findutils gcc-c++ jq libstdc++-devel lttng-ust lttng-tools npm postgresql-odbc postgresql-server strace unixODBC /usr/bin/file /usr/bin/free /usr/bin/lldb /usr/bin/readelf /usr/bin/su which zlib-devel
+awk babeltrace bash-completion bc findutils gcc-c++ jq libstdc++-devel lttng-ust lttng-tools npm postgresql-odbc postgresql-server strace unixODBC /usr/bin/file /usr/bin/free /usr/bin/lldb /usr/bin/readelf /usr/bin/su which zlib-devel
 ````

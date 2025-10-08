@@ -7,12 +7,15 @@
   "type": "bash",
   "cleanup": true,
   "skipWhen": [
-    "os=fedora,version=8", // see https://github.com/redhat-developer/dotnet-regular-tests/issues/254
+    "os=fedora",           // using bundled libunwind
     "vmr-ci",              // using system libunwind is configured in the rpm build
     "runtime=mono",        // mono does not use libunwind
-    "os=ubuntu,version=9",
-    "os=ubuntu,version=8", // see https://github.com/canonical/dotnet-regular-tests/issues/6
-    "os=ubuntu,version=7", // see https://github.com/canonical/dotnet-regular-tests/issues/6
+    // see https://github.com/canonical/dotnet-regular-tests/issues/6
+    "os=ubuntu,arch=arm64",
+    "os=ubuntu,arch=s390x",
+    "os=ubuntu,arch=ppc64le",
+    "os=ubuntu,version=8", 
+    "os=ubuntu,version=7",
   ],
   "ignoredRIDs":[
     "centos.8",

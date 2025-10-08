@@ -21,59 +21,73 @@ jobs:
           - docker.io/library/alpine:latest
           - docker.io/library/alpine:edge
           - quay.io/centos/centos:stream9
-          - registry.fedoraproject.org/fedora:39
-          - registry.fedoraproject.org/fedora:40
+          - quay.io/centos/centos:stream10
+          - registry.fedoraproject.org/fedora:41
+          - registry.fedoraproject.org/fedora:42
           - registry.fedoraproject.org/fedora:rawhide
           - registry.access.redhat.com/ubi8
           - registry.access.redhat.com/ubi9
         dotnet_version:
-          - "6.0"
           - "8.0"
-        exclude:
-          - container_image: registry.fedoraproject.org/fedora:rawhide
-            dotnet_version: "6.0"
+          - "9.0"
         include:
-          - container_image: registry.fedoraproject.org/fedora:40
+          - container_image: registry.fedoraproject.org/fedora:42
+            dotnet_version: "10.0"
+          - container_image: registry.fedoraproject.org/fedora:rawhide
+            dotnet_version: "10.0"
+        exclude:
+          - container_image: docker.io/library/alpine:latest
             dotnet_version: "9.0"
+          - container_image: docker.io/library/alpine:edge
+            dotnet_version: "9.0"
+
 
     container:
       image: ${{ matrix.container_image }}
       options: --security-opt seccomp=unconfined
 
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Install .NET ${{ matrix.dotnet_version }}
+        # .NET 9 introduced the 'dotnet-sdk-aot' package
+        # .NET 8 introduced the 'dbg' packages
+        # '/etc/os-release' will also match the grep fedora for Fedora derived systems, such as CentOS.
         timeout-minutes: 10
         run: |
           set -euo pipefail
           cat /etc/os-release
-          if grep fedora /etc/os-release ; then
-            if [[ ${{ matrix.dotnet_version }} == 9.* ]]; then
+          if grep fedora /etc/os-release; then
+            if [[ ${{ matrix.dotnet_version }} == 10.* ]]; then
               dnf install 'dnf-command(copr)' -y
-              dnf copr enable @dotnet-sig/dotnet-preview -y
-              dnf install -y dotnet-sdk-aot-${{ matrix.dotnet_version }}
+              if grep centos /etc/os-release; then
+                dnf copr enable @dotnet-sig/dotnet-preview centos-stream-10-x86_64 -y
+              else
+                dnf copr enable @dotnet-sig/dotnet-preview -y
+              fi
             fi
             dnf install -y dotnet-sdk-${{ matrix.dotnet_version }}
-            if [[ ! ${{ matrix.dotnet_version }} == *6* ]]; then
-              dnf install -y \
-                dotnet-sdk-dbg-${{ matrix.dotnet_version }} \
-                dotnet-runtime-dbg-${{ matrix.dotnet_version }} \
-                aspnetcore-runtime-dbg-${{ matrix.dotnet_version }}
+            dnf install -y \
+              dotnet-sdk-dbg-${{ matrix.dotnet_version }} \
+              dotnet-runtime-dbg-${{ matrix.dotnet_version }} \
+              aspnetcore-runtime-dbg-${{ matrix.dotnet_version }}
+            if [[ ${{ matrix.dotnet_version }} != 8.* ]]; then
+              dnf install -y dotnet-sdk-aot-${{ matrix.dotnet_version }}
             fi
           elif grep alpine /etc/os-release; then
             if grep edge /etc/os-release; then
               echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
             fi
             apk add dotnet-sdk-${{ matrix.dotnet_version }} dotnet-doc
-            if [[ ! ${{ matrix.dotnet_version }} == *6* ]]; then
-              apk add \
-                dotnet-sdk-dbg-${{ matrix.dotnet_version }} \
-                dotnet-runtime-dbg-${{ matrix.dotnet_version }} \
-                aspnetcore-runtime-dbg-${{ matrix.dotnet_version }}
+            apk add \
+              dotnet-sdk-dbg-${{ matrix.dotnet_version }} \
+              dotnet-runtime-dbg-${{ matrix.dotnet_version }} \
+              aspnetcore-runtime-dbg-${{ matrix.dotnet_version }}
+            if [[ ${{ matrix.dotnet_version }} != 8.* ]]; then
+              apk add dotnet-sdk-aot-${{ matrix.dotnet_version }}
             fi
           fi
+          dotnet --info
 
       - name: Install Test dependencies
         timeout-minutes: 5
@@ -95,28 +109,18 @@ jobs:
         run: |
           set -euo pipefail
 
-          ### This is very questionable, but making our CI fail because distro
-          ### .NET versions are out of date doesn't sound nice.
-          rm -rf release-version-sane
+          trait_flags=()
 
-          ### HACK: Filter tests that can't pass in Containers
-          rm -rf debugging-sos-lldb* createdump-aspnet cgroup-limit
-
-          ### HACK: RID parsing is broken on alpine:edge, so these tests fail
-          if [[ ${{ matrix.container_image }} == *'alpine:edge'* ]] ; then
-              rm -rf system-data-odbc
-          fi
-
-          ### HACK: UBI 8 is missing bash-completion, postgres, and strace packages for tests
           if [[ ${{ matrix.container_image }} == *ubi8* ]] ; then
-              rm -rf bash-completion system-data-odbc telemetry-is-off-by-default
-          fi
-          ### HACK: UBI 9 is missing postsgres and strace package for tests
-          if [[ ${{ matrix.container_image }} == *ubi9* ]] ; then
-              rm -rf system-data-odbc telemetry-is-off-by-default 
+              trait_flags+=( --trait ubi8-repos )
           fi
 
-          dotnet turkey/Turkey.dll -v --timeout 600
+          if [[ ${{ matrix.container_image }} == *ubi9* ]] ; then
+              trait_flags+=( --trait ubi9-repos )
+          fi
+
+          dotnet turkey/Turkey.dll -v --timeout 600 --trait github-ci "${trait_flags[@]}"
+        shell: bash
 
       - name: Show Logs
         if: ${{ always() }}

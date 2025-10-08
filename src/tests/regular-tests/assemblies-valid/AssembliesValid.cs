@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AssembliesValid
 {
@@ -40,6 +41,13 @@ namespace AssembliesValid
             new Regex("/packs/"),
         };
 
+        private readonly ITestOutputHelper _output;
+
+        public AssembliesValid(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public void ValidateAssemblies()
         {
@@ -47,15 +55,15 @@ namespace AssembliesValid
             int exitCode = RunProcessAndGetOutput(new string[] { "bash", "-c", "command -v dotnet" }, out dotnetPath);
             if (exitCode != 0)
             {
-                Console.Error.WriteLine("'dotnet' command not found");
-                Console.Error.WriteLine("PATH: " + Environment.GetEnvironmentVariable("PATH"));
+                _output.WriteLine("'dotnet' command not found");
+                _output.WriteLine("PATH: " + Environment.GetEnvironmentVariable("PATH"));
                 Assert.True(false);
             }
             dotnetPath = dotnetPath.Trim();
             exitCode = RunProcessAndGetOutput(new string[] { "readlink", "-f", dotnetPath }, out dotnetPath);
             if (exitCode != 0)
             {
-                Console.Error.WriteLine($"Unable to run readlink -f {dotnetPath}");
+                _output.WriteLine($"Unable to run readlink -f {dotnetPath}");
                 Assert.True(false);
             }
             dotnetPath = dotnetPath.Trim();
@@ -63,7 +71,7 @@ namespace AssembliesValid
             string searchRoot = new FileInfo(dotnetPath).DirectoryName;
             var searchRootDirectory = new System.IO.DirectoryInfo(searchRoot);
 
-            Console.WriteLine($"Searching for dotnet binaries in {searchRoot}");
+            _output.WriteLine($"Searching for dotnet binaries in {searchRoot}");
 
             var architecture = RuntimeInformation.OSArchitecture;
             var machine = GetCurrentMachine(architecture);
@@ -82,13 +90,14 @@ namespace AssembliesValid
                         bool hasAot = AssemblyHasAot(assembly, reader, machine);
                         bool inReleaseMode = AssemblyIfNgenIsInReleaseMode(assembly, reader);
                         bool hasMethods = AssemblyHasMethods(reader);
+                        bool hasMethodImplementations = AssemblyHasMethodImplementations(reader);
 
                         bool valid = true;
                         if (!inReleaseMode)
                         {
                             valid = false;
                         }
-                        if (hasMethods && !hasAot)
+                        if (hasMethods && hasMethodImplementations && !hasAot)
                         {
                             // 32-bit arm doesn't have AOT and niehter do s390x and ppc64le (which use mono). That's okay for now.
                             if (architecture != Architecture.Arm
@@ -106,11 +115,11 @@ namespace AssembliesValid
 
                         if (valid)
                         {
-                            Console.WriteLine($"{assembly}: OK");
+                            _output.WriteLine($"{assembly}: OK: {assembly} hasMethods: {hasMethods}, hasMethodImplementations: {hasMethodImplementations}, hasAot: {hasAot}, inReleaseMode: {inReleaseMode}");
                         }
                         else
                         {
-                            Console.WriteLine($"error: {assembly} hasMethods: {hasMethods}, hasAot: {hasAot}, inReleaseMode: {inReleaseMode}");
+                            _output.WriteLine($"error: {assembly} hasMethods: {hasMethods}, hasMethodImplementations: {hasMethodImplementations}, hasAot: {hasAot}, inReleaseMode: {inReleaseMode}");
                             allOkay = false;
                         }
                     }
@@ -224,6 +233,26 @@ namespace AssembliesValid
         {
             var metadataReader = reader.GetMetadataReader();
             return metadataReader.MethodDefinitions.Count > 0;
+        }
+
+        static bool AssemblyHasMethodImplementations(PEReader reader)
+        {
+            var metadataReader = reader.GetMetadataReader();
+
+            foreach (var methodHandle in metadataReader.MethodDefinitions)
+            {
+                var methodDefinition = metadataReader.GetMethodDefinition(methodHandle);
+
+                // The RelativeVirtualAddress (RVA) is an offset to the method's IL code.
+                // If it's 0, it means there is no method body (e.g., an abstract method).
+                // If it's > 0, we've found executable code!
+                if (methodDefinition.RelativeVirtualAddress > 0)
+                {
+                    return true; // Found a method with a body, no need to check further.
+                }
+            }
+
+            return false;
         }
 
         static bool AssemblyIfNgenIsInReleaseMode(string assemblyPath, PEReader reader)
