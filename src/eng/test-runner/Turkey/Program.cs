@@ -12,7 +12,9 @@ using System.Runtime.InteropServices;
 
 namespace Turkey
 {
+#pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
     public class Program
+#pragma warning restore CA1052 // Static holder types should be Static or NotInheritable
     {
         public static readonly Option<bool> verboseOption = new Option<bool>(
             new string[] { "--verbose", "-v" },
@@ -126,7 +128,7 @@ namespace Turkey
 
             Version packageVersion = runtimeVersion;
             string nuGetConfig = await GenerateNuGetConfigIfNeededAsync(additionalFeed, packageVersion,
-                                                                        useSourceBuildNuGetConfig: false);
+                                                                        useSourceBuildNuGetConfig: false).ConfigureAwait(false);
             if (verbose && nuGetConfig != null)
             {
                 Console.WriteLine("Using nuget.config: ");
@@ -140,7 +142,8 @@ namespace Turkey
                 verboseOutput: verbose,
                 nuGetConfig: nuGetConfig);
 
-            var results = await runner.ScanAndRunAsync(testOutputs, logDir.FullName, defaultTimeout, testName);
+
+            var results = await runner.ScanAndRunAsync(testOutputs, logDir.FullName, defaultTimeout, testName).ConfigureAwait(false);
 
             int exitCode = (results.Failed == 0) ? 0 : 1;
             return exitCode;
@@ -160,31 +163,12 @@ namespace Turkey
                 var nuget = new NuGet(client);
                 var sourceBuild = new SourceBuild(client);
 
-                if (netCoreAppVersion.Major < 4)
-                {
-                    try
-                    {
-                        var prodConUrl = await GetProdConFeedUrlIfNeededAsync(nuget, sourceBuild, netCoreAppVersion);
-                        if (!string.IsNullOrEmpty(prodConUrl))
-                        {
-                            prodConUrl = prodConUrl.Trim();
-                            Console.WriteLine($"Packages are not live on nuget.org; using {prodConUrl} as additional package source");
-                            urls.Add(prodConUrl);
-                        }
-                    }
-                    catch (HttpRequestException exception)
-                    {
-                        Console.WriteLine("WARNING: failed to get ProdCon url. Ignoring Exception:");
-                        Console.WriteLine(exception.ToString());
-                    }
-                }
-
                 string nugetConfig = null;
                 if (useSourceBuildNuGetConfig)
                 {
                     try
                     {
-                        nugetConfig = await sourceBuild.GetNuGetConfigAsync(netCoreAppVersion);
+                        nugetConfig = await sourceBuild.GetNuGetConfigAsync(netCoreAppVersion).ConfigureAwait(false);
                     }
                     catch( HttpRequestException exception )
                     {
@@ -200,14 +184,16 @@ namespace Turkey
                     // if the nugetConfig has a <clear/> element that removes
                     // it.
                     urls.Add("https://api.nuget.org/v3/index.json");
-                    return await nuget.GenerateNuGetConfig(urls, nugetConfig);
+                    return await nuget.GenerateNuGetConfig(urls, nugetConfig).ConfigureAwait(false);
                 }
             }
 
             return null;
         }
 
+#pragma warning disable CA1801 // Remove unused parameter
         public static IReadOnlySet<string> CreateTraits(Version runtimeVersion, Version sdkVersion, List<string> rids, bool isMonoRuntime, IEnumerable<string> additionalTraits)
+#pragma warning restore CA1801 // Remove unused parameter
         {
             var traits = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -226,7 +212,9 @@ namespace Turkey
             }
 
             // Add 'arch=' trait.
+#pragma warning disable CA1308 // Normalize strings to uppercase
             string arch = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant();
+#pragma warning restore CA1308 // Normalize strings to uppercase
             traits.Add($"arch={arch}");
 
             // Add 'runtime=' trait.
@@ -239,17 +227,6 @@ namespace Turkey
             }
 
             return traits;
-        }
-
-        public static async Task<string> GetProdConFeedUrlIfNeededAsync(NuGet nuget, SourceBuild sourceBuild, Version netCoreAppVersion)
-        {
-            bool live = await nuget.IsPackageLiveAsync("runtime.linux-x64.Microsoft.NetCore.DotNetAppHost", netCoreAppVersion);
-            if (!live)
-            {
-                return await sourceBuild.GetProdConFeedAsync(netCoreAppVersion);
-            }
-
-            return null;
         }
 
         static async Task<int> Main(string[] args)
@@ -270,7 +247,7 @@ namespace Turkey
             rootCommand.AddOption(timeoutOption);
             rootCommand.AddOption(testsOption);
 
-            return await rootCommand.InvokeAsync(args);
+            return await rootCommand.InvokeAsync(args).ConfigureAwait(false);
         }
     }
 }

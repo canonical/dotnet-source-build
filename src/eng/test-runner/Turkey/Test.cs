@@ -18,8 +18,12 @@ namespace Turkey
         public string Type { get; set; }
         public bool Cleanup { get; set; }
         public double TimeoutMultiplier { get; set; } = 1.0;
+
+        #pragma warning disable CA2227 // Change to be read-only by removing the property setter.
         public List<string> IgnoredRIDs { get; set; } = new();
         public List<string> SkipWhen { get; set; } = new();
+
+        #pragma warning restore CA2227
     }
 
     // TODO is this a strongly-typed enum in C#?
@@ -58,12 +62,10 @@ namespace Turkey
                 {
                     Console.WriteLine($"WARNING: overwriting {path}");
                 }
-                await File.WriteAllTextAsync(path, NuGetConfig);
+                await File.WriteAllTextAsync(path, NuGetConfig).ConfigureAwait(false);
             }
 
-            UpdateProjectFilesIfPresent();
-
-            var testResult = await InternalRunAsync(logger, cancelltionToken);
+            var testResult = await InternalRunAsync(logger, cancelltionToken).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(NuGetConfig))
             {
@@ -72,60 +74,6 @@ namespace Turkey
 
             return testResult;
         }
-
-        private void UpdateProjectFilesIfPresent()
-        {
-            if (SystemUnderTest.RuntimeVersion < Version.Parse("2.0"))
-            {
-                var projectJsonPath = Path.Combine(this.Directory.FullName, "project.json");
-                if (File.Exists(projectJsonPath))
-                {
-                    CopyProjectJsonFile();
-                }
-            }
-            else
-            {
-                var csprojFile = $"{Directory.Name}.csproj";
-                var csprojPath = Path.Combine(this.Directory.FullName, csprojFile);
-                if (File.Exists(csprojPath))
-                {
-                    UpdateCsprojVersion(csprojPath);
-                }
-            }
-        }
-
-        private void CopyProjectJsonFile()
-        {
-            string majorMinor = "" + SystemUnderTest.RuntimeVersion.Major + SystemUnderTest.RuntimeVersion.Minor;
-            var fileName = $"resources/project{majorMinor}xunit.json";
-            var resourceLocation = FindResourceFile(fileName);
-            var source = resourceLocation;
-            var dest = Path.Combine(this.Directory.FullName, "project.json");
-            File.Copy(source, dest);
-        }
-
-        private static string FindResourceFile(string name)
-        {
-            var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-            var dir = Path.GetDirectoryName(assemblyLocation);
-            var resourceLocation = Path.Combine(dir, name);
-            if (!File.Exists(resourceLocation))
-            {
-                throw new Exception($"Resource {name} at location {resourceLocation} does not exist");
-            }
-            return resourceLocation;
-        }
-
-        private void UpdateCsprojVersion(string csprojPath)
-        {
-            var contents = File.ReadAllText(csprojPath);
-            var updatedContents = UpdateCsprojContents(contents);
-
-            File.WriteAllText(csprojPath, updatedContents);
-        }
-
-        private string UpdateCsprojContents(string contents) =>
-            new CsprojCompatibilityPatcher().Patch(contents, this.SystemUnderTest.RuntimeVersion);
 
         protected abstract Task<TestResult> InternalRunAsync(Action<string> logger, CancellationToken cancellationToken);
 
