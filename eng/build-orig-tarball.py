@@ -24,7 +24,7 @@ def DotnetSecurityPartnersRepositoryUrl(accessToken: str | None = None) -> str:
         userinfo += ":" + accessToken
 
     return (f"https://{userinfo}@"
-            "dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet")
+            "dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet")
 
 
 def LogErrorAndExit(message: str, exitCode=1) -> NoReturn:

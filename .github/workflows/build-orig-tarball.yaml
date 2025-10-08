@@ -56,7 +56,7 @@ jobs:
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Build orig tarball
         id: build-orig-tarball
@@ -92,7 +92,7 @@ jobs:
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Clean up hosted runner
         # Removes the Android SDK from the runner because otherwise we run out of disk space.
@@ -151,7 +151,7 @@ jobs:
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/dotnet/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Get architecture
         id: get-arch
