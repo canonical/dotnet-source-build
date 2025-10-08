@@ -1,3 +1,12 @@
+dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa2) questing; urgency=medium
+
+  * debian/copyright: add copyright information
+  * source/lintian-overrides: update lintian-overrides for source package
+  * eng/test-runner: sync changes with upstream
+  * tests/control, tests/regular-tests: sync changes with upstream
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 08 Oct 2025 04:31:48 +0300
+
 dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa1) questing; urgency=medium
 
   * New upstream release
