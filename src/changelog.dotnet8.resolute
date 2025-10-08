@@ -1,4 +1,4 @@
-dotnet8 (8.0.121-8.0.21-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.121-8.0.21-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: denial of service
@@ -19,25 +19,25 @@ dotnet8 (8.0.121-8.0.21-0ubuntu1~22.04.1) jammy; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 08 Oct 2025 13:49:14 +0300
 
-dotnet8 (8.0.120-8.0.20-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.120-8.0.20-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2122356)
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 08 Sep 2025 20:48:08 +0300
 
-dotnet8 (8.0.119-8.0.19-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.119-8.0.19-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2119537)
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 05 Aug 2025 16:37:26 +0300
 
-dotnet8 (8.0.118-8.0.18-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.118-8.0.18-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2115829)
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 02 Jul 2025 16:38:30 +0300
 
-dotnet8 (8.0.117-8.0.17-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.117-8.0.17-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: remote code execution
@@ -48,7 +48,7 @@ dotnet8 (8.0.117-8.0.17-0ubuntu1~22.04.1) jammy; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
-dotnet8 (8.0.116-8.0.16-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.116-8.0.16-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: spoofing vulnerability
@@ -63,7 +63,7 @@ dotnet8 (8.0.116-8.0.16-0ubuntu1~22.04.1) jammy; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 06 May 2025 13:59:06 +0300
 
-dotnet8 (8.0.115-8.0.15-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.115-8.0.15-0ubuntu1) plucky; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: denial of service
@@ -71,7 +71,7 @@ dotnet8 (8.0.115-8.0.15-0ubuntu1~22.04.1) jammy; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 04 Apr 2025 12:32:57 +0300
 
-dotnet8 (8.0.114-8.0.14-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.114-8.0.14-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2101028)
   * SECURITY UPDATE: elevation of privilege
@@ -81,10 +81,19 @@ dotnet8 (8.0.114-8.0.14-0ubuntu1~22.04.1) jammy; urgency=medium
     - moved Suggests dotnet-runtime-dbg-8.0 from dotnet8 to dotnet-runtime-8.0
     - moved Suggests aspnetcore-runtime-dbg-8.0 from dotnet8 to aspnetcore-runtime-8.0
     - moved Suggests dotnet-sdk-dbg-8.0 from dotnet8 to dotnet-sdk-8.0
+  * renamed d/p/0004-fix-clang20-build.patch to d/p/0005-fix-clang20-build.patch
+  * refreshed d/p/0005-fix-clang20-build.patch to ab style patch
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 06 Mar 2025 11:24:30 +0200
 
-dotnet8 (8.0.113-8.0.13-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.113-8.0.13-0ubuntu2) plucky; urgency=medium
+
+  * d/p/0004-fix-clang20-build.patch: Fix FTBFS with clang 20 (LP: #2099720).
+  * d/eng/test-runner/Turkey: Removed unnecessary obj directory.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Sat, 22 Feb 2025 15:39:45 -0300
+
+dotnet8 (8.0.113-8.0.13-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2097013)
   * Updated security information of last changelog with latest information from
@@ -92,7 +101,7 @@ dotnet8 (8.0.113-8.0.13-0ubuntu1~22.04.1) jammy; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 10 Feb 2025 20:56:02 +0200
 
-dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.112-8.0.12-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2094272).
   * SECURITY UPDATE: elevation of privilege
@@ -102,7 +111,7 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
       context of the local system. This only affects .NET on Linux operating
       systems.
   * Unified source build transition. The debian source tree for dotnet*
-    source packages is now build from a common source (see also: 
+    source packages is now build from a common source (see also:
     https://github.com/canonical/dotnet-source-build/pull/13). Changes include:
     - d/rules: Refactored; the same file is now used by
       all dotnet* source packages. A major change is the use of substvars.
@@ -117,6 +126,7 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
       other dotnet* source packages.
     - d/patches: Renamed patch files to uniquely identify patches among all
       dotnet* source packages.
+  * Removed fix-clang19-build.patch; backported upstream.
   * d/aspnetcore-runtime-8.0.docs: Included src/razor/NOTICE.txt in package to
     comply with Apache-2.0 paragraph 4 section (d).
   * d/control:
@@ -135,21 +145,36 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
   * lintian overrides:
     - Silenced dotnet-sdk-8.0-source-built-artifacts: package-has-long-file-name
       The long file name is unavoidable.
-    - Silenced FO127 related lintian warning 
+    - Silenced FO127 related lintian warning
       hyphen-in-upstream-part-of-debian-changelog-version.
     - Silenced manpage troff warnings. Troff complains that it is silly that the
       dotnet8 manpages select a monospace font on a terminal output that only
       supports monospace fonts.
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 15 Jan 2025 20:11:26 +0200
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 14 Jan 2025 00:10:52 +0200
 
-dotnet8 (8.0.111-8.0.11-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.111-8.0.11-0ubuntu3) plucky; urgency=medium
+
+  * Hard-code libicu76 instead of libicu74.
+
+ -- Matthias Klose <doko@ubuntu.com>  Thu, 09 Jan 2025 15:41:25 +0100
+
+dotnet8 (8.0.111-8.0.11-0ubuntu2) plucky; urgency=medium
+
+  * No-change rebuild for icu soname change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 05 Jan 2025 20:30:29 +0100
+
+dotnet8 (8.0.111-8.0.11-0ubuntu1) plucky; urgency=medium
 
   * New upstream release (LP: #2087882)
+  * debian/eng/source_build_artifact_path.py: temporarily disable
+    strict RID matching to solve build issue on plucky due to binary copying
+    during archive opening.
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 08 Nov 2024 18:16:21 +0200
 
-dotnet8 (8.0.110-8.0.10-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.110-8.0.10-0ubuntu1) oracular; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: remote code execution
@@ -166,33 +191,32 @@ dotnet8 (8.0.110-8.0.10-0ubuntu1~22.04.1) jammy-security; urgency=medium
     - CVE-2024-43485: Denial of Service attack against System.Text.Json
       ExtensionData feature.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Wed, 02 Oct 2024 09:54:14 +0300
+ -- Ian Constantin <ian.constantin@canonical.com>  Wed, 02 Oct 2024 09:54:23 +0300
 
-dotnet8 (8.0.108-8.0.8-0ubuntu1~22.04.2) jammy; urgency=medium
+dotnet8 (8.0.108-8.0.8-0ubuntu3) oracular; urgency=medium
 
-  * Add s390x and ppc64el as supported architectures (LP: #2080023).
-    - d/control, d/rules: Add s390x and ppc64el as supported architectures.
-    - d/eng/versionlib/dotnet.py: Add ppc64le to ArchitectureIdentifier.
-  * d/p/0001-roslyn-analyzers-dont-use-apphost.patch: Fix ppc64el FTBFS by
-    disabling usage of AppHost in roslyn-analyzers PerformanceTests project.
-  * d/p/0002-vstest-intent-net8.0.patch: Fix ppc64el FTBFS by changing the
-    vstest Intent test project TFM to net8.0.
-  * d/t/regular-tests: Update regular-tests to latest available version to fix
-    autpkgtest failure.
-  * d/eng/test-runner: Update test runner to latest version (v1.1.0) to fix
-    autopkgtest failure in ppc64el.
+  * d/p/0004-fix-clang19-build.patch: fix clang19 build issues (LP: #2081032)
 
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 29 Aug 2024 17:00:02 -0300
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 18 Sep 2024 12:07:02 +0300
 
-dotnet8 (8.0.108-8.0.8-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.108-8.0.8-0ubuntu2) oracular; urgency=medium
+
+  * d/t/regular-tests/cgroup-limit/test.sh: bumped test scope memory
+    limit to 200M to fix autopkgtest failure in Oracular.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Aug 2024 11:06:51 -0300
+
+dotnet8 (8.0.108-8.0.8-0ubuntu1) oracular; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: information disclosure
     - CVE-2024-38167: information disclosure vulnerability in TlsStream.
+  * debian/eng/build-dotnet-tarball.sh: SECURITY_PARTNERS_REPOSITORY
+    connection method updated.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Thu, 08 Aug 2024 16:43:10 +0300
+ -- Ian Constantin <ian.constantin@canonical.com>  Fri, 09 Aug 2024 09:43:31 +0300
 
-dotnet8 (8.0.107-8.0.7-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.107-8.0.7-0ubuntu1) oracular; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: denial of service
@@ -203,12 +227,25 @@ dotnet8 (8.0.107-8.0.7-0ubuntu1~22.04.1) jammy-security; urgency=medium
   * SECURITY UPDATE: denial of service
     - CVE-2024-38095: Denial of service in parsing X.509 Content and
       ObjectIdentifiers.
-  * debian/eng/build-dotnet-tarball.sh: SECURITY_PARTNERS_REPOSITORY
-    connection method updated.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Tue, 02 Jul 2024 11:56:00 +0300
+ -- Ian Constantin <ian.constantin@canonical.com>  Tue, 02 Jul 2024 11:55:56 +0300
 
-dotnet8 (8.0.105-8.0.5-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.105-8.0.5-0ubuntu2) oracular; urgency=medium
+
+  * d/control, d/rules: Added ppc64el as a supported architecture
+  * d/eng/versionlib/dotnet.py: Added ppc64le to ArchitectureIdentifier
+  * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: Fixed ppc64el FTBFS by
+    disabling usage of AppHost in roslyn-analyzers PerformanceTests project
+  * d/p/0003-vstest-intent-net8.0.patch: Fixed ppc64el FTBFS by changing the
+    Intent test project TFM to net8.0 in vstest
+  * d/t/regular-tests/release-version-sane/VersionTest.cs: Fix test failure
+    by defining a sane release version number as less than or equal to current
+  * d/eng/test-runner: Updated test runner to latest release (v1.1.0) to fix
+    autopkgtest failure in ppc64el
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 12 Jun 2024 17:14:41 -0300
+
+dotnet8 (8.0.105-8.0.5-0ubuntu1) oracular; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: stack buffer overflow
@@ -217,10 +254,12 @@ dotnet8 (8.0.105-8.0.5-0ubuntu1~22.04.1) jammy-security; urgency=medium
   * SECURITY UPDATE: resource dead-lock
     - CVE-2024-30046: a dead-lock in Http2OutputProducer.Stop() results in a
       denial of service.
+  * debian/patches/0001-fix-clang18-build.patch: refreshed patch to remove
+    new upstream inclusions.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Thu, 09 May 2024 17:16:36 +0300
+ -- Ian Constantin <ian.constantin@canonical.com>  Thu, 09 May 2024 17:16:27 +0300
 
-dotnet8 (8.0.104-8.0.4-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.104-8.0.4-0ubuntu1) noble; urgency=medium
 
   * New upstream release (LP: #2060261).
   * debian/README.source: Update support information (LP: #2058746).
@@ -228,13 +267,29 @@ dotnet8 (8.0.104-8.0.4-0ubuntu1~22.04.1) jammy; urgency=medium
                            in version string.
   * debian/tests/versionlib-tests: Add versionlib unit tests
     - debian/tests/run-versionlib-tests.sh: script to run the tests
-  * Added new binary packages for debug symbols.
-  * Moved RID-specific targeting packs to dotnet-sdk
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 05 Apr 2024 06:24:17 +0300
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 05 Apr 2024 06:22:48 +0300
 
-dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.2) jammy; urgency=medium
+dotnet8 (8.0.103-8.0.3-0ubuntu3) noble; urgency=medium
 
+  * No-change rebuild for CVE-2024-3094
+
+ -- William Grant <wgrant@ubuntu.com>  Mon, 01 Apr 2024 16:43:22 +1100
+
+dotnet8 (8.0.103-8.0.3-0ubuntu2) noble; urgency=medium
+
+  * d/control: added s390x as a supported architecture
+  * d/rules: one-liner to remove .pdb files outside of debug symbols directory
+    and added s390x as a supported architecture
+  * d/p/0001-fix-clang18-build.patch: fixes FTBFS on clang 18 (LP: #2058766)
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Sun, 24 Mar 2024 15:32:00 -0300
+
+dotnet8 (8.0.103-8.0.3-0ubuntu1) noble; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2024-21392: DoS in .NET Core / YARP HTTP / 2 WebSocket support.
   * Add ca-certificates to dotnet-sdk-8.0 depends (LP: #2057982).
   * Replace debian/tests:
     - Add debian/tests/01_regular-tests & debian/tests/regular-tests
@@ -252,19 +307,19 @@ dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.2) jammy; urgency=medium
     - Added debian/eng/dotnet-version.py; needed by debian/tests/01_regular-tests
     - Moved debian/watch-script.sh and debian/build-dotnet-tarball.sh 
       to debian/eng
+  * debian/source/include-binaries: includes a certificate needed by
+    debian/tests/regular-tests/libuv-kestrel-sample-app-2x
   * Removed debian/repack-dotnet-tarball.sh (deprecated)
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 18 Mar 2024 14:34:59 +0200
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 18 Mar 2024 14:54:29 +0200
 
-dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.102-8.0.2-0ubuntu2) noble; urgency=medium
 
-  * New upstream release
-  * SECURITY UPDATE: denial of service
-    - CVE-2024-21392: DoS in .NET Core / YARP HTTP / 2 WebSocket support.
+  * No-change rebuild against libssl3t64
 
- -- Ian Constantin <ian.constantin@canonical.com>  Fri, 08 Mar 2024 10:26:16 +0200
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 04 Mar 2024 17:42:12 +0000
 
-dotnet8 (8.0.102-8.0.2-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.102-8.0.2-0ubuntu1) noble; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: denial of service
@@ -273,9 +328,17 @@ dotnet8 (8.0.102-8.0.2-0ubuntu1~22.04.1) jammy-security; urgency=medium
     - CVE-2024-21404: .NET with OpenSSL support is vulnerable to a denial of
       service when parsing X509 certificates.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Mon, 12 Feb 2024 22:08:53 +0200
+ -- Ian Constantin <ian.constantin@canonical.com>  Thu, 08 Feb 2024 14:02:19 +0200
 
-dotnet8 (8.0.101-8.0.1-0ubuntu1~22.04.1) jammy-security; urgency=medium
+dotnet8 (8.0.101-8.0.1-0ubuntu2) noble; urgency=medium
+
+  * Added new binary packages for debug symbols.
+  * Moved RID-specific targeting packs to dotnet-sdk-8.0 binary package
+    per Microsoft documentation. (LP: #2046458)
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 17 Jan 2024 17:30:29 -0300
+
+dotnet8 (8.0.101-8.0.1-0ubuntu1) noble; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: validation bypass
@@ -283,17 +346,18 @@ dotnet8 (8.0.101-8.0.1-0ubuntu1~22.04.1) jammy-security; urgency=medium
   * SECURITY UPDATE: denial of service
     - CVE-2024-21319: Azure Identity - Pre-Authentication DoS in JWT
   * debian/build-dotnet-tarball.sh: rename function print_err to print_error
+  * debian/control: transition to libicu74
+  * debian/tests: removed dotnet6-and-dotnet7-and-dotnet8-should-work-together
 
- -- Ian Constantin <ian.constantin@canonical.com>  Mon, 12 Feb 2024 11:04:58 +0200
+ -- Ian Constantin <ian.constantin@canonical.com>  Sat, 06 Jan 2024 18:28:44 +0200
 
-dotnet8 (8.0.100-8.0.0-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.100-8.0.0-0ubuntu2) noble; urgency=medium
 
-  * Backport to Ubuntu 22.04 LTS Jammy Jellyfish (LP: #2046133).
-    - d/control: change dotnet-runtime-8.0 Depends from libicu72 to libicu70
+  * No-change rebuild for ICU soname change.
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 11 Dec 2023 08:02:06 +0200
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 19 Dec 2023 11:05:39 +0100
 
-dotnet8 (8.0.100-8.0.0-0ubuntu1~23.10.1) mantic-security; urgency=medium
+dotnet8 (8.0.100-8.0.0-0ubuntu1) noble; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: security feature bypass
@@ -301,8 +365,16 @@ dotnet8 (8.0.100-8.0.0-0ubuntu1~23.10.1) mantic-security; urgency=medium
   * SECURITY UPDATE: Arbitrary File Write and Deletion
     - CVE-2023-36049: Microsoft .NET FormatFtpCommand CRLF Injection
       Arbitrary File Write and Deletion
+  * debian/patches/0001-Fix-source-built-runtime-version-number.patch: removed
+    no longer needed patch.
+ -- Ian Constantin <ian.constantin@canonical.com>  Mon, 13 Nov 2023 15:13:03 +0200
 
- -- Ian Constantin <ian.constantin@canonical.com>  Mon, 13 Nov 2023 11:10:48 +0200
+dotnet8 (8.0.100-8.0.0~rc2-0ubuntu2) noble; urgency=medium
+
+  * d/p/0001-Fix-source-built-runtime-version-number.patch: Fix
+    source-built runtime version number. (LP: #2040547)
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 26 Oct 2023 08:52:11 -0300
 
 dotnet8 (8.0.100-8.0.0~rc2-0ubuntu1) mantic-security; urgency=medium
 

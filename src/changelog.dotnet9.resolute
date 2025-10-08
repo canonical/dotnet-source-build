@@ -1,4 +1,4 @@
-dotnet9 (9.0.111-9.0.10-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.111-9.0.10-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: denial of service
@@ -19,25 +19,25 @@ dotnet9 (9.0.111-9.0.10-0ubuntu1~25.04.1) plucky; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 08 Oct 2025 13:49:49 +0300
 
-dotnet9 (9.0.110-9.0.9-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.110-9.0.9-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2122355)
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 08 Sep 2025 20:43:18 +0300
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 08 Sep 2025 20:43:17 +0300
 
-dotnet9 (9.0.109-9.0.8-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.109-9.0.8-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2119538)
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Tue, 05 Aug 2025 16:36:57 +0300
 
-dotnet9 (9.0.108-9.0.7-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.108-9.0.7-0ubuntu1) questing; urgency=medium
 
   * New upstream release (LP: #2115830)
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 02 Jul 2025 16:38:30 +0300
 
-dotnet9 (9.0.107-9.0.6-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.107-9.0.6-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: remote code execution
@@ -48,7 +48,7 @@ dotnet9 (9.0.107-9.0.6-0ubuntu1~25.04.1) plucky; urgency=medium
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
-dotnet9 (9.0.106-9.0.5-0ubuntu1~25.04.1) plucky; urgency=medium
+dotnet9 (9.0.106-9.0.5-0ubuntu1) questing; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: spoofing vulnerability
