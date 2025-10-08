@@ -1,0 +1,71 @@
+dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release
+  * d/control, d/rules: remove package netstandard-targeting-pack-2.1-10.0:
+    Upstream removed this package, see: https://github.com/dotnet/sdk/pull/50354.
+    
+    IMPORTANT: If you had previous preview version of the `dotnet10` package
+    installed and have installed one of the following packages: `dotnet9`,
+    `dotnet8`, `dotnet7` or `dotnet6`, we recommend to reinstall these packages.
+    Otherwise the .NET standard 2.1 targeting pack package will not receive any
+    updates.
+  
+  * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: roslyn-analyzers don't get
+    built anymore, see: https://github.com/dotnet/dotnet/pull/1979
+  * d/rules: add `--branding default` to DOTNET_BUILD_ARGS, see also:
+    https://github.com/dotnet/source-build/issues/5337
+  * d/rules: remove uninstalled netstandard-targeting-pack-2.1-10.0 files
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 10 Sep 2025 11:26:09 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~25.04.1~ppa3) plucky; urgency=medium
+
+  * d/dotnet-sdk-aot-10.0.install: update installation layout
+    (see also: https://github.com/dotnet/docs/pull/46910)
+  * d/dotnet-host-10.0.install, d/dotnet-host-10.0.links: add dnx tool
+    (see also: https://github.com/dotnet/docs/pull/47094)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 14 Aug 2025 00:41:10 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~25.04.1~ppa2) plucky; urgency=medium
+
+  * d/dotnet-sdk-10.0.install: remove sdk-manifest for microsoft.net.sdk.aspire
+    (see: https://github.com/dotnet/source-build/issues/4735)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 21:42:00 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 18:04:04 +0300
+
+dotnet10 (10.0.100-10.0.0~preview6-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 21 Jul 2025 15:04:08 -0300
+
+dotnet10 (10.0.100-10.0.0~preview5-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Sat, 14 Jun 2025 12:51:42 +0300
+
+dotnet10 (10.0.100-10.0.0~preview4-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 29 May 2025 12:45:19 +0300
+
+dotnet10 (10.0.100-10.0.0~preview3-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 11 Apr 2025 15:29:13 +0300
+
+dotnet10 (10.0.100-10.0.0~preview2-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * Initial packaging.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 09 Apr 2025 17:27:07 +0300

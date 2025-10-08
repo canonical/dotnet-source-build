@@ -78,8 +78,8 @@ Depends: dotnet-hostfxr-9.0,
          ${libicu:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
 Suggests: dotnet-runtime-dbg-9.0
+Breaks: dotnet-runtime-6.0 (<< 6.0.111~)
 Description: .NET runtime
  The .NET runtime contains everything needed to run .NET applications.
  It includes a high performance Virtual Machine as well as the framework

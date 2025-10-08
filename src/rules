@@ -66,8 +66,11 @@ else
 endif
 
 ifeq ($(DOTNET_80_OR_GREATER), true)
-    DOTNET_BUILD_ARGS += --source-repository $(DOTNET_GIT_REPO)
-    DOTNET_BUILD_ARGS += --source-version $(DOTNET_GIT_COMMIT)
+    ifeq ($(wildcard $(CURDIR)/release.json),)
+        $(error "No release.json file in the source tarball found")
+    endif
+
+    DOTNET_BUILD_ARGS += --release-manifest "$(CURDIR)/release.json"
 endif
 
 ifeq ($(DOTNET_90_OR_GREATER), true)
@@ -97,6 +100,12 @@ ifeq ($(DOTNET_90_OR_GREATER), true)
     endif
 else
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/$(DOTNET_ARCH)/Release
+endif
+
+# Fixup for a bug in the build script. Should be fixed with .NET 10 RC 2.
+# See also: https://github.com/dotnet/source-build/issues/5337
+ifeq ($(DOTNET_100_OR_GREATER), true)
+    DOTNET_BUILD_ARGS += --branding default
 endif
 
 %:
@@ -172,10 +181,11 @@ override_dh_auto_test:
 override_dh_install:
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	install --mode=0755 --directory "$(DEST_DIR)$(DOTNET_SYSCONF_DIR)"
-	ls "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
-	
+	ls -l "$(DOTNET_RELEASE_ARTIFACTS_DIR)"
 	tar --extract \
-	    --file "$(DOTNET_RELEASE_ARTIFACTS_DIR)"/dotnet-sdk-*-$(DOTNET_RUNTIME_ID).tar.gz \
+	    --file "$$("$(CURDIR)"/debian/eng/source_build_artifact_path.py \
+		           --type sdk \
+				   --base-path "$(DOTNET_RELEASE_ARTIFACTS_DIR)")" \
 	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
 	
 ifeq ($(DOTNET_80_OR_GREATER), true)
@@ -220,6 +230,11 @@ endif
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location_$(DOTNET_ARCH)
 	
+ifeq ($(DOTNET_100_OR_GREATER), true)
+#	This will be removed with one of the next releases, see
+#   https://github.com/dotnet/sdk/pull/50354
+	rm -rf "$(DEST_DIR)$(DOTNET_ROOT_DIR)"/packs/NETStandard.Library.Ref
+endif
 	dh_install
 
 override_dh_gencontrol:
@@ -239,10 +254,12 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)                        -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-sdk-$(DOTNET_MAJOR).$(DOTNET_MINOR)-source-built-artifacts -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-templates-$(DOTNET_MAJOR).$(DOTNET_MINOR)                  -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
-	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 	dh_gencontrol -pdotnet-sdk-dbg-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 ifeq ($(DOTNET_BUILD_AOT_BINARY_PACKAGE), true)
 	dh_gencontrol -pdotnet-sdk-aot-$(DOTNET_MAJOR).$(DOTNET_MINOR)                    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
+endif
+ifeq ($(DOTNET_100_OR_GREATER), false)
+	dh_gencontrol -pnetstandard-targeting-pack-2.1-$(DOTNET_MAJOR).$(DOTNET_MINOR)    -- -v$(DOTNET_DEB_VERSION_SDK_ONLY)
 endif
 endif
 

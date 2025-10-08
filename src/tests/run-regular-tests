@@ -30,7 +30,9 @@ echo "INFO: extract source build artifacts"
 mkdir -p "${AUTOPKGTEST_TMP}/packages"
 tar --extract --gzip \
   --directory "${AUTOPKGTEST_TMP}/packages" \
-  --file "$(debian/eng/source_build_artifact_path.py)"
+  --file "$(debian/eng/source_build_artifact_path.py \
+             --type packages \
+             --base-path /usr/lib/dotnet/source-built-artifacts)"
 
 echo "INFO: add source build artifacts to global NuGet config"
 mkdir -p ~/.nuget/NuGet/

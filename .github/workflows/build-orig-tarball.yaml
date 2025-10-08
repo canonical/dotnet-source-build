@@ -46,6 +46,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:dotnet/backports
           sudo add-apt-repository ppa:dotnet/previews
+          sudo add-apt-repository ppa:dotnet-bootstrap/amd64
           sudo apt-get install --assume-yes \
             dotnet${{steps.parse-version.outputs.dotnetMajorVersion}} \
             dotnet-sdk-${{steps.parse-version.outputs.dotnetMajorMinorVersion}}-source-built-artifacts
@@ -64,8 +65,8 @@ jobs:
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
             --source-version "${{inputs.sourceVersion}}" \
             --git-reference "${{inputs.gitCommitish}}" \
-            --vendor-name "Canonical Ltd." \
             --build-id "${{inputs.buildId}}" \
+            --vendor-name "Canonical Ltd." \
             --verbose
 
           echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT

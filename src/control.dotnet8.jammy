@@ -91,8 +91,8 @@ Description: .NET runtime
 Package: aspnetcore-runtime-8.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: dotnet-runtime-8.0, ${misc:Depends}, ${shlibs:Depends}
-Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
 Suggests: aspnetcore-runtime-dbg-8.0
+Breaks: aspnetcore-runtime-6.0 (<< 6.0.111~)
 Description: ASP.NET Core runtime
  The ASP.NET Core runtime contains everything needed to run .NET
  web applications. It includes a high performance Virtual Machine as

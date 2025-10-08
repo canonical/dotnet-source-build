@@ -10,6 +10,7 @@
     "linux-arm", // lldb sos relies on features not implemented on arm
   ],
   "skipWhen": [
+    "github-ci", // github CI can't ptrace(2)
     "runtime=mono", // lldb sos relies on coreclr features
     "ubuntu-autopkgtest-cloud,version=8,arch=arm64", // see https://github.com/canonical/dotnet-regular-tests/issues/12
   ]

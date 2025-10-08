@@ -7,7 +7,7 @@
     "type": "bash",
     "cleanup": true,
     "skipWhen": [
-      "vmr-ci", "os=ubuntu" // relies on RHEL/Fedora specific patches
+      "vmr-ci", // relies on RHEL/Fedora specific patches
     ],
     "ignoredRIDs":[
     ]

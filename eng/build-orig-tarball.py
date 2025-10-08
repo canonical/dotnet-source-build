@@ -321,10 +321,8 @@ class InvocationContext:
             self.ReleaseManifestFormat = "json"
         elif args.ForceUseLegacyManifestFormat:
             self.ReleaseManifestFormat = "legacy"
-        elif self.DotnetMajorVersion >= 10:
-            self.ReleaseManifestFormat = "json"
         elif self.DotnetMajorVersion >= 8:
-            self.ReleaseManifestFormat = "legacy"
+            self.ReleaseManifestFormat = "json"
 
         self.VendorName: str | None = args.VendorName
         self.SourceLinkRepository: str | None = args.SourceLinkRepository

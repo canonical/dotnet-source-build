@@ -1,0 +1,2 @@
+${env:DOTNET_ROOT_DIR}/dotnet ${env:DOTNET_BIN}
+${env:DOTNET_ROOT_DIR}/dnx ${env:DOTNET_BIN}
