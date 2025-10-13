@@ -1,4 +1,0 @@
-0001-fix-clang18-build.patch
-0002-roslyn-analyzers-dont-use-apphost.patch
-0003-vstest-intent-net8.0.patch
-0005-fix-clang20-build.patch
