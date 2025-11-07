@@ -1,3 +1,11 @@
+dotnet9 (9.0.112-9.0.11-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release (LP: #2130894)
+  * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
+    Canonical's release database.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 17:01:23 +0100
+
 dotnet9 (9.0.111-9.0.10-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release
@@ -44,7 +52,7 @@ dotnet9 (9.0.107-9.0.6-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
     - CVE-2025-30399: DLL Hijacking Remote Code Execution Vulnerability.
       When using the Download File task in Microsoft.NETCore.App.Runtime,
       omitting the DestinationFileName in the task invocation may expose
-      users to remote file hijacking if the server is malicious. 
+      users to remote file hijacking if the server is malicious.
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
@@ -110,7 +118,7 @@ dotnet9 (9.0.102-9.0.1-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
     dotnet* source packages.
   * d/rules: Added override_dh_auto_clean to remove .NET and Python
     binary artifacts.
-  * d/copyright, d/source/lintian-overrides.dotnet9: Fixed 
+  * d/copyright, d/source/lintian-overrides.dotnet9: Fixed
     superfluous-file-pattern warning for debian/eng/strenum,
     debian/eng/test-runner and debian/tests/regular-tests.
   * d/tests/build-time-tests/tests.py: Fixed crash when running for net8.0.
@@ -124,7 +132,7 @@ dotnet9 (9.0.101-9.0.0-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
   * New upstream release (LP: #2091009)
   * debian/rules, debian/eng/source_build_artifact_path.py: re-enable strict
     RID matching of last release.
-  * debian/eng/dotnet-version.py: 
+  * debian/eng/dotnet-version.py:
     - remove temporarily added '-rtm' to DOTNET_DEB_VERSION_SDK_ONLY due
       to higher SDK version number.
     - temporarily added '+build1' to DOTNET_DEB_VERSION_RUNTIME_ONLY to comply

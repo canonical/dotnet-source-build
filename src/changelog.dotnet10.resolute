@@ -1,3 +1,12 @@
+dotnet10 (10.0.100-10.0.0-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release (LP: #2130891)
+  * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
+    Canonical's release database.
+  * d/rules: add `--branding rtm` to DOTNET_BUILD_ARGS.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 16:11:30 +0100
+
 dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
 
   [ Dominik Viererbe ]
