@@ -126,6 +126,10 @@ override_dh_auto_build:
 	printenv | sort
 	vmstat --stats --unit MiB
 
+#	Replace {{RELEASE}} placeholder in sdk-check-config.json with actual release version
+	sed -i "s/{{RELEASE}}/$(RELEASE)/g" debian/sdk-check-config.json
+	cat debian/sdk-check-config.json
+
 #	If a library is being pulled in from the system, remove the bundled source for it
 ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
 	rm --recursive --force $(CURDIR)/src/runtime/src/native/external/brotli
@@ -144,7 +148,7 @@ endif
 
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	mkdir --parents "$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)"
-	
+
 	DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL=($$(find "$(DOTNET_ROOT_DIR)/source-built-artifacts" -maxdepth 1 -name 'Private.SourceBuilt.Artifacts.$(DOTNET_MAJOR).$(DOTNET_MINOR).*.tar.gz')); \
 	if [ "$${#DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}" -ne 1 ]; then \
 		echo "None or more than one source built artifacts tarballs have been found: $${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL[@]}"; \
@@ -154,7 +158,7 @@ ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	ln --symbolic \
 		"$${DOTNET_SOURCE_BUILT_ARTIFACTS_TARBALL}" \
 		"$(DOTNET_PREREQS_PACKAGES_ARCHIVE_DIR)/"
-	
+
 	cp --recursive --dereference --preserve=mode,ownership,timestamps \
 	    "$(DOTNET_ROOT_DIR)" \
 	    "$(DOTNET_PREVIOUS_BUILT_DIR)"
@@ -166,7 +170,7 @@ endif
 	/p:LogVerbosity=n \
 	/p:MinimalConsoleLogOutput=false \
 	/p:ContinueOnPrebuiltBaselineError=true
-	
+
 	tree
 
 override_dh_auto_test:
@@ -181,11 +185,11 @@ override_dh_install:
 		           --type sdk \
 				   --base-path "$(DOTNET_RELEASE_ARTIFACTS_DIR)")" \
 	    --directory "$(DEST_DIR)$(DOTNET_ROOT_DIR)"
-	
+
 ifeq ($(DOTNET_80_OR_GREATER), true)
 # 	Clean up unwanted PDB files in sdk tar.gz
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.pdb' -exec rm {} \;
-	
+
 # 	Extract debug symbols to their own directory for easy handling
 	mkdir --parents "$(CURDIR)/artifacts/debug-symbols"
 	tar --extract \
@@ -193,7 +197,7 @@ ifeq ($(DOTNET_80_OR_GREATER), true)
 	    --directory "$(CURDIR)/artifacts/debug-symbols"
 	ls "$(CURDIR)/artifacts/debug-symbols"
 endif
-	
+
 #   See https://github.com/dotnet/source-build/issues/2579
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'testhost.x86' -delete
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name 'vstest.console' -delete
@@ -211,7 +215,7 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.targets' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.txt' -exec chmod -x {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.xml' -exec chmod -x {} \;
-	
+
 #   fixes lintian warning: dotnet-sdk-aot-9.0: executable-not-elf-or-script
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h' -exec chmod 0644 {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.h.in' -exec chmod 0644 {} \;
@@ -220,15 +224,18 @@ endif
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.cmake' -exec chmod 0644 {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.m' -exec chmod 0644 {} \;
 	find "$(DEST_DIR)$(DOTNET_ROOT_DIR)" -type f -name '*.def' -exec chmod 0644 {} \;
-	
+
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location
 	echo "$(DOTNET_ROOT_DIR)" > "$(CURDIR)"/debian/install_location_$(DOTNET_ARCH)
-	
+
+	SDK_DIR=$$(ls -1d "$(DEST_DIR)$(DOTNET_ROOT_DIR)"/sdk/*/ | head -1); \
+	cp debian/sdk-check-config.json "$$SDK_DIR/sdk-check-config.json"
+  
 	dh_install
 
 override_dh_gencontrol:
 	echo "LIBICU_PACKAGENAME=$(LIBICU_PACKAGENAME)"
-	
+
 	dh_gencontrol -- -Vlibicu:Depends=$(LIBICU_PACKAGENAME)
 ifeq ($(DOTNET_80_OR_GREATER), true)
 	dh_gencontrol -paspnetcore-runtime-$(DOTNET_MAJOR).$(DOTNET_MINOR)                -- -v$(DOTNET_DEB_VERSION_RUNTIME_ONLY)

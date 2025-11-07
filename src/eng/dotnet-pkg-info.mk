@@ -19,6 +19,7 @@
 #  DOTNET_USE_SYSTEM_RAPIDJSON: A boolean (true/false) that indicates whether to use the system-provided rapidjson library.
 #  DOTNET_USE_SYSTEM_ZLIB: A boolean (true/false) that indicates whether to use the system-provided zlib library.
 
+export RELEASE = $(shell dpkg-parsechangelog --show-field Distribution)
 export DOTNET_MAJOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --major)
 export DOTNET_MINOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --minor)
 
