@@ -1,3 +1,2 @@
 0002-roslyn-analyzers-dont-use-apphost.patch
 0004-vstest-intent-net9.0.patch
-0005-fix-clang20-build.patch

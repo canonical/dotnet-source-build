@@ -1,4 +1,4 @@
-dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1~25.10.2) questing-security; urgency=medium
+dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
 
   [ Dominik Viererbe ]
   * New upstream release
@@ -11,7 +11,7 @@ dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1~25.10.2) questing-security; urgency=mediu
       ('http request/response smuggling') in ASP.NET Core allows an authorized
       attacker to bypass a security feature over a network.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Tue, 14 Oct 2025 22:24:22 +0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 16 Oct 2025 09:48:01 -0300
 
 dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1) questing; urgency=medium
 
