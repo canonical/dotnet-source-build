@@ -26,13 +26,13 @@ dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
   * New upstream release
   * d/control, d/rules: remove package netstandard-targeting-pack-2.1-10.0:
     Upstream removed this package, see: https://github.com/dotnet/sdk/pull/50354.
-    
+
     IMPORTANT: If you had previous preview version of the `dotnet10` package
     installed and have installed one of the following packages: `dotnet9`,
     `dotnet8`, `dotnet7` or `dotnet6`, we recommend to reinstall these packages.
     Otherwise the .NET standard 2.1 targeting pack package will not receive any
     updates.
-  
+
   * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: roslyn-analyzers don't get
     built anymore, see: https://github.com/dotnet/dotnet/pull/1979
   * d/rules: add `--branding default` to DOTNET_BUILD_ARGS, see also:

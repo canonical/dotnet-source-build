@@ -1,5 +1,6 @@
 dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
 
+  [ Dominik Viererbe ]
   * New upstream release
   * SECURITY UPDATE: denial of service
     - CVE-2025-55247: A vulnerability exists in .NET Core where predictable
@@ -9,12 +10,8 @@ dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
     - CVE-2025-55315: Inconsistent interpretation of http requests
       ('http request/response smuggling') in ASP.NET Core allows an authorized
       attacker to bypass a security feature over a network.
-  * SECURITY UPDATE: information disclosure
-    - CVE-2025-55248: MITM (man in the middle) attacker may prevent use of TLS
-      between client and SMTP server, forcing client to send data over
-      unencrypted connection.
 
- -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 08 Oct 2025 13:50:38 +0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 16 Oct 2025 09:48:01 -0300
 
 dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1) questing; urgency=medium
 
@@ -37,13 +34,13 @@ dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa1) questing; urgency=medium
   * New upstream release
   * d/control, d/rules: remove package netstandard-targeting-pack-2.1-10.0:
     Upstream removed this package, see: https://github.com/dotnet/sdk/pull/50354.
-    
+
     IMPORTANT: If you had previous preview version of the `dotnet10` package
     installed and have installed one of the following packages: `dotnet9`,
     `dotnet8`, `dotnet7` or `dotnet6`, we recommend to reinstall these packages.
     Otherwise the .NET standard 2.1 targeting pack package will not receive any
     updates.
-  
+
   * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: roslyn-analyzers don't get
     built anymore, see: https://github.com/dotnet/dotnet/pull/1979
   * d/rules: add `--branding default` to DOTNET_BUILD_ARGS, see also:
