@@ -77,6 +77,11 @@ ifeq ($(DOTNET_90_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-only
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/assets/Release
 
+#	Temporary branding parameter for .NET 10.0 GA release
+    ifeq ($(DOTNET_100_OR_GREATER), true)
+        DOTNET_BUILD_ARGS += --branding rtm
+    endif
+
     ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
         SYSTEM_LIBRARIES += +brotli
     endif
@@ -230,7 +235,7 @@ endif
 
 	SDK_DIR=$$(ls -1d "$(DEST_DIR)$(DOTNET_ROOT_DIR)"/sdk/*/ | head -1); \
 	cp debian/sdk-check-config.json "$$SDK_DIR/sdk-check-config.json"
-  
+
 	dh_install
 
 override_dh_gencontrol:
