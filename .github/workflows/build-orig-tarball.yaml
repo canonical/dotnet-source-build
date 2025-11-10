@@ -1,6 +1,6 @@
 name: "Build .NET orig tarball"
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       sourceVersion:
@@ -50,17 +50,17 @@ jobs:
           sudo apt-get install --assume-yes \
             dotnet${{steps.parse-version.outputs.dotnetMajorVersion}} \
             dotnet-sdk-${{steps.parse-version.outputs.dotnetMajorMinorVersion}}-source-built-artifacts
-      
+
       - name: Configure credentials for .NET security partners repository
         if: ${{ github.repository == 'canonical/dotnet-source-build-security' }}
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Build orig tarball
         id: build-orig-tarball
-        run: | 
+        run: |
           eng/build-orig-tarball.py \
             --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
             --source-version "${{inputs.sourceVersion}}" \
@@ -92,7 +92,7 @@ jobs:
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Clean up hosted runner
         # Removes the Android SDK from the runner because otherwise we run out of disk space.
@@ -151,7 +151,7 @@ jobs:
         run: |
           git config --global credential.helper store
           echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-distro-partners/_git/dotnet" >> ${GITHUB_ENV}
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Get architecture
         id: get-arch
