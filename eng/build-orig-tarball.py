@@ -678,6 +678,7 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
     env = os.environ.copy()
     env["DOTNET_NOLOGO"] = "true"
     env["DOTNET_SKIP_FIRST_TIME_EXPERIENCE"] = "true"
+    env["CustomPreviouslySourceBuiltPackagesPath"] = packagesDirectoryPath
 
     subprocess.check_call(command, cwd=context.GitRepositoryClonePath, env=env)
 
