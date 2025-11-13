@@ -1,4 +1,4 @@
-dotnet8 (8.0.122-8.0.22-0ubuntu1~ppa1) resolute; urgency=medium
+dotnet8 (8.0.122-8.0.22-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release (LP: #2130895)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
