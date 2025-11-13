@@ -21,11 +21,11 @@ babeltrace bash bash-completion binutils coreutils file findutils g++ jq libstdc
 #### apt
 
 ```
-babeltrace bash bash-completion build-essential coreutils file findutils jq lldb sed strace npm postgresql unixodbc zlib1g-dev
+babeltrace bash bash-completion build-essential coreutils file findutils jq libbrotli-dev lldb lttng-tools sed strace npm postgresql unixodbc zlib1g-dev
 ```
 
 #### dnf
 
 ````
-awk babeltrace bash-completion bc findutils gcc-c++ jq libstdc++-devel lttng-ust lttng-tools npm postgresql-odbc postgresql-server strace unixODBC /usr/bin/file /usr/bin/free /usr/bin/lldb /usr/bin/readelf /usr/bin/su which zlib-devel
+babeltrace bash-completion bc findutils gcc-c++ jq libstdc++-devel lttng-ust lttng-tools npm postgresql-odbc postgresql-server strace unixODBC /usr/bin/file /usr/bin/free /usr/bin/lldb /usr/bin/readelf /usr/bin/su which zlib-devel
 ````

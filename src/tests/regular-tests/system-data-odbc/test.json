@@ -6,11 +6,12 @@
   "versionSpecific": false,
   "type": "bash",
   "cleanup": true,
-  "ignoredRIDs":[
-    "ubuntu", // See: https://github.com/canonical/dotnet-regular-tests/issues/4
-  ],    
   "skipWhen": [
     "ubi8-repos", // UBI8 repos don't contain postgressql server
-    "ubi9-repos", // UBI9 repos don't contain postgressql server
+    "ubi9-repos" // UBI9 repos don't contain postgressql server
+  ],
+  "ignoredRIDs":[
+    "rhel7",
+    "ubuntu" // See: https://github.com/canonical/dotnet-regular-tests/issues/4
   ]
 }

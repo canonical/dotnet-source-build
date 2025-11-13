@@ -7,15 +7,9 @@ helpPages=$(dotnet --help | grep -A 999 'SDK commands' | grep -E -B 999 'Common 
 
 RUNTIME_ID=$(../runtime-id)
 case $RUNTIME_ID in
-    alpine*)
-        manPages=$(apk info -L dotnet-doc)
-        ;;
-    ubuntu*)
-        manPages=$(dpkg-query --listfiles $(dpkg --list | grep --only-matching --max-count 1 --basic-regexp 'dotnet-host\(-\S\+\)\?') | grep 'man1/dotnet-')
-        ;;
-    *)
-        manPages=$(rpm -qd $(rpm -qa | grep 'dotnet') | grep 'man1/dotnet-')
-        ;;
+	alpine*)manPages=$(apk info -L dotnet-doc);;
+	ubuntu*)manPages=$(dpkg-query --listfiles $(dpkg --list | grep --only-matching --max-count 1 --basic-regexp 'dotnet-host\(-\S\+\)\?') | grep 'man1/dotnet-');;
+	*)manPages=$(rpm -qd $(rpm -qa | grep 'dotnet') | grep 'man1/dotnet-');;
 esac
 
 function man_page_exists {
