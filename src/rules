@@ -7,6 +7,7 @@ SHELL = /usr/bin/bash
 # See https://github.com/dotnet/source-build/issues/2767
 export HOME=$(shell mktemp --directory)
 
+export DNX_BIN = /usr/bin/dnx
 export DOTNET_BIN = /usr/bin/dotnet
 export DOTNET_ROOT_DIR = /usr/lib/dotnet
 export DOTNET_SYSCONF_DIR = /etc/dotnet
