@@ -3,6 +3,7 @@ dotnet8 (8.0.122-8.0.22-0ubuntu1~25.04.1) plucky; urgency=medium
   * New upstream release (LP: #2130895)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
     Canonical's release database.
+  * d/t/regular-tests: synced with upstream to fix autopkgtest errors.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 17:02:25 +0100
 

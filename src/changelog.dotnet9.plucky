@@ -3,6 +3,7 @@ dotnet9 (9.0.112-9.0.11-0ubuntu1~25.04.1) plucky; urgency=medium
   * New upstream release (LP: #2130894)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
     Canonical's release database.
+  * d/t/regular-tests: synced with upstream to fix autopkgtest errors.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 17:01:22 +0100
 
