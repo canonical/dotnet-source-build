@@ -684,14 +684,6 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     print("Deleting temporary files...", flush=True)
 
-    dirPath = path.join(context.GitRepositoryClonePath, "artifacts")
-    if path.exists(dirPath):
-        shutil.rmtree(dirPath, ignore_errors=False)
-
-    dirPath = path.join(context.GitRepositoryClonePath, ".packages")
-    if path.exists(dirPath):
-        shutil.rmtree(dirPath, ignore_errors=False)
-
     shutil.rmtree(packagesDirectoryPath, ignore_errors=True)
 
 
@@ -773,6 +765,15 @@ def RemoveDirectory(context: InvocationContext,
 
 def RemoveUnwantedFiles(context: InvocationContext) -> None:
     print("Removing unwanted files...", flush=True)
+
+    # artifacts/ and .packages/ directories are created by prep{-source-build}.sh
+    dirPath = path.join(context.GitRepositoryClonePath, "artifacts")
+    if path.exists(dirPath):
+        shutil.rmtree(dirPath, ignore_errors=False)
+
+    dirPath = path.join(context.GitRepositoryClonePath, ".packages")
+    if path.exists(dirPath):
+        shutil.rmtree(dirPath, ignore_errors=False)
 
     RemoveDirectory(context, "src/runtime/src/tests/JIT/Performance/CodeQuality/Bytemark")  # noqa: E501
 
