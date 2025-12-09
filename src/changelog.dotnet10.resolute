@@ -1,3 +1,9 @@
+dotnet10 (10.0.100-10.0.0-0ubuntu2) resolute; urgency=medium
+
+  * No-change rebuild for icu soname.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 02 Dec 2025 22:49:47 +0100
+
 dotnet10 (10.0.100-10.0.0-0ubuntu1) resolute; urgency=medium
 
   * New upstream release (LP: #2130891)
