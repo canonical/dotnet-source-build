@@ -1,0 +1,6 @@
+{
+    "type": "external_source",
+    "sourceType": "git",
+    "repository": "https://github.com/canonical/dotnet-regular-tests",
+    "commitish": "f5990d68592ae7d9ddf7007d125a2833e630fd34"
+}
