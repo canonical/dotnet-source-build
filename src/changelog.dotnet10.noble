@@ -1,4 +1,11 @@
-dotnet10 (10.0.100-10.0.0-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+dotnet10 (10.0.101-10.0.1-0ubuntu1~24.04.1) noble; urgency=medium
+
+  * New upstream release.
+  * d/p/0007-fix-tempdir-on-exit-trap.patch: dropped patch included upstream.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 09 Dec 2025 18:28:55 -0300
+
+dotnet10 (10.0.100-10.0.0-0ubuntu1~24.04.1) noble; urgency=medium
 
   * New upstream release (LP: #2130891)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
