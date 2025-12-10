@@ -332,6 +332,7 @@ class ArchitectureIdentifier(StrEnum):
     ARM64 = "arm64"
     S390X = "s390x"
     PPC64LE = "ppc64le"
+    RISCV64 = "riscv64"
 
     @staticmethod
     def ParseMachineIdentifier(machineIdentifier: str) -> 'ArchitectureIdentifier':  # noqa: E501
@@ -344,6 +345,8 @@ class ArchitectureIdentifier(StrEnum):
                 return ArchitectureIdentifier.S390X
             case "ppc64le":
                 return ArchitectureIdentifier.PPC64LE
+            case "riscv64":
+                return ArchitectureIdentifier.RISCV64
             case _:
                 raise RuntimeError(f"{machineIdentifier} is an "
                                    "unknown/unsupported system architecture.")
