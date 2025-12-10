@@ -518,7 +518,7 @@ def CheckBootstrappingPrerequisites(context: InvocationContext) -> None:
     match context.BootstrapSdkArchitecture:
         case None:
             return
-        case "amd64" | "arm64" | "s390x" | "ppc64el":
+        case "amd64" | "arm64" | "s390x" | "ppc64el" | "riscv64":
             if context.HostDpkgArchitecture != context.BootstrapSdkArchitecture:  # noqa: E501
                 LogErrorAndExit(
                     "You need to run this script on an "
@@ -647,8 +647,8 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     print("Running binary toolkit...", flush=True)
 
-    if context.BootstrapSdkArchitecture in ["s390x", "ppc64el"]:
-        # NOTE: For s390x and ppc64el we unpack the bootstrapped .NET SDK
+    if context.BootstrapSdkArchitecture in ["s390x", "ppc64el", "riscv64"]:
+        # NOTE: For s390x, ppc64el and riscv64 we unpack the bootstrapped .NET SDK
         #       into $repoRoot/dotnet. The Binary Remover will then
         #       inadvertently remove the binaries inside this directory
         #       and break the bootstrap SDK in the process. For that reason,
