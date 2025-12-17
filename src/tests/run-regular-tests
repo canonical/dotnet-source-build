@@ -99,9 +99,9 @@ cd "${AUTOPKGTEST_TMP}"
 echo "INFO: create test user"
 chmod --recursive 777 "${AUTOPKGTEST_TMP}"
 useradd testrunner --create-home
-mkdir -p /home/testuser/.nuget/NuGet/
-cp ~/.nuget/NuGet/NuGet.Config /home/testuser/.nuget/NuGet/
-chown --recursive testrunner:testrunner /home/testuser/
+mkdir -p /home/testrunner/.nuget/NuGet/
+cp ~/.nuget/NuGet/NuGet.Config /home/testrunner/.nuget/NuGet/
+chown --recursive testrunner:testrunner /home/testrunner/
 
 echo "INFO: run regular-tests"
 mkdir -p "${AUTOPKGTEST_ARTIFACTS}/regular-tests"
