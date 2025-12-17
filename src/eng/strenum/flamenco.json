@@ -1,0 +1,9 @@
+{
+    "type": "external_source",
+    "sourceType": "git",
+    "repository": "https://github.com/canonical/dotnet-strenum",
+    "commitish": "dd078b33fccef6d16293fff816be41ea9d67a91a",
+    "ignoredFiles": [
+        ".gitignore"
+    ]
+}
