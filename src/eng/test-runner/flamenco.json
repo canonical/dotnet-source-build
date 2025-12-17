@@ -2,9 +2,14 @@
     "type": "external_source",
     "sourceType": "git",
     "repository": "https://github.com/canonical/dotnet-test-runner",
-    "commitish": "v1.2.0",
+    "commitish": "2fce608ca14afdce4e26815503badea472879319",
     "postClone": [
         "make GIT_COMMIT_ID",
         "make GIT_TAG_VERSION"
+    ],
+    "ignoredFiles": [
+        ".gitignore",
+        ".github/",
+        "Samples/"
     ]
 }
