@@ -1,7 +1,14 @@
 dotnet10 (10.0.101-10.0.1-0ubuntu1~25.04.1) plucky; urgency=medium
 
-  * New upstream release.
+  * New upstream release. (LP: #2134505)
   * d/p/0007-fix-tempdir-on-exit-trap.patch: dropped patch included upstream.
+  * Clean up source tree and sync tests with upstream.
+    - d/t/regular-tests: synced with upstream.
+      + Removed release-version-sane test following upstream.
+      + Removed unnecessary files from source tree.
+      + Normalized newline characters to Unix.
+    - d/t/run-regular-tests: fixed test username typo.
+    - d/eng/test-runner: removed unnecessary files from source tree.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 09 Dec 2025 18:28:55 -0300
 

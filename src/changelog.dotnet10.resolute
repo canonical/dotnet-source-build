@@ -1,3 +1,16 @@
+dotnet10 (10.0.101-10.0.1-0ubuntu2) resolute; urgency=medium
+
+  * Clean up source tree and sync tests with upstream. (LP: #2136762)
+    - d/t/regular-tests: synced with upstream.
+      + Removed release-version-sane test following upstream.
+      + Removed unnecessary files from source tree.
+      + Normalized newline characters to Unix.
+    - d/t/run-regular-tests: fixed test username typo.
+    - d/rules: cleaned up trailing spaces.
+    - d/eng/test-runner: removed unnecessary files from source tree.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 17 Dec 2025 12:09:34 -0300
+
 dotnet10 (10.0.101-10.0.1-0ubuntu1) resolute; urgency=medium
 
   * New upstream release. (LP: #2134505)
