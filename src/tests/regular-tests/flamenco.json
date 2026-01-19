@@ -2,7 +2,7 @@
     "type": "external_source",
     "sourceType": "git",
     "repository": "https://github.com/canonical/dotnet-regular-tests",
-    "commitish": "b04142da1c7b209447ff211a59c83ea6bd961436",
+    "commitish": "c69ead403db0f0e96ce8b73fa4283bfa177e773e",
     "ignoredFiles": [
         ".gitignore",
         ".github/"
