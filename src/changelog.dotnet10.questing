@@ -1,3 +1,15 @@
+dotnet10 (10.0.101-10.0.1-0ubuntu1~25.10.2) questing; urgency=medium
+
+  * Resolve package build failures (LP: #2134505):
+    - d/p/0007-fix-identitymodel-version.patch: fix FTBFS caused by date-based
+      version string calculation in the Microsoft.IdentityModel.Abstractions
+      package.
+    - d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
+      Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
+      instead of friendly name.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Jan 2026 11:17:22 -0300
+
 dotnet10 (10.0.101-10.0.1-0ubuntu1~25.10.1) questing; urgency=medium
 
   * New upstream release. (LP: #2134505)
@@ -64,13 +76,13 @@ dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa1) questing; urgency=medium
   * New upstream release
   * d/control, d/rules: remove package netstandard-targeting-pack-2.1-10.0:
     Upstream removed this package, see: https://github.com/dotnet/sdk/pull/50354.
-
+    
     IMPORTANT: If you had previous preview version of the `dotnet10` package
     installed and have installed one of the following packages: `dotnet9`,
     `dotnet8`, `dotnet7` or `dotnet6`, we recommend to reinstall these packages.
     Otherwise the .NET standard 2.1 targeting pack package will not receive any
     updates.
-
+  
   * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: roslyn-analyzers don't get
     built anymore, see: https://github.com/dotnet/dotnet/pull/1979
   * d/rules: add `--branding default` to DOTNET_BUILD_ARGS, see also:
