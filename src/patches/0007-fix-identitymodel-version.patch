@@ -1,0 +1,57 @@
+Description: [PATCH] Fix FileVersion calculation in 2026
+ This patch adds a patch file to the VMR's patching system to fix the date-based
+ version string calculation in the Microsoft.IdentityModel.Abstractions package.
+ This is a temporary patch that will be dropped in the next release of .NET.
+Author: Viktor Hofer <viktor.hofer@microsoft.com>
+Origin: upstream, https://github.com/dotnet/dotnet/commit/1def04f336cc452f7633f2ef1f157669c37c283a
+Bug-Microsoft: https://github.com/dotnet/dotnet/issues/4037
+Last-Update: 2026-01-20
+---
+Index: dotnet10/src/source-build-reference-packages/src/externalPackages/patches/azure-activedirectory-identitymodel-extensions-for-dotnet/0002-Fix-assembly-version-calculation-in-2026.patch
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ dotnet10/src/source-build-reference-packages/src/externalPackages/patches/azure-activedirectory-identitymodel-extensions-for-dotnet/0002-Fix-assembly-version-calculation-in-2026.patch	2026-01-16 10:25:12.527060138 -0300
+@@ -0,0 +1,43 @@
++From 22c9a70c8e0fe6a30190430d93f12fa29a304288 Mon Sep 17 00:00:00 2001
++From: Viktor Hofer <viktor.hofer@microsoft.com>
++Date: Mon, 5 Jan 2026 11:43:26 +0100
++Subject: [PATCH] Fix FileVersion calculation in 2026
++
++Issue: https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet/issues/3388
++
++---
++ build/common.props | 19 ++++++++++++++++++-
++ 1 file changed, 18 insertions(+), 1 deletion(-)
++
++diff --git a/build/common.props b/build/common.props
++index efd7e90e..e5f6f3ed 100644
++--- a/build/common.props
+++++ b/build/common.props
++@@ -42,7 +42,24 @@
++     <VersionSuffix Condition="'$(WilsonVersion)' == ''">$(PreviewVersionSuffix)</VersionSuffix>
++     <VersionPrefix Condition="'$(WilsonVersion)' == ''">$(WilsonCurrentVersion)</VersionPrefix>
++     <FileVersion Condition="'$(WilsonVersion)' != '' and '$(IsCustomPreview)' != 'true' ">$(WilsonVersion).$([System.DateTime]::Now.AddYears(-2019).Year)$([System.DateTime]::Now.ToString("MMdd"))</FileVersion>
++-    <FileVersion Condition="'$(WilsonVersion)' == ''">$(WilsonCurrentVersion).$([System.DateTime]::Now.AddYears(-2019).Year)$([System.DateTime]::Now.ToString("MMdd"))</FileVersion>
+++    <!-- TODO: Makes sure that the revision is higher than what's in already shipped packages (> 61231).
+++         This will overflow in 2029 though and needs a long term fix. -->
+++    <FileVersion Condition="'$(WilsonVersion)' == ''">$(WilsonCurrentVersion).$([MSBuild]::Add(
+++      61232,
+++      $([MSBuild]::Add(
+++        $([MSBuild]::Add(
+++          $([MSBuild]::Multiply(
+++            $([System.DateTime]::Now.AddYears(-2019).Year),
+++            416
+++          )),
+++          $([MSBuild]::Multiply(
+++            $([System.DateTime]::Now.ToString("MM")),
+++            32
+++          ))
+++        )),
+++        $([System.DateTime]::Now.ToString("dd"))
+++      ))
+++    ))</FileVersion>
++   </PropertyGroup>
++
++   <PropertyGroup>
++--
++2.52.0.windows.1
