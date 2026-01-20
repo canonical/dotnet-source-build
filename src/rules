@@ -78,11 +78,6 @@ ifeq ($(DOTNET_90_OR_GREATER), true)
     DOTNET_BUILD_ARGS += --source-only
     DOTNET_RELEASE_ARTIFACTS_DIR = $(CURDIR)/artifacts/assets/Release
 
-#	Temporary branding parameter for .NET 10.0 GA release
-    ifeq ($(DOTNET_100_OR_GREATER), true)
-        DOTNET_BUILD_ARGS += --branding rtm
-    endif
-
     ifeq ($(DOTNET_USE_SYSTEM_BROTLI), true)
         SYSTEM_LIBRARIES += +brotli
     endif
