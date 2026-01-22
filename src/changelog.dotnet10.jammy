@@ -1,3 +1,20 @@
+dotnet10 (10.0.102-10.0.2-0ubuntu1~22.04.1~ppa2) jammy; urgency=medium
+
+  * d/copyright: fix wrong line break location introduced by last upload.
+  * d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
+    Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
+    instead of friendly name.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 20 Jan 2026 11:07:00 -0300
+
+dotnet10 (10.0.102-10.0.2-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release (LP: 2138378).
+  * d/copyright: fix missing newline between entries.
+  * d/rules: remove temporary --branding parameter in build script call.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 13 Jan 2026 11:31:55 -0300
+
 dotnet10 (10.0.101-10.0.1-0ubuntu1~22.04.1~ppa2) jammy; urgency=medium
 
   * Clean up source tree and sync tests with upstream.

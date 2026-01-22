@@ -1,9 +1,28 @@
+dotnet9 (9.0.113-9.0.12-0ubuntu1~26.04.1~ppa2) resolute; urgency=medium
+
+  * d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
+    Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
+    instead of friendly name.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 20 Jan 2026 11:59:58 -0300
+
+dotnet9 (9.0.113-9.0.12-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release (LP: #2138327)
+  * d/t/regular-tests: synced with upstream.
+    - Removed release-version-sane test following upstream.
+    - Removed unnecessary files from source tree.
+  * d/t/run-regular-tests: fixed test username typo.
+  * d/eng/test-runner: removed unnecessary files from source tree.
+  * d/eng/test-runner/*/obj: removed unwanted build artifact directories.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 13 Jan 2026 11:23:58 -0300
+
 dotnet9 (9.0.112-9.0.11-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release (LP: #2130894)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
     Canonical's release database.
-  * d/t/regular-tests: synced with upstream to fix autopkgtest errors.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 17:01:22 +0100
 
@@ -53,7 +72,7 @@ dotnet9 (9.0.107-9.0.6-0ubuntu1) questing; urgency=medium
     - CVE-2025-30399: DLL Hijacking Remote Code Execution Vulnerability.
       When using the Download File task in Microsoft.NETCore.App.Runtime,
       omitting the DestinationFileName in the task invocation may expose
-      users to remote file hijacking if the server is malicious.
+      users to remote file hijacking if the server is malicious. 
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
@@ -147,7 +166,7 @@ dotnet9 (9.0.101-9.0.0-0ubuntu1) plucky; urgency=medium
   * New upstream release (LP: #2091009)
   * debian/rules, debian/eng/source_build_artifact_path.py: re-enable strict
     RID matching of last release.
-  * debian/eng/dotnet-version.py:
+  * debian/eng/dotnet-version.py: 
     - remove temporarily added '-rtm' to DOTNET_DEB_VERSION_SDK_ONLY due
       to higher SDK version number.
     - temporarily added '+build1' to DOTNET_DEB_VERSION_RUNTIME_ONLY to comply

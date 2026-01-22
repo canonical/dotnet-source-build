@@ -1,3 +1,18 @@
+dotnet8 (8.0.123-8.0.23-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * New upstream release (LP: #2138326)
+  * d/t/regular-tests: synced with upstream.
+    - Removed release-version-sane test following upstream.
+    - Removed unnecessary files from source tree.
+    - cgroup-limit/test.sh: fix autopkgtest regression in Ubuntu releases with
+      rust-coreutils by comparing the cgroup filesystem ID instead of friendly
+      name.
+  * d/t/run-regular-tests: fixed test username typo.
+  * d/rules: cleaned up trailing spaces.
+  * d/eng/test-runner: removed unnecessary files from source tree.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 20 Jan 2026 11:23:58 -0300
+
 dotnet8 (8.0.122-8.0.22-0ubuntu1~22.04.1) jammy; urgency=medium
 
   * New upstream release (LP: #2130895)
@@ -56,7 +71,7 @@ dotnet8 (8.0.117-8.0.17-0ubuntu1~22.04.1) jammy; urgency=medium
     - CVE-2025-30399: DLL Hijacking Remote Code Execution Vulnerability.
       When using the Download File task in Microsoft.NETCore.App.Runtime,
       omitting the DestinationFileName in the task invocation may expose
-      users to remote file hijacking if the server is malicious.
+      users to remote file hijacking if the server is malicious. 
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
@@ -114,7 +129,7 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
       context of the local system. This only affects .NET on Linux operating
       systems.
   * Unified source build transition. The debian source tree for dotnet*
-    source packages is now build from a common source (see also:
+    source packages is now build from a common source (see also: 
     https://github.com/canonical/dotnet-source-build/pull/13). Changes include:
     - d/rules: Refactored; the same file is now used by
       all dotnet* source packages. A major change is the use of substvars.
@@ -147,7 +162,7 @@ dotnet8 (8.0.112-8.0.12-0ubuntu1~22.04.1) jammy; urgency=medium
   * lintian overrides:
     - Silenced dotnet-sdk-8.0-source-built-artifacts: package-has-long-file-name
       The long file name is unavoidable.
-    - Silenced FO127 related lintian warning
+    - Silenced FO127 related lintian warning 
       hyphen-in-upstream-part-of-debian-changelog-version.
     - Silenced manpage troff warnings. Troff complains that it is silly that the
       dotnet8 manpages select a monospace font on a terminal output that only
@@ -236,7 +251,7 @@ dotnet8 (8.0.104-8.0.4-0ubuntu1~22.04.1) jammy; urgency=medium
 
   * New upstream release (LP: #2060261).
   * debian/README.source: Update support information (LP: #2058746).
-  * debian/eng/versionlib: Add support for '+really' and '~bootstrap+ARCH'
+  * debian/eng/versionlib: Add support for '+really' and '~bootstrap+ARCH' 
                            in version string.
   * debian/tests/versionlib-tests: Add versionlib unit tests
     - debian/tests/run-versionlib-tests.sh: script to run the tests
@@ -250,7 +265,7 @@ dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.2) jammy; urgency=medium
   * Add ca-certificates to dotnet-sdk-8.0 depends (LP: #2057982).
   * Replace debian/tests:
     - Add debian/tests/01_regular-tests & debian/tests/regular-tests
-      (testcases files; included version of:
+      (testcases files; included version of: 
       https://github.com/canonical/dotnet-regular-tests/).
     - Add debian/tests/build-time-tests
   * debian/rules: Added override_dh_auto_test; runs d/t/build-time-tests
@@ -258,11 +273,11 @@ dotnet8 (8.0.103-8.0.3-0ubuntu1~22.04.2) jammy; urgency=medium
   * debian/eng: Added directory for scripts & libraries used within the package:
     - Add debian/eng/test-runner (executes debian/tests/regular-tests testcases;
       included version of: https://github.com/canonical/dotnet-test-runner).
-    - Added debian/eng/versionlib (.NET version parsing library; used by
+    - Added debian/eng/versionlib (.NET version parsing library; used by 
       debian/tests).
     - Added debian/eng/strenum; needed by debian/eng/versionlib
     - Added debian/eng/dotnet-version.py; needed by debian/tests/01_regular-tests
-    - Moved debian/watch-script.sh and debian/build-dotnet-tarball.sh
+    - Moved debian/watch-script.sh and debian/build-dotnet-tarball.sh 
       to debian/eng
   * Removed debian/repack-dotnet-tarball.sh (deprecated)
 
