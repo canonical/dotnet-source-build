@@ -1,9 +1,12 @@
 dotnet10 (10.0.102-10.0.2-0ubuntu1) resolute; urgency=medium
 
-  * New upstream release (LP: #XXXXXX)
+  * New upstream release (LP: #2138378)
   * d/p/0007-fix-identitymodel-version.patch: dropped patch included upstream.
+  * d/control: use default LLVM since FTBFS with LLVM 21 was fixed upstream.
+  * d/copyright: fix missing newline between entries.
+  * d/rules: remove temporary --branding parameter in build script call.
 
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Jan 2026 11:17:22 -0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 26 Jan 2026 10:27:55 -0300
 
 dotnet10 (10.0.101-10.0.1-0ubuntu3) resolute; urgency=medium
 
