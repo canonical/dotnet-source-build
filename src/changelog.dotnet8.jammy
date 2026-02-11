@@ -1,3 +1,16 @@
+dotnet8 (8.0.124-8.0.24-0ubuntu1~22.04.1) jammy; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-21218: An attacker could exploit this vulnerability in
+      System.Security.Cryptography.Cose by crafting a malicious payload that
+      bypasses the security checks in the affected .NET versions, potentially
+      leading to unauthorized access or data manipulation.
+  * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: refreshed patch to fix
+    hunk failure.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 02 Feb 2026 17:30:30 -0300
+
 dotnet8 (8.0.123-8.0.23-0ubuntu1~22.04.1) jammy; urgency=medium
 
   * New upstream release (LP: #2138326)
