@@ -71,12 +71,19 @@ jobs:
 
           echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
 
+      - name: Sign orig tarball
+        run: |
+          echo -n "${{secrets.BASE64_GPG_SIGNING_KEY}}" | base64 --decode | gpg --import
+          gpg --output "./dist/${{steps.build-orig-tarball.outputs.tarballName}}.asc" \
+              --detach-sig "./dist/${{steps.build-orig-tarball.outputs.tarballName}}"
+
       - name: Upload orig tarball to workflow artifacts
-        id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{steps.build-orig-tarball.outputs.tarballName}}
-          path: ./dist/${{steps.build-orig-tarball.outputs.tarballName}}
+          path: |
+            ./dist/${{steps.build-orig-tarball.outputs.tarballName}}
+            ./dist/${{steps.build-orig-tarball.outputs.tarballName}}.asc
 
   bootstrap-sdk:
     if: ${{ inputs.bootstrap }}
@@ -218,10 +225,17 @@ jobs:
           fi
 
           echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
+      
+      - name: Sign orig tarball
+        run: |
+          echo -n "${{secrets.BASE64_GPG_SIGNING_KEY}}" | base64 --decode | gpg --import
+          gpg --output "./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}.asc" \
+              --detach-sig "./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}"
 
       - name: Upload orig tarball to workflow artifacts
-        id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
-          path: ./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
+          path: |
+            ./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
+            ./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}.asc
