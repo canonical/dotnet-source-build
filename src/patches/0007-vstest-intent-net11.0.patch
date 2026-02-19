@@ -1,0 +1,19 @@
+Description: Use .NET 11 as the target framework for vstest/Intent
+ Fixed ppc64el FTBFS
+Author: Mateus Rodrigues de Morais <mateus.morais@canonical.com>, Dominik Viererbe <dominik.viererbe@canonical.com>
+Origin: vendor, https://git.launchpad.net/ubuntu/+source/dotnet8/commit/debian/patches/0003-vstest-intent-net8.0.patch?h=ubuntu/oracular-devel&id=fb41115fd9b9992b824198c3e3909aee976e22f5
+Forwarded: not-needed
+Last-Update: 2025-04-09
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/vstest/test/Intent/Intent.csproj
++++ b/src/vstest/test/Intent/Intent.csproj
+@@ -2,7 +2,7 @@
+ 
+   <PropertyGroup>
+     <OutputType>Exe</OutputType>
+-    <TargetFrameworks>net8.0</TargetFrameworks>
++    <TargetFrameworks>net11.0</TargetFrameworks>
+     <ImplicitUsings>enable</ImplicitUsings>
+     <Nullable>enable</Nullable>
+   </PropertyGroup>

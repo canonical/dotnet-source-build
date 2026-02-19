@@ -1,0 +1,5 @@
+dotnet11 (11.0.100-11.0.0~preview2~bootstrap+amd64-0ubuntu1~25.10.1~ppa1) resolute; urgency=medium
+
+  * Initial packaging.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 19 Mar 2026 16:43:07 -0300
