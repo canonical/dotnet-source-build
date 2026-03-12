@@ -1,3 +1,9 @@
+dotnet10 (10.0.105-10.0.5-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 12 Mar 2026 17:11:45 -0300
+
 dotnet10 (10.0.104-10.0.4-0ubuntu1) resolute; urgency=medium
 
   * New upstream release
