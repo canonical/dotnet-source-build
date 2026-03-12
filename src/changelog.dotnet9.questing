@@ -1,3 +1,18 @@
+dotnet9 (9.0.115-9.0.14-0ubuntu1~25.10.1) questing-security; urgency=medium
+
+  [ Mateus Rodrigues de Morais ]
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26130: Possible denial-of-service via SignalR stateful
+      reconnect buffer overfill.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26127: System.Buffers.Text.Base64Url.DecodeFromChars
+      out-of-bounds read from malformed Base64Url input. A bug in the
+      implementation causes out-of-bound reads of the DecodingMap, potentially
+      leading to Access Violation Exceptions (AVEs) when unsafe code is used.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Sun, 08 Mar 2026 21:28:24 +0200
+
 dotnet9 (9.0.114-9.0.13-0ubuntu1~25.10.1) questing; urgency=medium
 
   * New upstream release
@@ -82,7 +97,7 @@ dotnet9 (9.0.107-9.0.6-0ubuntu1) questing; urgency=medium
     - CVE-2025-30399: DLL Hijacking Remote Code Execution Vulnerability.
       When using the Download File task in Microsoft.NETCore.App.Runtime,
       omitting the DestinationFileName in the task invocation may expose
-      users to remote file hijacking if the server is malicious. 
+      users to remote file hijacking if the server is malicious.
 
  -- Dominik Viererbe <dominik.viererbe@canonical.com>  Mon, 09 Jun 2025 12:16:30 +0300
 
@@ -176,7 +191,7 @@ dotnet9 (9.0.101-9.0.0-0ubuntu1) plucky; urgency=medium
   * New upstream release (LP: #2091009)
   * debian/rules, debian/eng/source_build_artifact_path.py: re-enable strict
     RID matching of last release.
-  * debian/eng/dotnet-version.py: 
+  * debian/eng/dotnet-version.py:
     - remove temporarily added '-rtm' to DOTNET_DEB_VERSION_SDK_ONLY due
       to higher SDK version number.
     - temporarily added '+build1' to DOTNET_DEB_VERSION_RUNTIME_ONLY to comply
