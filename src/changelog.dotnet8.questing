@@ -1,3 +1,13 @@
+dotnet8 (8.0.125-8.0.25-0ubuntu1~25.10.1) questing-security; urgency=medium
+
+  [ Mateus Rodrigues de Morais ]
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26130: Possible denial-of-service via SignalR stateful
+      reconnect buffer overfill.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Sun, 08 Mar 2026 21:24:25 +0200
+
 dotnet8 (8.0.124-8.0.24-0ubuntu1~25.10.1) questing; urgency=medium
 
   * New upstream release

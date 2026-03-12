@@ -1,3 +1,17 @@
+dotnet9 (9.0.115-9.0.14-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26130: Possible denial-of-service via SignalR stateful
+      reconnect buffer overfill.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26127: System.Buffers.Text.Base64Url.DecodeFromChars
+      out-of-bounds read from malformed Base64Url input. A bug in the
+      implementation causes out-of-bound reads of the DecodingMap, potentially
+      leading to Access Violation Exceptions (AVEs) when unsafe code is used.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 06 Mar 2026 10:28:15 -0300
+
 dotnet9 (9.0.114-9.0.13-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release

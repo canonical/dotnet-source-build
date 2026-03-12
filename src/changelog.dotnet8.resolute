@@ -1,3 +1,19 @@
+dotnet8 (8.0.125-8.0.25-0ubuntu1~26.04.1~ppa2) resolute; urgency=medium
+
+  * d/p/0008-fix-dotnet8-rust-coreutils-regression.patch: fix rust-coreutils
+    regression by replacing the usage of comm and sort in argument parsing.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 10 Mar 2026 14:59:00 -0300
+
+dotnet8 (8.0.125-8.0.25-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26130: Possible denial-of-service via SignalR stateful
+      reconnect buffer overfill.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 06 Mar 2026 10:31:44 -0300
+
 dotnet8 (8.0.124-8.0.24-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
