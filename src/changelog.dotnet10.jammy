@@ -1,3 +1,21 @@
+dotnet10 (10.0.106-10.0.6-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-33116: Possible denial of service via infinite recursion in
+      XmlDecryptionTransform.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-32203: Possible denial of service via stack overflow in
+      EncryptedKey nested decryption.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-32178: SMTP command injection and header injection via
+      MailAddress parsing flaw in System.Net.Mail.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-26171: denial of service and security feature bypass via unsafe
+      transforms in EncryptedXml.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 16 Apr 2026 11:01:22 -0300
+
 dotnet10 (10.0.105-10.0.5-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release
