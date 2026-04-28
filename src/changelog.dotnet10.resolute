@@ -1,7 +1,11 @@
-dotnet10 (10.0.106-10.0.6-0ubuntu1) resolute; urgency=medium
+dotnet10 (10.0.107-10.0.7-0ubuntu1~26.04.1) resolute-security; urgency=medium
 
-  [ Mateus Rodrigues de Morais ]
   * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-40372: A bug in Microsoft.AspNetCore.DataProtection
+      10.0.0-10.0.6 NuGet packages can give an attacker the opportunity to
+      execute an Elevation of Privilege attack by forging authentication
+      cookies, and also allows some protected payloads to be decrypted.
   * SECURITY UPDATE: denial of service
     - CVE-2026-33116: Possible denial of service via infinite recursion in
       XmlDecryptionTransform.
@@ -15,7 +19,7 @@ dotnet10 (10.0.106-10.0.6-0ubuntu1) resolute; urgency=medium
     - CVE-2026-26171: denial of service and security feature bypass via unsafe
       transforms in EncryptedXml.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Tue, 14 Apr 2026 19:43:50 +0000
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 22 Apr 2026 09:43:45 -0300
 
 dotnet10 (10.0.105-10.0.5-0ubuntu1) resolute; urgency=medium
 
