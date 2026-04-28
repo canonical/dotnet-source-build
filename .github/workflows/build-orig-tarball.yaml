@@ -19,6 +19,10 @@ on:
         description: 'Build bootstraped orig tarballs'
         required: false
         type: boolean
+      deterministic:
+        description: 'Produce a deterministic tarball (stable hash across runs)'
+        required: false
+        type: boolean
 
 
 jobs:
@@ -38,6 +42,7 @@ jobs:
           build-id: ${{ inputs.buildId }}
           vendor-name: "Canonical Ltd."
           security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
+          deterministic: ${{ inputs.deterministic }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7
@@ -180,6 +185,7 @@ jobs:
           include-bootstrap-sdk: "true"
           bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
           bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
+          deterministic: ${{ inputs.deterministic }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7

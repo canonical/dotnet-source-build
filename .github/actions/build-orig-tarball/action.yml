@@ -43,6 +43,10 @@ inputs:
     description: "Path to a local prebuilts tarball. Only used when include-bootstrap-sdk is true."
     required: false
     default: ""
+  deterministic:
+    description: "Produce a deterministic tarball (stable hash across runs). Uses the HEAD commit timestamp as mtime and single-threaded xz compression."
+    required: false
+    default: "false"
 
 outputs:
   tarball-name:
@@ -118,6 +122,10 @@ runs:
         fi
 
         BUILD_ARGS+=(--verbose)
+
+        if [[ "${{ inputs.deterministic }}" == "true" ]]; then
+          BUILD_ARGS+=(--deterministic)
+        fi
 
         python3 "${{ github.action_path }}/../../../eng/build-orig-tarball.py" "${BUILD_ARGS[@]}"
 
