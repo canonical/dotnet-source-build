@@ -1,0 +1,126 @@
+name: "Build .NET orig tarball"
+description: >
+  Creates a .NET orig tarball for Ubuntu source packages using
+  eng/build-orig-tarball.py. Does not upload any artifacts.
+
+inputs:
+  source-version:
+    description: >
+      FO127 compliant version string of the .NET release
+      (e.g. '8.0.100-8.0.0~preview1', '9.0.106-9.0.5').
+      Do NOT add a '~bootstrap' suffix when including a bootstrap SDK.
+    required: true
+  git-commitish:
+    description: "Git commit-ish (e.g. a tag) of the .NET release to package."
+    required: true
+  git-repository:
+    description: "Git repository URL to clone. Ignored when security-partners-access-token is set."
+    required: false
+    default: "https://github.com/dotnet/dotnet"
+  build-id:
+    description: "Official Build Id (only needed for .NET 10+)."
+    required: false
+    default: ""
+  vendor-name:
+    description: "Name of the organisation or person creating the tarball."
+    required: false
+    default: ""
+  security-partners-access-token:
+    description: >
+      Access token for the .NET security partners repository.
+      When set, the security partners repository is used instead of git-repository.
+    required: false
+    default: ""
+  include-bootstrap-sdk:
+    description: "Include a .NET SDK for bootstrapping (adds a ~bootstrap suffix to the tarball name)."
+    required: false
+    default: "false"
+  bootstrap-sdk-path:
+    description: "Path to a local bootstrap SDK tarball. Only used when include-bootstrap-sdk is true."
+    required: false
+    default: ""
+  bootstrap-prebuilts-tarball-path:
+    description: "Path to a local prebuilts tarball. Only used when include-bootstrap-sdk is true."
+    required: false
+    default: ""
+
+outputs:
+  tarball-name:
+    description: "Filename of the generated orig tarball (e.g. dotnet8_8.0.100-8.0.0.orig.tar.xz)."
+    value: ${{ steps.build.outputs.tarball-name }}
+  tarball-path:
+    description: "Absolute path to the generated orig tarball."
+    value: ${{ steps.build.outputs.tarball-path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Parse source version
+      id: parse-version
+      shell: bash
+      run: |
+        MAJOR_VERSION=$(echo "${{ inputs.source-version }}" | cut -d '.' -f 1)
+        MINOR_VERSION=$(echo "${{ inputs.source-version }}" | cut -d '.' -f 2)
+
+        echo "dotnetMajorVersion=$MAJOR_VERSION" >> $GITHUB_OUTPUT
+        echo "dotnetMinorVersion=$MINOR_VERSION" >> $GITHUB_OUTPUT
+        echo "dotnetMajorMinorVersion=$MAJOR_VERSION.$MINOR_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Install dependencies
+      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 }}
+      shell: bash
+      run: |
+        sudo add-apt-repository ppa:dotnet/backports
+        sudo add-apt-repository ppa:dotnet/previews
+        sudo add-apt-repository ppa:dotnet-bootstrap/amd64
+        sudo apt-get install --assume-yes \
+          dotnet${{ steps.parse-version.outputs.dotnetMajorVersion }} \
+          dotnet-sdk-${{ steps.parse-version.outputs.dotnetMajorMinorVersion }}-source-built-artifacts
+
+    - name: Build orig tarball
+      id: build
+      shell: bash
+      run: |
+        BUILD_ARGS=()
+
+        if [[ -n "${{ inputs.security-partners-access-token }}" ]]; then
+          BUILD_ARGS+=(
+            --clone-security-partners-repository
+            --security-partners-repository-access-token "${{ inputs.security-partners-access-token }}"
+          )
+        else
+          BUILD_ARGS+=(--clone-git-repository "${{ inputs.git-repository }}")
+        fi
+
+        BUILD_ARGS+=(
+          --source-version "${{ inputs.source-version }}"
+          --git-reference "${{ inputs.git-commitish }}"
+        )
+
+        if [[ -n "${{ inputs.build-id }}" ]]; then
+          BUILD_ARGS+=(--build-id "${{ inputs.build-id }}")
+        fi
+
+        if [[ -n "${{ inputs.vendor-name }}" ]]; then
+          BUILD_ARGS+=(--vendor-name "${{ inputs.vendor-name }}")
+        fi
+
+        if [[ "${{ inputs.include-bootstrap-sdk }}" == "true" ]]; then
+          BUILD_ARGS+=(--include-bootstrap-sdk)
+
+          if [[ -n "${{ inputs.bootstrap-sdk-path }}" ]]; then
+            BUILD_ARGS+=(--with-bootstrap-sdk "${{ inputs.bootstrap-sdk-path }}")
+          fi
+
+          if [[ -n "${{ inputs.bootstrap-prebuilts-tarball-path }}" ]]; then
+            BUILD_ARGS+=(--with-bootstrap-prebuilts-tarball "${{ inputs.bootstrap-prebuilts-tarball-path }}")
+          fi
+        fi
+
+        BUILD_ARGS+=(--verbose)
+
+        python3 "${{ github.action_path }}/../../../eng/build-orig-tarball.py" "${BUILD_ARGS[@]}"
+
+        TARBALL_NAME=$(find dist -name 'dotnet*_${{ inputs.source-version }}*.orig.tar.*' -printf '%f')
+        echo "tarball-name=${TARBALL_NAME}" >> $GITHUB_OUTPUT
+        echo "tarball-path=${{ github.workspace }}/dist/${TARBALL_NAME}" >> $GITHUB_OUTPUT
