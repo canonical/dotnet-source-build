@@ -47,6 +47,10 @@ inputs:
     description: "Produce a deterministic tarball (stable hash across runs). Uses the HEAD commit timestamp as mtime and single-threaded xz compression."
     required: false
     default: "false"
+  output-directory:
+    description: "Directory where the orig tarball will be written. Defaults to <github.workspace>/dist."
+    required: false
+    default: ""
 
 outputs:
   tarball-name:
@@ -127,8 +131,12 @@ runs:
           BUILD_ARGS+=(--deterministic)
         fi
 
+        OUTPUT_DIR="${{ inputs.output-directory }}"
+        OUTPUT_DIR="${OUTPUT_DIR:-${{ github.workspace }}/dist}"
+        BUILD_ARGS+=(--output-directory "${OUTPUT_DIR}")
+
         python3 "${{ github.action_path }}/../../../eng/build-orig-tarball.py" "${BUILD_ARGS[@]}"
 
-        TARBALL_NAME=$(find dist -name 'dotnet*_${{ inputs.source-version }}*.orig.tar.*' -printf '%f')
+        TARBALL_NAME=$(find "${OUTPUT_DIR}" -name 'dotnet*_${{ inputs.source-version }}*.orig.tar.*' -printf '%f')
         echo "tarball-name=${TARBALL_NAME}" >> $GITHUB_OUTPUT
-        echo "tarball-path=${{ github.workspace }}/dist/${TARBALL_NAME}" >> $GITHUB_OUTPUT
+        echo "tarball-path=${OUTPUT_DIR}/${TARBALL_NAME}" >> $GITHUB_OUTPUT
