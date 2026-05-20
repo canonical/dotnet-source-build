@@ -1,4 +1,4 @@
-dotnet9 (9.0.117-9.0.16-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+dotnet9 (9.0.117-9.0.16-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
 
   * New upstream release.
   * d/t/regular-tests/check-test-results: match to any NU1102 error

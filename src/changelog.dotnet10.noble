@@ -1,3 +1,17 @@
+dotnet10 (10.0.108-10.0.8-0ubuntu1~24.04.1) noble; urgency=medium
+
+  * New upstream release (LP: #2152598)
+  * d/t/regular-tests/check-test-results: match to any NU1102 error
+    occurrences when ignoring package not found restore errors.
+  * d/t/regular-tests/template-test/test.json: increment timeout multiplier to
+    avoid timeout errors when running on the autopkgtest cloud.
+  * d/t/regular-tests/tools-in-path/test.json: skip test when running on the
+    toolchains-ci CI pipeline.
+  * d/t/run-regular-tests: define environment variable to selectively add the
+    'toolchains-ci' trait to the test runner.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 14 May 2026 09:54:32 +0200
+
 dotnet10 (10.0.107-10.0.7-0ubuntu1~24.04.1) noble-security; urgency=medium
 
   * New upstream release

@@ -1,4 +1,4 @@
-dotnet10 (10.0.108-10.0.8-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.108-10.0.8-0ubuntu1) stonking; urgency=medium
 
   * New upstream release (LP: #2152598)
   * d/t/regular-tests/check-test-results: match to any NU1102 error
@@ -12,7 +12,7 @@ dotnet10 (10.0.108-10.0.8-0ubuntu1~25.10.1) questing; urgency=medium
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 14 May 2026 09:54:32 +0200
 
-dotnet10 (10.0.107-10.0.7-0ubuntu1~25.10.1) questing-security; urgency=medium
+dotnet10 (10.0.107-10.0.7-0ubuntu1~26.04.1) resolute-security; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: elevation of privilege
@@ -20,13 +20,6 @@ dotnet10 (10.0.107-10.0.7-0ubuntu1~25.10.1) questing-security; urgency=medium
       10.0.0-10.0.6 NuGet packages can give an attacker the opportunity to
       execute an Elevation of Privilege attack by forging authentication
       cookies, and also allows some protected payloads to be decrypted.
-
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 22 Apr 2026 09:43:45 -0300
-
-dotnet10 (10.0.106-10.0.6-0ubuntu1~25.10.1) questing-security; urgency=medium
-
-  [ Mateus Rodrigues de Morais ]
-  * New upstream release
   * SECURITY UPDATE: denial of service
     - CVE-2026-33116: Possible denial of service via infinite recursion in
       XmlDecryptionTransform.
@@ -40,17 +33,16 @@ dotnet10 (10.0.106-10.0.6-0ubuntu1~25.10.1) questing-security; urgency=medium
     - CVE-2026-26171: denial of service and security feature bypass via unsafe
       transforms in EncryptedXml.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Tue, 14 Apr 2026 19:43:50 +0000
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 22 Apr 2026 09:43:45 -0300
 
-dotnet10 (10.0.105-10.0.5-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.105-10.0.5-0ubuntu1) resolute; urgency=medium
 
   * New upstream release. (LP: #2144328)
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 12 Mar 2026 17:11:45 -0300
 
-dotnet10 (10.0.104-10.0.4-0ubuntu1~25.10.1) questing-security; urgency=medium
+dotnet10 (10.0.104-10.0.4-0ubuntu1) resolute; urgency=medium
 
-  [ Mateus Rodrigues de Morais ]
   * New upstream release
   * SECURITY UPDATE: denial of service
     - CVE-2026-26130: Possible denial-of-service via SignalR stateful
@@ -61,9 +53,9 @@ dotnet10 (10.0.104-10.0.4-0ubuntu1~25.10.1) questing-security; urgency=medium
       implementation causes out-of-bound reads of the DecodingMap, potentially
       leading to Access Violation Exceptions (AVEs) when unsafe code is used.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Sun, 08 Mar 2026 21:33:40 +0200
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 02 Mar 2026 14:37:22 -0300
 
-dotnet10 (10.0.103-10.0.3-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.103-10.0.3-0ubuntu1) resolute; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: security feature bypass
@@ -74,32 +66,30 @@ dotnet10 (10.0.103-10.0.3-0ubuntu1~25.10.1) questing; urgency=medium
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 02 Feb 2026 17:30:30 -0300
 
-dotnet10 (10.0.102-10.0.2-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.102-10.0.2-0ubuntu1) resolute; urgency=medium
 
   * New upstream release (LP: #2138378)
   * d/p/0007-fix-identitymodel-version.patch: dropped patch included upstream.
+  * d/control: use default LLVM since FTBFS with LLVM 21 was fixed upstream.
   * d/copyright: fix missing newline between entries.
   * d/rules: remove temporary --branding parameter in build script call.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 26 Jan 2026 10:27:55 -0300
 
-dotnet10 (10.0.101-10.0.1-0ubuntu1~25.10.2) questing; urgency=medium
+dotnet10 (10.0.101-10.0.1-0ubuntu3) resolute; urgency=medium
 
-  * Resolve package build failures (LP: #2134505):
-    - d/p/0007-fix-identitymodel-version.patch: fix FTBFS caused by date-based
-      version string calculation in the Microsoft.IdentityModel.Abstractions
-      package.
-    - d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
-      Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
-      instead of friendly name.
+  * d/p/0007-fix-identitymodel-version.patch: fix FTBFS caused by date-based
+    version string calculation in the Microsoft.IdentityModel.Abstractions
+    package. (LP: #2134505)
+  * d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
+    Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
+    instead of friendly name.
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Jan 2026 11:17:22 -0300
 
-dotnet10 (10.0.101-10.0.1-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.101-10.0.1-0ubuntu2) resolute; urgency=medium
 
-  * New upstream release. (LP: #2134505)
-  * d/p/0007-fix-tempdir-on-exit-trap.patch: dropped patch included upstream.
-  * Clean up source tree and sync tests with upstream.
+  * Clean up source tree and sync tests with upstream. (LP: #2136762)
     - d/t/regular-tests: synced with upstream.
       + Removed release-version-sane test following upstream.
       + Removed unnecessary files from source tree.
@@ -108,15 +98,29 @@ dotnet10 (10.0.101-10.0.1-0ubuntu1~25.10.1) questing; urgency=medium
     - d/rules: cleaned up trailing spaces.
     - d/eng/test-runner: removed unnecessary files from source tree.
 
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 17 Dec 2025 12:09:34 -0300
+
+dotnet10 (10.0.101-10.0.1-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release. (LP: #2134505)
+  * d/p/0007-fix-tempdir-on-exit-trap.patch: dropped patch included upstream.
+
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 09 Dec 2025 18:28:55 -0300
 
-dotnet10 (10.0.100-10.0.0-0ubuntu1~25.10.1) questing; urgency=medium
+dotnet10 (10.0.100-10.0.0-0ubuntu2) resolute; urgency=medium
+
+  * No-change rebuild for icu soname.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 02 Dec 2025 22:49:47 +0100
+
+dotnet10 (10.0.100-10.0.0-0ubuntu1) resolute; urgency=medium
 
   * New upstream release (LP: #2130891)
   * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
     Canonical's release database.
   * d/rules: add `--branding rtm` to DOTNET_BUILD_ARGS.
   * d/p/0007-fix-tempdir-on-exit-trap.patch: fix unbound variable error.
+  * d/control: pin LLVM 20 to avoid FTBFS on LLVM 21.
   * d/dotnet-host-10.0.links: fixed dnx link name to /usr/bin/dnx (DNX_BIN).
   * d/eng/test-runner/*/obj: removed unwanted build artifact directory from
     source package.
@@ -125,7 +129,7 @@ dotnet10 (10.0.100-10.0.0-0ubuntu1~25.10.1) questing; urgency=medium
 
  -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 16:11:30 +0100
 
-dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1~25.10.2) questing-security; urgency=medium
+dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
 
   [ Dominik Viererbe ]
   * New upstream release
@@ -138,7 +142,7 @@ dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1~25.10.2) questing-security; urgency=mediu
       ('http request/response smuggling') in ASP.NET Core allows an authorized
       attacker to bypass a security feature over a network.
 
- -- Ian Constantin <ian.constantin@canonical.com>  Tue, 14 Oct 2025 22:24:22 +0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 16 Oct 2025 09:48:01 -0300
 
 dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1) questing; urgency=medium
 
