@@ -1,0 +1,5 @@
+dotnet11 (11.0.100-11.0.0~preview4~bootstrap+amd64-0ubuntu1~25.10.1~ppa1) stonking; urgency=medium
+
+  * Initial packaging.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 20 May 2026 15:22:07 -0300
