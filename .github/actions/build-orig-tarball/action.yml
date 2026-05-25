@@ -93,8 +93,8 @@ runs:
       shell: bash
       run: |
         sudo apt-get install --assume-yes \
-        dotnet${{ steps.parse-version.outputs.dotnetMajorVersion }} \
-        dotnet-sdk-${{ steps.parse-version.outputs.dotnetMajorMinorVersion }}-source-built-artifacts
+          dotnet${{ steps.parse-version.outputs.dotnetMajorVersion }} \
+          dotnet-sdk-${{ steps.parse-version.outputs.dotnetMajorMinorVersion }}-source-built-artifacts
 
     - name: Build orig tarball
       id: build
