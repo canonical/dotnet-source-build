@@ -89,7 +89,7 @@ runs:
         fi
 
     - name: Install .NET SDK
-      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 }}
+      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && inputs.include-bootstrap-sdk == 'false' }}
       shell: bash
       run: |
         sudo apt-get install --assume-yes \
