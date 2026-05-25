@@ -15,6 +15,10 @@ on:
         description: 'Official Build Id (only needed for .NET 10+)'
         required: false
         type: string
+      extraPpaSource:
+        description: 'Extra apt source for installing the .NET SDK (e.g. "ppa:dotnet-bootstrap/amd64")'
+        required: false
+        type: string
       bootstrap:
         description: 'Build bootstraped orig tarballs'
         required: false
@@ -43,6 +47,7 @@ jobs:
           vendor-name: "Canonical Ltd."
           security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
           deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7
@@ -186,6 +191,7 @@ jobs:
           bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
           bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
           deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7
