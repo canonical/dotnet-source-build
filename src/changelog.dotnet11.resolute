@@ -1,4 +1,4 @@
-dotnet11 (11.0.100-11.0.0~preview4-0ubuntu1~26.04.1~ppa2) resolute; urgency=medium
+dotnet11 (11.0.100-11.0.0~preview4-0ubuntu1~26.04.1~ppa3) resolute; urgency=medium
 
   * Initial packaging.
 

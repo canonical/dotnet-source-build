@@ -46,9 +46,9 @@ Description: .NET CLI tools and runtime
 Package: dotnet-host-11.0
 Architecture: amd64 arm64 s390x ppc64el
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Conflicts: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
-Replaces: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
-Provides: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0
+Conflicts: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0, dotnet-host-10.0
+Replaces: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0, dotnet-host-10.0
+Provides: dotnet-host, dotnet-host-7.0, dotnet-host-8.0, dotnet-host-9.0, dotnet-host-10.0
 Description: .NET host command line
  The .NET host is a command line program that runs a standalone .NET
  application or launches the SDK.
