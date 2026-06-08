@@ -1,5 +1,11 @@
-dotnet8 (8.0.127-8.0.27-0ubuntu1~22.04.1) jammy; urgency=medium
+dotnet8 (8.0.127-8.0.27-0ubuntu1~22.04.1) jammy-security; urgency=medium
 
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-42899: Loop with unreachable exit condition ('infinite loop')
+      in ASP.NET Core allows an unauthorized attacker to deny service over a
+      network.
+
+  [ Mateus Rodrigues de Morais ]
   * New upstream release (LP: #2152591)
   * d/t/regular-tests/check-test-results: match to any NU1102 error
     occurrences when ignoring package not found restore errors.
@@ -10,7 +16,7 @@ dotnet8 (8.0.127-8.0.27-0ubuntu1~22.04.1) jammy; urgency=medium
   * d/t/run-regular-tests: define environment variable to selectively add the
     'toolchains-ci' trait to the test runner.
 
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 14 May 2026 09:54:32 +0200
+ -- Ian Constantin <ian.constantin@canonical.com>  Fri, 22 May 2026 17:45:46 +0300
 
 dotnet8 (8.0.126-8.0.26-0ubuntu1~22.04.1) jammy-security; urgency=medium
 
