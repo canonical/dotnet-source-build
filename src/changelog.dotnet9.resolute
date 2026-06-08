@@ -1,3 +1,14 @@
+dotnet9 (9.0.118-9.0.17-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-45591: Stack overflow DoS via deeply-nested MessagePack arrays.
+  * SECURITY UPDATE: arbitrary file creation
+    - CVE-2026-45490: Arbitrary file creation/truncation via LogFile named
+      pipe.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 08 Jun 2026 14:29:33 -0300
+
 dotnet9 (9.0.117-9.0.16-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release.

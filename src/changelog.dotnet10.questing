@@ -1,3 +1,14 @@
+dotnet10 (10.0.109-10.0.9-0ubuntu1~25.10.1) questing-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-45591: Stack overflow DoS via deeply-nested MessagePack arrays.
+  * SECURITY UPDATE: arbitrary file creation
+    - CVE-2026-45490: Arbitrary file creation/truncation via LogFile named
+      pipe.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 08 Jun 2026 14:29:33 -0300
+
 dotnet10 (10.0.108-10.0.8-0ubuntu1~25.10.1) questing-security; urgency=medium
 
   * SECURITY UPDATE: denial of service
