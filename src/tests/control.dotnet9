@@ -9,6 +9,7 @@ Depends:
     build-essential,
     coreutils,
     curl,
+    distro-info,
     file,
     findutils,
     git,
