@@ -1,3 +1,16 @@
+dotnet8 (8.0.128-8.0.28-0ubuntu1~26.10.2~ppa1) stonking; urgency=medium
+
+  * Fix `dotnet sdk check` command source URL. (LP: #2156464)
+    - d/eng/dotnet-pkg-info.mk: strip suffixes from changelog distribution
+      name to avoid using wrong release names.
+    - d/t/regular-tests/dotnet-sdk-check-url-verification: test to verify the
+      sdk check command queries a URL with a valid release name.
+    - d/t/regular-tests/README.md: add distro-info as a necessary dependency
+      for the testsuite.
+    - d/t/control: add distro-info as a test dependency.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 11 Jun 2026 17:38:34 -0300
+
 dotnet8 (8.0.128-8.0.28-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
 
   * New upstream release

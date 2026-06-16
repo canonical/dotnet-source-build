@@ -1,3 +1,16 @@
+dotnet9 (9.0.118-9.0.17-0ubuntu1~22.04.2~ppa1) jammy; urgency=medium
+
+  * Fix `dotnet sdk check` command source URL. (LP: #2156464)
+    - d/eng/dotnet-pkg-info.mk: strip suffixes from changelog distribution
+      name to avoid using wrong release names.
+    - d/t/regular-tests/dotnet-sdk-check-url-verification: test to verify the
+      sdk check command queries a URL with a valid release name.
+    - d/t/regular-tests/README.md: add distro-info as a necessary dependency
+      for the testsuite.
+    - d/t/control: add distro-info as a test dependency.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 11 Jun 2026 17:38:34 -0300
+
 dotnet9 (9.0.118-9.0.17-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release
