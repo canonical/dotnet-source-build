@@ -1,5 +1,6 @@
 # This Makefile fragment defines the following package information variables:
 #
+#  RELEASE: The release name from the changelog (e.g., "resolute", "noble").
 #  DOTNET_MAJOR: Major .NET version number from the latest changelog entry.
 #  DOTNET_MINOR: Minor .NET version number from the latest changelog entry.
 #  DOTNET_RUNTIME_ID: .NET runtime identifier of the current host.
@@ -19,7 +20,7 @@
 #  DOTNET_USE_SYSTEM_RAPIDJSON: A boolean (true/false) that indicates whether to use the system-provided rapidjson library.
 #  DOTNET_USE_SYSTEM_ZLIB: A boolean (true/false) that indicates whether to use the system-provided zlib library.
 
-export RELEASE = $(shell dpkg-parsechangelog --show-field Distribution)
+export RELEASE = $(shell dpkg-parsechangelog --show-field Distribution | cut -d- -f1)
 export DOTNET_MAJOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --major)
 export DOTNET_MINOR = $(shell $(CURDIR)/debian/eng/dotnet-version.py --minor)
 
