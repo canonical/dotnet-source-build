@@ -1,8 +1,11 @@
 dotnet11 (11.0.100-11.0.0~preview5-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release.
+  * d/aspnetcore-runtime-11.0.docs: updated razor's NOTICE file path.
+  * d/dotnet-sdk-11.0.docs: updated razor's NOTICE file path.
+  * d/p/0009-fix-roslyn-dotnet11-ftbfs.patch: fix Roslyn FTBFS.
 
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 10 Jun 2026 17:00:00 -0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 30 Jun 2026 10:24:11 -0300
 
 dotnet11 (11.0.100-11.0.0~preview4-0ubuntu1~26.04.1~ppa3) resolute; urgency=medium
 
