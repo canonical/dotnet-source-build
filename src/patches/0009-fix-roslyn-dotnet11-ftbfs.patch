@@ -1,0 +1,15 @@
+Index: dotnet11-11.0.100-11.0.0~preview5~bootstrap+ppc64el-0ubuntu1~26.10.1~ppa1/src/roslyn/src/Razor/src/Razor/src/Microsoft.VisualStudioCode.RazorExtension/Microsoft.VisualStudioCode.RazorExtension.csproj
+===================================================================
+--- a/src/roslyn/src/Razor/src/Razor/src/Microsoft.VisualStudioCode.RazorExtension/Microsoft.VisualStudioCode.RazorExtension.csproj
++++ b/src/roslyn/src/Razor/src/Razor/src/Microsoft.VisualStudioCode.RazorExtension/Microsoft.VisualStudioCode.RazorExtension.csproj
+@@ -43,8 +43,8 @@
+     </Content>
+   </ItemGroup>
+ 
+-  <!-- Copy the Razor companion assemblies into the local build output for manual VS Code testing without affecting CI packaging. -->
+-  <Target Name="PopulateLocalDevelopmentOutput" AfterTargets="Build" Condition="'$(ContinuousIntegrationBuild)' != 'true'">
++  <!-- Copy the Razor companion assemblies into the local build output for manual VS Code testing without affecting CI or source-build packaging. -->
++  <Target Name="PopulateLocalDevelopmentOutput" AfterTargets="Build" Condition="'$(ContinuousIntegrationBuild)' != 'true' and '$(DotNetBuildSourceOnly)' != 'true'">
+     <ItemGroup>
+       <_LocalRootOutput Include="
+           $(ArtifactsDir)bin\Microsoft.AspNetCore.Razor.Utilities.Shared\$(Configuration)\$(TargetFramework)\Microsoft.AspNetCore.Razor.Utilities.Shared.dll;
