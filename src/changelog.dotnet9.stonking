@@ -1,5 +1,45 @@
-dotnet9 (9.0.118-9.0.17-0ubuntu1~26.10.2~ppa1) stonking; urgency=medium
+dotnet9 (9.0.119-9.0.18-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
 
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-57108: .NET runtime - CryptoNative_GetX509NameInfo - UPN
+      BOOLEAN ASN.1 type-confusion DoS.
+  * SECURITY UPDATE:
+    - CVE-2026-47303: ASP.NET Core - Negotiate/LdapAdapter.cs - LDAP
+      identifier confusion CN vs sAMAccountName.
+  * SECURITY UPDATE: code injection
+    - CVE-2026-47300: LdapAdapter query validation fix - LDAP injection via
+      unvalidated filter input.
+  * SECURITY UPDATE: code injection
+    - CVE-2026-50659: System.Net.Mail - SMTP smuggling via CRLF split across
+      buffers.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-50528: System.Net.Security - additional SslStream fix (auth
+      bypass via ignored channel binding).
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50525: EncryptedXml/TransformChain - DoS via XML transform
+      chain DTD/base64 amplification.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-47304: EncryptedXml - XML Encryption vulnerability
+      (SignedXml.CheckSignature forgery via empty HMAC).
+  * SECURITY UPDATE: stack overflow
+    - CVE-2026-50527: EncryptedXml - System.Security.Cryptography.Xml.Utils -
+      Unauth XML triggers Type.GetType stack overflow.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50648: EncryptedXml - XmlDecryptionTransform document-rooted
+      XPath queries causing O(n²) CPU DoS.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-47302: EncryptedXml - XML Encryption vulnerability +
+      XmlTextReaderImpl.Read duplicate attributes DoS.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-50524: System.Net.Security - SslStream handshake with malformed
+      TLS packets.
+  * SECURITY UPDATE: blob injection
+    - CVE-2026-50526: .NET SDK - Container image build cache uses predictable
+      world-writable location enabling blob injection.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50651: SocketsHttpHandler Http2Connection - HTTP/2
+      SETTINGS/PING ACK flood causing OOM.
   * Fix `dotnet sdk check` command source URL. (LP: #2156464)
     - d/eng/dotnet-pkg-info.mk: strip suffixes from changelog distribution
       name to avoid using wrong release names.
@@ -9,7 +49,7 @@ dotnet9 (9.0.118-9.0.17-0ubuntu1~26.10.2~ppa1) stonking; urgency=medium
       for the testsuite.
     - d/t/control: add distro-info as a test dependency.
 
- -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 11 Jun 2026 17:38:34 -0300
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 07 Jul 2026 17:42:34 -0300
 
 dotnet9 (9.0.118-9.0.17-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
 
