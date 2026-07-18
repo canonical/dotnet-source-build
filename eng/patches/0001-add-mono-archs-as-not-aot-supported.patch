@@ -1,0 +1,92 @@
+From 6c2ab8a03cde381de73ce654fe34afc349025659 Mon Sep 17 00:00:00 2001
+From: Adeel <3840695+am11@users.noreply.github.com>
+Date: Wed, 24 Jun 2026 19:39:37 +0300
+Subject: [PATCH] Add mono platforms to exclude list
+
+---
+ src/arcade/eng/common/native/NativeAotSupported.props     | 2 ++
+ src/aspnetcore/eng/common/native/NativeAotSupported.props | 2 ++
+ src/efcore/eng/common/native/NativeAotSupported.props     | 2 ++
+ src/runtime/eng/common/native/NativeAotSupported.props    | 2 ++
+ src/runtime/src/coreclr/CMakeLists.txt                    | 2 +-
+ src/sdk/eng/common/native/NativeAotSupported.props        | 2 ++
+ 6 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/arcade/eng/common/native/NativeAotSupported.props b/src/arcade/eng/common/native/NativeAotSupported.props
+index 559a6663929e..cdff9ef03612 100644
+--- a/src/arcade/eng/common/native/NativeAotSupported.props
++++ b/src/arcade/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+diff --git a/src/aspnetcore/eng/common/native/NativeAotSupported.props b/src/aspnetcore/eng/common/native/NativeAotSupported.props
+index 559a6663929e..cdff9ef03612 100644
+--- a/src/aspnetcore/eng/common/native/NativeAotSupported.props
++++ b/src/aspnetcore/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+diff --git a/src/efcore/eng/common/native/NativeAotSupported.props b/src/efcore/eng/common/native/NativeAotSupported.props
+index 559a6663929e..cdff9ef03612 100644
+--- a/src/efcore/eng/common/native/NativeAotSupported.props
++++ b/src/efcore/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+diff --git a/src/runtime/eng/common/native/NativeAotSupported.props b/src/runtime/eng/common/native/NativeAotSupported.props
+index 559a6663929e..cdff9ef03612 100644
+--- a/src/runtime/eng/common/native/NativeAotSupported.props
++++ b/src/runtime/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+diff --git a/src/runtime/src/coreclr/CMakeLists.txt b/src/runtime/src/coreclr/CMakeLists.txt
+index 4c275c6611ef..60fe8cee3fca 100644
+--- a/src/runtime/src/coreclr/CMakeLists.txt
++++ b/src/runtime/src/coreclr/CMakeLists.txt
+@@ -156,7 +156,7 @@ endif ()
+ if(NOT CLR_CROSS_COMPONENTS_BUILD)
+   # NativeAOT is buildable for all CoreCLR-supported configurations except a known reject list.
+   # Keep this in sync with the NativeAotSupported reject list in eng/common/native/NativeAotSupported.props.
+-  if(NOT (CLR_CMAKE_HOST_ARCH_WASM OR (CLR_CMAKE_HOST_ARCH_I386 AND NOT CLR_CMAKE_HOST_WIN32)))
++  if(NOT (CLR_CMAKE_HOST_ARCH_WASM OR CLR_CMAKE_HOST_ARCH_S390X OR CLR_CMAKE_HOST_ARCH_POWERPC64 OR (CLR_CMAKE_HOST_ARCH_I386 AND NOT CLR_CMAKE_HOST_WIN32)))
+     add_subdirectory(nativeaot)
+   endif()
+ endif(NOT CLR_CROSS_COMPONENTS_BUILD)
+diff --git a/src/sdk/eng/common/native/NativeAotSupported.props b/src/sdk/eng/common/native/NativeAotSupported.props
+index 559a6663929e..cdff9ef03612 100644
+--- a/src/sdk/eng/common/native/NativeAotSupported.props
++++ b/src/sdk/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
