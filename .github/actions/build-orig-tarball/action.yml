@@ -51,6 +51,10 @@ inputs:
     description: "Directory where the orig tarball will be written. Defaults to <github.workspace>/dist."
     required: false
     default: ""
+  extra-ppa-source:
+    description: "Add an extra apt source for installing the bootstrap SDK (e.g. 'ppa:dotnet-bootstrap/amd64')."
+    required: false
+    default: ""
 
 outputs:
   tarball-name:
@@ -74,13 +78,20 @@ runs:
         echo "dotnetMinorVersion=$MINOR_VERSION" >> $GITHUB_OUTPUT
         echo "dotnetMajorMinorVersion=$MAJOR_VERSION.$MINOR_VERSION" >> $GITHUB_OUTPUT
 
-    - name: Install dependencies
+    - name: Install apt sources
       if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && inputs.include-bootstrap-sdk == 'false' }}
       shell: bash
       run: |
         sudo add-apt-repository ppa:dotnet/backports
         sudo add-apt-repository ppa:dotnet/previews
-        sudo add-apt-repository ppa:dotnet-bootstrap/amd64
+        if [[ -n "${{ inputs.extra-ppa-source }}" ]]; then
+          sudo add-apt-repository "${{ inputs.extra-ppa-source }}"
+        fi
+
+    - name: Install .NET SDK
+      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && inputs.include-bootstrap-sdk == 'false' }}
+      shell: bash
+      run: |
         sudo apt-get install --assume-yes \
           dotnet${{ steps.parse-version.outputs.dotnetMajorVersion }} \
           dotnet-sdk-${{ steps.parse-version.outputs.dotnetMajorMinorVersion }}-source-built-artifacts

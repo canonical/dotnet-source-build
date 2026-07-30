@@ -1,0 +1,78 @@
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/arcade/eng/common/native/NativeAotSupported.props
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/arcade/eng/common/native/NativeAotSupported.props
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/arcade/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/aspnetcore/eng/common/native/NativeAotSupported.props
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/aspnetcore/eng/common/native/NativeAotSupported.props
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/aspnetcore/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/efcore/eng/common/native/NativeAotSupported.props
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/efcore/eng/common/native/NativeAotSupported.props
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/efcore/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/runtime/eng/common/native/NativeAotSupported.props
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/runtime/eng/common/native/NativeAotSupported.props
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/runtime/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/runtime/src/coreclr/CMakeLists.txt
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/runtime/src/coreclr/CMakeLists.txt
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/runtime/src/coreclr/CMakeLists.txt
+@@ -156,7 +156,7 @@ endif ()
+ if(NOT CLR_CROSS_COMPONENTS_BUILD)
+   # NativeAOT is buildable for all CoreCLR-supported configurations except a known reject list.
+   # Keep this in sync with the NativeAotSupported reject list in eng/common/native/NativeAotSupported.props.
+-  if(NOT (CLR_CMAKE_HOST_ARCH_WASM OR (CLR_CMAKE_HOST_ARCH_I386 AND NOT CLR_CMAKE_HOST_WIN32)))
++  if(NOT (CLR_CMAKE_HOST_ARCH_WASM OR CLR_CMAKE_HOST_ARCH_S390X OR CLR_CMAKE_HOST_ARCH_POWERPC64 OR (CLR_CMAKE_HOST_ARCH_I386 AND NOT CLR_CMAKE_HOST_WIN32)))
+     add_subdirectory(nativeaot)
+   endif()
+ endif(NOT CLR_CROSS_COMPONENTS_BUILD)
+Index: dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/sdk/eng/common/native/NativeAotSupported.props
+===================================================================
+--- dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1.orig/src/sdk/eng/common/native/NativeAotSupported.props
++++ dotnet11-11.0.100-11.0.0~preview6~bootstrap+ppc64el-0ubuntu1~22.04.1~ppa1/src/sdk/eng/common/native/NativeAotSupported.props
+@@ -13,6 +13,8 @@
+     <!-- Reject unsupported architectures via RID suffix match -->
+     <_NativeAotSupportedArch Condition="
+       '$(TargetArchitecture)' != 'wasm' and
++      '$(TargetArchitecture)' != 's390x' and
++      '$(TargetArchitecture)' != 'ppc64le' and
+       ('$(TargetArchitecture)' != 'x86' or '$(TargetOS)' == 'windows')
+     ">true</_NativeAotSupportedArch>
+ 

@@ -1,0 +1,2984 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: dotnet
+Source: https://github.com/dotnet/dotnet
+
+Files: *
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+License: Expat
+
+Files: debian/*
+Copyright: Canonical Ltd.
+           Dominik Viererbe <dominik.viererbe@canonical.com>
+           Mateus Rodrigues de Morais <mateus.morais@canonical.com>
+           Miriam España Acebal <miriam.espana@canonical.com>
+License: Expat
+
+Files: debian/eng/strenum/*
+Copyright: 2019, James C Sinclair
+License: Expat
+
+Files: debian/eng/test-runner/*
+Copyright: 2019, Red Hat, Inc
+License: LGPL-2.1
+
+Files: debian/tests/regular-tests/*
+Copyright: 2018, Radka Janeková
+           2022, Canonical Ltd.
+License: Expat
+
+Files: src/arcade/src/Microsoft.DotNet.XUnitAssert/src/*
+Copyright: .NET Foundation and Contributors
+License: Apache-2 or Expat
+
+Files: src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/IChannelWrapper.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/Program.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropWebsite/Program.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropWebsite/Startup.cs
+       src/aspnetcore/src/Grpc/JsonTranscoding/src/Shared/AuthContextHelpers.cs
+       src/aspnetcore/src/Grpc/JsonTranscoding/src/Shared/Server/*
+       src/aspnetcore/src/Grpc/JsonTranscoding/src/Shared/ServiceDescriptorHelpers.cs
+       src/aspnetcore/src/Grpc/JsonTranscoding/src/Shared/X509CertificateHelpers.cs
+Copyright: 2019, gRPC Authors
+License: Apache-2
+
+Files: src/aspnetcore/src/Components/benchmarkapps/BlazingPizza.Server/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/benchmarkapps/Wasm.Performance/TestApp/wwwroot/benchmarks/lib/bootstrap.min.css
+       src/aspnetcore/src/Components/Samples/BlazorServerApp/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/Samples/BlazorServerApp/wwwroot/css/bootstrap-icons/*
+       src/aspnetcore/src/Components/Samples/BlazorUnitedApp/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/test/testassets/ComponentsApp.Server/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/WebAssembly/Samples/HostedBlazorWebassemblyApp/Client/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/WebAssembly/Samples/HostedBlazorWebassemblyApp/Client/wwwroot/css/bootstrap-icons/*
+       src/aspnetcore/src/Components/WebAssembly/testassets/StandaloneApp/wwwroot/css/bootstrap/bootstrap.min.css
+       src/aspnetcore/src/Components/WebAssembly/testassets/StandaloneApp/wwwroot/css/bootstrap-icons/*
+       src/aspnetcore/src/Components/WebAssembly/testassets/ThreadingApp/wwwroot/bootstrap.min.css
+       src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/*
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap.css
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap-grid.css
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap-grid.min.css
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap.min.css
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap-reboot.css
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap-reboot.min.css
+       src/aspnetcore/src/Identity/UI/src/assets/V5/lib/bootstrap*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/BlazorWeb-CSharp/BlazorWebCSharp.1/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/ComponentsWebAssembly-CSharp/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/bootstrap/*
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/bootstrap/*
+       src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/bootstrap/*
+       src/razor/src/Razor/benchmarks/testapps/ComponentApp/wwwroot/bootstrap/*
+       src/sdk/test/TestAssets/TestProjects/WatchMauiBlazor/wwwroot/css/bootstrap/*
+Copyright: Twitter, Inc. 
+           Bootstrap Authors
+License: Expat
+
+Files: src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation-unobtrusive/*
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/jquery/*
+       src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation-unobtrusive/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation-unobtrusive/*
+       src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/jquery/*
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/jquery/*
+Copyright: OpenJS Foundation and other contributors (https://openjsf.org)
+License: Expat
+
+Files: src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+Copyright: 2014, Jan Kovarik
+License: Expat
+
+Files: src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/jquery-validation/dist/additional-methods.js
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/jquery-validation/dist/additional-methods.js
+Copyright: Cleiton da Silva Mendonça
+           Jörn Zaefferer
+License: Expat
+
+Files: src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+Copyright: Diego Perini
+           Jörn Zaefferer
+License: Expat
+
+Files: src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Identity/UI/src/assets/V4/lib/jquery-validation/*
+       src/aspnetcore/src/Identity/UI/src/assets/V5/lib/jquery-validation/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/RazorPagesWeb-CSharp/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-CSharp/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/StarterWeb-FSharp/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/ClaimsTransformation/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/Cookies/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/jquery-validation/.bower.json
+       src/aspnetcore/src/Security/samples/DynamicSchemes/wwwroot/lib/jquery-validation/LICENSE.md
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/jquery-validation/.bower.json
+       src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/jquery-validation/LICENSE.md
+       src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/jquery-validation/*
+       src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/jquery-validation/*
+Copyright: Jörn Zaefferer
+License: Expat
+
+Files: src/aspnetcore/src/submodules/googletest/*
+Copyright: 2005-2025, Google Inc.
+           2018-2019, Google LLC
+License: BSD-3-clause
+
+Files: src/aspnetcore/src/submodules/MessagePack-CSharp/*
+Copyright: 2017 Yoshifumi Kawai and contributors
+License: Expat
+
+Files: src/cecil/*
+       src/runtime/src/tools/illink/src/linker/Linker.Steps/MarkStep.cs
+       src/runtime/src/tools/illink/src/linker/Linker.Steps/SweepStep.cs
+Copyright: 2008 - 2018, Jb Evain
+           2007 - 2011, Novell, Inc.
+License: Expat
+
+Files: src/cecil/Mono.Security.Cryptography/CryptoConvert.cs
+Copyright: 2003, Motus Technologies Inc. (http://www.motus.com)
+           2004-2006, Novell Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/cecil/symbols/mdb/Mono.CompilerServices.SymbolWriter/*
+Copyright: 2012, Xamarin Inc (http://www.xamarin.com)
+           2002-2003, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/cecil/symbols/mdb/Mono.CompilerServices.SymbolWriter/MonoSymbolTable.cs
+       src/cecil/symbols/mdb/Mono.CompilerServices.SymbolWriter/MonoSymbolWriter.cs
+Copyright: 2002, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/cecil/symbols/pdb/Microsoft.Cci.Pdb/*
+Copyright: Microsoft
+License: Expat
+
+Files: src/cecil/symbols/pdb/Mono.Cecil.Pdb/ISymUnmanagedDocumentWriter.cs
+       src/cecil/symbols/pdb/Mono.Cecil.Pdb/ISymUnmanagedWriter2.cs
+       src/cecil/symbols/pdb/Mono.Cecil.Pdb/SymDocumentWriter.cs
+       src/cecil/symbols/pdb/Mono.Cecil.Pdb/SymWriter.cs
+Copyright: 2008, Juerg Billeter
+License: Expat
+
+Files: src/diagnostics/src/shared/pal/src/include/pal/fakepoll.h
+Copyright: 2000, Greg Parker <gparker@cs.stanford.edu>
+           .NET Foundation and Contributors
+License: Expat or public-domain
+
+Files: src/diagnostics/src/SOS/lldbplugin/swift-4.0/*
+       src/diagnostics/src/SOS/lldbplugin/swift-4.1/*
+Copyright: LLVM Project
+           Apple Inc.
+License: Apache-2.0 with LLVM exception
+
+Files: src/emsdk/*
+Copyright: 2018, Emscripten authors
+License: Expat
+
+Files: src/nuget-client/*
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/Diagnostics/DiagnosticIds.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/Diagnostics/RazorDiagnostics.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/IncrementalValueProviderExtensions.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorGeneratorResult.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerationOptions.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.AllTagHelpers.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.Helpers.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.RazorProviders.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/SourceGeneratorProjectItem.cs
+       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/StaticCompilationTagHelperFeature.cs
+Copyright: .NET Foundation and Contributors
+License: Apache-2.0
+
+Files: src/runtime/src/coreclr/jit/utils.cpp
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Cos.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Cosh.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Exp.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Log.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Log2.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Round.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Sin.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Tan.cs
+       src/runtime/src/libraries/System.Numerics.Tensors/src/System/Numerics/Tensors/netcore/TensorPrimitives.Tanh.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/Double.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/Half.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/Math.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/MathF.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/VectorMath.cs
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/Single.cs
+Copyright: 2008-2022, Advanced Micro Devices, Inc
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/DataProvider.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ConstraintCollectionTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ConstraintExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataColumnCollectionTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataColumnTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRelationCollectionTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRelationTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowCollectionTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowViewTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetTypedDataSetTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableCollectionTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataViewTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DeletedRowInaccessibleExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DuplicateNameExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/EvaluateExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ForeignKeyConstraintTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/InRowChangingEventExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/InvalidConstraintExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/MissingPrimaryKeyExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/NoNullAllowedExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ReadOnlyExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/RowNotInTableExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/SyntaxErrorExceptionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/UniqueConstraintTest2.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/VersionNotFoundException.cs
+Copyright: 2004, Mainsoft Co.
+License: Expat
+
+Files: src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_11_0/IdnaTest_11.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_11_0/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_13_0/IdnaTest_13.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_13_0/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_15_0/IdnaTest_15_0.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_15_0/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_15_1/IdnaTest_15_1.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_15_1/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_16_0/IdnaTest_16.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_16_0/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_9_0/IdnaTest_9.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_9_0/ReadMe.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_6_0/IdnaTest_6.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_Win7/IdnaTest_Win7.txt
+       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_6_0/ReadMe.txt
+Copyright: Unicode, Inc.
+License: Expat
+Comment: For terms of use, see http://www.unicode.org/terms_of_use.html
+
+Files: src/runtime/src/libraries/System.ComponentModel.TypeConverter/tests/Design/Serialization/InstanceDescriptorTests.cs
+       src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/*
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetAssertion.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetInferXmlSchemaTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetReadXmlSchemaTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetReadXmlTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableReadXmlSchemaTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataViewTest_IBindingList.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataViewTest_IBindingListView.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/ChunkedInputStream.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpStreamAsyncResult.cs
+       src/runtime/src/libraries/System.Private.Uri/tests/FunctionalTests/UriParserTest.cs
+       src/runtime/src/libraries/System.Web.HttpUtility/src/System/Web/HttpUtility.cs
+       src/runtime/src/libraries/System.Web.HttpUtility/tests/HttpUtility/*
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/ConstructorOnTypeBuilderInstantiation.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/DynamicILInfo.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/FieldOnTypeBuilderInstantiation.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/MethodOnTypeBuilderInstantiation.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/SymbolType.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeAssembly.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeCustomAttributeData.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeFieldInfo.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeModule.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/TypeSpec.cs
+Copyright: 2004-2010, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/DataReferenceTest.cs
+       src/runtime/src/mono/mono/metadata/mono-ptr-array.h
+       src/runtime/src/mono/mono/metadata/runtime.h
+       src/runtime/src/mono/mono/mini/dwarfwriter.c
+       src/runtime/src/mono/mono/mini/dwarfwriter.h
+       src/runtime/src/mono/mono/mini/llvm-jit.h
+       src/runtime/src/mono/mono/mini/mini-llvm-cpp.h
+       src/runtime/src/mono/mono/mini/mini-unwind.h
+       src/runtime/src/mono/mono/mini/unwind.c
+       src/runtime/src/mono/mono/utils/hazard-pointer.c
+       src/runtime/src/mono/mono/utils/hazard-pointer.h
+       src/runtime/src/mono/mono/utils/lock-free-alloc.c
+       src/runtime/src/mono/mono/utils/mono-filemap.c
+       src/runtime/src/mono/mono/utils/mono-internal-hash.c
+       src/runtime/src/mono/mono/utils/mono-internal-hash.h
+       src/runtime/src/mono/mono/utils/mono-linked-list-set.c
+       src/runtime/src/mono/mono/utils/mono-linked-list-set.h
+       src/runtime/src/mono/mono/utils/mono-mmap-windows.c
+       src/runtime/src/mono/mono/utils/mono-mmap.c
+       src/runtime/src/mono/mono/utils/mono-os-semaphore.h
+       src/runtime/src/mono/mono/utils/mono-property-hash.c
+       src/runtime/src/mono/mono/utils/mono-property-hash.h
+       src/runtime/src/mono/mono/utils/mono-threads-mach.c
+       src/runtime/src/mono/mono/utils/mono-threads-posix.c
+       src/runtime/src/mono/mono/utils/mono-threads-windows.c
+       src/runtime/src/mono/mono/utils/mono-threads.h
+       src/runtime/src/mono/mono/utils/mono-time.c
+       src/runtime/src/native/public/mono/metadata/sgen-bridge.h
+Copyright: 2001-2011, Novell, Inc
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableTest3.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableTest4.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableTest5.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/XmlDataLoaderTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/XmlDataReaderTest.cs
+       src/runtime/src/mono/mono/eglib/garray.c
+       src/runtime/src/mono/mono/eglib/gbytearray.c
+       src/runtime/src/mono/mono/eglib/gdate-unix.c
+       src/runtime/src/mono/mono/eglib/gdate-win32.c
+       src/runtime/src/mono/mono/eglib/gerror.c
+       src/runtime/src/mono/mono/eglib/gfile-posix.c
+       src/runtime/src/mono/mono/eglib/gfile-unix.c
+       src/runtime/src/mono/mono/eglib/gfile-win32.c
+       src/runtime/src/mono/mono/eglib/gfile.c
+       src/runtime/src/mono/mono/eglib/ghashtable.c
+       src/runtime/src/mono/mono/eglib/glist.c
+       src/runtime/src/mono/mono/eglib/gmem.c
+       src/runtime/src/mono/mono/eglib/gmisc-unix.c
+       src/runtime/src/mono/mono/eglib/gmisc-win32.c
+       src/runtime/src/mono/mono/eglib/gpath.c
+       src/runtime/src/mono/mono/eglib/gptrarray.c
+       src/runtime/src/mono/mono/eglib/gqueue.c
+       src/runtime/src/mono/mono/eglib/gslist.c
+       src/runtime/src/mono/mono/eglib/gstr.c
+       src/runtime/src/mono/mono/eglib/gstring.c
+       src/runtime/src/mono/mono/eglib/gtimer-unix.c
+       src/runtime/src/mono/mono/eglib/gtimer-win32.c
+       src/runtime/src/mono/mono/eglib/sort.frag.h
+       src/runtime/src/mono/mono/eglib/test/driver.c
+       src/runtime/src/mono/mono/eglib/test/test.c
+       src/runtime/src/mono/mono/eglib/test/test.h
+       src/runtime/src/mono/mono/metadata/mono-hash.c
+       src/runtime/src/mono/mono/utils/lock-free-alloc.h
+       src/runtime/src/mono/mono/utils/lock-free-queue.c
+       src/runtime/src/mono/mono/utils/lock-free-queue.h
+       src/runtime/src/native/containers/dn-fwd-list.c
+       src/runtime/src/native/containers/dn-list.c
+       src/runtime/src/native/containers/dn-queue.c
+       src/runtime/src/native/containers/dn-sort-frag.inc
+       src/runtime/src/native/containers/dn-umap.c
+       src/runtime/src/native/containers/dn-vector.c
+       src/runtime/src/native/containers/simdhash-benchmark/ghashtable.c
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/EncryptedXmlTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/TransformTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDecryptionTransformTest.cs
+       src/runtime/src/mono/mono/metadata/mono-basic-block.c
+       src/runtime/src/mono/mono/metadata/runtime.c
+       src/runtime/src/mono/mono/profiler/aot.c
+       src/runtime/src/mono/mono/profiler/mprof-report.c
+       src/runtime/src/mono/mono/tests/test-runner.cs
+       src/runtime/src/mono/mono/tests/verifier/AssemblyRunner.cs
+       src/runtime/src/mono/mono/tests/verifier/BatchCompiler.cs
+       src/runtime/src/mono/mono/utils/mono-context.c
+       src/runtime/src/mono/mono/utils/mono-context.h
+       src/runtime/src/mono/mono/utils/mono-error.c
+       src/runtime/src/mono/mono/utils/mono-machine.h
+Copyright: 2006-2011, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/environment.c
+       src/runtime/src/mono/mono/metadata/exception.c
+       src/runtime/src/mono/mono/metadata/image.c
+       src/runtime/src/mono/mono/metadata/metadata.c
+       src/runtime/src/mono/mono/metadata/method-builder.c
+       src/runtime/src/mono/mono/metadata/monitor.c
+       src/runtime/src/mono/mono/metadata/mono-config.c
+       src/runtime/src/mono/mono/metadata/mono-endian.c
+       src/runtime/src/mono/mono/metadata/opcodes.c
+       src/runtime/src/mono/mono/metadata/string-icalls.c
+Copyright: 2004-2009, Novell, Inc. (http://www.novell.com)
+           2001-2003, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-archdep.h
+       src/runtime/src/mono/mono/sgen/sgen-copy-object.h
+       src/runtime/src/mono/mono/sgen/sgen-gray.c
+       src/runtime/src/mono/mono/sgen/sgen-major-copy-object.h
+       src/runtime/src/mono/mono/sgen/sgen-minor-copy-object.h
+       src/runtime/src/mono/mono/sgen/sgen-minor-scan-object.h
+       src/runtime/src/mono/mono/sgen/sgen-pinning.c
+       src/runtime/src/mono/mono/sgen/sgen-protocol.c
+       src/runtime/src/mono/mono/sgen/sgen-protocol.h
+       src/runtime/src/mono/mono/sgen/sgen-scan-object.h
+       src/runtime/src/mono/mono/sgen/sgen-workers.c
+Copyright: 2003-2010, Novell, Inc.
+           2012-2013, Xamarin Inc.
+           2001-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/threads-types.h
+       src/runtime/src/mono/mono/mini/mini-windows-dllmain.c
+       src/runtime/src/mono/mono/sgen/sgen-cardtable.h
+       src/runtime/src/mono/mono/sgen/sgen-memory-governor.h
+       src/runtime/src/mono/mono/utils/mono-dl-darwin.c
+       src/runtime/src/mono/mono/utils/mono-dl-posix.c
+       src/runtime/src/mono/mono/utils/mono-dl-windows.c
+       src/runtime/src/mono/mono/utils/mono-dl.c
+       src/runtime/src/native/public/mono/metadata/attrdefs.h
+Copyright: 2002-2010, Novell, Inc.
+           2001-2004, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-cardtable.c
+       src/runtime/src/mono/mono/sgen/sgen-conf.h
+       src/runtime/src/mono/mono/sgen/sgen-descriptor.c
+       src/runtime/src/mono/mono/sgen/sgen-descriptor.h
+       src/runtime/src/mono/mono/sgen/sgen-gc.h
+       src/runtime/src/mono/mono/sgen/sgen-memory-governor.c
+       src/runtime/src/mono/mono/sgen/sgen-simple-nursery.c
+       src/runtime/src/mono/mono/sgen/sgen-split-nursery.c
+Copyright: 2003-2010, Novell, Inc.
+           2012, Xamarin Inc. (http://www.xamarin.com)
+           2011-2012, Xamarin Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/gc_wrapper.h
+       src/runtime/src/mono/mono/mini/cpu-arm.mdesc
+       src/runtime/src/mono/mono/mini/cpu-arm64.mdesc
+       src/runtime/src/mono/mono/mini/mini-gc.c
+       src/runtime/src/mono/mono/mini/mini-generic-sharing.c
+       src/runtime/src/mono/mono/utils/mono-threads.c
+       src/runtime/src/mono/mono/utils/mono-tls-inline.h
+       src/runtime/src/mono/mono/utils/mono-tls.h
+Copyright: 2003-2011, Novell, Inc. (http://www.novell.com)
+           2011-2013, Xamarin, Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/callspec.c
+       src/runtime/src/mono/mono/mini/decompose.c
+       src/runtime/src/mono/mono/mini/dominators.c
+       src/runtime/src/mono/mono/mini/exceptions-amd64.c
+       src/runtime/src/mono/mono/mini/liveness.c
+       src/runtime/src/mono/mono/mini/mini-posix.c
+       src/runtime/src/mono/mono/mini/ssa.c
+       src/runtime/src/mono/mono/mini/trace.c
+Copyright: 2011, Xamarin, Inc. (http://www.xamarin.com)
+           2001-2008, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/method-to-ir.c
+       src/runtime/src/mono/mono/mini/mini-amd64.c
+       src/runtime/src/mono/mono/mini/mini-arm.c
+       src/runtime/src/mono/mono/mini/mini-arm64.c
+       src/runtime/src/mono/mono/mini/mini-darwin.c
+       src/runtime/src/mono/mono/mini/tramp-amd64.c
+Copyright: 2003-2011, Novell, Inc. (http://www.novell.com)
+           2011-2013, Xamarin, Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/class.c
+       src/runtime/src/mono/mono/metadata/gc.c
+       src/runtime/src/mono/mono/metadata/icall-table.c
+       src/runtime/src/mono/mono/metadata/icall.c
+       src/runtime/src/mono/mono/metadata/mono-debug.c
+       src/runtime/src/mono/mono/metadata/object.c
+Copyright: 2004-2011, Novell, Inc. (http://www.novell.com)
+           2001-2015, Xamarin Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/assembly.c
+       src/runtime/src/mono/mono/metadata/boehm-gc.c
+       src/runtime/src/mono/mono/metadata/domain.c
+       src/runtime/src/mono/mono/metadata/jit-info.c
+       src/runtime/src/mono/mono/metadata/loader.c
+       src/runtime/src/mono/mono/metadata/marshal.c
+       src/runtime/src/mono/mono/metadata/threads.c
+Copyright: 2004-2011, Novell, Inc. (http://www.novell.com)
+           2011-2012, Xamarin, Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mono-hwcap-arm.c
+       src/runtime/src/mono/mono/utils/mono-hwcap-ppc.c
+       src/runtime/src/mono/mono/utils/mono-hwcap-s390x.c
+       src/runtime/src/mono/mono/utils/mono-hwcap-x86.c
+       src/runtime/src/mono/mono/utils/mono-hwcap.c
+Copyright: 2007-2008, Andreas Faerber
+           2006, Broadcom
+           2003-2011, Novell, Inc.
+           2011-2013, Xamarin Inc.
+           2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/custom-attrs.c
+       src/runtime/src/mono/mono/metadata/dynamic-image.c
+       src/runtime/src/mono/mono/metadata/reflection.c
+       src/runtime/src/mono/mono/metadata/sre-encode.c
+       src/runtime/src/mono/mono/metadata/sre.c
+Copyright: 2016, Microsoft
+           2004-2009, Novell, Inc. (http://www.novell.com)
+           2011, Rodrigo Kumpera
+           2001-2003, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/component/debugger-agent.c
+       src/runtime/src/mono/mono/eglib/gutf8.c
+       src/runtime/src/mono/mono/metadata/w32handle.c
+       src/runtime/src/mono/mono/sgen/sgen-marksweep.c
+       src/runtime/src/mono/mono/utils/mono-stack-unwinding.h
+Copyright: 2002-2011, Novell, Inc
+           2011-2012, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/aot-runtime.h
+       src/runtime/src/mono/mono/mini/llvmonly-runtime.h
+       src/runtime/src/mono/mono/mini/mini-runtime.h
+       src/runtime/src/mono/mono/mini/mini.h
+Copyright: 2003-2011, Novell Inc
+           2011, Xamarin Inc
+           2002-2003, Ximian Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/marshal.h
+       src/runtime/src/mono/mono/metadata/method-builder.h
+       src/runtime/src/mono/mono/mini/abcremoval.c
+       src/runtime/src/mono/mono/mini/abcremoval.h
+       src/runtime/src/mono/mono/mini/cfold.c
+Copyright: 2002-2004, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/mini-ops.h
+       src/runtime/src/mono/mono/mini/mini-x86.c
+       src/runtime/src/mono/mono/mini/tramp-arm.c
+       src/runtime/src/mono/mono/mini/tramp-arm64.c
+Copyright: 2003-2011, Novell Inc
+           2011-2013, Xamarin Inc
+           2001-2003, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/sgen-stw.c
+       src/runtime/src/mono/mono/sgen/sgen-alloc.c
+       src/runtime/src/mono/mono/sgen/sgen-debug.c
+       src/runtime/src/mono/mono/sgen/sgen-fin-weak-hash.c
+Copyright: 2005-2011, Novell, Inc. (http://www.novell.com)
+           2011-2012, Xamarin Inc.
+           2011, Xamarin Inc. (http://www.xamarin.com)
+           2011, Xamarin, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/sgen-bridge.c
+       src/runtime/src/mono/mono/metadata/sgen-new-bridge.c
+       src/runtime/src/mono/mono/metadata/sgen-tarjan-bridge.c
+Copyright: 2003-2010, Novell, Inc.
+           2011, Novell, Inc. (http://www.novell.com)
+           2011-2014, Xamarin Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/exceptions-ppc.c
+       src/runtime/src/mono/mono/mini/mini-ppc.c
+       src/runtime/src/mono/mono/mini/tramp-ppc.c
+Copyright: 2007-2008, Andreas Faerber
+           2001-2003, Ximian, Inc.
+License: Expat
+
+
+Files: src/runtime/src/mono/wasm/host/Options.cs
+       src/runtime/src/tools/illink/external/*
+Copyright: 2009, Federico Di Gregorio
+           2017, Microsoft Corporation (http://www.microsoft.com)
+           2008, Novell (http://www.novell.com)
+           2012, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/class-init.c
+       src/runtime/src/mono/mono/metadata/class-setup-vtable.c
+Copyright: 2018, Microsoft
+           2004-2009, Novell, Inc (http://www.novell.com)
+           2012, Xamarin Inc (http://www.xamarin.com)
+           2001-2003, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Delegate.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimePropertyInfo.cs
+Copyright: 2004-2005, Novell, Inc (http://www.novell.com)
+           2013-2014, Xamarin, Inc (http://www.xamarin.com)
+           2001, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-gray.h
+       src/runtime/src/mono/mono/sgen/sgen-pinning.h
+       src/runtime/src/mono/mono/sgen/sgen-workers.h
+Copyright: 2012, Xamarin Inc.
+           2011, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/eglib/gmodule-unix.c
+       src/runtime/src/mono/mono/eglib/gmodule-win32.c
+Copyright: 2006, Jonathan Chambers
+           2006, Novell, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/mini-runtime.c
+       src/runtime/src/mono/mono/mini/mini-trampolines.c
+       src/runtime/src/mono/mono/mini/mini.c
+Copyright: 2003-2011, Novell, Inc.
+           2011-2015, Xamarin, Inc. (http://www.xamarin.com)
+           2002-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/aot-compiler.c
+       src/runtime/src/mono/mono/mini/mini-exceptions.c
+       src/runtime/src/mono/mono/sgen/sgen-pinning-stats.c
+Copyright: 2003-2011, Novell, Inc.
+           2011, Xamarin Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/cil/make-opcodes-def.pl
+       src/runtime/src/mono/mono/metadata/monitor.h
+       src/runtime/src/mono/mono/metadata/string-icalls.h
+       src/runtime/src/mono/mono/metadata/tabledefs.h
+       src/runtime/src/mono/mono/mini/debug-mini.c
+       src/runtime/src/mono/mono/mini/exceptions-arm.c
+       src/runtime/src/mono/mono/mini/exceptions-s390x.c
+       src/runtime/src/mono/mono/mini/exceptions-x86.c
+       src/runtime/src/mono/mono/mini/graph.c
+       src/runtime/src/mono/mono/mini/helpers.c
+       src/runtime/src/mono/mono/mini/image-writer.c
+       src/runtime/src/mono/mono/mini/image-writer.h
+       src/runtime/src/mono/mono/mini/ir-emit.h
+       src/runtime/src/mono/mono/mini/linear-scan.c
+       src/runtime/src/mono/mono/mini/mini-codegen.c
+       src/runtime/src/mono/mono/mini/mini-windows.c
+       src/runtime/src/mono/mono/mini/tramp-s390x.c
+       src/runtime/src/mono/mono/mini/tramp-x86.c
+       src/runtime/src/mono/mono/utils/atomic.c
+       src/runtime/src/native/public/mono/jit/jit.h
+       src/runtime/src/native/public/mono/metadata/appdomain.h
+       src/runtime/src/native/public/mono/metadata/environment.h
+       src/runtime/src/native/public/mono/metadata/mono-config.h
+       src/runtime/src/native/public/mono/metadata/opcodes.h
+       src/runtime/src/native/public/mono/metadata/threads.h
+Copyright: 2001-2008, Ximian, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/sgen-dynarray.h
+       src/runtime/src/mono/mono/metadata/sgen-toggleref.h
+       src/runtime/src/mono/mono/mini/llvm-runtime.h
+       src/runtime/src/mono/mono/utils/mach-support-unknown.c
+       src/runtime/src/mono/mono/utils/mono-memory-model.h
+       src/runtime/src/mono/mono/utils/mono-threads-posix-signals.c
+Copyright: 2011-2016, Xamarin, Inc.
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/debug-mono-ppdb.c
+       src/runtime/src/mono/mono/metadata/debug-mono-ppdb.h
+       src/runtime/src/mono/mono/metadata/domain-internals.h
+       src/runtime/src/mono/mono/metadata/jit-info.h
+       src/runtime/src/mono/mono/metadata/mono-hash.h
+       src/runtime/src/mono/mono/sgen/sgen-layout-stats.c
+       src/runtime/src/mono/mono/sgen/sgen-layout-stats.h
+       src/runtime/src/mono/mono/tests/pinvoke2.cs
+       src/runtime/src/mono/mono/utils/json.c
+       src/runtime/src/mono/mono/utils/json.h
+       src/runtime/src/native/public/mono/metadata/debug-mono-symfile.h
+Copyright: 2011-2015, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/arm/arm-vfp-codegen.h
+       src/runtime/src/mono/mono/metadata/abi-details.h
+       src/runtime/src/mono/mono/metadata/assembly-internals.h
+       src/runtime/src/mono/mono/metadata/class-internals.h
+       src/runtime/src/mono/mono/metadata/gc-stats.c
+       src/runtime/src/mono/mono/metadata/image-internals.h
+       src/runtime/src/mono/mono/metadata/seq-points-data.h
+       src/runtime/src/mono/mono/metadata/sgen-bridge-internals.h
+       src/runtime/src/mono/mono/metadata/sgen-client-mono.h
+       src/runtime/src/mono/mono/metadata/sgen-mono.c
+       src/runtime/src/mono/mono/mini/cfgdump.c
+       src/runtime/src/mono/mono/mini/cfgdump.h
+       src/runtime/src/mono/mono/mini/mini-arm.h
+       src/runtime/src/mono/mono/mini/mini-arm64.h
+       src/runtime/src/mono/mono/mini/seq-points.h
+       src/runtime/src/mono/mono/sgen/gc-internal-agnostic.h
+       src/runtime/src/mono/mono/sgen/sgen-array-list.c
+       src/runtime/src/mono/mono/sgen/sgen-array-list.h
+       src/runtime/src/mono/mono/sgen/sgen-client.h
+       src/runtime/src/mono/mono/sgen/sgen-gchandles.c
+       src/runtime/src/mono/mono/sgen/sgen-internal.c
+       src/runtime/src/mono/mono/sgen/sgen-marksweep-drain-gray-stack.h
+       src/runtime/src/mono/mono/sgen/sgen-pointer-queue.c
+       src/runtime/src/mono/mono/sgen/sgen-pointer-queue.h
+       src/runtime/src/mono/mono/sgen/sgen-qsort.c
+       src/runtime/src/mono/mono/sgen/sgen-qsort.h
+       src/runtime/src/mono/mono/sgen/sgen-tagged-pointer.h
+       src/runtime/src/mono/mono/sgen/sgen-thread-pool.c
+       src/runtime/src/mono/mono/sgen/sgen-thread-pool.h
+       src/runtime/src/mono/mono/unit-tests/test-conc-hashtable.c
+       src/runtime/src/mono/mono/unit-tests/test-memfuncs.c
+       src/runtime/src/mono/mono/unit-tests/test-sgen-qsort.c
+       src/runtime/src/mono/mono/utils/lock-free-array-queue.c
+       src/runtime/src/mono/mono/utils/lock-free-array-queue.h
+       src/runtime/src/mono/mono/utils/memfuncs.c
+       src/runtime/src/mono/mono/utils/memfuncs.h
+       src/runtime/src/mono/mono/utils/mono-hwcap-arm64.c
+       src/runtime/src/mono/mono/utils/mono-mmap-internals.h
+       src/runtime/src/mono/mono/utils/mono-signal-handler.h
+       src/runtime/src/mono/mono/utils/mono-threads-mach-helper.c
+       src/runtime/src/mono/mono/utils/parse.c
+Copyright: 2011-2016, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/component/debugger-networking.c
+       src/runtime/src/mono/mono/component/debugger-networking.h
+       src/runtime/src/mono/mono/mini/alias-analysis.c
+       src/runtime/src/mono/mono/utils/checked-build.c
+       src/runtime/src/mono/mono/utils/checked-build.h
+       src/runtime/src/mono/mono/utils/mono-conc-hashtable.c
+       src/runtime/src/mono/mono/utils/mono-conc-hashtable.h
+       src/runtime/src/mono/mono/utils/mono-threads-api.h
+       src/runtime/src/mono/mono/utils/mono-threads-coop.h
+Copyright: 2013-2015, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/arm64/arm64-codegen.h
+       src/runtime/src/mono/mono/metadata/seq-points-data.c
+       src/runtime/src/mono/mono/mini/lldb.c
+       src/runtime/src/mono/mono/mini/mini-amd64-gsharedvt.c
+       src/runtime/src/mono/mono/mini/mini-amd64-gsharedvt.h
+       src/runtime/src/mono/mono/mini/mini-arm-gsharedvt.c
+       src/runtime/src/mono/mono/mini/mini-arm64-gsharedvt.c
+       src/runtime/src/mono/mono/mini/mini-x86-gsharedvt.c
+       src/runtime/src/mono/mono/mini/seq-points.c
+       src/runtime/src/mono/mono/mini/tramp-amd64-gsharedvt.c
+       src/runtime/src/mono/mono/mini/tramp-arm-gsharedvt.c
+       src/runtime/src/mono/mono/mini/tramp-arm64-gsharedvt.c
+       src/runtime/src/mono/mono/mini/tramp-x86-gsharedvt.c
+       src/runtime/src/mono/mono/utils/mono-hwcap-cross.c
+       src/runtime/src/mono/mono/utils/mono-threads-coop.c
+       src/runtime/src/mono/mono/utils/mono-tls.c
+Copyright: 2013-2016, Xamarin, Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/CustomAttributeBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/MonoArrayMethod.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeAssemblyBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeConstructorBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeEnumBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeEventBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeFieldBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeILGenerator.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeLocalBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeMethodBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeModuleBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeParameterBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimePropertyBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeTypeBuilder.Mono.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/SignatureHelper.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/UnmanagedMarshal.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeEventInfo.cs
+       src/runtime/src/mono/System.Private.CoreLib/src/System/RuntimeTypeHandle.cs
+Copyright: 2004-2009, Novell, Inc (http://www.novell.com)
+           2001-2002, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/llvm-jit.cpp
+       src/runtime/src/mono/mono/mini/mini-llvm-cpp.cpp
+Copyright: 2009-2011, Novell, Inc
+           2011-2015, Xamarin, Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/exceptions-arm64.c
+       src/runtime/src/mono/mono/utils/atomic.h
+Copyright: 2012-2013, Xamarin Inc
+           2001-2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/amd64/*
+       src/runtime/src/mono/mono/arch/x86/*
+Copyright: 2000, Intel Corporation
+           2001-2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mach-support-amd64.c
+       src/runtime/src/mono/mono/utils/mach-support-arm64.c
+Copyright: 2010, Novell, Inc
+           2011-2013, Xamarin, Inc
+License: Expat
+
+Files: src/runtime/src/native/external/brotli/*
+Copyright: Brotli Authors
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/*
+Copyright: Hewlett-Packard Co.
+           David Mosberger-Tang <dmosberger@gmail.com>
+           David Mosberger-Tang <davidm@hpl.hp.com>
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/memcheck.h
+       src/runtime/src/mono/mono/utils/valgrind.h
+Copyright: 2000-2013, Julian Seward
+License: Valgrind BSD-like-clause
+
+Files: src/runtime/src/mono/mono/mini/bench.cs
+Copyright: 2001, Southern Storm Software, Pty Ltd
+License: Expat
+
+Files: src/runtime/src/mono/mono/unit-tests/test-mono-handle.c
+       src/runtime/src/mono/mono/utils/mono-lazy-init.h
+Copyright: 2015, Xamarin, Inc. (www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mono-os-mutex.c
+       src/runtime/src/mono/mono/utils/mono-os-mutex.h
+Copyright: 2002, Ximian, Inc. (www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-gc.c
+Copyright: 1998, Fergus Henderson
+           2000-2004, Hewlett-Packard Company
+           2003-2010, Novell, Inc
+           2005-2011, Novell, Inc (http://www.novell.com)
+           1996, Silicon Graphics
+           2012, Xamarin Inc
+           2011, Xamarin Inc (http://www.xamarin.com)
+           2011, Xamarin, Inc
+           1994, Xerox Corporation
+           2001-2003, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-los.c
+Copyright: 1998, Fergus Henderson
+           2000-2004, Hewlett-Packard Company
+           2003-2010, Novell, Inc
+           2005-2010, Novell, Inc (http://www.novell.com)
+           1996, Silicon Graphics
+           2012, Xamarin Inc
+           1994, Xerox Corporation
+           2001-2003, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/sgen/sgen-nursery-allocator.c
+Copyright: 2009-2010, Novell, Inc
+           2011, Rodrigo Kumpera
+           2012, Xamarin Inc
+           2011, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/sysmath.c
+Copyright: Microsoft
+           2004-2009, Novell, Inc (http://www.novell.com)
+           2015, Xamarin, Inc (https://www.xamarin.com)
+           2001-2003, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/eglib/gmodule-aix.c
+Copyright: 2019, Calvin Buckley
+           2006, Jonathan Chambers
+           2006, Novell, Inc
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/CustomAttribute.cs
+Copyright: 2004, Novell, Inc (http://www.novell.com)
+           2013, Xamarin, Inc (http://www.xamarin.com)
+           2002-2003, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/RuntimeMethodInfo.Mono.cs
+Copyright: 2004-2005, Novell, Inc (http://www.novell.com)
+           2012, Xamarin Inc (http://www.xamarin.com)
+           2001, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/aot-runtime.c
+Copyright: 2003-2011, Novell, Inc
+           2011, Xamarin, Inc
+           2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/driver.c
+Copyright: 2003-2006, Novell, Inc
+           Novell, Inc, Xamarin Inc . www.mono-project.com\n", build
+           2002-2003, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/jit-icalls.c
+Copyright: 2003-2011, Novell Inc (http://www.novell.com)
+           2011, Xamarin Inc (http://www.xamarin.com)
+           2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/arm/arm-codegen.h
+Copyright: 2005-2011, Novell Inc
+           2002-2003, Sergey Chaban <serge@wildwestsoftware.com>
+           2011, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/appdomain.c
+Copyright: 2004-2009, Novell, Inc (http://www.novell.com)
+           2012, Xamarin Inc
+           2001-2003, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/verify.c
+Copyright: 2004-2009, Novell, Inc (http://www.novell.com)
+           2011, Rodrigo Kumpera
+           2001-2003, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/mempool.c
+Copyright: 2004-2009, Novell, Inc (http://www.novell.com)
+           2011, Xamarin Inc. (http://www.xamarin.com)
+           2001-2003, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/eglib/goutput.c
+Copyright: 2006, Novell, Inc
+           2011, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/TypeBuilderInstantiation.Mono.cs
+Copyright: 2004, Novell, Inc (http://www.novell.com)
+           2001, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/Reflection/Emit/RuntimeGenericTypeParameterBuilder.cs
+Copyright: 2004, Novell, Inc
+           2004, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/interp/interp.c
+Copyright: 2001-2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/branch-opts.c
+Copyright: 2011, Xamarin Inc. http://www.xamarin.com
+           2005, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/mini-llvm.c
+Copyright: 2009-2011, Novell Inc (http://www.novell.com)
+           2011, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/mini/local-propagation.c
+Copyright: 2006, Novell, Inc. http://www.novell.com
+           2011, Xamarin, Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/profiler/log.c
+Copyright: 2010, Novell, Inc (http://www.novell.com)
+           2011, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/reflection-internals.h
+Copyright: 2016, Microsoft
+           2014, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/debug-mono-symfile.c
+Copyright: 2005-2008, Novell, Inc. (http://www.novell.com)
+           2012, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/sgen-toggleref.c
+Copyright: 2012, Xamarin Inc
+           2011, Xamarin, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/gc-internals.h
+Copyright: 2012, Xamarin Inc (http://www.xamarin.com)
+           2002, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mono-proclib.c
+Copyright: 2008-2011, Novell Inc
+           2011, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mono-counters.c
+Copyright: 2006-2010, Novell
+           2011, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/freebsd-dwarf.h
+Copyright: 2007, John Birrell <jb@freebsd.org>
+License: BSD-2-clause
+
+Files: src/runtime/src/mono/mono/utils/bsearch.c
+Copyright: 1990-1993, The Regents of the University of California
+License: BSD-3-clause
+
+Files: src/runtime/src/mono/mono/profiler/vtune.c
+Copyright: 2011, Virgile Bello
+License: Expat
+
+Files: src/runtime/src/mono/mono/eglib/giconv.c
+Copyright: 2011, Jeffrey Stedfast
+License: Expat
+
+Files: src/runtime/src/mono/System.Private.CoreLib/src/System/TypeIdentifier.cs
+Copyright: 2015, Xamarin, Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/arm/arm-wmmx.h
+Copyright: 2002, Wild West Software
+License: Expat
+
+Files: src/runtime/src/mono/mono/arch/s390x/*
+Copyright: 2001, Radek Doulik
+License: Expat
+
+Files: src/runtime/src/mono/mono/metadata/debug-helpers.c
+Copyright: 2005-2008, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/mono/mono/utils/mono-path.c
+       src/runtime/src/mono/mono/eglib/test/whats-implemented
+Copyright: 2006, Novell, Inc. http://www.novell.com
+License: Expat
+
+Files: src/runtime/src/mono/mono/unit-tests/test-mono-callspec.c
+Copyright: 2017, vFunction, Inc
+License: Expat
+
+Files: src/runtime/src/tools/illink/src/linker/Linker.Steps/RegenerateGuidStep.cs
+Copyright: NET Foundation
+           2008, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/tools/illink/test/Mono.Linker.Tests/Extensions/NiceIO.cs
+Copyright: NET Foundation
+           2015-2017, ` `Lucas Meijer`
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-riscv/jmpbuf.h
+Copyright: Contributed by Zhaofeng Li <hello@zhaofeng.li>
+           2004, Hewlett-Packard Co.
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-loongarch64.h
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2001-2004, Hewlett-Packard Co.
+           2021, Loongson Technology Corporation Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-aarch64.h
+Copyright: 2022, Blackberry Limited
+           David Mosberger-Tang <davidm@hpl.hp.com>
+           2001-2004, Hewlett-Packard Co.
+           2013, Linaro Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/dwarf/Gparser.c
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2003-2005, Hewlett-Packard Development Company, L.P
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-arm.h
+       src/runtime/src/native/external/libunwind/include/libunwind-mips.h
+       src/runtime/src/native/external/libunwind/include/tdep-arm/*
+       src/runtime/src/native/external/libunwind/include/tdep-mips/*
+       src/runtime/src/native/external/libunwind/include/tdep-riscv/libunwind_i.h
+       src/runtime/src/native/external/libunwind/src/aarch64/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/arm/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/arm/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/arm/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/arm/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/arm/Ginit.c
+       src/runtime/src/native/external/libunwind/src/arm/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/arm/Gregs.c
+       src/runtime/src/native/external/libunwind/src/arm/getcontext.S
+       src/runtime/src/native/external/libunwind/src/arm/init.h
+       src/runtime/src/native/external/libunwind/src/arm/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/arm/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/mips/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/mips/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/mips/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/mips/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/mips/Ginit.c
+       src/runtime/src/native/external/libunwind/src/mips/Ginit_local.c
+       src/runtime/src/native/external/libunwind/src/mips/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/mips/Gregs.c
+       src/runtime/src/native/external/libunwind/src/mips/Gresume.c
+       src/runtime/src/native/external/libunwind/src/mips/elfxx.c
+       src/runtime/src/native/external/libunwind/src/mips/init.h
+       src/runtime/src/native/external/libunwind/src/mips/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/mips/regname.c
+       src/runtime/src/native/external/libunwind/src/mips/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/riscv/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/riscv/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/riscv/Gresume.c
+       src/runtime/src/native/external/libunwind/src/riscv/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/riscv/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/sh/Gget_proc_info.c
+       src/runtime/src/native/external/libunwind/src/sh/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/sh/is_fpreg.c
+Copyright: 2008, CodeSourcery
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/coredump/ucd_file_table.c
+       src/runtime/src/native/external/libunwind/src/coredump/ucd_file_table.h
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_access_fpreg.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_access_mem.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_access_reg.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_create.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_destroy.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_elf.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_find_proc_info.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_get_dyn_info_list_addr.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_get_proc_name.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_internal.h
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_put_unwind_info.c
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_resume.c
+Copyright: 2020-2022, Blackberry Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/os-qnx.h
+       src/runtime/src/native/external/libunwind/src/x86_64/Gos-qnx.c
+       src/runtime/src/native/external/libunwind/src/x86_64/Los-qnx.c
+Copyright: 2022-2023, BlackBerry Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/Ginit.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gstep.c
+Copyright: 2022, Blackberry Limited
+           2008, CodeSourcery
+           2011-2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/Gis_signal_frame.c
+Copyright: 2022-2023, Blackberry Limited
+           2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/os-qnx.c
+Copyright: 2022-2023, BlackBerry Limited
+           Contributed by Matt Fischer <matt.fischer@garmin.com>
+           2013, Garmin International
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-ppc32.h
+       src/runtime/src/native/external/libunwind/include/libunwind-ppc64.h
+       src/runtime/src/native/external/libunwind/include/tdep-ppc32/*
+       src/runtime/src/native/external/libunwind/include/tdep-ppc64/*
+       src/runtime/src/native/external/libunwind/src/ppc/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/ppc/Gis_signal_frame.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Ginit.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Gregs.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Gresume.c
+       src/runtime/src/native/external/libunwind/src/ppc32/Gstep.c
+       src/runtime/src/native/external/libunwind/src/ppc32/get_func_addr.c
+       src/runtime/src/native/external/libunwind/src/ppc32/init.h
+       src/runtime/src/native/external/libunwind/src/ppc32/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/ppc32/regname.c
+       src/runtime/src/native/external/libunwind/src/ppc32/ucontext_i.h
+       src/runtime/src/native/external/libunwind/src/ppc32/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/ppc64/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/ppc64/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/ppc64/Ginit.c
+       src/runtime/src/native/external/libunwind/src/ppc64/Gregs.c
+       src/runtime/src/native/external/libunwind/src/ppc64/Gresume.c
+       src/runtime/src/native/external/libunwind/src/ppc64/Gstep.c
+       src/runtime/src/native/external/libunwind/src/ppc64/get_func_addr.c
+       src/runtime/src/native/external/libunwind/src/ppc64/init.h
+       src/runtime/src/native/external/libunwind/src/ppc64/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/ppc64/regname.c
+       src/runtime/src/native/external/libunwind/src/ppc64/ucontext_i.h
+       src/runtime/src/native/external/libunwind/src/ppc64/unwind_i.h
+Copyright: 2006-2007, IBM
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-loongarch64/*
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Ginit.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Ginit_local.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Ginit_remote.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gis_signal_frame.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gregs.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/Gresume.c
+       src/runtime/src/native/external/libunwind/src/loongarch64/init.h
+       src/runtime/src/native/external/libunwind/src/loongarch64/regname.c
+Copyright: 2008, CodeSourcery
+           2021, Loongson Technology Corporation Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-aarch64/*
+       src/runtime/src/native/external/libunwind/src/aarch64/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gos-linux.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gregs.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gresume.c
+       src/runtime/src/native/external/libunwind/src/arm/Gos-linux.c
+       src/runtime/src/native/external/libunwind/src/arm/Gos-other.c
+       src/runtime/src/native/external/libunwind/src/arm/Gresume.c
+       src/runtime/src/native/external/libunwind/src/arm/Gstep.c
+       src/runtime/src/native/external/libunwind/src/sh/Gresume.c
+       src/runtime/src/native/external/libunwind/src/sh/Gstep.c
+Copyright: 2008, CodeSourcery
+           2011-2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-sh.h
+       src/runtime/src/native/external/libunwind/include/tdep-arm/dwarf-config.h
+       src/runtime/src/native/external/libunwind/include/tdep-mips/dwarf-config.h
+       src/runtime/src/native/external/libunwind/include/tdep-sh/*
+       src/runtime/src/native/external/libunwind/src/mips/getcontext.S
+       src/runtime/src/native/external/libunwind/src/sh/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/sh/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/sh/Ginit.c
+       src/runtime/src/native/external/libunwind/src/sh/Gregs.c
+Copyright: 2008, CodeSourcery
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-aarch64/jmpbuf.h
+       src/runtime/src/native/external/libunwind/src/aarch64/Ginit_local.c
+       src/runtime/src/native/external/libunwind/src/aarch64/is_fpreg.c
+       src/runtime/src/native/external/libunwind/src/aarch64/unwind_i.h
+       src/runtime/src/native/external/libunwind/src/arm/Ginit_local.c
+       src/runtime/src/native/external/libunwind/src/sh/Ginit_local.c
+Copyright: 2008, CodeSourcery
+           2011-2013, Linaro Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/Gget_save_loc.c
+       src/runtime/src/native/external/libunwind/src/riscv/Gglobal.c
+       src/runtime/src/native/external/libunwind/src/riscv/Gis_signal_frame.c
+       src/runtime/src/native/external/libunwind/src/riscv/Gregs.c
+       src/runtime/src/native/external/libunwind/src/riscv/Gstep.c
+Copyright: 2008, CodeSourcery
+           2021, Zhaofeng Li
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-sh/jmpbuf.h
+       src/runtime/src/native/external/libunwind/src/coredump/_UCD_access_reg_linux.c
+       src/runtime/src/native/external/libunwind/src/sh/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/sh/Gis_signal_frame.c
+       src/runtime/src/native/external/libunwind/src/sh/init.h
+       src/runtime/src/native/external/libunwind/src/sh/regname.c
+       src/runtime/src/native/external/libunwind/src/sh/unwind_i.h
+       src/runtime/src/native/external/libunwind/tests/flush-cache.h
+Copyright: 2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/Gstash_frame.c
+       src/runtime/src/native/external/libunwind/src/aarch64/Gtrace.c
+       src/runtime/src/native/external/libunwind/src/arm/Gstash_frame.c
+       src/runtime/src/native/external/libunwind/src/arm/Gtrace.c
+Copyright: 2014, CERN and Aalto University
+           Filip Nyback
+           2010-2011, FERMI NATIONAL ACCELERATOR LABORATORY
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/x86_64/Gstash_frame.c
+       src/runtime/src/native/external/libunwind/src/x86_64/Gtrace.c
+       src/runtime/src/native/external/libunwind/tests/Gtest-trace.c
+Copyright: 2010-2011, FERMI NATIONAL ACCELERATOR LABORATORY
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/os-freebsd.c
+       src/runtime/src/native/external/libunwind/src/x86/Gos-freebsd.c
+       src/runtime/src/native/external/libunwind/src/x86/getcontext-freebsd.S
+       src/runtime/src/native/external/libunwind/src/x86_64/Gos-freebsd.c
+Copyright: 2010, Konstantin Belousov <kib@freebsd.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/Gos-freebsd.c
+       src/runtime/src/native/external/libunwind/src/aarch64/longjmp.S
+       src/runtime/src/native/external/libunwind/src/aarch64/setcontext.S
+       src/runtime/src/native/external/libunwind/src/aarch64/siglongjmp.S
+Copyright: 2023, Dmitry Chagin <dchagin@FreeBSD.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/mi/mempool.c
+       src/runtime/src/native/external/libunwind/src/s390x/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/x86_64/Gcreate_addr_space.c
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2002-2005, Hewlett-Packard Co.
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/ptrace/_UPT_access_fpreg.c
+       src/runtime/src/native/external/libunwind/src/ptrace/_UPT_access_mem.c
+       src/runtime/src/native/external/libunwind/src/ptrace/_UPT_access_reg.c
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2003-2005, Hewlett-Packard Co.
+           2010, Konstantin Belousov <kib@freebsd.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/getcontext.S
+       src/runtime/src/native/external/libunwind/src/x86_64/getcontext.S
+       src/runtime/src/native/external/libunwind/src/x86_64/setcontext.S
+Copyright: 2007-2008, Google, Inc
+           2010, Konstantin Belousov <kib@freebsd.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/aarch64/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/aarch64/init.h
+       src/runtime/src/native/external/libunwind/src/aarch64/regname.c
+Copyright: 2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/remote/freebsd-elf32.h
+       src/runtime/src/native/external/libunwind/include/remote/freebsd-elf64.h
+       src/runtime/src/native/external/libunwind/include/remote/freebsd-elf_common.h
+Copyright: 1996-1998, John D. Polstra
+License: BSD-2-clause
+
+Files: src/runtime/src/native/external/libunwind/src/x86/getcontext-linux.S
+       src/runtime/src/native/external/libunwind/tests/Gtest-nomalloc.c
+       src/runtime/src/native/external/libunwind/tests/Ltest-nocalloc.c
+Copyright: 2009-2011, Google, Inc
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/asm.h
+       src/runtime/src/native/external/libunwind/src/riscv/getcontext.S
+       src/runtime/src/native/external/libunwind/src/riscv/setcontext.S
+Copyright: 2021, Zhaofeng Li
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-loongarch64/dwarf-config.h
+       src/runtime/src/native/external/libunwind/src/loongarch64/getcontext.S
+Copyright: 2008, CodeSourcery
+           2021, Loongson Technology Corporation Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/s390x/getcontext.S
+       src/runtime/src/native/external/libunwind/src/s390x/setcontext.S
+Copyright: 2008, Google, Inc
+           2017, IBM
+           2010, Konstantin Belousov <kib@freebsd.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/Gapply_reg_state.c
+       src/runtime/src/native/external/libunwind/src/riscv/Greg_states_iterate.c
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2002-2003, Hewlett-Packard Development Company, L.P
+           2004, Max Asbock <masbock@us.ibm.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/Ginit_local.c
+       src/runtime/src/native/external/libunwind/src/riscv/init.h
+Copyright: 2008, CodeSourcery
+           2014, Tilera Corp
+           2021, Zhaofeng Li
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-aarch64/libunwind_i.h
+       src/runtime/src/native/external/libunwind/src/ptrace/_UPT_reg_offset.c
+Copyright: David Mosberger-Tang <davidm@hpl.hp.com>
+           2001-2005, Hewlett-Packard Co
+           2013, Linaro Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/mips/Gis_signal_frame.c
+       src/runtime/src/native/external/libunwind/src/mips/Gstep.c
+Copyright: 2008, CodeSourcery
+           2015, Imagination Technologies Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/Gcreate_addr_space.c
+       src/runtime/src/native/external/libunwind/src/riscv/regname.c
+Copyright: 2008, CodeSourcery
+           2014, Tilera Corp
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/libunwind-nto.h
+       src/runtime/src/native/external/libunwind/src/nto/unw_nto_accessors.c
+Copyright: 2020-2023, QNX Blackberry Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/include/tdep-arm/ex_tables.h
+       src/runtime/src/native/external/libunwind/src/arm/Gex_tables.c
+Copyright: 2011, Linaro Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/arm/Gos-freebsd.c
+Copyright: 2008, CodeSourcery
+           2011, Linaro Limited
+           2015, The FreeBSD Foundation
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/riscv/Ginit.c
+Copyright: 2008, CodeSourcery
+           2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+           2021, Zhaofeng Li
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/loongarch64/Gstep.c
+Copyright: 2008, CodeSourcery
+           2015, Imagination Technologies Limited
+           2021, Loongson Technology Corporation Limited
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/s390x/Gis_signal_frame.c
+Copyright: 2017, IBM
+           2013, Linaro Limited
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/mi/strerror.c
+Copyright: 2004, BEA Systems
+           Contributed by Thomas Hallgren <thallgre@bea.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/mi/Gset_cache_size.c
+Copyright: 2014, Contributed by Milian Wolff <address@hidden>
+           Dave Watson <dade.watson@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/unwind/GetIPInfo.c
+Copyright: Contributed by Jan Kratochvil <jan.kratochvil@redhat.com>
+           2009, Red Hat
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/src/x86/siglongjmp.S
+Copyright: 2004, Hewlett-Packard Co
+           2011, Konstantin Belousov <kib@FreeBSD.org>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/tests/x64-unwind-badjmp-signal-frame.c
+Copyright: 2019, Brock York <twunknown@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/tests/Ltest-cxx-exceptions.cxx
+Copyright: 2010, Arun Sharma <arun.sharma@google.com>
+           2010, Stefan Demharter <stefan.demharter@gmx.net>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/tests/Gtest-bt.c
+Copyright: 2022, Blackberry Limited
+           2001-2004, Hewlett-Packard Co.
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/tests/Gtest-resume-sig-rt.c
+Copyright: 2003-2004, Hewlett-Packard Co.
+           2012, Tommi Rantala <tt.rantala@gmail.com>
+License: Expat
+
+Files: src/runtime/src/native/external/libunwind/scripts/qemu-test-driver
+Copyright: 2011-2014, Free Software Foundation, Inc
+License: GPL-2+ with AutoConf exception
+
+Files: src/runtime/src/native/external/llvm-libunwind/*
+Copyright: LLVM Project
+License: Apache-2.0 with LLVM exception
+
+Files: src/runtime/src/native/external/llvm-libunwind/src/dwarf2.h
+Copyright: LLVM Project
+           2005, Free Standards Group
+           1992-1993, UNIX International, Inc
+License: Apache-2.0 with LLVM exception
+
+Files: src/runtime/src/native/external/rapidjson/allocators.h
+       src/runtime/src/native/external/rapidjson/document.h
+       src/runtime/src/native/external/rapidjson/encodedstream.h
+       src/runtime/src/native/external/rapidjson/error/*
+       src/runtime/src/native/external/rapidjson/fwd.h
+       src/runtime/src/native/external/rapidjson/internal/*
+       src/runtime/src/native/external/rapidjson/istreamwrapper.h
+       src/runtime/src/native/external/rapidjson/memorystream.h
+       src/runtime/src/native/external/rapidjson/rapidjson.h
+       src/runtime/src/native/external/rapidjson/reader.h
+       src/runtime/src/native/external/rapidjson/stream.h
+       src/runtime/src/native/external/rapidjson/stringbuffer.h
+Copyright: 2015, THL A29 Limited, a Tencent company, and Milo Yip
+License: Expat
+
+Files: src/runtime/src/native/external/zlib-ng/*
+Copyright: Jean-loup Gailly
+           Mark Adler
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/arm/compare256_neon.c
+       src/runtime/src/native/external/zlib-ng/arch/generic/compare256_c.c
+       src/runtime/src/native/external/zlib-ng/arch/generic/compare256_p.h
+       src/runtime/src/native/external/zlib-ng/arch/generic/crc32_fold_c.c
+       src/runtime/src/native/external/zlib-ng/compare256_rle.h
+       src/runtime/src/native/external/zlib-ng/crc32.h
+Copyright: 2020-2022, Nathan Moinvaziri
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/riscv/adler32_rvv.c
+       src/runtime/src/native/external/zlib-ng/arch/riscv/chunkset_rvv.c
+       src/runtime/src/native/external/zlib-ng/arch/riscv/compare256_rvv.c
+       src/runtime/src/native/external/zlib-ng/arch/riscv/riscv_features.h
+       src/runtime/src/native/external/zlib-ng/arch/riscv/riscv_functions.h
+       src/runtime/src/native/external/zlib-ng/arch/riscv/slide_hash_rvv.c
+Copyright: 2023, SiFive, Inc.
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/power/adler32_power8.c
+       src/runtime/src/native/external/zlib-ng/arch/power/crc32_constants.h
+       src/runtime/src/native/external/zlib-ng/arch/power/crc32_power8.c
+       src/runtime/src/native/external/zlib-ng/arch/power/power_intrins.h
+       src/runtime/src/native/external/zlib-ng/arch/power/slide_hash_power8.c
+Copyright: 2019-2021, IBM Corporation
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch_functions.h
+       src/runtime/src/native/external/zlib-ng/cpu_features.c
+       src/runtime/src/native/external/zlib-ng/cpu_features.h
+       src/runtime/src/native/external/zlib-ng/functable.c
+       src/runtime/src/native/external/zlib-ng/functable.h
+       src/runtime/src/native/external/zlib-ng/cmake/detect-arch.c
+       src/runtime/src/native/external/zlib-ng/cmake/detect-arch.cmake
+       src/runtime/src/native/external/zlib-ng/cmake/detect-install-dirs.cmake
+Copyright: Hans Kristian Rosbach
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/power/Makefile.in
+       src/runtime/src/native/external/zlib-ng/arch/power/power_features.c
+       src/runtime/src/native/external/zlib-ng/arch/power/power_features.h
+       src/runtime/src/native/external/zlib-ng/arch/power/power_functions.h
+Copyright: 2020, IBM
+           2020, Matheus Castanho <msc@linux.ibm.com>
+           2021-2024, Mika T. Lindqvist <postmaster@raasu.org>
+License: Zlib
+
+Files: src/runtime/src/libraries/System.Private.Xml/tests/Xslt/TestFiles/TestData/THIRD-PARTY-NOTICES
+       src/runtime/src/libraries/System.Private.Xml/tests/Xslt/TestFiles/TestData/XsltScenarios/Schematron/schematron-basic.xsl
+       src/runtime/src/libraries/System.Private.Xml/tests/Xslt/TestFiles/TestData/XsltScenarios/Schematron/schematron-message.xsl
+       src/runtime/src/libraries/System.Private.Xml/tests/Xslt/TestFiles/TestData/XsltScenarios/Schematron/skeleton1-5.xsl
+Copyright: 2000-2001, Rick Jelliffe and Academia Sinica Computing Center, Taiwan
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/slide_hash_avx2.c
+       src/runtime/src/native/external/zlib-ng/arch/x86/slide_hash_sse2.c
+       src/runtime/src/native/external/zlib-ng/arch/x86/x86_features.c
+       src/runtime/src/native/external/zlib-ng/deflate_medium.c
+Copyright: 2013-2017, Intel Corporation
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/crc32_fold_pclmulqdq_tpl.h
+       src/runtime/src/native/external/zlib-ng/arch/x86/crc32_pclmulqdq.c
+       src/runtime/src/native/external/zlib-ng/arch/x86/crc32_pclmulqdq_tpl.h
+Copyright: 2013, Intel Corporation
+           2016, Marian Beermann
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/generic/adler32_fold_c.c
+       src/runtime/src/native/external/zlib-ng/arch/x86/adler32_avx2_p.h
+       src/runtime/src/native/external/zlib-ng/arch/x86/adler32_ssse3_p.h
+Copyright: 2022, Adam Stylinski
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/power/slide_hash_vmx.c
+       src/runtime/src/native/external/zlib-ng/arch/power/slide_ppc_tpl.h
+       src/runtime/src/native/external/zlib-ng/arch/x86/compare256_avx2.c
+Copyright: 2017-2021, Mika T. Lindqvist <postmaster@raasu.org>
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/crc32_fold_vpclmulqdq_tpl.h
+       src/runtime/src/native/external/zlib-ng/arch/x86/crc32_vpclmulqdq.c
+Copyright: Wangyang Guo <wangyang.guo@intel.com>
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/x86_features.h
+       src/runtime/src/native/external/zlib-ng/arch/x86/x86_functions.h
+Copyright: 2013, Intel Corporation Jim Kukunas
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/riscv/Makefile.in
+Copyright: 2025, ByteDance
+           2024, Hans Kristian Rosbach
+           1995-2013, Jean-loup Gailly, Mark Adler
+           2025, Yin Tong <yintong.ustc@bytedance.com>
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/power/adler32_vmx.c
+Copyright: 2021, Adam Stylinski <kungfujesus06@gmail.com>
+           1995-2011, Mark Adler
+           2017-2023, Mika T. Lindqvist <postmaster@raasu.org>
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/insert_string_tpl.h
+Copyright: 2016, 12Sided Technology, LLC
+           2013, Intel Corporation
+           1995-2024, Jean-loup Gailly and Mark Adler
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/generic/Makefile.in
+Copyright: 2024, Hans Kristian Rosbach
+           1995-2013, Jean-loup Gailly, Mark Adler
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/power/compare256_power9.c
+Copyright: 2019, IBM
+           2019, Matheus Castanho <msc@linux.ibm.com>
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/arm/adler32_neon.c
+Copyright: 2017, ARM Holdings Inc
+           1995-2016, Mark Adler
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/arm/crc32_acle.c
+Copyright: 1995-2012, Mark Adler
+           2016, Yang Zhang
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/adler32_avx2.c
+Copyright: 2022, Adam Stylinski
+           1995-2011, Mark Adler
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/match_tpl.h
+Copyright: 1995-2024, Jean-loup Gailly and Mark Adler
+           2014-2021, Konstantin Nosov
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/deflate_quick.c
+Copyright: 2016, 12Sided Technology, LLC
+           2013, Intel Corporation
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/win32/depcheck.cpp
+Copyright: 2024, Mika T. Lindqvist
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/cmake/fallback-macros.cmake
+Copyright: 2022, Nathan Moinvaziri
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/arm/slide_hash_neon.c
+Copyright: 2017-2020, Mika T. Lindqvist
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/arm/slide_hash_armv6.c
+Copyright: 2023, Cameron Cawley
+License: Zlib
+
+Files: src/runtime/src/native/external/zlib-ng/arch/x86/compare256_sse2.c
+Copyright: Adam Stylinski <kungfujesus06@gmail.com>
+License: Zlib
+
+Files: src/runtime/src/tests/JIT/Performance/CodeQuality/BenchmarksGame/*
+Copyright: 2004-2008 Brent Fulgham
+           2005-2016 Isaac Gouy
+License: BSD-3-clause
+
+Files: src/source-build-reference-packages/src/externalPackages/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/CustomSecurityKey.cs
+       src/source-build-reference-packages/src/externalPackages/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/SecurityKeyCustomConverter.cs
+Copyright: 2007, James Newton-King
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/docker-creds-provider/*
+Copyright: 2020, Matt Thalman
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/humanizer/*
+Copyright: .NET Foundation and Contributors
+           2013, Scott Kirkland
+           2013-2014, Omar Khudeira (http://omar.io)
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/humanizer/src/Humanizer/MetricNumeralExtensions.cs
+Copyright: 2015, Alois de Gouvello
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/*
+Copyright: 2007-2022, James Newton-King
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/Build/psake.psm1
+Copyright: 2012, James Kovacs
+License: Expat
+
+Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/Src/Newtonsoft.Json/Utilities/LinqBridge.cs
+Copyright: 2007-2009, Atif Aziz, Joseph Albahari
+License: BSD
+
+Files: src/source-build-reference-packages/src/textOnlyPackages/src/microsoft.extensions.commandlineutils.sources/*
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+License: Apache-2.0
+
+Files: src/source-build-reference-packages/src/textOnlyPackages/src/wcwidth.sources/*
+Copyright: Patrik Svensson
+           Phil Scott
+License: Expat
+
+Files: src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/GraphicsPathIteratorTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/GraphicsPathTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/MatrixTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/PathGradientBrushTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/IconTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Imaging/ColorMatrixTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Imaging/ImageAttributesTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Imaging/MetafileTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/MarginsTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PageSettingsTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PaperSizeTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PaperSourceTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PrintDocumentTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PrinterSettingsTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Printing/PrinterUnitConvertTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/RegionTests.cs
+       src/winforms/src/System.Drawing.Common/tests/mono/*
+Copyright: 2004-2009, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Resources/*
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Calendar.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ContextMenu.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Frame.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Label.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ListBox.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ListBoxItem.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ListView.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ListViewItem.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Menu.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/MenuItem.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Page.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ProgressBar.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/RichTextBox.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ScrollBar.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ScrollViewer.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Separator.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Slider.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/StatusBar.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/TabControl.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/TextBlock.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ToolBar.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/ToolTip.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/TreeView.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/TreeViewItem.xaml
+       src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/Window.xaml
+Copyright: Leszek Pomianowski and WPF UI Contributors
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/AssertCrypto.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/KeyInfoRetrievalMethodTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/KeyInfoTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/KeyInfoX509DataTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/SignatureTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/SignedInfoTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/SignedXmlTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigC14NWithCommentsTransformTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigXPathTransformTest.cs
+Copyright: 2002-2003, Motus Technologies Inc. (http://www.motus.com)
+           2004-2009, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Net.Mail/tests/Functional/AlternateViewCollectionTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/AlternateViewTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/AttachmentCollectionTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/AttachmentTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/LinkedResourceCollectionTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/LinkedResourceTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/MailAddressCollectionTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/MailMessageTest.cs
+       src/runtime/src/libraries/System.Net.Mail/tests/Functional/SmtpClientTest.cs
+Copyright: 2005-2006, John Luke
+License: Expat
+
+Files: src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/Assert.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/AsyncStreamExtensions.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/InteropClient.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropWebsite/AsyncStreamExtensions.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/InteropWebsite/TestServiceImpl.cs
+       src/aspnetcore/src/Grpc/Interop/test/testassets/Proto/*
+Copyright: 2015-2016, gRPC authors
+License: Apache-2
+
+Files: src/aspnetcore/src/Grpc/JsonTranscoding/src/Microsoft.AspNetCore.Grpc.JsonTranscoding/protos/*
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/Proto/Issue048192/customhttp.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/google/*
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.Swagger.Tests/google/*
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/IntegrationTestsWebsite/google/*
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/Sandbox/google/*
+Copyright: 2015-2019, Google LLC
+License: Apache-2
+
+Files: src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/THIRD-PARTY-NOTICES
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/test/*
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/Program.cs
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/Startup.cs
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/*
+Copyright: 2019, The gRPC Authors
+License: Apache-2
+
+Files: src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/TestServiceImpl.cs
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Proto/*
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/Assert.cs
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/InteropClient.cs
+       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/TestCredentials.cs
+Copyright: 2015-2016, gRPC authors
+License: Apache-2
+
+Files: src/runtime/src/tools/illink/src/linker/Linker.Steps/CleanStep.cs
+       src/runtime/src/tools/illink/src/linker/Linker.Steps/IStep.cs
+       src/runtime/src/tools/illink/src/linker/Linker.Steps/OutputStep.cs
+       src/runtime/src/tools/illink/src/linker/Linker/AssemblyAction.cs
+       src/runtime/src/tools/illink/src/linker/Linker/AssemblyInfo.cs
+       src/runtime/src/tools/illink/src/linker/Linker/Driver.cs
+       src/runtime/src/tools/illink/src/linker/Linker/LinkContext.cs
+       src/runtime/src/tools/illink/src/linker/Linker/MethodAction.cs
+       src/runtime/src/tools/illink/src/linker/Linker/Pipeline.cs
+       src/runtime/src/tools/illink/src/linker/Linker.Steps/BaseStep.cs
+       src/runtime/src/tools/illink/src/linker/Linker/Annotations.cs
+       src/runtime/src/tools/illink/src/linker/Linker/AssemblyResolver.cs
+       src/runtime/src/tools/illink/src/linker/Linker/IXApiVisitor.cs
+       src/runtime/src/tools/illink/src/linker/Linker/TypeMapInfo.cs
+       src/runtime/src/tools/illink/src/linker/Linker/TypePreserve.cs
+Copyright: Jb Evain (jbevain@novell.com), Novell, Inc
+           .NET Foundation and Contributors
+License: Expat
+
+Files: src/runtime/src/libraries/System.Text.Json/tests/System.Text.Json.Tests/NewtonsoftTests/*
+Copyright: 2007, James Newton-King
+License: Expat
+
+Files: src/aspnetcore/src/Grpc/JsonTranscoding/src/Microsoft.AspNetCore.Grpc.JsonTranscoding/protos/google/api/annotations.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/Proto/Issue048192/customannotations.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/google/api/annotations.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.Swagger.Tests/google/api/annotations.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/IntegrationTestsWebsite/google/api/annotations.proto
+       src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/Sandbox/google/api/annotations.proto
+Copyright: 2015, Google Inc
+License: Apache-2
+
+Files: src/runtime/src/libraries/System.Runtime.Caching/tests/Common/PokerMemoryCache.cs
+       src/runtime/src/libraries/System.Runtime.Caching/tests/Common/PokerObjectCache.cs
+       src/runtime/src/libraries/System.Runtime.Caching/tests/Common/TestNotificationSystem.cs
+       src/runtime/src/libraries/System.Runtime.Caching/tests/System.Runtime.Caching/HostFileChangeMonitorTest.cs
+       src/runtime/src/libraries/System.Runtime.Caching/tests/System.Runtime.Caching/MemoryCacheTest.cs
+       src/runtime/src/libraries/System.Runtime.Caching/tests/System.Runtime.Caching/ObjectCacheTest.cs
+Copyright: 2010, Novell, Inc. (http://novell.com/)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/DSAKeyValueTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/KeyInfoNameTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/KeyInfoNodeTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/RSAKeyValueTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/TransformChainTest.cs
+       src/runtime/src/libraries/System.Security.Permissions/tests/PrincipalPermissionTests.cs
+Copyright: Sebastien Pouliot (spouliot@motus.com), Motus Technologies Inc. (http://www.motus.com)
+License: Expat
+
+Files: src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/simpbdo.ttf
+       src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/simpfxo.ttf
+       src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/simpo.ttf
+       src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/tradbdo.ttf
+       src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/trado.ttf
+Copyright: 1990, Compugraphic Corporation
+           The Monotype Corporation plc.
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/ConstraintCollectionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ConstraintTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowCollectionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/ForeignKeyConstraintTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/UniqueConstraintTest.cs
+Copyright: 2002, Franklin Wise
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/winforms/src/System.Drawing.Common/tests/System/Drawing/BitmapTests.cs
+       src/winforms/src/System.Drawing.Common/tests/System/Drawing/Imaging/ImageCodecInfoTests.cs
+       src/winforms/src/System.Drawing.Common/tests/mono/System.Drawing.Imaging/BmpCodecTests.cs
+       src/winforms/src/System.Drawing.Common/tests/mono/System.Drawing.Imaging/JpegCodecTests.cs
+       src/winforms/src/System.Drawing.Common/tests/mono/System.Drawing/BitmapTests.cs
+Copyright: 2004-2007, Novell, Inc (http://www.novell.com)
+           2004, Ximian, Inc. http://www.ximian.com
+License: Expat
+
+Files: src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpEndPointManager.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpListenerResponse.Managed.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpRequestStream.Managed.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpResponseStream.Managed.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/ListenerPrefix.cs
+Copyright: 2005, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/docs/design/coreclr/botr/images/profiling-exception-callback-sequence.png
+       src/runtime/docs/design/coreclr/botr/images/profiling-gc.png
+       src/runtime/docs/design/coreclr/botr/images/profiling-overview.png
+       src/runtime/docs/design/mono/web/images/igv-diff.png
+       src/runtime/docs/design/mono/web/images/igv-screenshot.png
+Copyright: 2015-2016, Apple Inc
+License: Expat
+
+Files: src/sourcelink/src/dotnet-sourcelink/AuthenticationHeaderProvider.cs
+       src/sourcelink/src/dotnet-sourcelink/HashAlgorithmGuids.cs
+       src/sourcelink/src/dotnet-sourcelink/LanguageGuids.cs
+       src/sourcelink/src/dotnet-sourcelink/Program.cs
+       src/symreader/src/PdbTestResources/TestResources.cs
+License: Apache-2
+
+Files: src/aspnetcore/src/submodules/MessagePack-CSharp/*
+Copyright: 2013-2017, Milosz Krajewski
+           2017, Yoshifumi Kawai
+License: BSD-2-clause or Expat
+
+Files: src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Safe32.Dirty.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Safe64.Dirty.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Unsafe32.Dirty.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Unsafe64.Dirty.cs
+Copyright: All contributors
+           2013, Milosz Krajewski
+           2011-2012, Yann Collet
+License: BSD-2-clause
+
+Files: src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Safe.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.Unsafe.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/LZ4/LZ4Codec.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2013, Milosz Krajewski
+License: Expat or BSD-2-clause
+
+Files: src/runtime/src/native/libs/System.Native/ios/*
+Copyright: 2000-2020, Apple Inc
+           1980-1993, The Regents of the University of California
+License: BSD-4-clause
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System.Data.DataSetExtensions.Tests/Mono/DataRowComparerTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System.Data.DataSetExtensions.Tests/Mono/DataRowExtensionsTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System.Data.DataSetExtensions.Tests/Mono/DataTableExtensionsTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System.Data.DataSetExtensions.Tests/Mono/EnumerableRowCollectionTest.cs
+Copyright: 2008, Novell, Inc. http://www.novell.com
+License: Expat
+
+Files: src/arcade/Documentation/Projects/PKPIs/flowgraph.png
+       src/arcade/Documentation/Projects/PKPIs/lbp-breakdown.png
+       src/arcade/Documentation/Projects/PKPIs/lbp-ot.png
+       src/arcade/Documentation/Projects/PKPIs/lbp-stacked.png
+Copyright: 2019, Apple Inc
+License: Expat
+
+
+Files: src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpConnection.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpEndPointListener.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpListenerRequest.Managed.cs
+Copyright: 2005-2009, Novell, Inc. (http://www.novell.com)
+           2011-2012, Xamarin, Inc. (http://xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/ReferenceTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigBase64TransformTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigXsltTransformTest.cs
+Copyright: 2002-2003, Motus Technologies Inc. (http://www.motus.com)
+           2004, Novell (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/tools/illink/src/analyzer/ConsoleDependencyGraph.cs
+       src/runtime/src/tools/illink/src/analyzer/LinkerAnalyzerCore/DependencyGraph.cs
+       src/runtime/src/tools/illink/src/analyzer/Main.cs
+Copyright: 2015, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/ConfigurationSaveTest.cs
+       src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/TestLabel.cs
+       src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/TestUtil.cs
+Copyright: 2012, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Private.Xml/src/Utils/DTDs/XHTML10/original/*
+       src/wpf/src/Microsoft.DotNet.Wpf/src/ReachFramework/Resources/schemas/Master/xmldsig-core-schema.xsd
+       src/wpf/src/Microsoft.DotNet.Wpf/src/ReachFramework/Resources/schemas/Validation/__xmldsig-core-schema.xsd
+       src/runtime/src/libraries/System.Private.Xml/tests/XmlSchema/TestFiles/TestData/105897.xsd
+Copyright: W3C (MIT, INRIA, Keio)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Private.Xml/src/Utils/DTDs/XHTML10/original/xhtml-lat1.ent
+       src/runtime/src/libraries/System.Private.Xml/src/Utils/DTDs/XHTML10/original/xhtml-special.ent
+       src/runtime/src/libraries/System.Private.Xml/src/Utils/DTDs/XHTML10/original/xhtml-symbol.ent
+Copyright: 1986, International Organization for Standardization
+License: Expat
+
+Files: src/diagnostics/src/shared/inc/llvm/*
+       src/runtime/src/coreclr/inc/llvm/*
+Copyright: 2003-2015, University of Illinois at Urbana-Champaign
+License: NCSA
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigC14NTransformTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigExcC14NTransformTest.cs
+Copyright: 2003, Aleksey Sanin <aleksey@aleksey.com>
+           2002-2003, Motus Technologies Inc. (http://www.motus.com)
+           2004, Novell (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigExcC14NWithCommentsTransformTest.cs
+       src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlLicenseTransformTest.cs
+Copyright: 2003, Aleksey Sanin <aleksey@aleksey.com>
+           2008, Gert Driesen
+           2004, Novell (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography/tests/PKCS1MaskGenerationMethodTest.cs
+       src/runtime/src/libraries/System.Security.Permissions/tests/SecurityElementTests.cs
+Copyright: 2002-2004, Motus Technologies Inc. (http://www.motus.com)
+           2004-2005, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/Common/DataColumnMappingCollectionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/Common/DataTableMappingCollectionTest.cs
+Copyright: Ameya Gargesh
+           2004, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRelationCollectionTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableCollectionTest.cs
+Copyright: 2004, Novell, Inc (http://www.novell.com)
+           Punit Todi
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowViewTest.cs
+       src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataViewManagerTest.cs
+Copyright: 2005, Novell Inc
+           2005, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/coreclr/vm/typehashingalgorithms.h
+       src/runtime/src/libraries/System.Private.CoreLib/src/System/HashCode.cs
+Copyright: 2012-2016, Yann Collet
+License: BSD-2-clause
+
+Files: src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/ChunkStream.cs
+       src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/ListenerAsyncResult.Managed.cs
+Copyright: 2003-2005, Ximian, Inc (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/tests/JIT/Performance/CodeQuality/V8/Crypto/*
+Copyright: 2003-2005, Tom Wu
+           .NET Foundation and Contributors
+License: Expat
+
+Files: src/runtime/src/libraries/System.Diagnostics.DiagnosticSource/src/System/Diagnostics/Metrics/Base2ExponentialHistogramAggregator.cs
+       src/runtime/src/libraries/System.Diagnostics.DiagnosticSource/src/System/Diagnostics/Metrics/CircularBufferBuckets.cs
+Copyright: .NET Foundation and Contributors
+           The OpenTelemetry Authors
+License: Expat
+
+Files: src/diagnostics/src/Microsoft.Diagnostics.DebugServices.Implementation/Microsoft.Diagnostics.DebugServices.Implementation.csproj
+       src/diagnostics/src/Microsoft.Diagnostics.ExtensionCommands/Microsoft.Diagnostics.ExtensionCommands.csproj
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+License: Apache-2
+
+Files: src/msbuild/src/Package/MSBuild.VSSetup.Arm64/MSBuild.VSSetup.Arm64.csproj
+       src/msbuild/src/Package/MSBuild.VSSetup/MSBuild.VSSetup.csproj
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+License: Apache-2
+
+Files: src/fsharp/tests/FSharp.Core.UnitTests/FSharp.Core/Microsoft.FSharp.Control/Tasks.fs
+       src/fsharp/tests/FSharp.Core.UnitTests/FSharp.Core/Microsoft.FSharp.Control/TasksDynamic.fs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Robert Peele (humbobst@gmail.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataColumnTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2003, Daniel Morgan
+           2002, Franklin Wise
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+           2002, Rodrigo Moya
+           2011, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2005, Mainsoft Corporation (http://www.mainsoft.com)
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+           2002, Ville Palo
+           2011, Xamarin Inc
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Franklin Wise
+           2005, Mainsoft Corporation (http://www.mainsoft.com)
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+           2011, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/docs/design/mono/*
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2013, 7digital Media Ltd
+           2004-2011, Novell, Inc
+           2011-2012, Xamarin Inc
+           2003, Ximian, Inc
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataRowTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2003, Daniel Morgan
+           2002, Franklin Wise
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataColumnCollectionTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2002, Franklin Wise
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+           2003, Ville Palo
+License: Expat
+
+Files: src/runtime/src/tools/illink/src/linker/Linker.Steps/ResolveFromXmlStep.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2006, Jb Evain
+           2007, Novell, Inc
+           2013, Xamarin Inc
+License: Expat
+
+Files: src/aspnetcore/src/Http/Routing/test/testassets/RoutingSandbox/wwwroot/viz.js
+Copyright: 2001-2006, Expat maintainers
+           1995-2013, Jean-loup Gailly and Mark Adler
+           2014-2018, Michael Daines
+           1998-2000, Thai Open Source Software Center Ltd and Clark Cooper
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/SqlTypes/SqlInt32Test.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2003, Martin Willemoes Hansen
+           2004, Novell, Inc (http://www.novell.com)
+           Tim Coleman
+License: Expat
+
+Files: src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/Internal/Sequence`1.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/BufferWriter.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Andrew Arnott
+License: Expat
+
+Files: src/runtime/src/libraries/System.ComponentModel.TypeConverter/tests/LicenseManagerTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004, Ivan Hamilton
+           2003, Martin Willemoes Hansen
+           2002, Ximian, Inc. (http://www.ximian.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Private.Xml/src/Utils/DTDs/RSS091/original/*
+Copyright: International Organization for Standardization
+           Netscape Communications
+           Dan Libby <danda@netscape.com>
+           Lars Marius Garshol <larsga@ifi.uio.no>
+License: Expat
+
+Files: src/runtime/src/native/external/rapidjson/writer.h
+Copyright: 2015, THL A29 Limited, a Tencent company, and Milo Yip
+License: Expat
+
+Files: src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/Fonts/andlso.ttf
+Copyright: 1993, Glyph Systems, Limited Partnership. Typeface Portions
+           The Monotype Corporation
+License: Expat
+
+Files: src/sdk/test/TestAssets/TestProjects/WatchMauiBlazor/Resources/Fonts/*
+Copyright: 2010-2011, Google Corporation
+License: Apache-2
+
+Files: src/runtime/src/coreclr/pal/src/exception/remote-unwind.cpp
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Contributed by David Mosberger-Tang <davidm@hpl.hp.com>
+           2003-2005, Hewlett-Packard Development Company, L.P
+License: Apache-2 or Expat
+
+Files: src/runtime/src/native/libs/System.Native/ios/net/if_media.h
+Copyright: 2000-2019, Apple Inc
+           1997, Jonathan Stone and Jason R. Thorpe
+License: BSD-4-clause
+
+Files: src/runtime/src/native/libs/System.Native/ios/netinet/tcp_fsm.h
+Copyright: 2000, Apple Computer, Inc
+           1982-1993, The Regents of the University of California
+License: BSD-4-clause
+
+Files: src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/IntegerValidatorTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2012, 7digital Media, Ltd (http://www.7digital.com)
+           2005, Novell, Inc (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/Common/src/System/Net/Security/MD4.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2003, Motus Technologies Inc. (http://www.motus.com)
+           2013, Xamarin Inc. (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/SqlTypes/SqlBooleanTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004, Ville Palo, Novell Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataViewTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004-2005, Novell, Inc (http://www.novell.com)
+           2003, Patrick Kalkman
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataSetTest2.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004, Mainsoft Co.
+           2009, Novell Inc.
+License: Expat
+
+Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/*
+Copyright: 2014, Waybury
+License: OFL-1.1
+Comment: License for included fonts.
+
+Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/*
+Copyright: 2014, Waybury
+License: Expat
+Comment: License for included icons.
+
+Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf
+Copyright: P.J. Onori
+License: Expat
+Comment: Creted with FontForge 2.0 (http://fontforge.sf.net)
+
+Files: src/runtime/src/tests/JIT/Performance/CodeQuality/Burgers/*
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2017, Gary Evans
+License: Expat
+
+Files: src/runtime/src/libraries/System.ComponentModel.TypeConverter/tests/ContainerTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2006, Ivan N. Zlatev
+           2006, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/DataObjectTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2002-2003, Motus Technologies Inc. (http://www.motus.com)
+           2004, Novell Inc
+License: Expat
+
+Files: src/runtime/src/libraries/System.Security.Cryptography/tests/SignatureDescriptionTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2002, Motus Technologies Inc. (http://www.motus.com)
+           2004, Novell http://www.novell.com
+License: Expat
+
+Files: src/runtime/src/libraries/System.Runtime/tests/System.Runtime.Tests/System/Attributes.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2002, Duco Fijma
+           2004, Novell, Inc. (http://www.novell.com)
+License: Expat
+
+Files: src/runtime/src/coreclr/utilcode/guidfromname.cpp
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Hewlett-Packard Company, Palo Alto, Ca.
+           Digital Equipment Corporation, Maynard, Mass.
+           Open Software Foundation, Inc
+License: Expat
+
+Files: src/wpf/src/Microsoft.DotNet.Wpf/src/Themes/PresentationFramework.Fluent/Styles/DataGrid.xaml
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Leszek Pomianowski 
+           WPF UI Contributors
+License: Expat
+
+Files: src/roslyn/src/Compilers/Test/Core/Assert/UseCultureAttribute.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2014, Outercurve Foundation
+License: Expat
+
+Files: src/roslyn/src/RoslynAnalyzers/Utilities/Compiler/RoslynHashCode.cs
+       src/aspnetcore/src/Shared/HashCode.cs
+       src/aspnetcore/src/submodules/MessagePack-CSharp/src/MessagePack.UnityClient/Assets/Scripts/MessagePack/HashCode.cs
+       src/sdk/src/Microsoft.CodeAnalysis.NetAnalyzers/src/Utilities/Compiler/RoslynHashCode.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Yann Collet
+License: BSD-2-clause and Expat
+
+Files: src/aspnetcore/src/Grpc/JsonTranscoding/src/Shared/Legacy.cs
+Copyright: 2008, Google Inc
+License: BSD-3-clause
+
+Files: src/runtime/src/libraries/System.ComponentModel.TypeConverter/tests/ReferenceConverterTests.cs
+       src/runtime/src/libraries/System.ComponentModel.TypeConverter/tests/ContextStackTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Ivan N. Zlatev <contact@i-nz.net>
+License: Expat
+
+Files: src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/ConfigurationErrorsExceptionTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Gert Driesen
+License: Expat
+
+Files: src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/ConfigurationPropertyTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Mainsoft, Inc (http://www.mainsoft.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Runtime/tests/System.Runtime.Tests/System/TypedReferenceTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2015, Xamarin Inc (http://www.xamarin.com)
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/Common/DbDataReaderMock.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2014, Mika Aalto
+License: Expat
+
+Files: src/runtime/src/libraries/System.Data.Common/tests/System/Data/DataTableLoadRowTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004, Novell Inc., and the individuals listed
+License: Expat
+
+Files: src/vstest/src/Microsoft.TestPlatform.Common/Utilities/SimpleJSON.cs
+Copyright: 2012-2019, Markus Göbel (Bunny83)
+License: Expat
+
+Files: src/sourcelink/docs/GitSpec/*
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           1989-1991, Free Software Foundation, Inc
+License: GPL-2+
+
+Files: src/runtime/src/coreclr/ilasm/prebuilt/asmparse.cpp
+Copyright: 1984-2021, Free Software Foundation
+License: GPL-3+ with Bison exception
+
+Files: src/fsharp/src/FSharp.Core/local.fs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2001-2023, Python Software Foundation.
+License: Expat and PSF-2.0
+
+Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigEnvelopedSignatureTransformTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2004, Novell Inc.
+License: Expat
+
+Files: src/runtime/src/libraries/System.Private.Xml.Linq/tests/Schema/ExtensionTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Stefan Prutianu <stefanprutianu@yahoo.com>
+License: Expat
+
+Files: src/runtime/src/libraries/System.Net.Mail/tests/Functional/SmtpExceptionTest.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           2008, Gert Driesen <drieseng@users.sourceforge.net>
+License: Expat
+
+Files: src/runtime/src/coreclr/vm/eeconfig.cpp
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           1999, Lucent Technologies
+License: Expat
+
+Files: src/runtime/src/libraries/System.Text.RegularExpressions/tests/FunctionalTests/AttRegexTests.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
+           Glenn Fowler <gsf@research.att.com>
+           AT&T Research
+License: BSD
+
+Files: src/wpf/src/Microsoft.DotNet.Wpf/src/PresentationCore/System/Windows/Media/Resources/ColorProfiles/sRGB.icm
+Copyright: 1998, Hewlett-Packard Company
+License: sRGB Profile Licensing Agreement
+Comment: See also https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=657281
+
+License: Apache-2.0
+ On Debian systems, the full Apache-2.0 license text can be found at
+ /usr/share/common-licenses/Apache-2.0.
+
+License: Apache-2.0 with LLVM exception
+ On Debian systems, the full Apache-2.0 license text can be found at
+ /usr/share/common-licenses/Apache-2.0.
+ .
+ ---- LLVM Exceptions to the Apache 2.0 License ----
+ .
+ As an exception, if, as a result of your compiling your source code, portions
+ of this Software are embedded into an Object form of such source code, you
+ may redistribute such embedded portions in such Object form without complying
+ with the conditions of Sections 4(a), 4(b) and 4(d) of the License.
+ .
+ In addition, if you combine or link compiled forms of this Software with
+ software that is licensed under the GPLv2 ("Combined Software") and if a
+ court of competent jurisdiction determines that the patent provision (Section
+ 3), the indemnity provision (Section 9) or other Section of the License
+ conflicts with the conditions of the GPLv2, you may retroactively and
+ prospectively choose to deem waived or otherwise exclude such Section(s) of
+ the License, but only in their entirety and only with respect to the Combined
+ Software.
+ .
+ ==============================================================================
+ Software from third parties included in the LLVM Project:
+ ==============================================================================
+ The LLVM Project contains third party software which is under different license
+ terms. All such code will be identified clearly using at least one of two
+ mechanisms:
+ 1) It will be in a separate directory tree with its own `LICENSE.txt` or
+    `LICENSE` file at the top containing the specific license and restrictions
+    which apply to that software, or
+ 2) It will contain specific license and restriction terms at the top of every
+    file.
+ .
+ ==============================================================================
+ Legacy LLVM License (https://llvm.org/docs/DeveloperPolicy.html#legacy):
+ ==============================================================================
+ .
+ The libunwind library is dual licensed under both the University of Illinois
+ "BSD-Like" license and the MIT license.  As a user of this code you may choose
+ to use it under either license.  As a contributor, you agree to allow your code
+ to be used under both.
+ .
+ Full text of the relevant licenses is included below.
+ .
+ ==============================================================================
+ .
+ University of Illinois/NCSA
+ Open Source License
+ .
+ Copyright (c) 2009-2019 by the contributors listed in CREDITS.TXT
+ .
+ All rights reserved.
+ .
+ Developed by:
+ .
+     LLVM Team
+ .
+     University of Illinois at Urbana-Champaign
+ .
+     http://llvm.org
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy of
+ this software and associated documentation files (the "Software"), to deal with
+ the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+     * Redistributions of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimers.
+ .
+     * Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimers in the
+       documentation and/or other materials provided with the distribution.
+ .
+     * Neither the names of the LLVM Team, University of Illinois at
+       Urbana-Champaign, nor the names of its contributors may be used to
+       endorse or promote products derived from this Software without specific
+       prior written permission.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE
+ SOFTWARE.
+ .
+ ==============================================================================
+ .
+ Copyright (c) 2009-2014 by the contributors listed in CREDITS.TXT
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+
+License: BSD
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+ .
+ THIS SOFTWARE IS PROVIDED BY [Name of Organization] “AS IS” AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ EVENT SHALL [Name of Organisation] BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-2-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation 
+    and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+ THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are perExpatted provided that the following conditions
+ are met:
+ .
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+ .
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in
+       the documentation and/or other materials provided with the distribution.
+ .
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software
+       without specific prior written permission.
+ .
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LImited TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LImited TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-4-clause
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ .
+  1. Redistributions of source code must retain the above copyright notice,
+  this list of conditions and the following disclaimer.
+ .
+  2. Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+ .
+  3. All advertising materials mentioning features or use of this software must
+  display the following acknowledgement:
+  This product includes software developed by the organization.
+ .
+  4. Neither the name of the copyright holder nor the names of its contributors
+  may be used to endorse or promote products derived from this software without
+  specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY COPYRIGHT HOLDER "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER BE LIABLE FOR ANY DIRECT,
+ INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without liExpatation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to perExpat persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LImited TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+License: GPL-2
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 2 as
+ published by the Free Software Foundation.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ .
+ See /usr/share/common-licenses/GPL-2 on Debian systems, or
+ <https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt> for the terms of the
+ latest version of the GNU General Public License 2.0.
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, see <https://www.gnu.org/licenses/>.
+ .
+ See /usr/share/common-licenses/GPL-2 on Debian systems, or
+ <https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt> for the terms of the
+ latest version of the GNU General Public License 2.0.
+
+License: GPL-2+ with AutoConf exception
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ .
+ As a special exception to the GNU General Public License, if you
+ distribute this file as part of a program that contains a
+ configuration script generated by Autoconf, you may include it under
+ the same distribution terms that you use for the rest of that program.
+ .
+ This file is maintained in Automake, please report
+ bugs to <bug-automake@gnu.org> or send patches to
+ <automake-patches@gnu.org>.
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ .
+ See /usr/share/common-licenses/GPL-3 on Debian systems, or
+ <https://www.gnu.org/licenses/gpl-3.0.txt> for the terms of the latest version
+ of the GNU General Public License 3.0.
+
+License: GPL-3+ with Bison exception
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ .
+ As a special exception, you may create a larger work that contains
+ part or all of the Bison parser skeleton and distribute that work
+ under terms of your choice, so long as that work isn't itself a
+ parser generator using the skeleton or a modified version thereof
+ as a parser skeleton.  Alternatively, if you modify or redistribute
+ the parser skeleton itself, you may (at your option) remove this
+ special exception, which will cause the skeleton and the resulting
+ Bison output files to be licensed under the GNU General Public
+ License without this special exception.
+
+License: LGPL-2.1
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License version 2.1 as published by the Free Software Foundation.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ .
+ See /usr/share/common-licenses/LGPL-2.1 on Debian systems, or
+ <https://www.gnu.org/licenses/lgpl-2.1.txt> for the terms of the latest version
+ of the GNU Lesser General Public License 2.1.
+
+License: NCSA
+ Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal with the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ * Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimers.
+ .
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimers in the
+ documentation and/or other materials provided with the distribution.
+ .
+ * Neither the names of LLVM Team, University of Illinois at
+ Urbana-Champaign nor the names of its contributors may be used to endorse or
+ promote products derived from this Software without specific prior written
+ permission.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH
+ THE SOFTWARE.
+
+License: OFL-1.1
+ PREAMBLE
+ The goals of the Open Font License (OFL) are to stimulate worldwide
+ development of collaborative font projects, to support the font creation
+ efforts of academic and linguistic communities, and to provide a free and
+ open framework in which fonts may be shared and improved in partnership
+ with others.
+ .
+ The OFL allows the licensed fonts to be used, studied, modified and
+ redistributed freely as long as they are not sold by themselves. The
+ fonts, including any derivative works, can be bundled, embedded,
+ redistributed and/or sold with any software provided that any reserved
+ names are not used by derivative works. The fonts and derivatives,
+ however, cannot be released under any other type of license. The
+ requirement for fonts to remain under this license does not apply
+ to any document created using the fonts or their derivatives.
+ .
+ DEFINITIONS
+ "Font Software" refers to the set of files released by the Copyright
+ Holder(s) under this license and clearly marked as such. This may
+ include source files, build scripts and documentation.
+ .
+ "Reserved Font Name" refers to any names specified as such after the
+ copyright statement(s).
+ .
+ "Original Version" refers to the collection of Font Software components as
+ distributed by the Copyright Holder(s).
+ .
+ "Modified Version" refers to any derivative made by adding to, deleting,
+ or substituting -- in part or in whole -- any of the components of the
+ Original Version, by changing formats or by porting the Font Software to a
+ new environment.
+ .
+ "Author" refers to any designer, engineer, programmer, technical
+ writer or other person who contributed to the Font Software.
+ .
+ PERMISSION & CONDITIONS
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of the Font Software, to use, study, copy, merge, embed, modify,
+ redistribute, and sell modified and unmodified copies of the Font
+ Software, subject to the following conditions:
+ .
+ 1) Neither the Font Software nor any of its individual components,
+ in Original or Modified Versions, may be sold by itself.
+ .
+ 2) Original or Modified Versions of the Font Software may be bundled,
+ redistributed and/or sold with any software, provided that each copy
+ contains the above copyright notice and this license. These can be
+ included either as stand-alone text files, human-readable headers or
+ in the appropriate machine-readable metadata fields within text or
+ binary files as long as those fields can be easily viewed by the user.
+ .
+ 3) No Modified Version of the Font Software may use the Reserved Font
+ Name(s) unless explicit written permission is granted by the corresponding
+ Copyright Holder. This restriction only applies to the primary font name as
+ presented to the users.
+ .
+ 4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+ Software shall not be used to promote, endorse or advertise any
+ Modified Version, except to acknowledge the contribution(s) of the
+ Copyright Holder(s) and the Author(s) or with their explicit written
+ permission.
+ .
+ 5) The Font Software, modified or unmodified, in part or in whole,
+ must be distributed entirely under this license, and must not be
+ distributed under any other license. The requirement for fonts to
+ remain under this license does not apply to any document created
+ using the Font Software.
+ .
+ TERMINATION
+ This license becomes null and void if any of the above conditions are
+ not met.
+ .
+ DISCLAIMER
+ THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+ OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+ COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+ DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+ OTHER DEALINGS IN THE FONT SOFTWARE.
+
+License: sRGB Profile Licensing Agreement
+ To anyone who acknowledges that the file "sRGB Color Space Profile.icm" 
+ is provided "AS IS" WITH NO EXPRESS OR IMPLIED WARRANTY:
+ permission to use, copy and distribute this file for any purpose is hereby 
+ granted without fee, provided that the file is not changed including the HP 
+ copyright notice tag, and that the name of Hewlett-Packard Company not be 
+ used in advertising or publicity pertaining to distribution of the software 
+ without specific, written prior permission. Hewlett-Packard Company makes 
+ no representations about the suitability of this software for any purpose.
+
+License: Valgrind BSD-like-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ 1. Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ .
+ 2. The origin of this software must not be misrepresented; you must
+ not claim that you wrote the original software.  If you use this
+ software in a product, an acknowledgment in the product
+ documentation would be appreciated but is not required.
+ .
+ 3. Altered source versions must be plainly marked as such, and must
+ not be misrepresented as being the original software.
+ .
+ 4. The name of the author may not be used to endorse or promote
+ products derived from this software without specific prior written
+ permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Zlib
+ This software is provided 'as-is', without any express or implied
+ warranty.  In no event will the authors be held liable for any damages
+ arising from the use of this software.
+ .
+ Permission is granted to anyone to use this software for any purpose,
+ including commercial applications, and to alter it and redistribute it
+ freely, subject to the following restrictions:
+ .
+ 1. The origin of this software must not be misrepresented; you must not
+    claim that you wrote the original software. If you use this software
+    in a product, an acknowledgment in the product documentation would be
+    appreciated but is not required.
+ 2. Altered source versions must be plainly marked as such, and must not be
+    misrepresented as being the original software.
+ 3. This notice may not be removed or altered from any source distribution.

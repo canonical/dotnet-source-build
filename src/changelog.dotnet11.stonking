@@ -1,0 +1,24 @@
+dotnet11 (11.0.100-11.0.0~preview6-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
+
+  * New upstream release.
+  * d/p/0009-fix-roslyn-dotnet11-ftbfs.patch: dropped because it was included
+    upstream.
+  * d/p/0009-add-mono-archs-as-not-aot-supported.patch: fix FTBFS on s390x and
+    ppc64el caused by missing Mono architectures on NativeAOT block list.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 20 Jul 2026 09:53:12 -0300
+
+dotnet11 (11.0.100-11.0.0~preview5-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
+
+  * New upstream release.
+  * d/aspnetcore-runtime-11.0.docs: updated razor's NOTICE file path.
+  * d/dotnet-sdk-11.0.docs: updated razor's NOTICE file path.
+  * d/p/0009-fix-roslyn-dotnet11-ftbfs.patch: fix Roslyn FTBFS.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 30 Jun 2026 10:24:11 -0300
+
+dotnet11 (11.0.100-11.0.0~preview4-0ubuntu1~26.10.1~ppa3) stonking; urgency=medium
+
+  * Initial packaging.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 22 May 2026 14:44:15 -0300
