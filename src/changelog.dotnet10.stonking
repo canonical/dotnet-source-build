@@ -1,3 +1,11 @@
+dotnet10 (10.0.110-10.0.10-0ubuntu3) stonking; urgency=medium
+
+  * d/p/0007-openssl4-support.patch: fix FTBFS with OpenSSL 4. (LP: #2163066)
+  * d/t/regular-tests/template-test/test.sh: move mcpserver template to ignore
+    list due to dependency issues on s390x and ppc64el.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Aug 2026 16:11:22 -0300
+
 dotnet10 (10.0.110-10.0.10-0ubuntu2) stonking; urgency=medium
 
   * d/t/regular-tests/template-test/test.sh: add new 'mcpserver' template to
