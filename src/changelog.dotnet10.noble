@@ -14,6 +14,12 @@ dotnet10 (10.0.111-10.0.11-0ubuntu1~24.04.1) noble-security; urgency=medium
     - CVE-2026-62901: System.Net.WebSockets vulnerability.
   * SECURITY UPDATE:
     - CVE-2026-62909: Diagnostics IPC abstract UDS exposure via long TMPDIR.
+  * d/t/regular-tests/template-test/test.sh:
+    - Add 'mcpserver' template to fix autopkgtest failure, ignoring it on
+      s390x and ppc64el due to missing dependencies.
+    - Treat warnings as errors to catch template quality regressions,
+      excluding environment-specific warnings (NETSDK1057, NU1803,
+      and NU1900-NU1905).
 
  -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 10 Aug 2026 12:00:00 -0500
 
