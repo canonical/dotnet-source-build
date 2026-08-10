@@ -1,3 +1,22 @@
+dotnet8 (8.0.130-8.0.30-0ubuntu1~24.04.1) noble-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-58641: SkiaSharp Int32 overflow in image decoding causes pinned
+      byte array overwrite.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-62900: Source Link embeds git remote credentials into
+      assemblies and PDBs.
+  * SECURITY UPDATE:
+    - CVE-2026-62899: System.Net.HttpListener incorrectly parses
+      Content-Length header.
+  * SECURITY UPDATE:
+    - CVE-2026-62901: System.Net.WebSockets vulnerability.
+  * SECURITY UPDATE:
+    - CVE-2026-62909: Diagnostics IPC abstract UDS exposure via long TMPDIR.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 10 Aug 2026 12:00:00 -0500
+
 dotnet8 (8.0.129-8.0.29-0ubuntu1~24.04.1) noble-security; urgency=medium
 
   * New upstream release
