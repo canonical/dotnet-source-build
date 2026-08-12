@@ -1,27 +1,47 @@
 dotnet9 (9.0.120-9.0.19-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release
-  * SECURITY UPDATE: elevation of privilege
-    - CVE-2026-58641: SkiaSharp Int32 overflow in image decoding causes pinned
-      byte array overwrite.
   * SECURITY UPDATE: information disclosure
-    - CVE-2026-62900: Source Link embeds git remote credentials into
-      assemblies and PDBs.
-  * SECURITY UPDATE:
-    - CVE-2026-62899: System.Net.HttpListener incorrectly parses
-      Content-Length header.
-  * SECURITY UPDATE:
-    - CVE-2026-62901: System.Net.WebSockets vulnerability.
-  * SECURITY UPDATE:
-    - CVE-2026-62909: Diagnostics IPC abstract UDS exposure via long TMPDIR.
+    - CVE-2026-62900: Improper removal of sensitive information before storage
+      or transfer in .NET allows an unauthorized attacker to disclose
+      information over a network.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-62899: Inconsistent interpretation of http requests
+      ('http request/response smuggling') in .NET allows an unauthorized
+      attacker to bypass a security feature over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-62901: Unchecked input for loop condition in .NET allows an
+      unauthorized attacker to deny service over a network.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-62909: Uncaught exception in .NET allows an authorized attacker
+      to elevate privileges locally.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-62898: Use after free in Microsoft QUIC allows an unauthorized
+      attacker to disclose information over a network.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-62886: Integer overflow or wraparound in .NET allows an
+      unauthorized attacker to elevate privileges locally.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-62871: Out-of-bounds write in .NET allows an unauthorized
+      attacker to execute code locally.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-70354: Out-of-bounds write in .NET allows an unauthorized
+      attacker to execute code locally.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-62902: Inclusion of functionality from untrusted control sphere
+      in .NET allows an unauthorized attacker to disclose information over a
+      network.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-62897: Integer overflow or wraparound in .NET Framework allows
+      an unauthorized attacker to execute code locally.
   * d/t/regular-tests/template-test/test.sh:
-    - Add 'mcpserver' template to fix autopkgtest failure, ignoring it on
+    - Add 'mcpserver' template to ignore list to fix autopkgtest failure on
       s390x and ppc64el due to missing dependencies.
     - Treat warnings as errors to catch template quality regressions,
       excluding environment-specific warnings (NETSDK1057, NU1803,
       and NU1900-NU1905).
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 10 Aug 2026 12:00:00 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 12 Aug 2026 09:12:00 -0500
 
 dotnet9 (9.0.119-9.0.18-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
