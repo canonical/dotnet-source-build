@@ -15,27 +15,8 @@ dotnet10 (10.0.111-10.0.11-0ubuntu1) stonking; urgency=medium
   * SECURITY UPDATE: elevation of privilege
     - CVE-2026-62909: Uncaught exception in .NET allows an authorized attacker
       to elevate privileges locally.
-  * SECURITY UPDATE: information disclosure
-    - CVE-2026-62898: Use after free in Microsoft QUIC allows an unauthorized
-      attacker to disclose information over a network.
-  * SECURITY UPDATE: elevation of privilege
-    - CVE-2026-62886: Integer overflow or wraparound in .NET allows an
-      unauthorized attacker to elevate privileges locally.
-  * SECURITY UPDATE: elevation of privilege
-    - CVE-2026-62871: Out-of-bounds write in .NET allows an unauthorized
-      attacker to execute code locally.
-  * SECURITY UPDATE: remote code execution
-    - CVE-2026-70354: Out-of-bounds write in .NET allows an unauthorized
-      attacker to execute code locally.
-  * SECURITY UPDATE: information disclosure
-    - CVE-2026-62902: Inclusion of functionality from untrusted control sphere
-      in .NET allows an unauthorized attacker to disclose information over a
-      network.
-  * SECURITY UPDATE: remote code execution
-    - CVE-2026-62897: Integer overflow or wraparound in .NET Framework allows
-      an unauthorized attacker to execute code locally.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 12 Aug 2026 09:12:00 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 13 Aug 2026 14:30:00 -0500
 
 dotnet10 (10.0.110-10.0.10-0ubuntu3) stonking; urgency=medium
 
