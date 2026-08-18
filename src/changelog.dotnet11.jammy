@@ -1,3 +1,11 @@
+dotnet11 (11.0.100-11.0.0~preview7-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release.
+  * d/p/0009-add-mono-archs-as-not-aot-supported.patch: dropped because it was
+    included upstream.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 17 Aug 2026 13:10:00 -0500
+
 dotnet11 (11.0.100-11.0.0~preview6-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release.
