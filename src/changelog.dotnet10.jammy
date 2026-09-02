@@ -1,3 +1,17 @@
+dotnet10 (10.0.112-10.0.12-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-58649: dotnet watch BrowserRefreshServer does not adequately
+      validate cross-origin WebSocket origins, potentially allowing IL and PDB
+      information disclosure.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-69806: dotnet-watch AspireServerService exposes information
+      through procfs arguments that can enable injection into the /run_session
+      endpoint.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 2 Sep 2026 12:00:00 -0500
+
 dotnet10 (10.0.111-10.0.11-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 
   * New upstream release

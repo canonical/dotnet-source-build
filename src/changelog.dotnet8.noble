@@ -1,3 +1,13 @@
+dotnet8 (8.0.131-8.0.31-0ubuntu1~24.04.1) noble-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-58649: dotnet watch BrowserRefreshServer does not adequately
+      validate cross-origin WebSocket origins, potentially allowing IL and PDB
+      information disclosure.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 2 Sep 2026 12:00:00 -0500
+
 dotnet8 (8.0.130-8.0.30-0ubuntu1~24.04.1) noble-security; urgency=medium
 
   * New upstream release
