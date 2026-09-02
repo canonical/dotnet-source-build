@@ -10,7 +10,7 @@ dotnet10 (10.0.112-10.0.12-0ubuntu1) stonking; urgency=medium
       through procfs arguments that can enable injection into the /run_session
       endpoint.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 2 Sep 2026 12:00:00 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 02 Sep 2026 12:00:00 -0500
 
 dotnet10 (10.0.111-10.0.11-0ubuntu1) stonking; urgency=medium
 
