@@ -12,6 +12,7 @@ Copyright: Canonical Ltd.
            Dominik Viererbe <dominik.viererbe@canonical.com>
            Mateus Rodrigues de Morais <mateus.morais@canonical.com>
            Miriam España Acebal <miriam.espana@canonical.com>
+           Nicolas Rincon <nicolas.ballesteros@canonical.com>
 License: Expat
 
 Files: debian/eng/strenum/*
@@ -24,12 +25,44 @@ License: LGPL-2.1
 
 Files: debian/tests/regular-tests/*
 Copyright: 2018, Radka Janeková
-           2022, Canonical Ltd.
+           2026, Canonical Ltd.
 License: Expat
 
-Files: src/arcade/src/Microsoft.DotNet.XUnitAssert/src/*
+Files: src/command-line-api/*
 Copyright: .NET Foundation and Contributors
-License: Apache-2 or Expat
+License: Expat
+
+Files: src/arcade/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/deployment-tools/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/efcore/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/scenario-tests/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/source-build-assets/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/source-build-assets/src/externalPackages/src/opentelemetry-dotnet/*
+Copyright: The OpenTelemetry Authors
+License: Apache-2.0
+
+Files: src/windowsdesktop/*
+Copyright: .NET Foundation and Contributors
+License: Expat
+
+Files: src/xdt/*
+Copyright: .NET Foundation and Contributors
+License: Expat
 
 Files: src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/IChannelWrapper.cs
        src/aspnetcore/src/Grpc/Interop/test/testassets/InteropClient/Program.cs
@@ -44,15 +77,9 @@ License: Apache-2
 
 Files: src/aspnetcore/src/Components/benchmarkapps/BlazingPizza.Server/wwwroot/css/bootstrap/bootstrap.min.css
        src/aspnetcore/src/Components/benchmarkapps/Wasm.Performance/TestApp/wwwroot/benchmarks/lib/bootstrap.min.css
-       src/aspnetcore/src/Components/Samples/BlazorServerApp/wwwroot/css/bootstrap/bootstrap.min.css
-       src/aspnetcore/src/Components/Samples/BlazorServerApp/wwwroot/css/bootstrap-icons/*
-       src/aspnetcore/src/Components/Samples/BlazorUnitedApp/wwwroot/css/bootstrap/bootstrap.min.css
        src/aspnetcore/src/Components/test/testassets/ComponentsApp.Server/wwwroot/css/bootstrap/bootstrap.min.css
-       src/aspnetcore/src/Components/WebAssembly/Samples/HostedBlazorWebassemblyApp/Client/wwwroot/css/bootstrap/bootstrap.min.css
-       src/aspnetcore/src/Components/WebAssembly/Samples/HostedBlazorWebassemblyApp/Client/wwwroot/css/bootstrap-icons/*
        src/aspnetcore/src/Components/WebAssembly/testassets/StandaloneApp/wwwroot/css/bootstrap/bootstrap.min.css
        src/aspnetcore/src/Components/WebAssembly/testassets/StandaloneApp/wwwroot/css/bootstrap-icons/*
-       src/aspnetcore/src/Components/WebAssembly/testassets/ThreadingApp/wwwroot/bootstrap.min.css
        src/aspnetcore/src/Identity/testassets/Identity.DefaultUI.WebSite/wwwroot/lib/bootstrap/*
        src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/*
        src/aspnetcore/src/Identity/UI/src/assets/V4/lib/bootstrap/dist/css/bootstrap.css
@@ -72,8 +99,6 @@ Files: src/aspnetcore/src/Components/benchmarkapps/BlazingPizza.Server/wwwroot/c
        src/aspnetcore/src/Security/samples/Identity.ExternalClaims/wwwroot/lib/bootstrap/*
        src/aspnetcore/src/Security/samples/PathSchemeSelection/wwwroot/lib/bootstrap/*
        src/aspnetcore/src/Security/samples/StaticFilesAuth/wwwroot/lib/bootstrap/*
-       src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/bootstrap/*
-       src/razor/src/Razor/benchmarks/testapps/ComponentApp/wwwroot/bootstrap/*
        src/sdk/test/TestAssets/TestProjects/WatchMauiBlazor/wwwroot/css/bootstrap/*
 Copyright: Twitter, Inc. 
            Bootstrap Authors
@@ -161,10 +186,6 @@ Copyright: 2005-2025, Google Inc.
            2018-2019, Google LLC
 License: BSD-3-clause
 
-Files: src/aspnetcore/src/submodules/MessagePack-CSharp/*
-Copyright: 2017 Yoshifumi Kawai and contributors
-License: Expat
-
 Files: src/cecil/*
        src/runtime/src/tools/illink/src/linker/Linker.Steps/MarkStep.cs
        src/runtime/src/tools/illink/src/linker/Linker.Steps/SweepStep.cs
@@ -214,17 +235,6 @@ Copyright: 2018, Emscripten authors
 License: Expat
 
 Files: src/nuget-client/*
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/Diagnostics/DiagnosticIds.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/Diagnostics/RazorDiagnostics.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/IncrementalValueProviderExtensions.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorGeneratorResult.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerationOptions.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.AllTagHelpers.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.Helpers.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.RazorProviders.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/RazorSourceGenerator.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/SourceGeneratorProjectItem.cs
-       src/razor/src/Compiler/Microsoft.CodeAnalysis.Razor.Compiler/src/SourceGenerators/StaticCompilationTagHelperFeature.cs
 Copyright: .NET Foundation and Contributors
 License: Apache-2.0
 
@@ -290,7 +300,6 @@ Files: src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Exten
        src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_9_0/IdnaTest_9.txt
        src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_9_0/ReadMe.txt
        src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_6_0/IdnaTest_6.txt
-       src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_Win7/IdnaTest_Win7.txt
        src/runtime/src/libraries/System.Runtime/tests/System.Globalization.Extensions.Tests/IdnMapping/Data/Unicode_6_0/ReadMe.txt
 Copyright: Unicode, Inc.
 License: Expat
@@ -614,7 +623,6 @@ License: Expat
 
 
 Files: src/runtime/src/mono/wasm/host/Options.cs
-       src/runtime/src/tools/illink/external/*
 Copyright: 2009, Federico Di Gregorio
            2017, Microsoft Corporation (http://www.microsoft.com)
            2008, Novell (http://www.novell.com)
@@ -1706,47 +1714,6 @@ Copyright: 2004-2008 Brent Fulgham
            2005-2016 Isaac Gouy
 License: BSD-3-clause
 
-Files: src/source-build-reference-packages/src/externalPackages/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/CustomSecurityKey.cs
-       src/source-build-reference-packages/src/externalPackages/src/azure-activedirectory-identitymodel-extensions-for-dotnet/test/Microsoft.IdentityModel.TestUtils/SecurityKeyCustomConverter.cs
-Copyright: 2007, James Newton-King
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/docker-creds-provider/*
-Copyright: 2020, Matt Thalman
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/humanizer/*
-Copyright: .NET Foundation and Contributors
-           2013, Scott Kirkland
-           2013-2014, Omar Khudeira (http://omar.io)
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/humanizer/src/Humanizer/MetricNumeralExtensions.cs
-Copyright: 2015, Alois de Gouvello
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/*
-Copyright: 2007-2022, James Newton-King
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/Build/psake.psm1
-Copyright: 2012, James Kovacs
-License: Expat
-
-Files: src/source-build-reference-packages/src/externalPackages/src/newtonsoft-json/Src/Newtonsoft.Json/Utilities/LinqBridge.cs
-Copyright: 2007-2009, Atif Aziz, Joseph Albahari
-License: BSD
-
-Files: src/source-build-reference-packages/src/textOnlyPackages/src/microsoft.extensions.commandlineutils.sources/*
-Copyright: .NET Foundation and Contributors
-           Microsoft Corporation
-License: Apache-2.0
-
-Files: src/source-build-reference-packages/src/textOnlyPackages/src/wcwidth.sources/*
-Copyright: Patrik Svensson
-           Phil Scott
-License: Expat
-
 Files: src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/GraphicsPathIteratorTests.cs
        src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/GraphicsPathTests.cs
        src/winforms/src/System.Drawing.Common/tests/System/Drawing/Drawing2D/MatrixTests.cs
@@ -1833,26 +1800,9 @@ License: Apache-2
 Files: src/aspnetcore/src/Grpc/JsonTranscoding/src/Microsoft.AspNetCore.Grpc.JsonTranscoding/protos/*
        src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/Proto/Issue048192/customhttp.proto
        src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/google/*
-       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.Swagger.Tests/google/*
        src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/IntegrationTestsWebsite/google/*
        src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/Sandbox/google/*
 Copyright: 2015-2019, Google LLC
-License: Apache-2
-
-Files: src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/THIRD-PARTY-NOTICES
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/test/*
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/Program.cs
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/Startup.cs
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/*
-Copyright: 2019, The gRPC Authors
-License: Apache-2
-
-Files: src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/InteropTestsWebsite/TestServiceImpl.cs
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Proto/*
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/Assert.cs
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/InteropClient.cs
-       src/runtime/src/tests/FunctionalTests/Android/Device_Emulator/gRPC/grpc-dotnet/testassets/Shared/TestCredentials.cs
-Copyright: 2015-2016, gRPC authors
 License: Apache-2
 
 Files: src/runtime/src/tools/illink/src/linker/Linker.Steps/CleanStep.cs
@@ -1881,7 +1831,6 @@ License: Expat
 Files: src/aspnetcore/src/Grpc/JsonTranscoding/src/Microsoft.AspNetCore.Grpc.JsonTranscoding/protos/google/api/annotations.proto
        src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/Proto/Issue048192/customannotations.proto
        src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests/google/api/annotations.proto
-       src/aspnetcore/src/Grpc/JsonTranscoding/test/Microsoft.AspNetCore.Grpc.Swagger.Tests/google/api/annotations.proto
        src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/IntegrationTestsWebsite/google/api/annotations.proto
        src/aspnetcore/src/Grpc/JsonTranscoding/test/testassets/Sandbox/google/api/annotations.proto
 Copyright: 2015, Google Inc
@@ -1954,6 +1903,8 @@ Files: src/sourcelink/src/dotnet-sourcelink/AuthenticationHeaderProvider.cs
        src/sourcelink/src/dotnet-sourcelink/LanguageGuids.cs
        src/sourcelink/src/dotnet-sourcelink/Program.cs
        src/symreader/src/PdbTestResources/TestResources.cs
+Copyright: .NET Foundation and Contributors
+           Microsoft Corporation
 License: Apache-2
 
 Files: src/aspnetcore/src/submodules/MessagePack-CSharp/*
@@ -1990,13 +1941,6 @@ Files: src/runtime/src/libraries/System.Data.Common/tests/System.Data.DataSetExt
 Copyright: 2008, Novell, Inc. http://www.novell.com
 License: Expat
 
-Files: src/arcade/Documentation/Projects/PKPIs/flowgraph.png
-       src/arcade/Documentation/Projects/PKPIs/lbp-breakdown.png
-       src/arcade/Documentation/Projects/PKPIs/lbp-ot.png
-       src/arcade/Documentation/Projects/PKPIs/lbp-stacked.png
-Copyright: 2019, Apple Inc
-License: Expat
-
 
 Files: src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpConnection.cs
        src/runtime/src/libraries/System.Net.HttpListener/src/System/Net/Managed/HttpEndPointListener.cs
@@ -2010,12 +1954,6 @@ Files: src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/Referenc
        src/runtime/src/libraries/System.Security.Cryptography.Xml/tests/XmlDsigXsltTransformTest.cs
 Copyright: 2002-2003, Motus Technologies Inc. (http://www.motus.com)
            2004, Novell (http://www.novell.com)
-License: Expat
-
-Files: src/runtime/src/tools/illink/src/analyzer/ConsoleDependencyGraph.cs
-       src/runtime/src/tools/illink/src/analyzer/LinkerAnalyzerCore/DependencyGraph.cs
-       src/runtime/src/tools/illink/src/analyzer/Main.cs
-Copyright: 2015, Xamarin Inc (http://www.xamarin.com)
 License: Expat
 
 Files: src/runtime/src/libraries/System.Configuration.ConfigurationManager/tests/Mono/ConfigurationSaveTest.cs
@@ -2286,21 +2224,6 @@ Copyright: .NET Foundation and Contributors
            2004, Mainsoft Co.
            2009, Novell Inc.
 License: Expat
-
-Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/*
-Copyright: 2014, Waybury
-License: OFL-1.1
-Comment: License for included fonts.
-
-Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/*
-Copyright: 2014, Waybury
-License: Expat
-Comment: License for included icons.
-
-Files: src/razor/src/Compiler/perf/Microsoft.AspNetCore.Razor.Microbenchmarks.Generator/SampleApp/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf
-Copyright: P.J. Onori
-License: Expat
-Comment: Creted with FontForge 2.0 (http://fontforge.sf.net)
 
 Files: src/runtime/src/tests/JIT/Performance/CodeQuality/Burgers/*
 Copyright: .NET Foundation and Contributors

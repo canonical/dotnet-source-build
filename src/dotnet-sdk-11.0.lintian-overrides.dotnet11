@@ -1,2 +1,2 @@
 # the repetition is intended
-dotnet-sdk-10.0: repeated-path-segment
+dotnet-sdk-11.0: repeated-path-segment
