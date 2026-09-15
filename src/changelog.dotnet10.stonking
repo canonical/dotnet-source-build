@@ -1,13 +1,13 @@
 dotnet10 (10.0.112-10.0.12-0ubuntu2) stonking; urgency=medium
 
   * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
-    autopkgtest failures on amd64, amd64v3 and arm64.
+    autopkgtest failures on amd64, amd64v3 and arm64. (LP: #2167382)
     - debugging-sos-lldb-via-core/test.sh, debugging-via-dotnet-dump/test.sh:
       the dotnet-sos/dotnet-dump 'name2ee' C# rewrite no longer prints the
       'EEClass:' field. Use the MethodTable, or the EEClass from the dumpmt
       output when present, for the dumpclass command instead.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 11 Sep 2026 15:43:00 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Tue, 15 Sep 2026 12:05:32 -0500
 
 dotnet10 (10.0.112-10.0.12-0ubuntu1) stonking; urgency=medium
 
