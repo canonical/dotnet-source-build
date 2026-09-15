@@ -1,3 +1,12 @@
+dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+
+  * New upstream release.
+  * d/p/0009-fix-cecil-writecompressedint32-big-endian.patch: fix the IL
+    Trimmer failing on s390x (big-endian): WriteCompressedInt32 wrote
+    byte-swapped compressed ints into the PDBs.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Tue, 15 Sep 2026 13:01:32 -0500
+
 dotnet11 (11.0.100-11.0.0~preview7-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release.

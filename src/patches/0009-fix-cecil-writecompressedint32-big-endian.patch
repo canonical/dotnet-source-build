@@ -1,0 +1,69 @@
+Description: Fix WriteCompressedInt32 endianness on big-endian hosts
+Author: medhatiwari <medhatiwari@users.noreply.github.com>
+Origin: https://github.com/dotnet/cecil/pull/517
+Bug: https://github.com/dotnet/runtime/issues/133889
+Last-Update: 2026-09-14
+---
+Cecil's WriteUInt16/WriteUInt32 are always little-endian, but
+WriteCompressedInt32 copied System.Reflection.Metadata's IsLittleEndian check,
+so on big-endian hosts (s390x) it wrote byte-swapped compressed ints into
+portable PDBs. The IL Trimmer then misparsed the debug info (missing document
+indices, buffer overruns and out-of-range line/column values), failing the
+s390x source-build.
+Always ReverseEndianness before those writes so the ECMA-335 II.23.2
+compressed signed integer encoding (big-endian in the blob) is produced on all
+hosts.
+
+Index: dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1/src/cecil/Mono.Cecil.PE/ByteBuffer.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1.orig/src/cecil/Mono.Cecil.PE/ByteBuffer.cs
++++ dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1/src/cecil/Mono.Cecil.PE/ByteBuffer.cs
+@@ -269,11 +269,13 @@
+ 				} else if ((value & ~b13) == (signMask & ~b13)) {
+ 					int n = ((value & b13) << 1) | (signMask & 1);
+ 					ushort val = (ushort)(0x8000 | n);
+-					WriteUInt16 (BitConverter.IsLittleEndian ? ReverseEndianness (val) : val);
++					// WriteUInt16 is always little-endian; compressed ints must be big-endian.
++					WriteUInt16 (ReverseEndianness (val));
+ 				} else if ((value & ~b28) == (signMask & ~b28)) {
+ 					int n = ((value & b28) << 1) | (signMask & 1);
+ 					uint val = 0xc0000000 | (uint)n;
+-					WriteUInt32 (BitConverter.IsLittleEndian ? ReverseEndianness (val) : val);
++					// WriteUInt32 is always little-endian; compressed ints must be big-endian.
++					WriteUInt32 (ReverseEndianness (val));
+ 				} else {
+ 					throw new ArgumentOutOfRangeException ("value", "valid range is -2^28 to 2^28 -1");
+ 				}
+
+
+Index: dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1/src/cecil/Test/Mono.Cecil.Tests/ByteBufferTests.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1.orig/src/cecil/Test/Mono.Cecil.Tests/ByteBufferTests.cs
++++ dotnet11-11.0.100-11.0.0~rc1~bootstrap+s390x-0ubuntu1~26.10.1~ppa1/src/cecil/Test/Mono.Cecil.Tests/ByteBufferTests.cs
+@@ -13,6 +13,24 @@
+ 			Assert.AreEqual (-9076, result);
+ 		}
+ 
++		// Round-trip tests pass on big-endian even with swapped bytes.
++		// Assert the ECMA-335 II.23.2 encoding (always big-endian in the blob).
++		[Test]
++		public void CompressedInt32BytesAreBigEndian ()
++		{
++			AssertCompressedInt32Bytes (-100, 0xBF, 0x39);
++			AssertCompressedInt32Bytes (-9076, 0xDF, 0xFF, 0xB9, 0x19);
++		}
++
++		static void AssertCompressedInt32Bytes (int value, params byte [] expected)
++		{
++			var testee = new ByteBuffer ();
++			testee.WriteCompressedInt32 (value);
++			Assert.AreEqual (expected.Length, testee.length);
++			for (int i = 0; i < expected.Length; i++)
++				Assert.AreEqual (expected [i], testee.buffer [i]);
++		}
++
+ 		// Round-trips WriteCompressedInt32/ReadCompressedInt32 across every encoding-width
+ 		// boundary of the ECMA-335 compressed signed integer format (1/2/4-byte forms)
+ 		[TestCase (0)]
+
+
