@@ -1,0 +1,177 @@
+Description: Resolve CLI forwarding paths from the versioned SDK directory
+Author: Chet Husk <chethusk@microsoft.com>, copilot-swe-agent[bot]
+Origin: upstream, https://github.com/dotnet/sdk/pull/55988
+Bug: https://github.com/dotnet/sdk/issues/55919
+Bug: https://github.com/dotnet/sdk/issues/56244
+Applied-Upstream: 11.0.100-rc.2, https://github.com/dotnet/sdk/commit/9489ae1dd6b9e2b2f357974b3a4cb905272422d2
+Last-Update: 2026-09-18
+---
+Since .NET 11 the CLI ships a Native AOT front end (libdotnet-aot.so, built on
+amd64 and arm64) that the muxer loads directly instead of going through
+hostfxr.  Inside that native bubble nothing sets APP_CONTEXT_BASE_DIRECTORY, so
+AppContext.BaseDirectory resolves to the install root (/usr/lib/dotnet) rather
+than the versioned SDK directory (/usr/lib/dotnet/sdk/<version>).  See
+src/sdk/src/Cli/dotnet-aot/SdkRootResolution.md.
+
+Five call sites still derived SDK-relative paths from AppContext.BaseDirectory
+and therefore looked for their payload one directory tree too high:
+
+  dotnet format  -> /usr/lib/dotnet/DotnetTools/dotnet-format/dotnet-format.dll
+  dotnet nuget   -> /usr/lib/dotnet/NuGet.CommandLine.XPlat.dll
+  dotnet vstest  -> /usr/lib/dotnet/vstest.console.dll
+  dotnet fsi     -> /usr/lib/dotnet/FSharp/fsi.dll
+  external command search (EnvironmentProvider) probed the install root
+
+"dotnet format" failed outright with "The application to execute does not
+exist", which the bundled-tools-can-execute autopkgtest catches.  The other
+four are the same defect and fail the same way once reached.
+
+Use SdkPaths.SdkDirectory, which prefers the Microsoft.DotNet.Sdk.Root
+AppContext value published by the AOT bridge and stays equivalent to
+AppContext.BaseDirectory for the managed CLI.  Microsoft.DotNet.Cli.CoreUtils
+already grants InternalsVisibleTo to dotnet, dotnet-aot and
+Microsoft.DotNet.Cli.Utils, so no project changes are needed.
+
+Only the product sources from the upstream backport are carried here; its new
+test/dotnet-aot.Tests/ files are omitted because the SDK unit tests are not
+built during the Debian build, and the accompanying
+test/dotnet-aot.Tests/MSBuildEvaluationTests.cs hunk only removes a helper that
+those new files replace.
+
+This patch can be dropped once the package is rebased onto 11.0.100-rc.2 or
+later.
+
+Index: dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/Microsoft.DotNet.Cli.Utils/EnvironmentProvider.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1.orig/src/sdk/src/Cli/Microsoft.DotNet.Cli.Utils/EnvironmentProvider.cs
++++ dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/Microsoft.DotNet.Cli.Utils/EnvironmentProvider.cs
+@@ -39,7 +39,7 @@
+         {
+             if (_searchPaths == null)
+             {
+-                var searchPaths = new List<string> { AppContext.BaseDirectory };
++                var searchPaths = new List<string> { SdkPaths.SdkDirectory };
+ 
+                 searchPaths.AddRange(Environment
+                     .GetEnvironmentVariable("PATH")?
+
+
+Index: dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Format/FormatForwardingApp.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1.orig/src/sdk/src/Cli/dotnet/Commands/Format/FormatForwardingApp.cs
++++ dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Format/FormatForwardingApp.cs
+@@ -1,6 +1,8 @@
+ ﻿// Licensed to the .NET Foundation under one or more agreements.
+ // The .NET Foundation licenses this file to you under the MIT license.
+ 
++using Microsoft.DotNet.Cli.Utils;
++
+ namespace Microsoft.DotNet.Cli.Commands.Format;
+ 
+ public class FormatForwardingApp(IEnumerable<string> argsToForward)
+@@ -11,11 +13,11 @@
+         runtimeConfig: GetRuntimeConfigPath())
+ {
+     private static string GetForwardApplicationPath()
+-        => Path.Combine(AppContext.BaseDirectory, "DotnetTools/dotnet-format/dotnet-format.dll");
++        => Path.Combine(SdkPaths.SdkDirectory, "DotnetTools", "dotnet-format", "dotnet-format.dll");
+ 
+     private static string GetDepsFilePath()
+-        => Path.Combine(AppContext.BaseDirectory, "DotnetTools/dotnet-format/dotnet-format.deps.json");
++        => Path.Combine(SdkPaths.SdkDirectory, "DotnetTools", "dotnet-format", "dotnet-format.deps.json");
+ 
+     private static string GetRuntimeConfigPath()
+-        => Path.Combine(AppContext.BaseDirectory, "DotnetTools/dotnet-format/dotnet-format.runtimeconfig.json");
++        => Path.Combine(SdkPaths.SdkDirectory, "DotnetTools", "dotnet-format", "dotnet-format.runtimeconfig.json");
+ }
+
+
+Index: dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Fsi/FsiForwardingApp.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1.orig/src/sdk/src/Cli/dotnet/Commands/Fsi/FsiForwardingApp.cs
++++ dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Fsi/FsiForwardingApp.cs
+@@ -9,8 +9,9 @@
+ 
+ public class FsiForwardingApp(string[] arguments) : ForwardingApp(GetFsiAppPath(), processArguments(arguments))
+ {
+-    private const string FsiDllName = @"FSharp/fsi.dll";
+-    private const string FsiExeName = @"FSharp/fsi.exe";
++    private const string FsiDirectoryName = "FSharp";
++    private const string FsiDllName = "fsi.dll";
++    private const string FsiExeName = "fsi.exe";
+ 
+     static string[] processArguments(string[] args)
+     {
+@@ -45,16 +46,16 @@
+      * So here we look for fsi.dll, if it's found then we will return the path to it, otherwise we return fsi.exe
+      * the reason for using this bridging mechanism is to simplify the coordination between F#/VS and the dotnet sdk
+     */
+-    private static string GetFsiAppPath()
++    internal static string GetFsiAppPath()
+     {
+-        var dllPath = Path.Combine(AppContext.BaseDirectory, FsiDllName);
++        var dllPath = Path.Combine(SdkPaths.SdkDirectory, FsiDirectoryName, FsiDllName);
+         if (exists(dllPath))
+         {
+             return dllPath;
+         }
+         else
+         {
+-            return Path.Combine(AppContext.BaseDirectory, FsiExeName);
++            return Path.Combine(SdkPaths.SdkDirectory, FsiDirectoryName, FsiExeName);
+         }
+     }
+ }
+
+
+Index: dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Test/VSTest/VSTestForwardingApp.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1.orig/src/sdk/src/Cli/dotnet/Commands/Test/VSTest/VSTestForwardingApp.cs
++++ dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/Commands/Test/VSTest/VSTestForwardingApp.cs
+@@ -24,7 +24,7 @@
+         VSTestTrace.SafeWriteTrace(() => $"Forwarding to '{GetVSTestExePath()}' with args \"{string.Join(" | ", argsToForward ?? [])}\"");
+     }
+ 
+-    private static string GetVSTestExePath()
++    internal static string GetVSTestExePath()
+     {
+         // Provide custom path to vstest.console.dll or exe to be able to test it against any version of 
+         // vstest.console. This is useful especially for our integration tests.
+@@ -35,7 +35,7 @@
+             return vsTestConsolePath;
+         }
+ 
+-        return Path.Combine(AppContext.BaseDirectory, VstestAppName);
++        return Path.Combine(SdkPaths.SdkDirectory, VstestAppName);
+     }
+ 
+     internal static Dictionary<string, string> GetVSTestRootVariables()
+
+
+Index: dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/NuGetForwardingApp.cs
+===================================================================
+--- dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1.orig/src/sdk/src/Cli/dotnet/NuGetForwardingApp.cs
++++ dotnet11-11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1/src/sdk/src/Cli/dotnet/NuGetForwardingApp.cs
+@@ -3,6 +3,8 @@
+ 
+ #nullable disable
+ 
++using Microsoft.DotNet.Cli.Utils;
++
+ namespace Microsoft.DotNet.Cli;
+ 
+ public class NuGetForwardingApp
+@@ -35,10 +37,10 @@
+         return this;
+     }
+ 
+-    private static string GetNuGetExePath()
++    internal static string GetNuGetExePath()
+     {
+         return Path.Combine(
+-            AppContext.BaseDirectory,
++            SdkPaths.SdkDirectory,
+             s_nugetExeName);
+     }
+ }
+
