@@ -13,7 +13,7 @@ dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
     instead of the versioned SDK directory. Also covers the same defect in
     "dotnet nuget", "dotnet vstest" and "dotnet fsi".
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 17 Sep 2026 12:58:22 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 18 Sep 2026 13:35:28 -0500
 
 dotnet11 (11.0.100-11.0.0~preview7-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
