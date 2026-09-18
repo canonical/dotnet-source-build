@@ -7,6 +7,11 @@ dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
   * d/p/0009-fix-cecil-writecompressedint32-big-endian.patch: fix the IL
     Trimmer failing on s390x (big-endian): WriteCompressedInt32 wrote
     byte-swapped compressed ints into the PDBs.
+  * d/p/0010-fix-cli-forwarding-paths-nativeaot.patch: fix "dotnet format"
+    failing with "The application to execute does not exist" under the new
+    Native AOT CLI, which resolved SDK-relative paths from the install root
+    instead of the versioned SDK directory. Also covers the same defect in
+    "dotnet nuget", "dotnet vstest" and "dotnet fsi".
 
  -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 17 Sep 2026 12:58:22 -0500
 
