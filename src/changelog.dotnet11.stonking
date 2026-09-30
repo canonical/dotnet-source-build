@@ -1,4 +1,4 @@
-dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
+dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1) stonking; urgency=medium
 
   * New upstream release.
   * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
@@ -15,7 +15,7 @@ dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
   * d/t/control: add the missing distro-info test dependency, without which
     the dotnet-sdk-check-url-verification autopkgtest fails.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 21 Sep 2026 13:27:08 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 30 Sep 2026 10:51:08 -0500
 
 dotnet11 (11.0.100-11.0.0~preview7-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
 
