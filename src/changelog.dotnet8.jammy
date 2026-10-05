@@ -1,3 +1,14 @@
+dotnet8 (8.0.131-8.0.31-0ubuntu2~22.04.1) jammy; urgency=medium
+
+  * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
+    autopkgtest failures on amd64, amd64v3 and arm64. (LP: #2167382)
+    - debugging-sos-lldb-via-core/test.sh, debugging-via-dotnet-dump/test.sh:
+      the dotnet-sos/dotnet-dump 'name2ee' C# rewrite no longer prints the
+      'EEClass:' field. Use the MethodTable, or the EEClass from the dumpmt
+      output when present, for the dumpclass command instead.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 02 Oct 2026 12:30:43 -0500
+
 dotnet8 (8.0.131-8.0.31-0ubuntu1~22.04.1) jammy-security; urgency=medium
 
   * New upstream release
