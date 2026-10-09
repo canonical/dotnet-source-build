@@ -103,6 +103,9 @@ dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1) stonking; urgency=medium
     it was included upstream.
   * d/p/0010-fix-cli-forwarding-paths-nativeaot.patch: dropped because it was
     included upstream.
+  * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
+    name without a path in the `runtimes` output, fixing an autopkgtest
+    regression caused by dotnet-dump no longer printing the full DAC path.
 
  -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 12:20:39 -0500
 
