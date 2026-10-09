@@ -121,8 +121,14 @@ dotnet8 (8.0.132-8.0.32-0ubuntu1~24.04.1) noble-security; urgency=medium
       limits, prohibit DTD processing by default, validate entity references,
       bound encrypted-data candidate processing, and cap attributes and
       namespaces used by C14N transforms.
+  * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
+    name without a path in the `runtimes` output, fixing an autopkgtest
+    regression caused by dotnet-dump no longer printing the full DAC path.
+  * d/t/regular-tests/lttng/test.sh: prefer babeltrace2 over babeltrace to
+    read traces, as lttng-tools >= 2.15 writes CTF 2 traces that babeltrace
+    1.x cannot read.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 07 Oct 2026 15:53:14 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 21:46:40 -0500
 
 dotnet8 (8.0.131-8.0.31-0ubuntu2~24.04.1) noble; urgency=medium
 
