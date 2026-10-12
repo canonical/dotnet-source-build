@@ -1,4 +1,4 @@
-dotnet10 (10.0.113-10.0.13-0ubuntu1) stonking; urgency=medium
+dotnet10 (10.0.113-10.0.13-0ubuntu1~26.10.1) stonking-security; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: remote code execution
@@ -132,7 +132,7 @@ dotnet10 (10.0.113-10.0.13-0ubuntu1) stonking; urgency=medium
     read traces, as lttng-tools >= 2.15 writes CTF 2 traces that babeltrace
     1.x cannot read.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 21:46:40 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sun, 11 Oct 2026 22:15:26 -0500
 
 dotnet10 (10.0.112-10.0.12-0ubuntu2) stonking; urgency=medium
 
