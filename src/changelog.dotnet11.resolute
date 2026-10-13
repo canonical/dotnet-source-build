@@ -1,0 +1,162 @@
+dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-102870: The Blazor WebAssembly debug proxy embeds
+      attacker-controlled ToString(), description, and class-name values into
+      generated C# without consistently escaping them. When a developer
+      evaluates an expression while debugging, the value can escape the
+      generated string literal and execute code on the developer's machine.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-58280: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-66822: SocketsHttpHandler can retain a Proxy-Authorization
+      header across an HTTP redirect and leak basic proxy credentials to the
+      destination server.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-69651: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70159: SignalR stateful reconnect clients can indefinitely block
+      broadcasts through MessageBuffer.ResendAsync backpressure and retain
+      associated resources.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70183: A stale asynchronous authorization result in Blazor
+      AuthorizeRouteView can be applied after navigation or an
+      authorization-state change, bypassing the current [Authorize] decision.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70188: Kestrel accepts newline characters in HTTP/2 request
+      trailers and values retrieved from the dynamic HPACK table instead of
+      treating them as malformed.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70194: .NET 11 post-handshake TLS client authentication can fail
+      to verify the client certificate, allowing mutual-authentication
+      requirements to be bypassed.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-84008: SignedCms.CheckSignature can repeatedly reparse
+      attacker-controlled X.509 data, causing unauthenticated quadratic CPU
+      exhaustion.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-88092: An aborted Kestrel HTTP/1 connection can reparse unread
+      request-body bytes as another request, creating a request-smuggling or
+      desynchronization path.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-92707: SignalR's MessagePack protocol can consume excessive
+      memory while deserializing deeply nested attacker-controlled arrays,
+      resulting in unauthenticated remote denial of service.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96225: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-96230: The Blazor WebAssembly development-server debug page can
+      reflect unencoded exception text, allowing cross-origin script injection
+      through the unauthenticated /_framework/debug endpoint used by dotnet
+      watch.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96231: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96233: DateTime Hebrew-number parsing can read outside expected
+      stack bounds and terminate the process.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96236: ASP.NET Core request-localization fallback can add
+      attacker-supplied synthetic culture names to the runtime's global cache,
+      allowing unauthenticated requests to cause unbounded memory growth and
+      denial of service.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-96238: dotnet new install can acquire a template package from a
+      feed that is not permitted by NuGet Package Source Mapping, bypassing the
+      configured feed trust boundary.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96239: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-96957: Signature verification for .NET file-based apps can fail
+      to enforce the expected trust decision.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96958: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96959: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96960: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * d/p/0009-fix-cecil-writecompressedint32-big-endian.patch: dropped because
+    it was included upstream.
+  * d/p/0010-fix-cli-forwarding-paths-nativeaot.patch: dropped because it was
+    included upstream.
+  * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
+    name without a path in the `runtimes` output, fixing an autopkgtest
+    regression caused by dotnet-dump no longer printing the full DAC path.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 23:01:10 -0500
+
+dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release.
+  * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
+    autopkgtest failures on dotnet11.
+    - picks up new upstream tests and drops the removed lttng test.
+  * d/p/0009-fix-cecil-writecompressedint32-big-endian.patch: fix the IL
+    Trimmer failing on s390x (big-endian): WriteCompressedInt32 wrote
+    byte-swapped compressed ints into the PDBs.
+  * d/p/0010-fix-cli-forwarding-paths-nativeaot.patch: fix "dotnet format"
+    failing with "The application to execute does not exist" under the new
+    Native AOT CLI, which resolved SDK-relative paths from the install root
+    instead of the versioned SDK directory. Also covers the same defect in
+    "dotnet nuget", "dotnet vstest" and "dotnet fsi".
+  * d/t/control: add the missing distro-info test dependency, without which
+    the dotnet-sdk-check-url-verification autopkgtest fails.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 21 Sep 2026 13:27:08 -0500
+
+dotnet11 (11.0.100-11.0.0~preview7-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release.
+  * d/p/0009-add-mono-archs-as-not-aot-supported.patch: dropped because it was
+    included upstream.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 17 Aug 2026 13:10:00 -0500
+
+dotnet11 (11.0.100-11.0.0~preview6-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release.
+  * d/p/0009-fix-roslyn-dotnet11-ftbfs.patch: dropped because it was included
+    upstream.
+  * d/p/0009-add-mono-archs-as-not-aot-supported.patch: fix FTBFS on s390x and
+    ppc64el caused by missing Mono architectures on NativeAOT block list.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 20 Jul 2026 09:53:12 -0300
+
+dotnet11 (11.0.100-11.0.0~preview5-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release.
+  * d/aspnetcore-runtime-11.0.docs: updated razor's NOTICE file path.
+  * d/dotnet-sdk-11.0.docs: updated razor's NOTICE file path.
+  * d/p/0009-fix-roslyn-dotnet11-ftbfs.patch: fix Roslyn FTBFS.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 30 Jun 2026 10:24:11 -0300
+
+dotnet11 (11.0.100-11.0.0~preview4-0ubuntu1~26.04.1~ppa3) resolute; urgency=medium
+
+  * Initial packaging.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 22 May 2026 14:44:15 -0300

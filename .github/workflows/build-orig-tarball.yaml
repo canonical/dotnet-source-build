@@ -15,6 +15,10 @@ on:
         description: 'Official Build Id (only needed for .NET 10+)'
         required: false
         type: string
+      extraPpaSource:
+        description: 'Extra apt source for installing the .NET SDK (e.g. "ppa:dotnet-bootstrap/amd64")'
+        required: false
+        type: string
       bootstrap:
         description: 'Build bootstraped orig tarballs'
         required: false
@@ -31,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Build orig tarball
         id: build-orig-tarball
@@ -43,6 +47,7 @@ jobs:
           vendor-name: "Canonical Ltd."
           security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
           deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7
@@ -52,13 +57,16 @@ jobs:
 
   bootstrap-sdk:
     if: ${{ inputs.bootstrap }}
-    runs-on: [self-hosted, large, jammy, X64]
+    runs-on: [self-hosted, large, noble, X64]
     strategy:
       matrix:
         arch: [s390x, ppc64le]
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
       - name: Configure credentials for .NET security partners repository
         if: github.repository == 'canonical/dotnet-source-build-security'
         run: |
@@ -84,6 +92,21 @@ jobs:
       - name: Clone .NET VMR
         run: |
           git clone --depth 1 --branch "${{ inputs.gitCommitish }}" "${DOTNET_GIT_REPOSITORY}" dotnet-vmr
+
+      - name: Apply patches
+        shell: bash
+        run: |
+          patches_dir="${{ github.workspace }}/eng/patches"
+          shopt -s nullglob
+          patches=( "$patches_dir"/*.patch )
+          if [ ${#patches[@]} -eq 0 ]; then
+            echo "No patches to apply."
+            exit 0
+          fi
+          for patch in "${patches[@]}"; do
+            echo "Applying $(basename "$patch")"
+            git -C "${{ github.workspace }}/dotnet-vmr" apply "$patch"
+          done
 
       - name: Bootstrap .NET SDK
         run: |
@@ -117,8 +140,8 @@ jobs:
     strategy:
       matrix:
         os:
-          - [self-hosted, large, jammy, X64]
-          - [self-hosted, large, jammy, ARM64]
+          - [self-hosted, large, noble, X64]
+          - [self-hosted, large, noble, ARM64]
           - [self-hosted, linux, noble, S390X]
           - [self-hosted, linux, noble, PPC64EL]
     runs-on: ${{ matrix.os }}
@@ -186,6 +209,7 @@ jobs:
           bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
           bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
           deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
 
       - name: Upload orig tarball to workflow artifacts
         uses: actions/upload-artifact@v7
