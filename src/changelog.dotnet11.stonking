@@ -1,4 +1,4 @@
-dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1) stonking; urgency=medium
+dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1~26.10.1) stonking-security; urgency=medium
 
   * New upstream release
   * SECURITY UPDATE: remote code execution
@@ -107,7 +107,7 @@ dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1) stonking; urgency=medium
     name without a path in the `runtimes` output, fixing an autopkgtest
     regression caused by dotnet-dump no longer printing the full DAC path.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 23:01:10 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Tue, 13 Oct 2026 11:38:46 -0500
 
 dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1) stonking; urgency=medium
 
