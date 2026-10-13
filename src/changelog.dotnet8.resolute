@@ -1,3 +1,177 @@
+dotnet8 (8.0.132-8.0.32-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-58280: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-66822: SocketsHttpHandler can retain a Proxy-Authorization
+      header across an HTTP redirect and leak basic proxy credentials to the
+      destination server.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-69651: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70159: SignalR stateful reconnect clients can indefinitely block
+      broadcasts through MessageBuffer.ResendAsync backpressure and retain
+      associated resources.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-70175: ASP.NET Core Identity password-reset and confirmation
+      flows can send mail to the unvalidated request address instead of the
+      user's stored canonical address.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70179: ASP.NET Core Negotiate LDAP authentication can associate
+      an authenticated identity with an unintended LDAP principal when the LDAP
+      result is not verified against the Kerberos principal SID.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70181: FileBufferingReadStream eagerly rents buffers during
+      multipart processing, allowing memory exhaustion and denial of service.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70183: A stale asynchronous authorization result in Blazor
+      AuthorizeRouteView can be applied after navigation or an
+      authorization-state change, bypassing the current [Authorize] decision.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70186: An unauthenticated remote attacker can send crafted
+      HTTP/3 reset or abort sequences that deadlock Kestrel connection
+      handling. Repeated requests can cause excessive blocked-thread creation
+      and exhaust server resources, resulting in denial of service. The
+      application must expose an HTTP/3 endpoint to the attacker.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70188: Kestrel accepts newline characters in HTTP/2 request
+      trailers and values retrieved from the dynamic HPACK table instead of
+      treating them as malformed.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70196: Incrementally arriving form data can cause FormPipeReader
+      to repeatedly rescan the full buffered body, resulting in quadratic CPU
+      consumption and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-84008: SignedCms.CheckSignature can repeatedly reparse
+      attacker-controlled X.509 data, causing unauthenticated quadratic CPU
+      exhaustion.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-88092: An aborted Kestrel HTTP/1 connection can reparse unread
+      request-body bytes as another request, creating a request-smuggling or
+      desynchronization path.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-92707: SignalR's MessagePack protocol can consume excessive
+      memory while deserializing deeply nested attacker-controlled arrays,
+      resulting in unauthenticated remote denial of service.
+  * SECURITY UPDATE: spoofing
+    - CVE-2026-96222: KeyInfoX509Data can accept serialized certificate formats
+      containing attacker-controlled chain metadata instead of requiring a
+      plain X.509 certificate, contributing to certificate-forgery and
+      token-spoofing paths.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96225: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-96230: The Blazor WebAssembly development-server debug page can
+      reflect unencoded exception text, allowing cross-origin script injection
+      through the unauthenticated /_framework/debug endpoint used by dotnet
+      watch.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96231: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96233: DateTime Hebrew-number parsing can read outside expected
+      stack bounds and terminate the process.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96236: ASP.NET Core request-localization fallback can add
+      attacker-supplied synthetic culture names to the runtime's global cache,
+      allowing unauthenticated requests to cause unbounded memory growth and
+      denial of service.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-96237: SDK workload package downloads and integrity-repair paths
+      can bypass NuGet Package Source Mapping, allowing packages to be
+      reacquired from an unmapped attacker-controlled feed and potentially
+      enabling remote code execution.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-96238: dotnet new install can acquire a template package from a
+      feed that is not permitted by NuGet Package Source Mapping, bypassing the
+      configured feed trust boundary.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96239: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96956: Deeply nested CBOR map keys can trigger repeated key
+      hashing in CborReader, causing unauthenticated quadratic CPU consumption
+      and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96958: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96959: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96960: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
+    autopkgtest failures on amd64, amd64v3 and arm64. (LP: #2167382)
+    - debugging-sos-lldb-via-core/test.sh, debugging-via-dotnet-dump/test.sh:
+      the dotnet-sos/dotnet-dump 'name2ee' C# rewrite no longer prints the
+      'EEClass:' field. Use the MethodTable, or the EEClass from the dumpmt
+      output when present, for the dumpclass command instead.
+  * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
+    name without a path in the `runtimes` output, fixing an autopkgtest
+    regression caused by dotnet-dump no longer printing the full DAC path.
+  * d/t/regular-tests/lttng/test.sh: prefer babeltrace2 over babeltrace to
+    read traces, as lttng-tools >= 2.15 writes CTF 2 traces that babeltrace
+    1.x cannot read.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 21:46:40 -0500
+
+dotnet8 (8.0.131-8.0.31-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-58649: dotnet watch BrowserRefreshServer does not adequately
+      validate cross-origin WebSocket origins, potentially allowing IL and PDB
+      information disclosure.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 02 Sep 2026 12:00:00 -0500
+
+dotnet8 (8.0.130-8.0.30-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-62900: Improper removal of sensitive information before storage
+      or transfer in .NET allows an unauthorized attacker to disclose
+      information over a network.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-62899: Inconsistent interpretation of http requests
+      ('http request/response smuggling') in .NET allows an unauthorized
+      attacker to bypass a security feature over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-62901: Unchecked input for loop condition in .NET allows an
+      unauthorized attacker to deny service over a network.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-62909: Uncaught exception in .NET allows an authorized attacker
+      to elevate privileges locally.
+  * d/t/regular-tests/template-test/test.sh:
+    - Add 'mcpserver' template to ignore list to fix autopkgtest failure on
+      s390x and ppc64el due to missing dependencies.
+    - Treat warnings as errors to catch template quality regressions,
+      excluding environment-specific warnings (NETSDK1057, NU1803,
+      and NU1900-NU1905).
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 13 Aug 2026 14:30:00 -0500
+
 dotnet8 (8.0.129-8.0.29-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release

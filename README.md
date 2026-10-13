@@ -9,6 +9,7 @@ Home of the .NET source build effort for Ubuntu platforms. This Repository inclu
 
 | Package Name | Launchpad Link | Autopkgtest Link |
 |--------------|----------------|------------------|
+| `dotnet10` | [![dotnet10 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet10-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet10) | [![dotnet10 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet10-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet10) |
 | `dotnet9` | [![dotnet9 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet9-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet9) | [![dotnet9 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet9-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet9) |
 | `dotnet8` | [![dotnet8 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet8-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet8) | [![dotnet8 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet8-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet8) |
 | `dotnet7` | [![dotnet7 source package on Launchpad](https://img.shields.io/badge/Launchpad-dotnet7-F8C300?logo=launchpad)](https://launchpad.net/ubuntu/+source/dotnet7) | [![dotnet7 Ubuntu autopkgtest cloud](https://img.shields.io/badge/Ubuntu%20autopkgtest%20cloud-dotnet7-E95420?logo=ubuntu)](https://autopkgtest.ubuntu.com/packages/dotnet7) |
@@ -24,7 +25,7 @@ Home of the .NET source build effort for Ubuntu platforms. This Repository inclu
 
 ## License
   
-Copyright (C) 2025 Canonical Ltd.
+Copyright (C) 2026 Canonical Ltd.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
