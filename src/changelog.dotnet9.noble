@@ -92,15 +92,6 @@ dotnet9 (9.0.122-9.0.21-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
     - CVE-2026-96238: dotnet new install can acquire a template package from a
       feed that is not permitted by NuGet Package Source Mapping, bypassing the
       configured feed trust boundary.
-  * SECURITY UPDATE: elevation of privilege
-    - CVE-2026-96239: Unix named-mutex and shared-memory paths can be
-      manipulated through insecure global directories, symlink races, and
-      unsafe permission changes, allowing local attackers to truncate or
-      overwrite files, widen directory permissions, or elevate privileges.
-  * SECURITY UPDATE: denial of service
-    - CVE-2026-96956: Deeply nested CBOR map keys can trigger repeated key
-      hashing in CborReader, causing unauthenticated quadratic CPU consumption
-      and denial of service.
   * SECURITY UPDATE: denial of service
     - CVE-2026-96958: Signed XML fixes add input-depth and operation-count
       limits, prohibit DTD processing by default, validate entity references,
