@@ -1,0 +1,9 @@
+{
+    "type": "external_source",
+    "sourceType": "git",
+    "repository": "https://github.com/canonical/dotnet-versionlib",
+    "commitish": "a4253ae7c38d358fb26ca7ff4ace66c01e957554",
+    "ignoredFiles": [
+        ".gitignore"
+    ]
+}

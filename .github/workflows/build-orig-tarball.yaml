@@ -15,8 +15,16 @@ on:
         description: 'Official Build Id (only needed for .NET 10+)'
         required: false
         type: string
+      extraPpaSource:
+        description: 'Extra apt source for installing the .NET SDK (e.g. "ppa:dotnet-bootstrap/amd64")'
+        required: false
+        type: string
       bootstrap:
         description: 'Build bootstraped orig tarballs'
+        required: false
+        type: boolean
+      deterministic:
+        description: 'Produce a deterministic tarball (stable hash across runs)'
         required: false
         type: boolean
 
@@ -25,11 +33,46 @@ jobs:
   build-orig-tarball:
     if: ${{ ! inputs.bootstrap }}
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Build orig tarball
+        id: build-orig-tarball
+        uses: ./.github/actions/build-orig-tarball
+        with:
+          source-version: ${{ inputs.sourceVersion }}
+          git-commitish: ${{ inputs.gitCommitish }}
+          build-id: ${{ inputs.buildId }}
+          vendor-name: "Canonical Ltd."
+          security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
+          deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
+
+      - name: Upload orig tarball to workflow artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.build-orig-tarball.outputs.tarball-name }}
+          path: ${{ steps.build-orig-tarball.outputs.tarball-path }}
+
+  bootstrap-sdk:
+    if: ${{ inputs.bootstrap }}
+    runs-on: [self-hosted, large, noble, X64]
+    strategy:
+      matrix:
+        arch: [s390x, ppc64le]
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+
+      - name: Configure credentials for .NET security partners repository
+        if: github.repository == 'canonical/dotnet-source-build-security'
+        run: |
+          git config --global credential.helper store
+          echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
+          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
 
       - name: Parse source version
         id: parse-version
@@ -41,59 +84,6 @@ jobs:
           echo "dotnetMinorVersion=$MINOR_VERSION" >> $GITHUB_OUTPUT
           echo "dotnetMajorMinorVersion=$MAJOR_VERSION.$MINOR_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Install dependencies
-        if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 }}
-        run: |
-          sudo add-apt-repository ppa:dotnet/backports
-          sudo add-apt-repository ppa:dotnet/previews
-          sudo add-apt-repository ppa:dotnet-bootstrap/amd64
-          sudo apt-get install --assume-yes \
-            dotnet${{steps.parse-version.outputs.dotnetMajorVersion}} \
-            dotnet-sdk-${{steps.parse-version.outputs.dotnetMajorMinorVersion}}-source-built-artifacts
-
-      - name: Configure credentials for .NET security partners repository
-        if: ${{ github.repository == 'canonical/dotnet-source-build-security' }}
-        run: |
-          git config --global credential.helper store
-          echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
-
-      - name: Build orig tarball
-        id: build-orig-tarball
-        run: |
-          eng/build-orig-tarball.py \
-            --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
-            --source-version "${{inputs.sourceVersion}}" \
-            --git-reference "${{inputs.gitCommitish}}" \
-            --build-id "${{inputs.buildId}}" \
-            --vendor-name "Canonical Ltd." \
-            --verbose
-
-          echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
-
-      - name: Upload orig tarball to workflow artifacts
-        id: upload-artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{steps.build-orig-tarball.outputs.tarballName}}
-          path: ./dist/${{steps.build-orig-tarball.outputs.tarballName}}
-
-  bootstrap-sdk:
-    if: ${{ inputs.bootstrap }}
-    runs-on: [self-hosted, large, jammy, X64]
-    strategy:
-      matrix:
-        arch: [s390x, ppc64le]
-    env:
-      DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
-    steps:
-      - name: Configure credentials for .NET security partners repository
-        if: github.repository == 'canonical/dotnet-source-build-security'
-        run: |
-          git config --global credential.helper store
-          echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
-
       - name: Clean up hosted runner
         # Removes the Android SDK from the runner because otherwise we run out of disk space.
         run: |
@@ -103,6 +93,21 @@ jobs:
         run: |
           git clone --depth 1 --branch "${{ inputs.gitCommitish }}" "${DOTNET_GIT_REPOSITORY}" dotnet-vmr
 
+      - name: Apply patches
+        shell: bash
+        run: |
+          patches_dir="${{ github.workspace }}/eng/patches"
+          shopt -s nullglob
+          patches=( "$patches_dir"/*.patch )
+          if [ ${#patches[@]} -eq 0 ]; then
+            echo "No patches to apply."
+            exit 0
+          fi
+          for patch in "${patches[@]}"; do
+            echo "Applying $(basename "$patch")"
+            git -C "${{ github.workspace }}/dotnet-vmr" apply "$patch"
+          done
+
       - name: Bootstrap .NET SDK
         run: |
           docker run \
@@ -111,7 +116,7 @@ jobs:
             -v${{ github.workspace }}/dotnet-vmr:/dotnet \
             -w /dotnet \
             -e ROOTFS_DIR=/crossrootfs/${{ matrix.arch }} \
-            mcr.microsoft.com/dotnet-buildtools/prereqs:azurelinux-3.0-net10.0-cross-${{ matrix.arch }} \
+            mcr.microsoft.com/dotnet-buildtools/prereqs:azurelinux-3.0-net${{ steps.parse-version.outputs.dotnetMajorVersion }}.0-cross-${{ matrix.arch }} \
             sh -c '
               ./prep-source-build.sh &&
               ./build.sh --clean-while-building -sb --os linux --arch ${{ matrix.arch }} --use-mono-runtime -- /p:OfficialBuildId=${{ inputs.buildId }}
@@ -122,7 +127,7 @@ jobs:
           find "${{ github.workspace }}/dotnet-vmr/artifacts"
 
       - name: Upload .NET
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dotnet-sdk-${{ inputs.gitCommitish }}-linux-${{ matrix.arch }}-artifacts
           path: |
@@ -135,26 +140,18 @@ jobs:
     strategy:
       matrix:
         os:
-          - [self-hosted, large, jammy, X64]
-          - [self-hosted, large, jammy, ARM64]
+          - [self-hosted, large, noble, X64]
+          - [self-hosted, large, noble, ARM64]
           - [self-hosted, linux, noble, S390X]
           - [self-hosted, linux, noble, PPC64EL]
     runs-on: ${{ matrix.os }}
-    env:
-      DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Configure credentials for .NET security partners repository
-        if: github.repository == 'canonical/dotnet-source-build-security'
-        run: |
-          git config --global credential.helper store
-          echo "https://dotnet-security-partners:${{secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN}}@dev.azure.com" >> ~/.git-credentials
-          echo "DOTNET_GIT_REPOSITORY=https://dotnet-security-partners@dev.azure.com/dotnet-security-partners/enterprise-partners/_git/dotnet" >> ${GITHUB_ENV}
+        uses: actions/checkout@v6
 
       - name: Get architecture
         id: get-arch
+        shell: bash
         run: |
           arch=$(dpkg --print-architecture)
           if [ "$arch" == "ppc64el" ]; then
@@ -169,59 +166,53 @@ jobs:
         with:
           name: dotnet-sdk-${{ inputs.gitCommitish }}-linux-${{ steps.get-arch.outputs.arch }}-artifacts
 
-      - name: Build bootstraped orig tarball
-        id: build-bootstraped-orig-tarball
+      - name: Resolve and verify bootstrap artifact paths
+        id: resolve-artifacts
+        if: ${{ steps.get-arch.outputs.arch == 's390x' || steps.get-arch.outputs.arch == 'ppc64le' }}
         shell: bash
         run: |
-          if [[ "${{ steps.get-arch.outputs.arch }}" == "s390x" || "${{ steps.get-arch.outputs.arch }}" == "ppc64le" ]]; then
-            sdkTarballPath=$(find \
-                "${{ steps.download-artifacts.outputs.download-path }}" \
-                -type f \
-                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz" \
-                | head -n 1)
-            sdkChecksumPath=$(find \
-                "${{ steps.download-artifacts.outputs.download-path }}" \
-                -type f \
-                -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz.sha512" \
-                | head -n 1)
-            prebuiltsTarballPath=$(find \
-                "${{ steps.download-artifacts.outputs.download-path }}" \
-                -type f \
-                -name "Private.SourceBuilt.Artifacts.*.tar.gz" \
-                | head -n 1)
+          sdkTarballPath=$(find \
+              "${{ steps.download-artifacts.outputs.download-path }}" \
+              -type f \
+              -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz" \
+              | head -n 1)
+          sdkChecksumPath=$(find \
+              "${{ steps.download-artifacts.outputs.download-path }}" \
+              -type f \
+              -name "dotnet-sdk-*-linux-${{ steps.get-arch.outputs.arch }}.tar.gz.sha512" \
+              | head -n 1)
+          prebuiltsTarballPath=$(find \
+              "${{ steps.download-artifacts.outputs.download-path }}" \
+              -type f \
+              -name "Private.SourceBuilt.Artifacts.*.tar.gz" \
+              | head -n 1)
 
-            # Verify the checksum of the SDK tarball
-            CHECKSUM=$(cat $sdkChecksumPath)
-            echo "${CHECKSUM}  ${sdkTarballPath}" > temp_checksum.sha512
-            sha512sum --check temp_checksum.sha512
-            rm temp_checksum.sha512
+          # Verify the checksum of the SDK tarball
+          CHECKSUM=$(cat $sdkChecksumPath)
+          echo "${CHECKSUM}  ${sdkTarballPath}" > temp_checksum.sha512
+          sha512sum --check temp_checksum.sha512
+          rm temp_checksum.sha512
 
-            eng/build-orig-tarball.py \
-              --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
-              --source-version "${{inputs.sourceVersion}}" \
-              --git-reference "${{inputs.gitCommitish}}" \
-              --build-id "${{inputs.buildId}}" \
-              --vendor-name "Canonical Ltd." \
-              --include-bootstrap-sdk \
-              --with-bootstrap-sdk $sdkTarballPath \
-              --with-bootstrap-prebuilts-tarball $prebuiltsTarballPath \
-              --verbose
-          else
-            eng/build-orig-tarball.py \
-              --clone-git-repository "${DOTNET_GIT_REPOSITORY}" \
-              --source-version "${{inputs.sourceVersion}}" \
-              --git-reference "${{inputs.gitCommitish}}" \
-              --build-id "${{inputs.buildId}}" \
-              --vendor-name "Canonical Ltd." \
-              --include-bootstrap-sdk \
-              --verbose
-          fi
+          echo "sdk-tarball-path=${sdkTarballPath}" >> $GITHUB_OUTPUT
+          echo "prebuilts-tarball-path=${prebuiltsTarballPath}" >> $GITHUB_OUTPUT
 
-          echo "tarballName=$(find dist -name 'dotnet*_${{inputs.sourceVersion}}*.orig.tar.*' -printf '%f')" >> $GITHUB_OUTPUT
+      - name: Build bootstraped orig tarball
+        id: build-orig-tarball
+        uses: ./.github/actions/build-orig-tarball
+        with:
+          source-version: ${{ inputs.sourceVersion }}
+          git-commitish: ${{ inputs.gitCommitish }}
+          build-id: ${{ inputs.buildId }}
+          vendor-name: "Canonical Ltd."
+          security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
+          include-bootstrap-sdk: "true"
+          bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
+          bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
+          deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
 
       - name: Upload orig tarball to workflow artifacts
-        id: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: ${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
-          path: ./dist/${{steps.build-bootstraped-orig-tarball.outputs.tarballName}}
+          name: ${{ steps.build-orig-tarball.outputs.tarball-name }}
+          path: ${{ steps.build-orig-tarball.outputs.tarball-path }}

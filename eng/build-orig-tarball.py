@@ -113,6 +113,15 @@ class ArgumentParser(argparse.ArgumentParser):
             help="Borrow the objects from a reference repository only to "
                  "reduce network transfer.")
 
+        self.add_argument(
+            "--deterministic",
+            dest="Deterministic",
+            action="store_true",
+            help="Produce a deterministic tarball by normalising file order, "
+                 "timestamps (set to the HEAD commit time), ownership, and "
+                 "using single-threaded xz compression. "
+                 "When not set, multi-threaded xz compression is used.")
+
     def __AddCloneGitRepositoryOptionGroup(self) -> None:
         gitRepoGroup = self.add_mutually_exclusive_group(required=True)
 
@@ -285,6 +294,7 @@ class InvocationContext:
 
     def __init__(self, args: argparse.Namespace, hostDpkgArchitecture: str):
         self.VerboseOutput: bool = args.VerboseOutput
+        self.Deterministic: bool = args.Deterministic
 
         self.SourceVersion: str = args.SourceVersion
         majorVersion, minorVersion = self.__ParseDotnetVersion()
@@ -390,6 +400,8 @@ class InvocationContext:
         else:
             self.SourceBuiltArtifactsTarball = args.BootstrapPrebuiltsTarballLocation  # noqa: E501
 
+        self.HeadCommitTimestamp: str | None = None
+
     def __ParseDotnetVersion(self):
         match = re.search(
             r"^(?P<majorVersion>\d+)\.(?P<minorVersion>\d+)(?=\.)",
@@ -492,6 +504,7 @@ Source/Output options:
 - GitRepositoryClonePath={self.GitRepositoryClonePath}
 - OutputDirectory={self.OutputDirectory}
 - TarballName={self.TarballName}
+- Deterministic={self.Deterministic}
 
 Manifest options:
 - ReleaseManifestFormat={self.ReleaseManifestFormat}
@@ -870,6 +883,14 @@ def GetHeadCommitSha1Hash(context: InvocationContext) -> str:
     return output.strip()
 
 
+def GetHeadCommitTimestamp(context: InvocationContext) -> str:
+    output = subprocess.check_output(
+        ["git", "log", "-1", "--format=%ct", "HEAD"],
+        cwd=context.GitRepositoryClonePath,
+        text=True)
+    return output.strip()
+
+
 def CreateReleaseManifest(context: InvocationContext) -> None:
     if context.ReleaseManifestFormat is None:
         return
@@ -958,6 +979,7 @@ def PrepareForSourceBuild(context: InvocationContext) -> None:
 
     RemoveUnwantedFiles(context)
     CreateReleaseManifest(context)
+    context.HeadCommitTimestamp = GetHeadCommitTimestamp(context)
     RemoveDotGitDirectory(context)
 
 
@@ -967,14 +989,27 @@ def CreateOrigTarball(context: InvocationContext) -> None:
     if not path.exists(context.OutputDirectory):
         os.mkdir(context.OutputDirectory)
 
-    command = [
-            "tar",
-            "--create",
-            # Use --use-compress-program to specify xz with multithreading
-            "--use-compress-program=xz --threads=0",
-            "--file", context.OutputTarballFilePath,
-            "."
+    if context.Deterministic and not context.HeadCommitTimestamp:
+        LogErrorAndExit("Cannot create a deterministic tarball: "
+                        "head commit timestamp is not set.")
+
+    command = ["tar", "--create"]
+
+    if context.Deterministic:
+        # Use deterministic options to ensure the tarball is reproducible
+        # across multiple runs with the same inputs.
+        command += [
+            "--sort=name",
+            f"--mtime=@{context.HeadCommitTimestamp}",
+            "--owner=0",
+            "--group=0",
+            "--numeric-owner",
+            "--use-compress-program=xz --threads=1",
         ]
+    else:
+        command += ["--use-compress-program=xz --threads=0"]
+
+    command += ["--file", context.OutputTarballFilePath, "."]
 
     subprocess.check_call(args=command, cwd=context.GitRepositoryClonePath)
 

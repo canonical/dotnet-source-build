@@ -1,0 +1,495 @@
+dotnet10 (10.0.113-10.0.13-0ubuntu1~26.10.1) stonking-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-102870: The Blazor WebAssembly debug proxy embeds
+      attacker-controlled ToString(), description, and class-name values into
+      generated C# without consistently escaping them. When a developer
+      evaluates an expression while debugging, the value can escape the
+      generated string literal and execute code on the developer's machine.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-58280: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-66822: SocketsHttpHandler can retain a Proxy-Authorization
+      header across an HTTP redirect and leak basic proxy credentials to the
+      destination server.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-69651: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70159: SignalR stateful reconnect clients can indefinitely block
+      broadcasts through MessageBuffer.ResendAsync backpressure and retain
+      associated resources.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-70175: ASP.NET Core Identity password-reset and confirmation
+      flows can send mail to the unvalidated request address instead of the
+      user's stored canonical address.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70179: ASP.NET Core Negotiate LDAP authentication can associate
+      an authenticated identity with an unintended LDAP principal when the LDAP
+      result is not verified against the Kerberos principal SID.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70181: FileBufferingReadStream eagerly rents buffers during
+      multipart processing, allowing memory exhaustion and denial of service.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70183: A stale asynchronous authorization result in Blazor
+      AuthorizeRouteView can be applied after navigation or an
+      authorization-state change, bypassing the current [Authorize] decision.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70186: An unauthenticated remote attacker can send crafted
+      HTTP/3 reset or abort sequences that deadlock Kestrel connection
+      handling. Repeated requests can cause excessive blocked-thread creation
+      and exhaust server resources, resulting in denial of service. The
+      application must expose an HTTP/3 endpoint to the attacker.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-70188: Kestrel accepts newline characters in HTTP/2 request
+      trailers and values retrieved from the dynamic HPACK table instead of
+      treating them as malformed.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-70196: Incrementally arriving form data can cause FormPipeReader
+      to repeatedly rescan the full buffered body, resulting in quadratic CPU
+      consumption and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-84008: SignedCms.CheckSignature can repeatedly reparse
+      attacker-controlled X.509 data, causing unauthenticated quadratic CPU
+      exhaustion.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-88092: An aborted Kestrel HTTP/1 connection can reparse unread
+      request-body bytes as another request, creating a request-smuggling or
+      desynchronization path.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-92707: SignalR's MessagePack protocol can consume excessive
+      memory while deserializing deeply nested attacker-controlled arrays,
+      resulting in unauthenticated remote denial of service.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96225: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-96230: The Blazor WebAssembly development-server debug page can
+      reflect unencoded exception text, allowing cross-origin script injection
+      through the unauthenticated /_framework/debug endpoint used by dotnet
+      watch.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-96231: Unix named-mutex and shared-memory paths can be
+      manipulated through insecure global directories, symlink races, and
+      unsafe permission changes, allowing local attackers to truncate or
+      overwrite files, widen directory permissions, or elevate privileges.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96233: DateTime Hebrew-number parsing can read outside expected
+      stack bounds and terminate the process.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96236: ASP.NET Core request-localization fallback can add
+      attacker-supplied synthetic culture names to the runtime's global cache,
+      allowing unauthenticated requests to cause unbounded memory growth and
+      denial of service.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-96237: SDK workload package downloads and integrity-repair paths
+      can bypass NuGet Package Source Mapping, allowing packages to be
+      reacquired from an unmapped attacker-controlled feed and potentially
+      enabling remote code execution.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-96238: dotnet new install can acquire a template package from a
+      feed that is not permitted by NuGet Package Source Mapping, bypassing the
+      configured feed trust boundary.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-96957: Signature verification for .NET file-based apps can fail
+      to enforce the expected trust decision.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96958: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96959: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-96960: Signed XML fixes add input-depth and operation-count
+      limits, prohibit DTD processing by default, validate entity references,
+      bound encrypted-data candidate processing, and cap attributes and
+      namespaces used by C14N transforms.
+  * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
+    name without a path in the `runtimes` output, fixing an autopkgtest
+    regression caused by dotnet-dump no longer printing the full DAC path.
+  * d/t/regular-tests/lttng/test.sh: prefer babeltrace2 over babeltrace to
+    read traces, as lttng-tools >= 2.15 writes CTF 2 traces that babeltrace
+    1.x cannot read.
+  * d/eng/dotnet-pkg-info.mk: add the DOTNET_110_OR_GREATER variable and a
+    .NET 11 version branch, as this file is shared with the dotnet11 package.
+    No functional change for this package.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 16 Oct 2026 14:56:55 -0500
+
+dotnet10 (10.0.112-10.0.12-0ubuntu2) stonking; urgency=medium
+
+  * Sync d/t/regular-tests with canonical/dotnet-regular-tests to fix
+    autopkgtest failures on amd64, amd64v3 and arm64. (LP: #2167382)
+    - debugging-sos-lldb-via-core/test.sh, debugging-via-dotnet-dump/test.sh:
+      the dotnet-sos/dotnet-dump 'name2ee' C# rewrite no longer prints the
+      'EEClass:' field. Use the MethodTable, or the EEClass from the dumpmt
+      output when present, for the dumpclass command instead.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Tue, 15 Sep 2026 12:05:32 -0500
+
+dotnet10 (10.0.112-10.0.12-0ubuntu1) stonking; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-58649: dotnet watch BrowserRefreshServer does not adequately
+      validate cross-origin WebSocket origins, potentially allowing IL and PDB
+      information disclosure.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-69806: dotnet-watch AspireServerService exposes information
+      through procfs arguments that can enable injection into the /run_session
+      endpoint.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 02 Sep 2026 12:00:00 -0500
+
+dotnet10 (10.0.111-10.0.11-0ubuntu1) stonking; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-62900: Improper removal of sensitive information before storage
+      or transfer in .NET allows an unauthorized attacker to disclose
+      information over a network.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-62899: Inconsistent interpretation of http requests
+      ('http request/response smuggling') in .NET allows an unauthorized
+      attacker to bypass a security feature over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-62901: Unchecked input for loop condition in .NET allows an
+      unauthorized attacker to deny service over a network.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-62909: Uncaught exception in .NET allows an authorized attacker
+      to elevate privileges locally.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 13 Aug 2026 14:30:00 -0500
+
+dotnet10 (10.0.110-10.0.10-0ubuntu3) stonking; urgency=medium
+
+  * d/p/0007-openssl4-support.patch: fix FTBFS with OpenSSL 4. (LP: #2163066)
+  * d/t/regular-tests/template-test/test.sh: move mcpserver template to ignore
+    list due to dependency issues on s390x and ppc64el.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Aug 2026 16:11:22 -0300
+
+dotnet10 (10.0.110-10.0.10-0ubuntu2) stonking; urgency=medium
+
+  * d/t/regular-tests/template-test/test.sh: add new 'mcpserver' template to
+    fix autopkgtest failure.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 21 Jul 2026 11:50:42 -0300
+
+dotnet10 (10.0.110-10.0.10-0ubuntu1) stonking; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-57108: .NET runtime - CryptoNative_GetX509NameInfo - UPN
+      BOOLEAN ASN.1 type-confusion DoS.
+  * SECURITY UPDATE:
+    - CVE-2026-47303: ASP.NET Core - Negotiate/LdapAdapter.cs - LDAP
+      identifier confusion CN vs sAMAccountName.
+  * SECURITY UPDATE: code injection
+    - CVE-2026-47300: LdapAdapter query validation fix - LDAP injection via
+      unvalidated filter input.
+  * SECURITY UPDATE: code injection
+    - CVE-2026-50659: System.Net.Mail - SMTP smuggling via CRLF split across
+      buffers.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-50528: System.Net.Security - additional SslStream fix (auth
+      bypass via ignored channel binding).
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50525: EncryptedXml/TransformChain - DoS via XML transform
+      chain DTD/base64 amplification.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-47304: EncryptedXml - XML Encryption vulnerability
+      (SignedXml.CheckSignature forgery via empty HMAC).
+  * SECURITY UPDATE: stack overflow
+    - CVE-2026-50527: EncryptedXml - System.Security.Cryptography.Xml.Utils -
+      Unauth XML triggers Type.GetType stack overflow.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50648: EncryptedXml - XmlDecryptionTransform document-rooted
+      XPath queries causing O(n²) CPU DoS.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-47302: EncryptedXml - XML Encryption vulnerability +
+      XmlTextReaderImpl.Read duplicate attributes DoS.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-50524: System.Net.Security - SslStream handshake with malformed
+      TLS packets.
+  * SECURITY UPDATE: blob injection
+    - CVE-2026-50526: .NET SDK - Container image build cache uses predictable
+      world-writable location enabling blob injection.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-50651: SocketsHttpHandler Http2Connection - HTTP/2
+      SETTINGS/PING ACK flood causing OOM.
+  * Fix `dotnet sdk check` command source URL. (LP: #2156464)
+    - d/eng/dotnet-pkg-info.mk: strip suffixes from changelog distribution
+      name to avoid using wrong release names.
+    - d/t/regular-tests/dotnet-sdk-check-url-verification: test to verify the
+      sdk check command queries a URL with a valid release name.
+    - d/t/regular-tests/README.md: add distro-info as a necessary dependency
+      for the testsuite.
+    - d/t/control: add distro-info as a test dependency.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 07 Jul 2026 17:52:34 -0300
+
+dotnet10 (10.0.109-10.0.9-0ubuntu1) stonking; urgency=medium
+
+  [ Mateus Rodrigues de Morais ]
+  * New upstream release
+  * SECURITY UPDATE: arbitrary file write
+    - CVE-2026-45491: improper link resolution before file access
+      ('link following') in .NET allows an unauthorized attacker to perform
+      local tampering.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-45591: Stack overflow DoS via deeply-nested MessagePack arrays.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Wed, 10 Jun 2026 10:35:01 +0300
+
+dotnet10 (10.0.108-10.0.8-0ubuntu1) stonking; urgency=medium
+
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-42899: Loop with unreachable exit condition ('infinite loop')
+      in ASP.NET Core allows an unauthorized attacker to deny service over a
+      network.
+
+  [ Mateus Rodrigues de Morais ]
+  * New upstream release (LP: #2152598)
+  * d/t/regular-tests/check-test-results: match to any NU1102 error
+    occurrences when ignoring package not found restore errors.
+  * d/t/regular-tests/template-test/test.json: increment timeout multiplier to
+    avoid timeout errors when running on the autopkgtest cloud.
+  * d/t/regular-tests/tools-in-path/test.json: skip test when running on the
+    toolchains-ci CI pipeline.
+  * d/t/run-regular-tests: define environment variable to selectively add the
+    'toolchains-ci' trait to the test runner.
+
+ -- Ian Constantin <ian.constantin@canonical.com>  Fri, 22 May 2026 17:45:46 +0300
+
+dotnet10 (10.0.107-10.0.7-0ubuntu1~26.04.1) resolute-security; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-40372: A bug in Microsoft.AspNetCore.DataProtection
+      10.0.0-10.0.6 NuGet packages can give an attacker the opportunity to
+      execute an Elevation of Privilege attack by forging authentication
+      cookies, and also allows some protected payloads to be decrypted.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-33116: Possible denial of service via infinite recursion in
+      XmlDecryptionTransform.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-32203: Possible denial of service via stack overflow in
+      EncryptedKey nested decryption.
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-32178: SMTP command injection and header injection via
+      MailAddress parsing flaw in System.Net.Mail.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-26171: denial of service and security feature bypass via unsafe
+      transforms in EncryptedXml.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 22 Apr 2026 09:43:45 -0300
+
+dotnet10 (10.0.105-10.0.5-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release. (LP: #2144328)
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 12 Mar 2026 17:11:45 -0300
+
+dotnet10 (10.0.104-10.0.4-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26130: Possible denial-of-service via SignalR stateful
+      reconnect buffer overfill.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-26127: System.Buffers.Text.Base64Url.DecodeFromChars
+      out-of-bounds read from malformed Base64Url input. A bug in the
+      implementation causes out-of-bound reads of the DecodingMap, potentially
+      leading to Access Violation Exceptions (AVEs) when unsafe code is used.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 02 Mar 2026 14:37:22 -0300
+
+dotnet10 (10.0.103-10.0.3-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-21218: An attacker could exploit this vulnerability in
+      System.Security.Cryptography.Cose by crafting a malicious payload that
+      bypasses the security checks in the affected .NET versions, potentially
+      leading to unauthorized access or data manipulation.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 02 Feb 2026 17:30:30 -0300
+
+dotnet10 (10.0.102-10.0.2-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release (LP: #2138378)
+  * d/p/0007-fix-identitymodel-version.patch: dropped patch included upstream.
+  * d/control: use default LLVM since FTBFS with LLVM 21 was fixed upstream.
+  * d/copyright: fix missing newline between entries.
+  * d/rules: remove temporary --branding parameter in build script call.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 26 Jan 2026 10:27:55 -0300
+
+dotnet10 (10.0.101-10.0.1-0ubuntu3) resolute; urgency=medium
+
+  * d/p/0007-fix-identitymodel-version.patch: fix FTBFS caused by date-based
+    version string calculation in the Microsoft.IdentityModel.Abstractions
+    package. (LP: #2134505)
+  * d/t/regular-tests/cgroup-limit/test.sh: fix autopkgtest regression in
+    Ubuntu releases with rust-coreutils by comparing the cgroup filesystem ID
+    instead of friendly name.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 16 Jan 2026 11:17:22 -0300
+
+dotnet10 (10.0.101-10.0.1-0ubuntu2) resolute; urgency=medium
+
+  * Clean up source tree and sync tests with upstream. (LP: #2136762)
+    - d/t/regular-tests: synced with upstream.
+      + Removed release-version-sane test following upstream.
+      + Removed unnecessary files from source tree.
+      + Normalized newline characters to Unix.
+    - d/t/run-regular-tests: fixed test username typo.
+    - d/rules: cleaned up trailing spaces.
+    - d/eng/test-runner: removed unnecessary files from source tree.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Wed, 17 Dec 2025 12:09:34 -0300
+
+dotnet10 (10.0.101-10.0.1-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release. (LP: #2134505)
+  * d/p/0007-fix-tempdir-on-exit-trap.patch: dropped patch included upstream.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Tue, 09 Dec 2025 18:28:55 -0300
+
+dotnet10 (10.0.100-10.0.0-0ubuntu2) resolute; urgency=medium
+
+  * No-change rebuild for icu soname.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 02 Dec 2025 22:49:47 +0100
+
+dotnet10 (10.0.100-10.0.0-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release (LP: #2130891)
+  * d/{sdk-check-config.json,rules}: `dotnet sdk check` tool points to
+    Canonical's release database.
+  * d/rules: add `--branding rtm` to DOTNET_BUILD_ARGS.
+  * d/p/0007-fix-tempdir-on-exit-trap.patch: fix unbound variable error.
+  * d/control: pin LLVM 20 to avoid FTBFS on LLVM 21.
+  * d/dotnet-host-10.0.links: fixed dnx link name to /usr/bin/dnx (DNX_BIN).
+  * d/eng/test-runner/*/obj: removed unwanted build artifact directory from
+    source package.
+  * d/t/regular-tests: synced with upstream to fix failing tests and add new
+    ones for .NET 10.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Fri, 07 Nov 2025 16:11:30 +0100
+
+dotnet10 (10.0.100-10.0.0~rc2-0ubuntu1) resolute; urgency=medium
+
+  [ Dominik Viererbe ]
+  * New upstream release
+  * SECURITY UPDATE: denial of service
+    - CVE-2025-55247: A vulnerability exists in .NET Core where predictable
+      paths for MSBuild's temporary directories on Linux let another user
+      create the directories ahead of MSBuild, leading to DoS of builds.
+  * SECURITY UPDATE: validation bypass
+    - CVE-2025-55315: Inconsistent interpretation of http requests
+      ('http request/response smuggling') in ASP.NET Core allows an authorized
+      attacker to bypass a security feature over a network.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Thu, 16 Oct 2025 09:48:01 -0300
+
+dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1) questing; urgency=medium
+
+  * Upload to the primary archive.
+
+ -- Utkarsh Gupta <utkarsh@ubuntu.com>  Wed, 08 Oct 2025 17:30:00 +0000
+
+dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa2) questing; urgency=medium
+
+  * debian/copyright: add copyright information
+  * source/lintian-overrides: update lintian-overrides for source package
+  * eng/test-runner: sync changes with upstream
+  * tests/control, tests/regular-tests: sync changes with upstream
+  * debian/rules: remove temporary .NET 10 RC 1 fixups
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 08 Oct 2025 04:31:48 +0300
+
+dotnet10 (10.0.100-10.0.0~rc1-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release
+  * d/control, d/rules: remove package netstandard-targeting-pack-2.1-10.0:
+    Upstream removed this package, see: https://github.com/dotnet/sdk/pull/50354.
+
+    IMPORTANT: If you had previous preview version of the `dotnet10` package
+    installed and have installed one of the following packages: `dotnet9`,
+    `dotnet8`, `dotnet7` or `dotnet6`, we recommend to reinstall these packages.
+    Otherwise the .NET standard 2.1 targeting pack package will not receive any
+    updates.
+
+  * d/p/0002-roslyn-analyzers-dont-use-apphost.patch: roslyn-analyzers don't get
+    built anymore, see: https://github.com/dotnet/dotnet/pull/1979
+  * d/rules: add `--branding default` to DOTNET_BUILD_ARGS, see also:
+    https://github.com/dotnet/source-build/issues/5337
+  * d/rules: remove uninstalled netstandard-targeting-pack-2.1-10.0 files
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 10 Sep 2025 11:26:09 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~ppa3) questing; urgency=medium
+
+  * d/dotnet-sdk-aot-10.0.install: update installation layout
+    (see also: https://github.com/dotnet/docs/pull/46910)
+  * d/dotnet-host-10.0.install, d/dotnet-host-10.0.links: add dnx tool
+    (see also: https://github.com/dotnet/docs/pull/47094)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 14 Aug 2025 00:41:10 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~ppa2) questing; urgency=medium
+
+  * d/dotnet-sdk-10.0.install: remove sdk-manifest for microsoft.net.sdk.aspire
+    (see: https://github.com/dotnet/source-build/issues/4735)
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 21:42:00 +0300
+
+dotnet10 (10.0.100-10.0.0~preview7-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 13 Aug 2025 18:04:04 +0300
+
+dotnet10 (10.0.100-10.0.0~preview6-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release.
+
+ -- Mateus Rodrigues de Morais <mateus.morais@canonical.com>  Mon, 21 Jul 2025 15:04:08 -0300
+
+dotnet10 (10.0.100-10.0.0~preview5-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Sat, 14 Jun 2025 12:51:42 +0300
+
+dotnet10 (10.0.100-10.0.0~preview4-0ubuntu1~ppa1) questing; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Thu, 29 May 2025 12:45:19 +0300
+
+dotnet10 (10.0.100-10.0.0~preview3-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * New upstream release.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Fri, 11 Apr 2025 15:29:13 +0300
+
+dotnet10 (10.0.100-10.0.0~preview2-0ubuntu1~25.04.1~ppa1) plucky; urgency=medium
+
+  * Initial packaging.
+
+ -- Dominik Viererbe <dominik.viererbe@canonical.com>  Wed, 09 Apr 2025 17:27:07 +0300

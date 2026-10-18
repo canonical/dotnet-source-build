@@ -1,0 +1,7 @@
+{
+    "type": "external_source",
+    "sourceType": "git",
+    "repository": "https://github.com/canonical/dotnet-versionlib",
+    "commitish": "9384bad458bb491aa2dd63ff39a758ee57522cef",
+    "rootDirectory": "tests"
+}

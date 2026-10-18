@@ -1680,6 +1680,7 @@ Files: src/runtime/src/native/external/zlib-ng/deflate_quick.c
 Copyright: 2016, 12Sided Technology, LLC
            2013, Intel Corporation
 License: Zlib
+
 Files: src/runtime/src/native/external/zlib-ng/win32/depcheck.cpp
 Copyright: 2024, Mika T. Lindqvist
 License: Zlib
