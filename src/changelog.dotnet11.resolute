@@ -1,6 +1,13 @@
 dotnet11 (11.0.100-11.0.0~rc3-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-102870: The fix shipped in 11.0.0~rc2 was incomplete and did not
+      fully prevent attacker-controlled values from escaping generated C# in
+      the Blazor WebAssembly debug proxy, allowing code execution on the
+      developer's machine during expression evaluation. This update provides
+      the corrected fix in the Microsoft.AspNetCore.Components.WebAssembly
+      Server and DevServer packages.
   * SECURITY UPDATE: information disclosure
     - CVE-2026-111497: A buffer overflow vulnerability exists in .NET's use
       of the Brotli decompression algorithm. This vulnerability may allow an
@@ -15,7 +22,7 @@ dotnet11 (11.0.100-11.0.0~rc3-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
       (identified by their corresponding SDK release). Other Microsoft-published
       runtime/SDK tarballs and standalone NuGet packages are not in scope.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sat, 24 Oct 2026 21:33:13 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 26 Oct 2026 14:11:37 -0500
 
 dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
