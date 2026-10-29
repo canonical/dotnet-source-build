@@ -127,8 +127,14 @@ dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
   * d/t/regular-tests/debugging-via-dotnet-dump/test.sh: accept the DAC file
     name without a path in the `runtimes` output, fixing an autopkgtest
     regression caused by dotnet-dump no longer printing the full DAC path.
+  * d/t/regular-tests/template-test/test.sh: skip the mcpserver template
+    test, as it fails on s390x and ppc64el due to missing dependencies in the
+    template.
+  * d/t/regular-tests/tls-uses-pqc/test.json: skip the test on Ubuntu 22.04
+    and 24.04, as their OpenSSL 3.0 does not support PQC key exchange
+    (requires OpenSSL >= 3.5).
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 23:01:10 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 16 Oct 2026 14:56:55 -0500
 
 dotnet11 (11.0.100-11.0.0~rc1-0ubuntu1~22.04.1~ppa1) jammy; urgency=medium
 

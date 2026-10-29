@@ -143,8 +143,11 @@ dotnet8 (8.0.132-8.0.32-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
   * d/t/regular-tests/lttng/test.sh: prefer babeltrace2 over babeltrace to
     read traces, as lttng-tools >= 2.15 writes CTF 2 traces that babeltrace
     1.x cannot read.
+  * d/eng/dotnet-pkg-info.mk: add the DOTNET_110_OR_GREATER variable and a
+    .NET 11 version branch, as this file is shared with the dotnet11 package.
+    No functional change for this package.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 08 Oct 2026 21:46:40 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 16 Oct 2026 14:56:55 -0500
 
 dotnet8 (8.0.131-8.0.31-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
