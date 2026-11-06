@@ -26,6 +26,8 @@ dotnet10 (10.0.115-10.0.15-0ubuntu1~26.10.1) stonking-security; urgency=medium
   * SECURITY UPDATE: elevation of privilege
     - CVE-2026-114155: Time-of-check time-of-use (toctou) race condition in
       .NET allows an authorized attacker to elevate privileges locally.
+  * d/p/0007-openssl4-support.patch: drop, OpenSSL 4 support is now included
+    upstream.
 
  -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 06 Nov 2026 10:29:57 -0500
 
