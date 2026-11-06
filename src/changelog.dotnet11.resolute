@@ -1,3 +1,59 @@
+dotnet11 (11.0.100-11.0.0-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-105544: The VSTest artifact postprocessor can consume a forged
+      executionComplete.json from another local user and execute
+      attacker-controlled output handling.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-109475: Managed HttpListener can recursively process an
+      unterminated request line and exhaust the process stack.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-109476: A crafted X-Forwarded-Prefix can inject cookie path
+      delimiters unless PathBase-derived cookie paths percent-encode
+      semicolons.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-109481: The Blazor/SignalR /_blazor/refresh path can accept a
+      cross-site request that binds a victim's authenticated principal to an
+      attacker-owned circuit.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114146: SignalR connections are not consistently bound to the
+      identity negotiated at connection establishment, allowing injected
+      messages to execute Hub invocations as the victim.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114147: SignalR Redis scale-out can mishandle case-mismatched
+      group removal and leave subscriptions in a state that permits persistent
+      resource amplification and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114149: Multipart form processing can bypass the configured
+      header-count limit and consume excessive resources.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-114150: A reused ResponseBufferingStream can retain pooled tail
+      memory and expose response-body data from another request through HTTP
+      logging.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114155: Time-of-check time-of-use (toctou) race condition in
+      .NET allows an authorized attacker to elevate privileges locally.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-114156: PathString.StartsWithSegments can mishandle
+      percent-encoded backslashes and permit authorization checks to match an
+      unintended path.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-118746: Not failing securely ('failing open') in .NET allows an
+      unauthorized attacker to bypass a security feature over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-118748: Allocation of resources without limits or throttling in
+      ASP.NET Core allows an unauthorized attacker to deny service over a
+      network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-118749: Inefficient algorithmic complexity in ASP.NET Core
+      allows an unauthorized attacker to deny service over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-120796: Inefficient algorithmic complexity in .NET allows an
+      unauthorized attacker to deny service over a network.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 06 Nov 2026 10:29:57 -0500
+
 dotnet11 (11.0.100-11.0.0~rc3-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release

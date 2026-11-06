@@ -1,3 +1,31 @@
+dotnet9 (9.0.124-9.0.23-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-105544: The VSTest artifact postprocessor can consume a forged
+      executionComplete.json from another local user and execute
+      attacker-controlled output handling.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-109475: Managed HttpListener can recursively process an
+      unterminated request line and exhaust the process stack.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-109476: A crafted X-Forwarded-Prefix can inject cookie path
+      delimiters unless PathBase-derived cookie paths percent-encode
+      semicolons.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114146: SignalR connections are not consistently bound to the
+      identity negotiated at connection establishment, allowing injected
+      messages to execute Hub invocations as the victim.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114147: SignalR Redis scale-out can mishandle case-mismatched
+      group removal and leave subscriptions in a state that permits persistent
+      resource amplification and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114149: Multipart form processing can bypass the configured
+      header-count limit and consume excessive resources.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 06 Nov 2026 10:29:57 -0500
+
 dotnet9 (9.0.123-9.0.22-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
