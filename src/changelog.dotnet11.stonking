@@ -51,8 +51,12 @@ dotnet11 (11.0.100-11.0.0-0ubuntu1~26.10.1) stonking-security; urgency=medium
   * SECURITY UPDATE: denial of service
     - CVE-2026-120796: Inefficient algorithmic complexity in .NET allows an
       unauthorized attacker to deny service over a network.
+  * d/t/build-time-tests/tests.py: accept a 'Base Path' without a trailing
+    directory separator in the `dotnet --info` output, as printed by the
+    NativeAOT CLI on amd64 and arm64, and stop the pattern from matching past
+    the end of that line.
 
- -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 06 Nov 2026 10:29:57 -0500
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sun, 08 Nov 2026 13:04:02 -0500
 
 dotnet11 (11.0.100-11.0.0~rc3-0ubuntu1~26.10.1) stonking-security; urgency=medium
 
