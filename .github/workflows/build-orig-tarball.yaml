@@ -144,6 +144,7 @@ jobs:
           - [self-hosted, large, noble, ARM64]
           - [self-hosted, linux, noble, S390X]
           - [self-hosted, linux, noble, PPC64EL]
+          - [self-hosted, linux, noble, RISCV64]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
@@ -161,14 +162,14 @@ jobs:
 
       - name: Get bootstrapped artifacts
         id: download-artifacts
-        if: ${{ steps.get-arch.outputs.arch == 's390x' || steps.get-arch.outputs.arch == 'ppc64le' }}
+        if: ${{ steps.get-arch.outputs.arch == 's390x' || steps.get-arch.outputs.arch == 'ppc64le' || steps.get-arch.outputs.arch == 'riscv64' }}
         uses: actions/download-artifact@v4
         with:
           name: dotnet-sdk-${{ inputs.gitCommitish }}-linux-${{ steps.get-arch.outputs.arch }}-artifacts
 
       - name: Resolve and verify bootstrap artifact paths
         id: resolve-artifacts
-        if: ${{ steps.get-arch.outputs.arch == 's390x' || steps.get-arch.outputs.arch == 'ppc64le' }}
+        if: ${{ steps.get-arch.outputs.arch == 's390x' || steps.get-arch.outputs.arch == 'ppc64le' || steps.get-arch.outputs.arch == 'riscv64' }}
         shell: bash
         run: |
           sdkTarballPath=$(find \
