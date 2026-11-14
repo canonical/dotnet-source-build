@@ -1,3 +1,55 @@
+dotnet9 (9.0.124-9.0.23-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-105544: The VSTest artifact postprocessor can consume a forged
+      executionComplete.json from another local user and execute
+      attacker-controlled output handling.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-109475: Managed HttpListener can recursively process an
+      unterminated request line and exhaust the process stack.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-109476: A crafted X-Forwarded-Prefix can inject cookie path
+      delimiters unless PathBase-derived cookie paths percent-encode
+      semicolons.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114146: SignalR connections are not consistently bound to the
+      identity negotiated at connection establishment, allowing injected
+      messages to execute Hub invocations as the victim.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114147: SignalR Redis scale-out can mishandle case-mismatched
+      group removal and leave subscriptions in a state that permits persistent
+      resource amplification and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114149: Multipart form processing can bypass the configured
+      header-count limit and consume excessive resources.
+  * d/t/build-time-tests/tests.py: accept a 'Base Path' without a trailing
+    directory separator in the `dotnet --info` output and stop the pattern
+    from matching past the end of that line. No change in behaviour for this
+    package, keeps the shared test in sync with dotnet11, whose NativeAOT CLI
+    omits the separator on amd64 and arm64.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sun, 08 Nov 2026 13:04:02 -0500
+
+dotnet9 (9.0.123-9.0.22-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-111497: A buffer overflow vulnerability exists in .NET's use
+      of the Brotli decompression algorithm. This vulnerability may allow an
+      unauthenticated attacker to read or corrupt process memory.
+      This could lead to information disclosure, denial of service, or
+      elevation of privilege.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114148: Address a local elevation of privilege vulnerability
+      caused by incorrect file ownership in Linux .NET tarball distributions.
+      This affects Microsoft-published .NET 8 and .NET 9 ASP.NET Core runtime
+      and targeting-pack tarballs, as well as all source-built Linux tarballs
+      (identified by their corresponding SDK release). Other Microsoft-published
+      runtime/SDK tarballs and standalone NuGet packages are not in scope.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sat, 24 Oct 2026 21:33:13 -0500
+
 dotnet9 (9.0.122-9.0.21-0ubuntu1~24.04.1~ppa1) noble; urgency=medium
 
   * New upstream release

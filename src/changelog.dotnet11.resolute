@@ -1,3 +1,89 @@
+dotnet11 (11.0.100-11.0.0-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-105544: The VSTest artifact postprocessor can consume a forged
+      executionComplete.json from another local user and execute
+      attacker-controlled output handling.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-109475: Managed HttpListener can recursively process an
+      unterminated request line and exhaust the process stack.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-109476: A crafted X-Forwarded-Prefix can inject cookie path
+      delimiters unless PathBase-derived cookie paths percent-encode
+      semicolons.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-109481: The Blazor/SignalR /_blazor/refresh path can accept a
+      cross-site request that binds a victim's authenticated principal to an
+      attacker-owned circuit.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114146: SignalR connections are not consistently bound to the
+      identity negotiated at connection establishment, allowing injected
+      messages to execute Hub invocations as the victim.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114147: SignalR Redis scale-out can mishandle case-mismatched
+      group removal and leave subscriptions in a state that permits persistent
+      resource amplification and denial of service.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-114149: Multipart form processing can bypass the configured
+      header-count limit and consume excessive resources.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-114150: A reused ResponseBufferingStream can retain pooled tail
+      memory and expose response-body data from another request through HTTP
+      logging.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114155: Time-of-check time-of-use (toctou) race condition in
+      .NET allows an authorized attacker to elevate privileges locally.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-114156: PathString.StartsWithSegments can mishandle
+      percent-encoded backslashes and permit authorization checks to match an
+      unintended path.
+  * SECURITY UPDATE: security feature bypass
+    - CVE-2026-118746: Not failing securely ('failing open') in .NET allows an
+      unauthorized attacker to bypass a security feature over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-118748: Allocation of resources without limits or throttling in
+      ASP.NET Core allows an unauthorized attacker to deny service over a
+      network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-118749: Inefficient algorithmic complexity in ASP.NET Core
+      allows an unauthorized attacker to deny service over a network.
+  * SECURITY UPDATE: denial of service
+    - CVE-2026-120796: Inefficient algorithmic complexity in .NET allows an
+      unauthorized attacker to deny service over a network.
+  * d/t/build-time-tests/tests.py: accept a 'Base Path' without a trailing
+    directory separator in the `dotnet --info` output, as printed by the
+    NativeAOT CLI on amd64 and arm64, and stop the pattern from matching past
+    the end of that line.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Sun, 08 Nov 2026 13:04:02 -0500
+
+dotnet11 (11.0.100-11.0.0~rc3-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
+
+  * New upstream release
+  * SECURITY UPDATE: remote code execution
+    - CVE-2026-102870: The fix shipped in 11.0.0~rc2 was incomplete and did not
+      fully prevent attacker-controlled values from escaping generated C# in
+      the Blazor WebAssembly debug proxy, allowing code execution on the
+      developer's machine during expression evaluation. This update provides
+      the corrected fix in the Microsoft.AspNetCore.Components.WebAssembly
+      Server and DevServer packages.
+  * SECURITY UPDATE: information disclosure
+    - CVE-2026-111497: A buffer overflow vulnerability exists in .NET's use
+      of the Brotli decompression algorithm. This vulnerability may allow an
+      unauthenticated attacker to read or corrupt process memory.
+      This could lead to information disclosure, denial of service, or
+      elevation of privilege.
+  * SECURITY UPDATE: elevation of privilege
+    - CVE-2026-114148: Address a local elevation of privilege vulnerability
+      caused by incorrect file ownership in Linux .NET tarball distributions.
+      This affects Microsoft-published .NET 8 and .NET 9 ASP.NET Core runtime
+      and targeting-pack tarballs, as well as all source-built Linux tarballs
+      (identified by their corresponding SDK release). Other Microsoft-published
+      runtime/SDK tarballs and standalone NuGet packages are not in scope.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Mon, 26 Oct 2026 14:11:37 -0500
+
 dotnet11 (11.0.100-11.0.0~rc2-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release

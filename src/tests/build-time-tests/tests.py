@@ -479,7 +479,7 @@ class TestContext:
             rf"OS Version:\s+{UbuntuVersion}.+"
             r"OS Platform:\s+Linux.+"
             rf"RID:\s+{DotnetRuntimeIdentifier}.+"
-            rf"Base Path:\s+{DotnetRoot}/sdk/{DotnetSdkVersion}(\..+)?/",
+            rf"Base Path:\s+{DotnetRoot}/sdk/{DotnetSdkVersion}(\.\S+)?/?\s",
             description=".NET runtime info")
 
         self.__ValidateOutputMatchesPattern(
