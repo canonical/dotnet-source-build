@@ -27,6 +27,10 @@ on:
         description: 'Produce a deterministic tarball (stable hash across runs)'
         required: false
         type: boolean
+      riscv64Only:
+        description: 'Only bootstrap riscv64 (experimental, requires "Build bootstraped orig tarballs")'
+        required: false
+        type: boolean
 
 
 jobs:
@@ -60,7 +64,7 @@ jobs:
     runs-on: [self-hosted, large, noble, X64]
     strategy:
       matrix:
-        arch: [s390x, ppc64le]
+        arch: ${{ fromJSON(inputs.riscv64Only && '["riscv64"]' || '["s390x", "ppc64le"]') }}
     env:
       DOTNET_GIT_REPOSITORY: https://github.com/dotnet/dotnet
     steps:
@@ -119,7 +123,7 @@ jobs:
             mcr.microsoft.com/dotnet-buildtools/prereqs:azurelinux-3.0-net${{ steps.parse-version.outputs.dotnetMajorVersion }}.0-cross-${{ matrix.arch }} \
             sh -c '
               ./prep-source-build.sh &&
-              ./build.sh --clean-while-building -sb --os linux --arch ${{ matrix.arch }} --use-mono-runtime -- /p:OfficialBuildId=${{ inputs.buildId }}
+              ./build.sh --clean-while-building -sb --os linux --arch ${{ matrix.arch }} ${{ matrix.arch != 'riscv64' && '--use-mono-runtime' || '' }} -- /p:OfficialBuildId=${{ inputs.buildId }}
             '
 
       - name: List assets directory
@@ -135,7 +139,7 @@ jobs:
             ${{ github.workspace }}/dotnet-vmr/artifacts/assets/Release/Private.SourceBuilt.Artifacts.*.tar.gz
 
   build-bootstraped-orig-tarball:
-    if: ${{ inputs.bootstrap }}
+    if: ${{ inputs.bootstrap && ! inputs.riscv64Only }}
     needs: [bootstrap-sdk]
     strategy:
       matrix:
@@ -206,6 +210,57 @@ jobs:
           vendor-name: "Canonical Ltd."
           security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
           include-bootstrap-sdk: "true"
+          bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
+          bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
+          deterministic: ${{ inputs.deterministic }}
+          extra-ppa-source: ${{ inputs.extraPpaSource }}
+
+      - name: Upload orig tarball to workflow artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.build-orig-tarball.outputs.tarball-name }}
+          path: ${{ steps.build-orig-tarball.outputs.tarball-path }}
+
+  # There are no native riscv64 runners, so the riscv64 bootstrap orig tarball
+  # is created on an X64 runner. The binary toolkit runs with the host's .NET.
+  build-bootstraped-orig-tarball-riscv64:
+    if: ${{ inputs.bootstrap && inputs.riscv64Only }}
+    needs: [bootstrap-sdk]
+    runs-on: [self-hosted, large, noble, X64]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Get bootstrapped artifacts
+        id: download-artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dotnet-sdk-${{ inputs.gitCommitish }}-linux-riscv64-artifacts
+
+      - name: Resolve and verify bootstrap artifact paths
+        id: resolve-artifacts
+        shell: bash
+        run: |
+          dir="${{ steps.download-artifacts.outputs.download-path }}"
+          sdkTarballPath=$(find "$dir" -type f -name "dotnet-sdk-*-linux-riscv64.tar.gz" | head -n 1)
+          prebuiltsTarballPath=$(find "$dir" -type f -name "Private.SourceBuilt.Artifacts.*.tar.gz" | head -n 1)
+
+          echo "$(cat "${sdkTarballPath}.sha512")  ${sdkTarballPath}" | sha512sum --check
+
+          echo "sdk-tarball-path=${sdkTarballPath}" >> "$GITHUB_OUTPUT"
+          echo "prebuilts-tarball-path=${prebuiltsTarballPath}" >> "$GITHUB_OUTPUT"
+
+      - name: Build bootstraped orig tarball
+        id: build-orig-tarball
+        uses: ./.github/actions/build-orig-tarball
+        with:
+          source-version: ${{ inputs.sourceVersion }}
+          git-commitish: ${{ inputs.gitCommitish }}
+          build-id: ${{ inputs.buildId }}
+          vendor-name: "Canonical Ltd."
+          security-partners-access-token: ${{ github.repository == 'canonical/dotnet-source-build-security' && secrets.DOTNET_SECURITY_PARTNERS_ACCESS_TOKEN || '' }}
+          include-bootstrap-sdk: "true"
+          bootstrap-sdk-architecture: riscv64
           bootstrap-sdk-path: ${{ steps.resolve-artifacts.outputs.sdk-tarball-path }}
           bootstrap-prebuilts-tarball-path: ${{ steps.resolve-artifacts.outputs.prebuilts-tarball-path }}
           deterministic: ${{ inputs.deterministic }}

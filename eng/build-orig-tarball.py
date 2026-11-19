@@ -14,6 +14,11 @@ import tempfile
 
 
 DOTNET_VIRTUAL_MONOLITHIC_REPOSITORY_URL = "https://github.com/dotnet/dotnet"
+# Architectures whose bootstrap SDK is cross-built and embedded in the orig
+# tarball, but which have no native host (CI runner) to create the tarball on.
+# For these, the binary toolkit runs with the host's .NET SDK instead of the
+# embedded bootstrap SDK.
+CROSS_BOOTSTRAP_ARCHITECTURES = ["riscv64"]
 FO127_SPEC_URL = "https://github.com/canonical/dotnet/blob/main/specs/FO127.md"
 
 
@@ -387,7 +392,8 @@ class InvocationContext:
         self.GitRepositoryClonePath: str = self.__GenerateTmpGitRepositoryClonePath()  # noqa: E501
 
         self.DotnetRoot: str | None = None
-        if args.BootstrapSdkTarballLocation is None:
+        if (args.BootstrapSdkTarballLocation is None
+           or self.BootstrapSdkArchitecture in CROSS_BOOTSTRAP_ARCHITECTURES):
             self.DotnetRoot = self.__FindMatchingDotnetSdk()
         else:
             # NOTE: Providing a bootstrap .NET SDK tarball will make the script
@@ -395,7 +401,8 @@ class InvocationContext:
             self.DotnetRoot = path.join(self.GitRepositoryClonePath, "dotnet")
 
         self.SourceBuiltArtifactsTarball: str | None = None
-        if args.BootstrapPrebuiltsTarballLocation is None:
+        if (args.BootstrapPrebuiltsTarballLocation is None
+           or self.BootstrapSdkArchitecture in CROSS_BOOTSTRAP_ARCHITECTURES):
             self.SourceBuiltArtifactsTarball = self.__FindMatchingSourceBuiltArtifactsTarball()  # noqa: E501
         else:
             self.SourceBuiltArtifactsTarball = args.BootstrapPrebuiltsTarballLocation  # noqa: E501
@@ -539,6 +546,31 @@ def CheckBootstrappingPrerequisites(context: InvocationContext) -> None:
                     f"for architecture '{context.BootstrapSdkArchitecture}'. "
                     "Current host architecture is "
                     f"'{context.HostDpkgArchitecture}'.")
+        case "riscv64":
+            if context.BootstrapSdkTarballLocation is None:
+                LogErrorAndExit(
+                    "A cross-built .NET SDK tarball is required to bootstrap "
+                    f"for '{context.BootstrapSdkArchitecture}'. "
+                    "Use the --with-bootstrap-sdk option.")
+
+            if context.BootstrapPrebuiltsTarballLocation is None:
+                LogErrorAndExit(
+                    "A cross-built prebuilts tarball is required to "
+                    f"bootstrap for '{context.BootstrapSdkArchitecture}'. "
+                    "Use the --with-bootstrap-prebuilts-tarball option.")
+
+            # NOTE: The binary toolkit runs with the host's .NET SDK.
+            if context.DotnetRoot is None:
+                LogErrorAndExit(
+                    "No matching host .NET SDK found to run the binary "
+                    "toolkit. Required version: "
+                    + context.DotnetMajorMinorVersion)
+
+            if context.SourceBuiltArtifactsTarball is None:
+                LogErrorAndExit(
+                    "No matching host .NET source build artifacts tarball "
+                    "found to run the binary toolkit. Required version: "
+                    + context.DotnetMajorMinorVersion)
         case _:
             LogErrorAndExit("Bootstrapping for architecture "
                             f"'{context.BootstrapSdkArchitecture}' "
@@ -660,9 +692,9 @@ def RunBinaryToolkit(context: InvocationContext) -> None:
 
     print("Running binary toolkit...", flush=True)
 
-    if context.BootstrapSdkArchitecture in ["s390x", "ppc64el"]:
-        # NOTE: For s390x and ppc64el we unpack the bootstrapped .NET SDK
-        #       into $repoRoot/dotnet. The Binary Remover will then
+    if context.BootstrapSdkArchitecture in ["s390x", "ppc64el", "riscv64"]:
+        # NOTE: For s390x, ppc64el and riscv64 we unpack the bootstrapped
+        #       .NET SDK into $repoRoot/dotnet. The Binary Remover will then
         #       inadvertently remove the binaries inside this directory
         #       and break the bootstrap SDK in the process. For that reason,
         #       we modify the eng/allowed-sb-binaries.txt file to include
@@ -958,7 +990,7 @@ def PrepareForSourceBuild(context: InvocationContext) -> None:
         case "amd64" | "arm64":
             # NOTE: The prep scrip will run the BinaryToolkit for .NET 9+
             RunPrepScript(context)
-        case "s390x" | "ppc64el":
+        case "s390x" | "ppc64el" | "riscv64":
             # NOTE: We don't use the prep script to get the bootstrap SDK and
             #       prebuilt binaries for these architectures. Instead we use
             #       a cross-built SDK and prebuilts tarball to create the
