@@ -1,3 +1,9 @@
+dotnet10 (10.0.115-10.0.15~bootstrap+riscv64-0ubuntu1~ppa2) tenacious; urgency=medium
+
+  * Stage 1 bootstrap for riscv64 (cross-built CoreCLR SDK).
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Fri, 20 Nov 2026 10:32:14 -0500
+
 dotnet10 (10.0.115-10.0.15-0ubuntu1) tenacious; urgency=medium
 
   * New upstream release
