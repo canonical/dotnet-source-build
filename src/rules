@@ -57,6 +57,9 @@ ifeq ($(DEB_HOST_ARCH), riscv64)
     export DOTNET_PROCESSOR_COUNT = 4
     export OMP_NUM_THREADS = 4
     export DOTNET_gcServer = 0
+#   csc/VBCSCompiler deadlocks on riscv64 when running ReadyToRun code, even
+#   with DOTNET_PROCESSOR_COUNT=4. See filipnavara/dotnet-riscv#19.
+    export DOTNET_ReadyToRun = 0
     DOTNET_MSBUILD_ARGS += /p:BuildInParallel=false
 endif
 
