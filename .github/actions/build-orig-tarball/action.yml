@@ -39,6 +39,13 @@ inputs:
     description: "Path to a local bootstrap SDK tarball. Only used when include-bootstrap-sdk is true."
     required: false
     default: ""
+  bootstrap-sdk-architecture:
+    description: >
+      Architecture of the bootstrap SDK (defaults to the host architecture).
+      For riscv64 the host's .NET SDK is installed to run the binary toolkit.
+      Only used when include-bootstrap-sdk is true.
+    required: false
+    default: ""
   bootstrap-prebuilts-tarball-path:
     description: "Path to a local prebuilts tarball. Only used when include-bootstrap-sdk is true."
     required: false
@@ -79,7 +86,7 @@ runs:
         echo "dotnetMajorMinorVersion=$MAJOR_VERSION.$MINOR_VERSION" >> $GITHUB_OUTPUT
 
     - name: Install apt sources
-      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && inputs.include-bootstrap-sdk == 'false' }}
+      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && (inputs.include-bootstrap-sdk == 'false' || inputs.bootstrap-sdk-architecture == 'riscv64') }}
       shell: bash
       run: |
         sudo add-apt-repository ppa:dotnet/backports
@@ -89,7 +96,7 @@ runs:
         fi
 
     - name: Install .NET SDK
-      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && inputs.include-bootstrap-sdk == 'false' }}
+      if: ${{ steps.parse-version.outputs.dotnetMajorVersion >= 9 && (inputs.include-bootstrap-sdk == 'false' || inputs.bootstrap-sdk-architecture == 'riscv64') }}
       shell: bash
       run: |
         sudo apt-get install --assume-yes \
@@ -126,6 +133,10 @@ runs:
 
         if [[ "${{ inputs.include-bootstrap-sdk }}" == "true" ]]; then
           BUILD_ARGS+=(--include-bootstrap-sdk)
+
+          if [[ -n "${{ inputs.bootstrap-sdk-architecture }}" ]]; then
+            BUILD_ARGS+=(--bootstrap-sdk-architecture "${{ inputs.bootstrap-sdk-architecture }}")
+          fi
 
           if [[ -n "${{ inputs.bootstrap-sdk-path }}" ]]; then
             BUILD_ARGS+=(--with-bootstrap-sdk "${{ inputs.bootstrap-sdk-path }}")

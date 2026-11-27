@@ -50,9 +50,22 @@ ifeq ($(UBUNTU_2310_OR_GREATER), true)
 endif
 endif
 
+ifeq ($(DEB_HOST_ARCH), riscv64)
+#   riscv64 builders are emulated and previous builds failed, suspected OOM.
+#   Build the VMR repos sequentially and limit the parallelism inside each
+#   repo build (MSBuild nodes, native make/ninja jobs) and use workstation GC.
+    export DOTNET_PROCESSOR_COUNT = 4
+    export OMP_NUM_THREADS = 4
+    export DOTNET_gcServer = 0
+#   csc/VBCSCompiler deadlocks on riscv64 when running ReadyToRun code, even
+#   with DOTNET_PROCESSOR_COUNT=4. See filipnavara/dotnet-riscv#19.
+    export DOTNET_ReadyToRun = 0
+    DOTNET_MSBUILD_ARGS += /p:BuildInParallel=false
+endif
+
 ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), true)
     DOTNET_BUILD_ARGS += --clean-while-building
-    ifneq ($(filter $(DEB_HOST_ARCH),s390x ppc64el),)
+    ifneq ($(filter $(DEB_HOST_ARCH),s390x ppc64el riscv64),)
         DOTNET_BUILD_ARGS += --with-sdk $(CURDIR)/dotnet
     endif
 else
@@ -164,13 +177,18 @@ ifeq ($(DOTNET_CONTAINS_BOOTSTRAPPING_SDK), false)
 	    "$(DOTNET_ROOT_DIR)" \
 	    "$(DOTNET_PREVIOUS_BUILT_DIR)"
 endif
+	date
 	VERBOSE=1 ./build.sh $(DOTNET_BUILD_ARGS) \
 	-- \
 	/v:n \
 	/p:SkipPortableRuntimeBuild=true \
 	/p:LogVerbosity=n \
 	/p:MinimalConsoleLogOutput=false \
-	/p:ContinueOnPrebuiltBaselineError=true
+	/p:ContinueOnPrebuiltBaselineError=true \
+	$(DOTNET_MSBUILD_ARGS) \
+	|| { date; vmstat --stats --unit MiB; \
+	     find /tmp -name 'MSBuild_*.failure.txt' -exec tail -n 50 {} +; \
+	     exit 1; }
 
 	tree
 

@@ -1,3 +1,9 @@
+dotnet10 (10.0.115-10.0.15~bootstrap+riscv64-0ubuntu1~26.10.1~ppa1) stonking; urgency=medium
+
+  * Stage 1 bootstrap for riscv64 (cross-built CoreCLR SDK).
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Wed, 25 Nov 2026 12:04:14 -0500
+
 dotnet10 (10.0.115-10.0.15-0ubuntu1~26.10.1) stonking-security; urgency=medium
 
   * New upstream release
