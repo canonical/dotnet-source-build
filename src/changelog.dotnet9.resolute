@@ -1,3 +1,13 @@
+dotnet9 (9.0.124-9.0.23-0ubuntu1~26.04.1~ppa2) resolute; urgency=medium
+
+  * d/p/0010-apphost-hash-compare-noopt.patch: backport the upstream fix
+    that stops the compiler from duplicating the embedded apphost
+    placeholder hash. On amd64v3 (-march=x86-64-v3) builds the
+    placeholder appeared twice, so executables created by the SDK (e.g.
+    via `dotnet run`) failed to start.
+
+ -- Nicolas Rincon <nicolas.ballesteros@canonical.com>  Thu, 26 Nov 2026 16:48:19 -0500
+
 dotnet9 (9.0.124-9.0.23-0ubuntu1~26.04.1~ppa1) resolute; urgency=medium
 
   * New upstream release
