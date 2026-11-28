@@ -111,6 +111,10 @@ ifeq ($(DOTNET_90_OR_GREATER), true)
         export DOTNET_BUILD_AOT_BINARY_PACKAGE = true
         export DOTNET_USE_MONO_RUNTIME = false
         export DOTNET_USE_SYSTEM_LIBUNWIND = false
+    else ifeq ($(DEB_HOST_ARCH), riscv64)
+        export DOTNET_BUILD_AOT_BINARY_PACKAGE = true
+        export DOTNET_USE_MONO_RUNTIME = false
+        export DOTNET_USE_SYSTEM_LIBUNWIND = false
     else ifeq ($(DEB_HOST_ARCH), s390x)
         export DOTNET_BUILD_AOT_BINARY_PACKAGE = false
         export DOTNET_USE_MONO_RUNTIME = true
